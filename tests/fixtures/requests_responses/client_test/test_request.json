@@ -1,0 +1,62 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {"version":"v1", "service":"PredictHQ API"}
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/no-content/",
+    "status": 204,
+    "body": ""
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/invalid-json/",
+    "status": 200,
+    "body": "["
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/not-found/",
+    "status": 404,
+    "content_type": "application/json",
+    "body": {"error": "not found"}
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/server-error/",
+    "status": 500,
+    "content_type": "application/json",
+    "body": {"error": "server error"}
+  },
+  {
+    "method": "POST",
+    "match_querystring": true,
+    "url": "/oauth2/token/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {"access_token": "token123", "token_type": "Bearer", "scope": "account events signals"}
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/accounts/self/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "id": "3HgPJyIwoUWb",
+      "name": "PredictHQ",
+      "description": "PredictHQ is a new global events intelligence platform.",
+      "created_at": "2015-07-16T01:35:26Z",
+      "updated_at": "2016-02-02T21:39:19Z"
+    }
+  }
+]

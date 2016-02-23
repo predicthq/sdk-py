@@ -1,0 +1,12 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/events/count/?q=Foo+Fighters&country=AU&limit=10",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "count": 12
+    }
+  }
+]

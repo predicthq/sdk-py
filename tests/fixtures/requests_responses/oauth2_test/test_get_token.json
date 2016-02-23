@@ -1,0 +1,14 @@
+[
+  {
+    "method": "POST",
+    "match_querystring": true,
+    "url": "/oauth2/token/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "access_token": "token123",
+      "token_type": "Bearer",
+      "scope": "account events"
+    }
+  }
+]

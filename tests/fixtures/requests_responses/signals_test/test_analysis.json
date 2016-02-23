@@ -1,0 +1,158 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/signals/zVNLr8tHvWQw/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "id": "zVNLr8tHvWQw",
+      "name": "Test",
+      "country": "NZ",
+      "dimensions": [
+        {
+          "type": "category",
+          "name": "city"
+        },
+        {
+          "type": "number",
+          "name": "revenue"
+        }
+      ],
+      "created_at": "2016-01-05T21:30:24.970",
+      "updated_at": "2016-01-05T21:30:24.970"
+    }
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/signals/zVNLr8tHvWQw/analysis/?span=1&lead=1",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "count": 365,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "actual": 329,
+          "trend": 326.7875867369319,
+          "expected": 407.6649175062919,
+          "details": {
+            "span": {
+              "count": 329,
+              "min": 0,
+              "sum_of_squares": 11645,
+              "max": 29,
+              "sum": 1575,
+              "std_deviation": 3.532354314042595,
+              "percentiles": {
+                "5.0": 0,
+                "25.0": 3,
+                "1.0": 0,
+                "95.0": 11,
+                "75.0": 6,
+                "99.0": 16,
+                "50.0": 4
+              },
+              "std_deviation_bounds": {
+                "upper": 11.851942670638381,
+                "lower": -2.2774745855319978
+              },
+              "variance": 12.47752699993533,
+              "avg": 4.787234042553192
+            },
+            "lead": {
+              "count": 329,
+              "min": 0,
+              "sum_of_squares": 729639,
+              "max": 281,
+              "sum": 7951,
+              "std_deviation": 40.41899871791781,
+              "percentiles": {
+                "5.0": 0,
+                "25.0": 1.125,
+                "1.0": 0,
+                "95.0": 115.19999999999959,
+                "75.0": 27.999999999999996,
+                "99.0": 189.35999999999888,
+                "50.0": 9
+              },
+              "std_deviation_bounds": {
+                "upper": 105.00517068811526,
+                "lower": -56.67082418355598
+              },
+              "variance": 1633.6954573590413,
+              "avg": 24.167173252279635
+            }
+          },
+          "excess": -78.66491750629189,
+          "date": "2015-01-01T00:00:00"
+        },
+        {
+          "actual": 342,
+          "trend": 325.63983679188283,
+          "expected": 475.5862667153484,
+          "details": {
+            "span": {
+              "count": 342,
+              "min": 0,
+              "sum_of_squares": 14740,
+              "max": 34,
+              "sum": 1762,
+              "std_deviation": 4.0688854916316,
+              "percentiles": {
+                "5.0": 1,
+                "25.0": 2,
+                "1.0": 0,
+                "95.0": 13,
+                "75.0": 7,
+                "99.0": 19,
+                "50.0": 4.166666666666667
+              },
+              "std_deviation_bounds": {
+                "upper": 13.28981776688893,
+                "lower": -2.9857241996374695
+              },
+              "variance": 16.555829144010126,
+              "avg": 5.152046783625731
+            },
+            "lead": {
+              "count": 342,
+              "min": 0,
+              "sum_of_squares": 1107796,
+              "max": 301,
+              "sum": 10220,
+              "std_deviation": 48.43731469724757,
+              "percentiles": {
+                "5.0": 0,
+                "25.0": 2,
+                "1.0": 0,
+                "95.0": 131,
+                "75.0": 37.5,
+                "99.0": 227.20999999999952,
+                "50.0": 9
+              },
+              "std_deviation_bounds": {
+                "upper": 126.75767033016766,
+                "lower": -66.99158845882263
+              },
+              "variance": 2346.1734550801957,
+              "avg": 29.883040935672515
+            }
+          },
+          "excess": -133.58626671534842,
+          "date": "2015-01-02T00:00:00"
+        },
+        {
+          "actual": 0,
+          "trend": 4.974674771228433,
+          "expected": 3.9252131844241966,
+          "details": {},
+          "excess": -3.9252131844241966,
+          "date": "2015-12-07T00:00:00"
+        }
+      ]
+    }
+  }
+]

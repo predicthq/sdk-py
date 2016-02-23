@@ -1,0 +1,26 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/signals/zVNLr8tHvWQw/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "id": "zVNLr8tHvWQw",
+      "name": "Test",
+      "country": "NZ",
+      "dimensions": [
+        {
+          "type": "category",
+          "name": "city"
+        },
+        {
+          "type": "number",
+          "name": "revenue"
+        }
+      ],
+      "created_at": "2016-01-05T21:30:24.970",
+      "updated_at": "2016-01-05T21:30:24.970"
+    }
+  }
+]

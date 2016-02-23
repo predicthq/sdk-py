@@ -1,0 +1,9 @@
+[
+  {
+    "method": "POST",
+    "match_querystring": true,
+    "url": "/oauth2/revoke/",
+    "status": 200,
+    "body": ""
+  }
+]

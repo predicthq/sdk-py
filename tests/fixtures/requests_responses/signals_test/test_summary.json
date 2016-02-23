@@ -1,0 +1,83 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/signals/zVNLr8tHvWQw/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "id": "zVNLr8tHvWQw",
+      "name": "Test",
+      "country": "NZ",
+      "dimensions": [
+        {
+          "type": "category",
+          "name": "city"
+        },
+        {
+          "type": "number",
+          "name": "revenue"
+        }
+      ],
+      "created_at": "2016-01-05T21:30:24.970",
+      "updated_at": "2016-01-05T21:30:24.970"
+    }
+  },
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/signals/zVNLr8tHvWQw/dimensions/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "date": {
+        "count": 2729,
+        "min": "2014-09-03T00:00:00.000Z",
+        "max": "2016-04-03T05:00:00.000Z",
+        "type": "date"
+      },
+      "initiated": {
+        "count": 2729,
+        "min": "2014-09-01T00:23:00.000Z",
+        "max": "2015-10-08T08:12:00.000Z",
+        "type": "date"
+      },
+      "completed": {
+        "count": 2729,
+        "min": "2014-09-06T16:00:00.000Z",
+        "max": "2016-04-17T03:00:00.000Z",
+        "type": "date"
+      },
+      "location": {
+        "type": "geo",
+        "bbox": [
+          153.02342,
+          -27.46846,
+          153.02342,
+          -27.46846
+        ]
+      },
+      "country": {
+        "type": "category",
+        "options": [
+          {
+            "count": 2445,
+            "name": "NZ"
+          },
+          {
+            "count": 282,
+            "name": "AU"
+          }
+        ]
+      },
+      "revenue": {
+        "count": 2729,
+        "min": 0,
+        "max": 754.1099853515625,
+        "std_deviation": 76.9167076432597,
+        "avg": 51.462359763100366,
+        "type": "number"
+      }
+    }
+  }
+]
