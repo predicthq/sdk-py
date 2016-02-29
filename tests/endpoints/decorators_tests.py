@@ -3,8 +3,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 
 import unittest
 
-from predicthq import schemas
-from predicthq import decorators
+from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint
 from predicthq.exceptions import ValidationError
 
@@ -27,13 +26,13 @@ class DecoratorsTest(unittest.TestCase):
             arg1 = schemas.StringType(required=True)
             arg2 = schemas.ListType(schemas.IntType)
 
-        class EndpointExample(object):
+        class EndpointExample(BaseEndpoint):
 
             @decorators.accepts(SchemaExample)
             def func(self, **kwargs):
                 return kwargs
 
-        endpoint = EndpointExample()
+        endpoint = EndpointExample(None)
         self.assertDictEqual(endpoint.func(arg1="test", arg2=[1, 2]), {'arg1': 'test', 'arg2': '1,2'})
 
         self.assertDictEqual(endpoint.func(SchemaExample({"arg1": "test", "arg2": [1, 2]})), {'arg1': 'test', 'arg2': '1,2'})
@@ -52,13 +51,13 @@ class DecoratorsTest(unittest.TestCase):
             arg1 = schemas.StringType(required=True)
             arg2 = schemas.ListType(schemas.IntType)
 
-        class EndpointExample(object):
+        class EndpointExample(BaseEndpoint):
 
             @decorators.accepts(SchemaExample, query_string=False)
             def func(self, **kwargs):
                 return kwargs
 
-        endpoint = EndpointExample()
+        endpoint = EndpointExample(None)
         self.assertDictEqual(endpoint.func({"arg1": "test", "arg2": [1, 2]}), {'arg1': 'test', 'arg2': [1, 2]})
 
     def test_returns(self):
@@ -67,13 +66,13 @@ class DecoratorsTest(unittest.TestCase):
             arg1 = schemas.StringType(required=True)
             arg2 = schemas.ListType(schemas.IntType)
 
-        class EndpointExample(object):
+        class EndpointExample(BaseEndpoint):
 
             @decorators.returns(SchemaExample)
             def func(self, **kwargs):
                 return kwargs
 
-        endpoint = EndpointExample()
+        endpoint = EndpointExample(None)
         self.assertEqual(endpoint.func(arg1="test", arg2=[1, 2]), SchemaExample({'arg1': 'test', 'arg2': [1, 2]}))
 
         with self.assertRaises(ValidationError):

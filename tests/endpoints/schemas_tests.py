@@ -2,11 +2,12 @@
 from __future__ import unicode_literals, absolute_import, print_function
 
 import unittest
+
 import pytz
 from datetime import datetime
 
-from predicthq import schemas
-from predicthq import decorators
+from predicthq.endpoints import decorators, schemas
+from predicthq.endpoints.base import BaseEndpoint
 
 
 class SchemasTest(unittest.TestCase):
@@ -137,7 +138,7 @@ class SchemasTest(unittest.TestCase):
 
             results = schemas.ResultType(ResultExample)
 
-        class EndpointExample(object):
+        class EndpointExample(BaseEndpoint):
 
             @decorators.returns(ResultSetExample)
             def load_page(self, page):
@@ -149,7 +150,7 @@ class SchemasTest(unittest.TestCase):
                     "results": [{"value": 1 + (3 * (page - 1))}, {"value": 2 + (3 * (page - 1))}, {"value": 3 + (3 * (page - 1))}]
                 }
 
-        endpoint = EndpointExample()
+        endpoint = EndpointExample(None)
 
         p1 = endpoint.load_page(page=1)
         self.assertEqual(p1.count, 9)

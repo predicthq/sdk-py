@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-import itertools
 import json
 
-from predicthq.decorators import returns, accepts
-from predicthq.endpoints.base import BaseEndpoint
-from predicthq.endpoints.v1.signals.schemas import SignalsSearchParams, AnalysisResultSet, AnalysisParams, Dimensions
+import itertools
 
+from predicthq.endpoints.base import BaseEndpoint
+from predicthq.endpoints.decorators import returns, accepts
+from predicthq.endpoints.v1.signals.schemas import SignalsSearchParams, AnalysisResultSet, AnalysisParams, Dimensions
 from .schemas import Signal, SignalID, SavedSignal, SignalResultSet, SignalDataPoints
 
 

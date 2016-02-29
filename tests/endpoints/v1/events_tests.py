@@ -23,7 +23,6 @@ class EventsTest(unittest.TestCase):
             'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
             'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland'})
 
-
     @with_mock_client(request_returns={"count": 12})
     def test_count_params(self, client):
         client.events.count(id="id", q="query", rank_level=[4,5], rank__gt=85, country=["NZ", "AU"],

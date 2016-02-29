@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-from predicthq.schemas import PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, \
-                              GeoJSONPointType, StringListType, StringModelType, Area, ModelType, IntRange, \
-                              IntType, DateRange, DateTimeType, FloatType, ResultType
+from predicthq.endpoints.schemas import PaginatedMixin, SortableMixin, Model, ResultSet, \
+    ListType, StringType, GeoJSONPointType, StringListType, StringModelType, Area, \
+    ModelType, IntRange, IntType, DateRange, DateTimeType, FloatType, ResultType
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):
