@@ -3,7 +3,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 
 from schematics.transforms import blacklist, wholelist, whitelist
 
-from predicthq.schemas import Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin, FloatType, IntType, DictType, \
+from predicthq.endpoints.schemas import Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin, FloatType, IntType, DictType, \
     PaginatedMixin, DateRange, StringListType, StringModelType, Area, BooleanType
 
 

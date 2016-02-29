@@ -2,7 +2,7 @@
 from __future__ import unicode_literals, absolute_import, print_function
 
 from predicthq.config import config
-from predicthq.schemas import Model, StringType, StringListType, IntType
+from predicthq.endpoints.schemas import Model, StringType, StringListType, IntType
 
 
 class GetTokenParams(Model):

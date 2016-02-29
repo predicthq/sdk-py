@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-import six
 import functools
 from collections import defaultdict
 
-from .exceptions import ValidationError
-from .schemas import ResultSet, Model, SchematicsDataError
+import six
+
+from predicthq.endpoints.schemas import ResultSet, Model, SchematicsDataError
+from predicthq.exceptions import ValidationError
 
 
 def _to_url_params(data, glue=".", separator=","):
@@ -43,11 +44,14 @@ def accepts(schema_class, query_string=True, role=None):
     def decorator(f):
 
         @functools.wraps(f)
-        def wrapper(*args, **kwargs):
+        def wrapper(endpoint, *args, **kwargs):
+
+            schema = getattr(endpoint.Meta, f.__name__, {}).get("accepts", schema_class)
+
             if not kwargs:  # accept instance of schema_class
-                new_args = tuple(a for a in args if not isinstance(a, (schema_class, dict)))
+                new_args = tuple(a for a in args if not isinstance(a, (schema, dict)))
                 if args != new_args:
-                    instance = next(a for a in args if isinstance(a, (schema_class, dict)))
+                    instance = next(a for a in args if isinstance(a, (schema, dict)))
                     if isinstance(instance, dict):
                         kwargs = instance
                     else:
@@ -56,7 +60,7 @@ def accepts(schema_class, query_string=True, role=None):
 
             try:
                 data = _process_kwargs(kwargs)
-                model = schema_class()
+                model = schema()
                 model.import_data(data, strict=True, partial=False)
                 model.validate()
             except SchematicsDataError as e:
@@ -67,7 +71,7 @@ def accepts(schema_class, query_string=True, role=None):
             else:
                 params = model.to_primitive(role=role)
 
-            return f(*args, **params)
+            return f(endpoint, *args, **params)
 
         return wrapper
 
@@ -80,9 +84,12 @@ def returns(schema_class):
 
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
+
+            schema = getattr(endpoint.Meta, f.__name__, {}).get("returns", schema_class)
+
             data = f(endpoint, *args, **kwargs)
             try:
-                model = schema_class()
+                model = schema()
                 model._endpoint = endpoint
 
                 # if schema class is a ResultSet, tell it how to load more results

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-from predicthq.decorators import accepts, returns
 from predicthq.endpoints.base import BaseEndpoint
-
+from predicthq.endpoints.decorators import accepts, returns
 from .schemas import AccessToken, GetTokenParams, RevokeTokenParams
 
 
