@@ -1,0 +1,180 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": false,
+    "url": "/v1/events/calendar/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "count": 60,
+      "previous": null,
+      "next": null,
+      "results": [
+        {
+          "date": "2015-12-24",
+          "count": 40,
+          "labels": {
+            "conference": 1,
+            "holiday": 1,
+            "observance": 1,
+            "concert": 12,
+            "family": 1,
+            "festival": 20,
+            "movie": 1,
+            "performing-arts": 1,
+            "delay": 5,
+            "religion": 1,
+            "airport": 5,
+            "music": 12,
+            "education": 1
+          },
+          "top_rank": 50.0,
+          "rank_levels": {
+            "1": 15,
+            "3": 6,
+            "2": 19,
+            "5": 0,
+            "4": 0
+          },
+          "top_events": {
+            "count": 40,
+            "results": [
+              {
+                "category": "observances",
+                "end": "2015-12-24T00:00:00Z",
+                "description": "Christmas Eve is the day before Christmas Day and falls on December 24 in the Gregorian calendar.",
+                "title": "Christmas Eve",
+                "country": "NZ",
+                "labels": [
+                  "holiday",
+                  "observance"
+                ],
+                "rank": 50,
+                "duration": 0,
+                "location": [
+                  174.885971,
+                  -40.900557
+                ],
+                "relevance": null,
+                "timezone": "",
+                "start": "2015-12-24T00:00:00Z",
+                "id": "66e454beaf1aacdef8"
+              }
+            ]
+          },
+          "categories": {
+            "conferences": 1,
+            "observances": 1,
+            "airport-delays": 5,
+            "festivals": 20,
+            "performing-arts": 1,
+            "concerts": 12
+          }
+        },
+        {
+          "date": "2015-12-25",
+          "count": 19,
+          "labels": {
+            "holiday": 1,
+            "outdoor": 1,
+            "concert": 5,
+            "festival": 9,
+            "delay": 1,
+            "attraction": 1,
+            "airport": 1,
+            "holiday-national": 1,
+            "music": 5,
+            "health": 1,
+            "sport": 4
+          },
+          "top_rank": 70.0,
+          "rank_levels": {
+            "1": 7,
+            "3": 1,
+            "2": 7,
+            "5": 0,
+            "4": 1
+          },
+          "top_events": {
+            "count": 19,
+            "results": [
+              {
+                "category": "public-holidays",
+                "end": "2015-12-25T00:00:00Z",
+                "description": "Christmas Day is a public holiday in New Zealand on December 25 each year.",
+                "title": "Christmas Day",
+                "country": "NZ",
+                "labels": [
+                  "holiday",
+                  "holiday-national"
+                ],
+                "rank": 70,
+                "duration": 0,
+                "location": [
+                  174.885971,
+                  -40.900557
+                ],
+                "relevance": null,
+                "timezone": "",
+                "start": "2015-12-25T00:00:00Z",
+                "id": "5469663176e532cfb8"
+              }
+            ]
+          },
+          "categories": {
+            "public-holidays": 1,
+            "festivals": 9,
+            "airport-delays": 1,
+            "concerts": 5,
+            "sports": 3
+          }
+        },
+        {
+          "date": "2015-12-26",
+          "count": 1,
+          "labels": {
+            "holiday": 1,
+            "holiday-national": 1
+          },
+          "top_rank": 70.0,
+          "rank_levels": {
+            "1": 0,
+            "3": 0,
+            "2": 0,
+            "5": 0,
+            "4": 1
+          },
+          "top_events": {
+            "count": 1,
+            "results": [
+              {
+                "category": "public-holidays",
+                "end": "2015-12-26T00:00:00Z",
+                "description": "Boxing Day, annually observed on December 26, is a public holiday in New Zealand.",
+                "title": "Boxing Day",
+                "country": "NZ",
+                "labels": [
+                  "holiday",
+                  "holiday-national"
+                ],
+                "rank": 70,
+                "duration": 0,
+                "location": [
+                  174.885971,
+                  -40.900557
+                ],
+                "relevance": null,
+                "timezone": "Pacific/Auckland",
+                "start": "2015-12-26T00:00:00Z",
+                "id": "788ef6b62cc8b49dc2"
+              }
+            ]
+          },
+          "categories": {
+            "public-holidays": 1
+          }
+        }
+      ]
+    }
+  }
+]
