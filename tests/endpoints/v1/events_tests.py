@@ -6,7 +6,7 @@ from datetime import datetime
 
 from tests import with_mock_client, with_mock_responses, with_client
 
-from predicthq.endpoints.v1.events.schemas import EventResultSet
+from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet
 
 
 class EventsTest(unittest.TestCase):
@@ -49,3 +49,12 @@ class EventsTest(unittest.TestCase):
         result = client.events.count(q="Foo Fighters", country="AU", limit=10)
         self.assertIsInstance(result, int)
         self.assertEqual(result, 12)
+
+    @with_client()
+    @with_mock_responses()
+    def test_calendar(self, client, responses):
+        result = client.events.calendar(start__gte="2015-12-24", start__lte="2015-12-26", country="NZ", top_events__limit=1, top_events__sort=["rank"])
+        self.assertIsInstance(result, CalendarResultSet)
+        self.assertEqual(result.count, 60)
+        self.assertEqual(3, len(list(result.iter_all())))
+        self.assertEqual(1, len(responses.calls))
