@@ -11,11 +11,9 @@ def read(*parts):
         return fp.read()
 
 
-REPO_URL = "https://github.com/predicthq/sdk-py"
+VERSION = read("VERSION").strip()
 
-VERSION = (0, 0, 1)
-__version__ = VERSION
-__versionstr__ = ".".join(map(str, VERSION))
+REPO_URL = "https://github.com/predicthq/sdk-py"
 
 PYPI_README_NOTE = """\
 .. note::
@@ -23,17 +21,20 @@ PYPI_README_NOTE = """\
    For the latest source, discussions, bug reports, etc., please visit the `GitHub repository <{}>`_
 """.format(REPO_URL)
 
+LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.rst")])
+
+
 setup(
     name="predicthq",
-    version=__versionstr__,
+    version=VERSION,
     description="PredictHQ Event Intelligence",
-    long_description="\n\n".join([PYPI_README_NOTE, read("README.rst")]),
+    long_description=LONG_DESCRIPTION,
     license="MIT",
     author="PredictHQ",
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    test_suite = "nose.collector",
+    test_suite="nose.collector",
     setup_requires=[
         "nose==1.3.7"
     ],
@@ -50,12 +51,11 @@ setup(
         "python-dateutil>=2.4.2",
         "pytz>=2015.4",
     ],
-    classifiers = [
+    classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Environment :: Web Environment",
-        "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",
