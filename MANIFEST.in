@@ -1,5 +1,6 @@
 include LICENSE
 include README.md
+include VERSION
 exclude tests
 recursive-exclude predicthq *.pyc
 recursive-exclude predicthq *.pyo
