@@ -5,7 +5,7 @@ import re
 
 import itertools
 
-from datetime import datetime
+from datetime import datetime, date
 
 from dateutil.parser import parse as parse_date
 import six
@@ -13,7 +13,7 @@ import pytz
 
 from schematics.models import Model
 from schematics.transforms import Role
-from schematics.types import StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType, DateType
+from schematics.types import StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType, DateType as SchematicsDateType
 from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType
 from schematics.exceptions import ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
 from schematics.types.serializable import serializable
@@ -26,6 +26,14 @@ class DateTimeType(SchematicsDateTimeType):
         if isinstance(value, datetime):
             return value
         return parse_date(value)
+
+
+class DateType(SchematicsDateType):
+
+    def to_native(self, value, context=None):
+        if isinstance(value, date):
+            return value
+        return parse_date(value).date()
 
 
 class StringModelType(ModelType):
@@ -103,7 +111,7 @@ class Area(StringModel):
     longitude = FloatType(required=True)
 
 
-class DateRange(Model):
+class DateTimeRange(Model):
 
     class Options:
         serialize_when_none = False

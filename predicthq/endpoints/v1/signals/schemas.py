@@ -4,7 +4,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 from schematics.transforms import blacklist, wholelist, whitelist
 
 from predicthq.endpoints.schemas import Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin, FloatType, IntType, DictType, \
-    PaginatedMixin, DateRange, StringListType, StringModelType, Area, BooleanType
+    PaginatedMixin, DateTimeRange, StringListType, StringModelType, Area, BooleanType, DateType
 
 
 class SignalsSearchParams(SortableMixin, Model):
@@ -176,7 +176,7 @@ class DailyAnalysisDetails(Model):
 
 class DailyAnalysis(Model):
 
-    date = DateTimeType()
+    date = DateType()
     trend = FloatType()
     actual = FloatType()
     expected = FloatType()
@@ -195,9 +195,9 @@ class AnalysisParams(PaginatedMixin, SortableMixin, Model):
         serialize_when_none = False
 
     id = StringType(required=True)
-    date = ModelType(DateRange)
-    initiated = ModelType(DateRange)
-    completed = ModelType(DateRange)
+    date = ModelType(DateTimeRange)
+    initiated = ModelType(DateTimeRange)
+    completed = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
     significance = IntType(min_value=0, max_value=100)
     lead = BooleanType(default=False)

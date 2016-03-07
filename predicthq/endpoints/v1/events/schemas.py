@@ -3,7 +3,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 
 from predicthq.endpoints.schemas import PaginatedMixin, SortableMixin, Model, ResultSet, \
     ListType, StringType, GeoJSONPointType, StringListType, StringModelType, Area, \
-    ModelType, IntRange, IntType, DateRange, DateTimeType, FloatType, ResultType, \
+    ModelType, IntRange, IntType, DateTimeRange, DateTimeType, FloatType, ResultType, \
     DictType, DateType
 
 
@@ -16,8 +16,8 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     q = StringType()
     label = ListType(StringType)
     category = ListType(StringType)
-    start = ModelType(DateRange)
-    end = ModelType(DateRange)
+    start = ModelType(DateTimeRange)
+    end = ModelType(DateTimeRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
     rank = ModelType(IntRange)
     country = ListType(StringType)
@@ -57,6 +57,7 @@ class TopEventsSearchParams(SortableMixin, Model):
 
 class CalendarParams(SearchParams):
 
+    dates = ModelType(DateTimeRange)
     top_events = ModelType(TopEventsSearchParams)
 
 
