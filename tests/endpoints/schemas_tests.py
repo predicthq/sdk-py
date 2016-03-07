@@ -4,7 +4,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 import unittest
 
 import pytz
-from datetime import datetime
+from datetime import datetime, date
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint
@@ -16,13 +16,26 @@ class SchemasTest(unittest.TestCase):
 
         class SchemaExample(schemas.Model):
 
-            my_date = schemas.DateTimeType()
+            my_datetime = schemas.DateTimeType()
 
         test_date = datetime(2016, 1, 1, tzinfo=pytz.UTC)
-        self.assertEqual(SchemaExample({"my_date": "2016-01-01T00:00:00+00:00"}).my_date, test_date)
+        self.assertEqual(SchemaExample({"my_datetime": "2016-01-01T00:00:00+00:00"}).my_datetime, test_date)
+        self.assertEqual(SchemaExample({"my_datetime": "2016-01-01T00:00:00+0000"}).my_datetime, test_date)
+        self.assertEqual(SchemaExample({"my_datetime": "2016-01-01T00:00:00Z"}).my_datetime, test_date)
+        self.assertEqual(SchemaExample({"my_datetime": test_date}).my_datetime, test_date)
+
+    def test_date_type(self):
+
+        class SchemaExample(schemas.Model):
+
+            my_date = schemas.DateType()
+
+        test_date = date(2016, 1, 1)
+        self.assertEqual(SchemaExample({"my_date": "2016-01-01"}).my_date, test_date)
         self.assertEqual(SchemaExample({"my_date": "2016-01-01T00:00:00+0000"}).my_date, test_date)
         self.assertEqual(SchemaExample({"my_date": "2016-01-01T00:00:00Z"}).my_date, test_date)
         self.assertEqual(SchemaExample({"my_date": test_date}).my_date, test_date)
+
 
     def test_string_model_and_string_model_type(self):
 
