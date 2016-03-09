@@ -2,6 +2,8 @@
 PredictHQ API Client for Python
 ###############################
 
+.. image:: https://badge.fury.io/py/predicthq.svg
+    :target: https://badge.fury.io/py/predicthq
 .. image:: https://travis-ci.org/predicthq/sdk-py.svg?branch=master
     :target: https://travis-ci.org/predicthq/sdk-py
 .. image:: https://coveralls.io/repos/github/predicthq/sdk-py/badge.svg?branch=master
