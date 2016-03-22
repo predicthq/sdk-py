@@ -111,6 +111,15 @@ class Area(StringModel):
     longitude = FloatType(required=True)
 
 
+class Location(StringModel):
+
+    import_format = r'@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
+    export_format = "@{latitude},{longitude}"
+
+    latitude = FloatType(required=True)
+    longitude = FloatType(required=True)
+
+
 class DateTimeRange(Model):
 
     class Options:
@@ -145,10 +154,19 @@ class IntRange(Model):
     lte = IntType()
 
 
-class PaginatedMixin(Model):
+class LimitMixin(Model):
 
     limit = IntType(min_value=1, max_value=200)
+
+
+class OffsetMixin(Model):
+
     offset = IntType(min_value=0, max_value=50)
+
+
+class PaginatedMixin(LimitMixin, OffsetMixin):
+
+    pass
 
 
 class SortableMixin(Model):

@@ -42,6 +42,7 @@ Endpoints
 * ``Client.accounts``
 * ``Client.events``
 * ``Client.signals``
+* ``Client.places``
 
 For a description of all available endpoints, refer to our `API Documentation <https://developer.predicthq.com/>`_.
 
