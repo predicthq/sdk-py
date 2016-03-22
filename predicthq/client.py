@@ -32,6 +32,7 @@ class Client(object):
         self.events = endpoints.EventsEndpoint(proxy(self))
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
         self.signals = endpoints.SignalsEndpoint(proxy(self))
+        self.places = endpoints.PlacesEndpoint(proxy(self))
 
     def get_headers(self, headers):
         _headers = {"Accept": "application/json",}

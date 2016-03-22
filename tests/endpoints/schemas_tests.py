@@ -141,6 +141,31 @@ class SchemasTest(unittest.TestCase):
         with self.assertRaises(schemas.SchematicsDataError):
             m.import_data(invalid_data)
 
+    def test_location_model(self):
+
+        class SchemaExample(schemas.Model):
+
+            location = schemas.StringModelType(schemas.Location)
+
+        short_data = {"location": "@-36.847585,174.765742"}
+        long_data = {"location": {"latitude": -36.847585, "longitude": 174.765742}}
+        model_data = {"location": schemas.Location("@-36.847585,174.765742")}
+        invalid_data = {"location": "-36.847585,174.765742"}
+
+        expected_expected = {"location": "@-36.847585,174.765742"}
+
+        m = SchemaExample()
+        self.assertDictEqual(m.import_data(short_data).to_primitive(), expected_expected)
+        self.assertDictEqual(m.import_data(long_data).to_primitive(), expected_expected)
+        self.assertDictEqual(m.import_data(model_data).to_primitive(), expected_expected)
+
+        self.assertDictEqual(m.import_data(short_data).to_dict(), expected_expected)
+        self.assertDictEqual(m.import_data(long_data).to_dict(), expected_expected)
+        self.assertDictEqual(m.import_data(model_data).to_dict(), expected_expected)
+
+        with self.assertRaises(schemas.SchematicsDataError):
+            m.import_data(invalid_data)
+
     def test_resultset(self):
 
         class ResultExample(schemas.Model):

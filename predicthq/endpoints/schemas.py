@@ -89,7 +89,7 @@ class StringListType(SchematicsListType):
 class ListType(SchematicsListType):
 
     def _coerce(self, value):
-        if isinstance(value, six.string_types):
+        if not isinstance(value, (list, tuple)):
             return [value]
         else:
             return super(ListType, self)._coerce(value)
@@ -109,6 +109,20 @@ class Area(StringModel):
     radius = StringType(regex='\d+(k?m|ft|mi)', required=True)
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
+
+
+class Location(StringModel):
+
+    import_format = r'@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
+    export_format = "@{latitude},{longitude}"
+
+    latitude = FloatType(required=True)
+    longitude = FloatType(required=True)
+
+
+class Place(Model):
+
+    scope = ListType(IntType, required=True)
 
 
 class DateTimeRange(Model):
@@ -145,10 +159,19 @@ class IntRange(Model):
     lte = IntType()
 
 
-class PaginatedMixin(Model):
+class LimitMixin(Model):
 
     limit = IntType(min_value=1, max_value=200)
+
+
+class OffsetMixin(Model):
+
     offset = IntType(min_value=0, max_value=50)
+
+
+class PaginatedMixin(LimitMixin, OffsetMixin):
+
+    pass
 
 
 class SortableMixin(Model):

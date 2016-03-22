@@ -1,0 +1,44 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/v1/places/?country=NZ,AU",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "count": 2,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "id": "2186224",
+          "type": "country",
+          "name": "New Zealand",
+          "county": null,
+          "region": null,
+          "country": "New Zealand",
+          "country_alpha2": "NZ",
+          "country_alpha3": "NZL",
+          "location": [
+            174,
+            -42
+          ]
+        },
+        {
+          "id": "2077456",
+          "type": "country",
+          "name": "Australia",
+          "county": null,
+          "region": null,
+          "country": "Australia",
+          "country_alpha2": "AU",
+          "country_alpha3": "AUS",
+          "location": [
+            135,
+            -25
+          ]
+        }
+      ]
+    }
+  }
+]

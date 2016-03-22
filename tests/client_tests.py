@@ -26,6 +26,7 @@ class ClientTest(unittest.TestCase):
         self.assertIsInstance(self.client.accounts, endpoints.AccountsEndpoint)
         self.assertIsInstance(self.client.events, endpoints.EventsEndpoint)
         self.assertIsInstance(self.client.signals, endpoints.SignalsEndpoint)
+        self.assertIsInstance(self.client.places, endpoints.PlacesEndpoint)
 
     @with_mock_responses()
     def test_request(self, responses):
