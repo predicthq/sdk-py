@@ -17,6 +17,11 @@ class SignalsTest(unittest.TestCase):
         client.signals.search(sort=["-created_at", "updated_at"])
         client.request.assert_called_once_with('get', '/v1/signals/', params={'sort': '-created_at,updated_at'})
 
+    @with_mock_client()
+    def test_search_for_account(self, client):
+        client.signals.for_account('account-id').search()
+        client.request.assert_called_once_with('get', '/v1/accounts/account-id/signals/', params={})
+
     @with_mock_client(request_returns={"id": "signal-id", "name": "Test", "dimensions": [], "country": "NZ"})
     def test_get_params(self, client):
         client.signals.get(id="signal-id")

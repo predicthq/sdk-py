@@ -6,7 +6,7 @@ from datetime import datetime
 
 from tests import with_mock_client, with_mock_responses, with_client
 
-from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet
+from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, Count
 
 
 class EventsTest(unittest.TestCase):
@@ -18,22 +18,15 @@ class EventsTest(unittest.TestCase):
              label=["label1", "label2"], category="category",
              start__gte="2016-03-01", start__lt=datetime(2016, 4, 1), start__tz="Pacific/Auckland",)
 
-        client.request.assert_called_once_with('get', '/v1/events', params={
+        client.request.assert_called_once_with('get', '/v1/events/', params={
             'id': 'id', 'rank.gt': 85, 'rank_level': '4,5', 'category': 'category', 'country': 'NZ,AU',
             'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
             'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland'})
 
-    @with_mock_client(request_returns={"count": 12})
-    def test_count_params(self, client):
-        client.events.count(id="id", q="query", rank_level=[4,5], rank__gt=85, country=["NZ", "AU"],
-             within__radius="2km", within__longitude=-71.0432, within__latitude=42.346,
-             label=["label1", "label2"], category="category",
-             start__gte="2016-03-01", start__lt=datetime(2016, 4, 1), start__tz="Pacific/Auckland",)
-
-        client.request.assert_called_once_with('get', '/v1/events/count/', params={
-            'id': 'id', 'rank.gt': 85, 'rank_level': '4,5', 'category': 'category', 'country': 'NZ,AU',
-            'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
-            'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland'})
+    @with_mock_client()
+    def test_search_for_account(self, client):
+        client.events.for_account('account-id').search(q="query")
+        client.request.assert_called_once_with('get', '/v1/accounts/account-id/events/', params={'q': 'query'})
 
     @with_client()
     @with_mock_responses()
@@ -46,9 +39,9 @@ class EventsTest(unittest.TestCase):
     @with_client()
     @with_mock_responses()
     def test_count(self, client, responses):
-        result = client.events.count(q="Foo Fighters", country="AU", limit=10)
-        self.assertIsInstance(result, int)
-        self.assertEqual(result, 12)
+        result = client.events.count(active__gte="2015-01-01", active__lte="2015-12-31", within="50km@-27.470784,153.030124")
+        self.assertIsInstance(result, Count)
+        self.assertEqual(result.count, 2501)
 
     @with_client()
     @with_mock_responses()
