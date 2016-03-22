@@ -89,7 +89,7 @@ class StringListType(SchematicsListType):
 class ListType(SchematicsListType):
 
     def _coerce(self, value):
-        if isinstance(value, six.string_types):
+        if not isinstance(value, (list, tuple)):
             return [value]
         else:
             return super(ListType, self)._coerce(value)
@@ -118,6 +118,11 @@ class Location(StringModel):
 
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
+
+
+class Place(Model):
+
+    scope = ListType(IntType, required=True)
 
 
 class DateTimeRange(Model):
