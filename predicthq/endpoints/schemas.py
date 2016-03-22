@@ -197,7 +197,11 @@ class ResultSet(Model):
         return iter(self.results)
 
     def iter_all(self):
-        return itertools.chain(self.iter_items(), *(page.iter_items() for page in self.iter_pages()))
+        for item in self.iter_items():
+            yield item
+        for page in self.iter_pages():
+            for item in page.iter_items():
+                yield item
 
     def __iter__(self):
         return self.iter_items()

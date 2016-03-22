@@ -18,6 +18,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     category = ListType(StringType)
     start = ModelType(DateTimeRange)
     end = ModelType(DateTimeRange)
+    active = ModelType(DateTimeRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
     rank = ModelType(IntRange)
     country = ListType(StringType)
@@ -48,6 +49,15 @@ class Event(Model):
 class EventResultSet(ResultSet):
 
     results = ResultType(Event)
+
+
+class Count(Model):
+
+    count = IntType()
+    top_rank = FloatType()
+    rank_levels = DictType(IntType)
+    categories = DictType(IntType)
+    labels = DictType(IntType)
 
 
 class TopEventsSearchParams(SortableMixin, Model):
