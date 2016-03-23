@@ -25,9 +25,6 @@ class SearchParams(LimitMixin, Model):
 
 class Place(Model):
 
-    class Options:
-        serialize_when_none = False
-
     id = StringType()
     type = StringType()
     name = StringType()

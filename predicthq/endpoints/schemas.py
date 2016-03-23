@@ -122,7 +122,11 @@ class Location(StringModel):
 
 class Place(Model):
 
-    scope = ListType(IntType, required=True)
+    class Options:
+        serialize_when_none = False
+
+    scope = ListType(IntType)
+    exact = ListType(IntType)
 
 
 class DateTimeRange(Model):
