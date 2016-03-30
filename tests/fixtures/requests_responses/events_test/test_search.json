@@ -29,7 +29,8 @@
           "timezone": "Australia/Sydney",
           "duration": 0,
           "scope": "locality",
-          "id": "ZqlPDvqW21X7"
+          "id": "ZqlPDvqW21X7",
+          "rogue_field": "unknown"
         },
         {
           "category": "concerts",

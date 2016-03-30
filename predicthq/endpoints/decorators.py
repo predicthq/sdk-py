@@ -101,7 +101,7 @@ def returns(schema_class):
                             and hasattr(model._fields['results'], 'model_class') \
                             and issubclass(model._fields['results'].model_class, Model):
                         def initialize_result_type(item_data):
-                            item = model._fields['results'].model_class(item_data)
+                            item = model._fields['results'].model_class(item_data, strict=False)
                             item._endpoint = endpoint
                             return item
                         # Use generator so results are not iterated over more than necessary
