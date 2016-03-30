@@ -9,5 +9,6 @@ class Account(Model):
     id = StringType()
     name = StringType()
     description = StringType()
+    industry = StringType()
     created_at = DateTimeType()
     updated_at = DateTimeType()
