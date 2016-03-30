@@ -2,6 +2,8 @@
 PredictHQ API Client for Python
 ###############################
 
+.. image:: https://badge.fury.io/gh/predicthq%2Fsdk-py.svg
+    :target: https://badge.fury.io/gh/predicthq%2Fsdk-py
 .. image:: https://badge.fury.io/py/predicthq.svg
     :target: https://badge.fury.io/py/predicthq
 .. image:: https://travis-ci.org/predicthq/sdk-py.svg?branch=master
@@ -11,7 +13,6 @@ PredictHQ API Client for Python
 
 
 `PredictHQ <https://www.predicthq.com/>`_ is a global events intelligence platform that aggregates, enriches and connects scheduled and real-time event data happening both locally and globally, then predicts which ones could impact your business.
-
 
 Installation
 ############
@@ -26,15 +27,12 @@ Usage
 .. code-block:: python
 
     from predicthq import Client
-
+    
     phq = Client(access_token="$ACCESS_TOKEN")
-
+    
     for event in phq.events.search(q="Foo Fighters", rank_level=[4, 5], country='US'):
-        print("{} - {} - {} - {}".format(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d')))
-
-    81 - concerts - Foo Fighters - 2015-11-17
-    99 - concerts - Foo Fighters - 2015-11-16
-
+        print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d')))
+    
 Endpoints
 #########
 
@@ -53,3 +51,8 @@ Running Tests
 
     pip install tox
     tox
+
+Found a Bug?
+############
+
+Please `log an issue <https://github.com/predicthq/sdk-py/issues/new>`_.
