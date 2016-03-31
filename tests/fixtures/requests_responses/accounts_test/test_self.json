@@ -9,6 +9,10 @@
       "id": "3HgPJyIwoUWb",
       "name": "PredictHQ",
       "description": "PredictHQ is a new global events intelligence platform.",
+      "industry": {
+        "id": "pzLDW2D1GAwJ",
+        "name": "Marketing and Advertising"
+      },
       "created_at": "2015-07-16T01:35:26Z",
       "updated_at": "2016-02-02T21:39:19Z"
     }
