@@ -48,10 +48,15 @@ class Client(object):
         try:
             response.raise_for_status()
         except requests.HTTPError:
+            try:
+                error = response.json()
+            except ValueError:
+                error = response.content
+
             if 400 <= response.status_code <= 499:
-                raise ClientError(response.json())
+                raise ClientError(error)
             else:
-                raise ServerError(response.json())
+                raise ServerError(error)
 
         try:
             result = response.json() or None

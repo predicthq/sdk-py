@@ -38,6 +38,14 @@
     "body": {"error": "server error"}
   },
   {
+    "method": "GET",
+    "match_querystring": true,
+    "url": "/no-json/",
+    "status": 500,
+    "content_type": "text/plain",
+    "body": "server error"
+  },
+  {
     "method": "POST",
     "match_querystring": true,
     "url": "/oauth2/token/",

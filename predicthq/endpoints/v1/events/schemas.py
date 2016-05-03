@@ -68,8 +68,8 @@ class TopEventsSearchParams(SortableMixin, Model):
 
 class CalendarParams(SearchParams):
 
-    dates = ModelType(DateTimeRange)
     top_events = ModelType(TopEventsSearchParams)
+    view = StringType(choices=('active',))
 
 
 class CalendarDay(Model):

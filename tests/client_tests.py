@@ -46,14 +46,18 @@ class ClientTest(unittest.TestCase):
             self.client.get("/server-error/")
             self.assertEqual(ctx.exception.message, responses.calls[4].response.json())
 
+        with self.assertRaises(ServerError) as ctx:
+            self.client.get("/no-json/")
+            self.assertEqual(ctx.exception.message, responses.calls[5].response.content)
+
         # Test headers
         self.client.authenticate(client_id='client_id', client_secret='client_secret', scope=['account'])
-        self.assertEqual(responses.calls[5].request.headers['Authorization'], 'Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=')
-        self.assertEqual(responses.calls[5].request.headers['Content-Type'], 'application/x-www-form-urlencoded')
+        self.assertEqual(responses.calls[6].request.headers['Authorization'], 'Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ=')
+        self.assertEqual(responses.calls[6].request.headers['Content-Type'], 'application/x-www-form-urlencoded')
 
         self.client.accounts.self()
-        self.assertEqual(responses.calls[6].request.headers['Authorization'], 'Bearer token123')
-        self.assertEqual(responses.calls[6].request.headers['Accept'], 'application/json')
+        self.assertEqual(responses.calls[7].request.headers['Authorization'], 'Bearer token123')
+        self.assertEqual(responses.calls[7].request.headers['Accept'], 'application/json')
 
     @with_mock_client(request_returns={"result": "value"})
     def test_get(self, client):
