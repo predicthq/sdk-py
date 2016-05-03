@@ -46,7 +46,7 @@ class EventsTest(unittest.TestCase):
     @with_client()
     @with_mock_responses()
     def test_calendar(self, client, responses):
-        result = client.events.calendar(start__gte="2015-12-24", start__lte="2015-12-26", country="NZ", top_events__limit=1, top_events__sort=["rank"], dates__tz="Pacific/Auckland")
+        result = client.events.calendar(active__gte="2015-12-24", active__lte="2015-12-26", country="NZ", top_events__limit=1, top_events__sort=["rank"], active__tz="Pacific/Auckland")
         self.assertIsInstance(result, CalendarResultSet)
         self.assertEqual(result.count, 60)
         self.assertEqual(3, len(list(result.iter_all())))
