@@ -4,7 +4,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 from schematics.transforms import blacklist, wholelist, whitelist
 
 from predicthq.endpoints.schemas import Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin, FloatType, IntType, DictType, \
-    PaginatedMixin, DateTimeRange, StringListType, StringModelType, Area, BooleanType, DateType
+    PaginatedMixin, DateTimeRange, StringListType, StringModelType, Area, BooleanType, DateType, Place
 
 
 class SignalsSearchParams(SortableMixin, Model):
@@ -94,7 +94,7 @@ class SignalResultSet(ResultSet):
 class DataPoint(Model):
 
     uid = StringType(required=True)
-    date = DateTimeType(requird=True)
+    date = DateTimeType(required=True)
     latitude = FloatType(min_value=-90, max_value=90, required=True)
     longitude = FloatType(min_value=-180, max_value=180, required=True)
     initiated = DateTimeType()
@@ -202,4 +202,6 @@ class AnalysisParams(PaginatedMixin, SortableMixin, Model):
     significance = IntType(min_value=0, max_value=100)
     lead = BooleanType(default=False)
     span = BooleanType(default=False)
+    place = ModelType(Place)
+
     # @todo: Support custom dimensions from signal
