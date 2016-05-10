@@ -125,8 +125,8 @@ class Place(Model):
     class Options:
         serialize_when_none = False
 
-    scope = ListType(IntType)
-    exact = ListType(IntType)
+    scope = ListType(StringType)
+    exact = ListType(StringType)
 
 
 class DateTimeRange(Model):
