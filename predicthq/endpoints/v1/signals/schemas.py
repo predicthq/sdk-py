@@ -154,34 +154,27 @@ class Dimensions(Model):
     # @todo: Support custom dimensions from signal
 
 
-class DailyAnalysisDetailsComponent(Model):
+class MeanAnalysisComponent(Model):
+
+    mean = FloatType()
+    std_deviation = FloatType()
+    expected = FloatType()
+    excess = FloatType()
+
+
+class CountAnalysisComponent(Model):
 
     count = IntType()
-    min = IntType()
-    max = IntType()
-    avg = FloatType()
-    sum = IntType()
-    sum_of_squares = IntType()
-    variance = FloatType()
-    std_deviation = FloatType()
-    std_deviation_bounds = DictType(FloatType)
-    percentiles = DictType(FloatType)
-
-
-class DailyAnalysisDetails(Model):
-
-    lead = ModelType(DailyAnalysisDetailsComponent)
-    span = ModelType(DailyAnalysisDetailsComponent)
+    expected = FloatType()
+    excess = FloatType()
 
 
 class DailyAnalysis(Model):
 
     date = DateType()
-    trend = FloatType()
-    actual = FloatType()
-    expected = FloatType()
-    excess = FloatType()
-    details = ModelType(DailyAnalysisDetails)
+    demand = ModelType(CountAnalysisComponent)
+    lead = ModelType(MeanAnalysisComponent)
+    span = ModelType(MeanAnalysisComponent)
 
 
 class AnalysisResultSet(ResultSet):
@@ -199,9 +192,7 @@ class AnalysisParams(PaginatedMixin, SortableMixin, Model):
     initiated = ModelType(DateTimeRange)
     completed = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
-    significance = IntType(min_value=0, max_value=100)
-    lead = BooleanType(default=False)
-    span = BooleanType(default=False)
+    significance = FloatType(min_value=0, max_value=100)
     place = ModelType(Place)
 
     # @todo: Support custom dimensions from signal

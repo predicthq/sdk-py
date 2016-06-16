@@ -57,26 +57,28 @@
           -27.46846
         ]
       },
-      "country": {
-        "type": "category",
-        "options": [
-          {
-            "count": 2445,
-            "name": "NZ"
-          },
-          {
-            "count": 282,
-            "name": "AU"
-          }
-        ]
-      },
-      "revenue": {
-        "count": 2729,
-        "min": 0,
-        "max": 754.1099853515625,
-        "std_deviation": 76.9167076432597,
-        "avg": 51.462359763100366,
-        "type": "number"
+      "custom": {
+        "country": {
+          "type": "category",
+          "options": [
+            {
+              "count": 2445,
+              "name": "NZ"
+            },
+            {
+              "count": 282,
+              "name": "AU"
+            }
+          ]
+        },
+        "revenue": {
+          "count": 2729,
+          "min": 0,
+          "max": 754.1099853515625,
+          "std_deviation": 76.9167076432597,
+          "avg": 51.462359763100366,
+          "type": "number"
+        }
       }
     }
   }
