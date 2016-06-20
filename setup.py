@@ -40,7 +40,7 @@ setup(
     ],
     tests_require=[
         "nose==1.3.7",
-        "coverage==4.0.3",
+        "coverage>=4.0.0",
         "responses==0.5.1",
         "mock==1.3.0",
     ],

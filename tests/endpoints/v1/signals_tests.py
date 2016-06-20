@@ -158,6 +158,6 @@ class SignalsTest(unittest.TestCase):
     @with_mock_responses()
     def test_analysis(self, client, responses):
         signal = client.signals.get(id="zVNLr8tHvWQw")
-        analysis = signal.analysis(lead=True, span=True)
+        analysis = signal.analysis()
         self.assertEqual(analysis.count, 365)
         # @todo: add tests for custom signal dimensions
