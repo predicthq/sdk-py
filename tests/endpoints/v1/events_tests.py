@@ -16,7 +16,7 @@ class EventsTest(unittest.TestCase):
         client.events.search(id="id", q="query", rank_level=[4,5], rank__gt=85, country=["NZ", "AU"],
              within__radius="2km", within__longitude=-71.0432, within__latitude=42.346,
              label=["label1", "label2"], category="category",
-             place__scope=["place1", "place2"], place__exact=["place3"],
+             place={"scope": ["place1", "place2"], "exact": "place3"},
              start__gte="2016-03-01", start__lt=datetime(2016, 4, 1), start__tz="Pacific/Auckland",
              active__gte="2016-03-01", active__lt=datetime(2016, 4, 1), active__tz="Pacific/Auckland",
              signal__id='zVNLr8tHvWQw', signal__explain=datetime(2016, 4, 1))
