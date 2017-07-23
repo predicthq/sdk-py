@@ -27,12 +27,12 @@ Usage
 .. code-block:: python
 
     from predicthq import Client
-    
+
     phq = Client(access_token="$ACCESS_TOKEN")
-    
-    for event in phq.events.search(q="Foo Fighters", rank_level=[4, 5], country='US'):
+
+    for event in phq.events.search(q="Foo Fighters", rank_level=[4, 5], place={"scope": ["5391959", "5368361"]}):
         print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d')))
-    
+
 Endpoints
 #########
 

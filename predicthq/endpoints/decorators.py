@@ -22,7 +22,10 @@ def _to_url_params(data, glue=".", separator=","):
             params[key] = separator.join(map(six.text_type, value))
         elif isinstance(value, dict):
             for subkey, subvalue in six.iteritems(value):
-                params[glue.join((key, subkey))] = subvalue
+                if isinstance(subvalue, list):
+                    params[glue.join((key, subkey))] = separator.join(map(six.text_type, subvalue))
+                else:
+                    params[glue.join((key, subkey))] = subvalue
         else:
             params[key] = value
     return params
