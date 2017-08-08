@@ -179,12 +179,12 @@ class IntRange(Model):
 
 class LimitMixin(Model):
 
-    limit = IntType(min_value=1, max_value=200)
+    limit = IntType(min_value=1)
 
 
 class OffsetMixin(Model):
 
-    offset = IntType(min_value=0, max_value=50)
+    offset = IntType(min_value=0)
 
 
 class PaginatedMixin(LimitMixin, OffsetMixin):
