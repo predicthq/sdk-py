@@ -12,7 +12,7 @@ PredictHQ API Client for Python
     :target: https://coveralls.io/github/predicthq/sdk-py?branch=master
 
 
-`PredictHQ <https://www.predicthq.com/>`_ is a global events intelligence platform that aggregates, enriches and connects scheduled and real-time event data happening both locally and globally, then predicts which ones could impact your business.
+`PredictHQ <https://www.predicthq.com/>`_ is an event intelligence platform that combines real world events into one global source of truth to help businesses better understand demand and plan for the future.
 
 Installation
 ############
