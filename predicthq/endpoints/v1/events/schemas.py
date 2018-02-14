@@ -46,6 +46,7 @@ class Event(Model):
     country = StringType()
     rank = IntType()
     location = GeoJSONPointType()
+    place_hierarchies = ListType(ListType(StringType()))
     scope = StringType()
     relevance = FloatType()
 
