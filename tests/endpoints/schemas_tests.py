@@ -116,6 +116,32 @@ class SchemasTest(unittest.TestCase):
         with self.assertRaises(schemas.SchematicsDataError):
             m.import_data({"point": [-36.847585, 174.765742]}, validate=True)
 
+    def test_date_around_type(self):
+
+        class SchemaExample(schemas.Model):
+            around = schemas.ModelType(schemas.DateAround)
+
+        m = SchemaExample()
+
+        self.assertDictEqual(m.import_data({"around": {"origin": '2020-01-01', "offset": "1d", "scale": "0d", "decay": "0.1"}}).to_primitive(),
+                             {'around': {'origin': '2020-01-01', 'decay': 0.1, 'scale': u'0d', 'offset': u'1d'}})
+
+        with self.assertRaises(schemas.SchematicsDataError):
+            m.import_data({"around": "2020-01-01"}, validate=True)
+
+    def test_location_around_type(self):
+        class SchemaExample(schemas.Model):
+            around = schemas.ModelType(schemas.LocationAround)
+
+        m = SchemaExample()
+
+        self.assertDictEqual(m.import_data(
+            {"around": {"origin": '40.730610,-73.935242', "offset": "1km", "scale": "2km", "decay": "0.1"}}).to_primitive(),
+                             {'around': {'origin': u'40.730610,-73.935242', 'decay': 0.1, 'scale': u'2km', 'offset': u'1km'}})
+
+        with self.assertRaises(schemas.SchematicsDataError):
+            m.import_data({"around": "40.730610,-73.935242"}, validate=True)
+
     def test_area_model(self):
 
         class SchemaExample(schemas.Model):

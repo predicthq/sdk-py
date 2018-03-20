@@ -143,6 +143,28 @@ class Signal(Model):
     explain = DateType()
 
 
+class DateAround(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    origin = DateType(required=True)
+    offset = StringType(regex='\d+d')
+    scale = StringType(regex='\d+d')
+    decay = FloatType()
+
+
+class LocationAround(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    origin = StringType(regex='(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
+    offset = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    scale = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    decay = FloatType()
+
+
 class DateTimeRange(Model):
 
     class Options:
