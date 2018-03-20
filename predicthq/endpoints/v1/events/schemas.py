@@ -4,7 +4,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 from predicthq.endpoints.schemas import PaginatedMixin, SortableMixin, Model, ResultSet, \
     ListType, StringType, GeoJSONPointType, StringListType, StringModelType, Area, \
     ModelType, IntRange, IntType, DateTimeRange, DateTimeType, FloatType, ResultType, \
-    DictType, DateType, Place, Signal
+    DictType, DateType, Place, Signal, DateAround, LocationAround
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):
@@ -17,16 +17,20 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     label = ListType(StringType)
     category = ListType(StringType)
     start = ModelType(DateTimeRange)
+    start_around = ModelType(DateAround)
     end = ModelType(DateTimeRange)
+    end_around = ModelType(DateAround)
     active = ModelType(DateTimeRange)
     updated = ModelType(DateTimeRange)
     state = StringType(choices=('active', 'deleted'))
     rank_level = ListType(IntType(min_value=1, max_value=5))
     rank = ModelType(IntRange)
     country = ListType(StringType)
+    location_around = ModelType(LocationAround)
     within = StringListType(StringModelType(Area), separator="+")
     place = ModelType(Place)
     signal = ModelType(Signal)
+    relevance = ListType(StringType)
 
 
 class Event(Model):
@@ -45,6 +49,7 @@ class Event(Model):
     labels = ListType(StringType())
     country = StringType()
     rank = IntType()
+    local_rank = IntType()
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
     scope = StringType()
