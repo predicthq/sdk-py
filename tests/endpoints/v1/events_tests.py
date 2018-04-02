@@ -13,7 +13,8 @@ class EventsTest(unittest.TestCase):
 
     @with_mock_client()
     def test_search_params_underscores(self, client):
-        client.events.search(id="id", q="query", rank_level=[4,5], rank__gt=85, country=["NZ", "AU"],
+        client.events.search(id="id", q="query", country=["NZ", "AU"],
+             rank_level=[4,5], rank__gt=85,  local_rank_level=[4,5], local_rank__gt=85,
              within__radius="2km", within__longitude=-71.0432, within__latitude=42.346,
              label=["label1", "label2"], category="category", state='deleted',
              start_around__origin='2016-03-05', start_around__scale='5d',
@@ -25,7 +26,8 @@ class EventsTest(unittest.TestCase):
              signal__id="zVNLr8tHvWQw", signal__explain=datetime(2016, 4, 1))
 
         client.request.assert_called_once_with('get', '/v1/events/', params={
-            'id': 'id', 'rank.gt': 85, 'rank_level': '4,5', 'category': 'category', 'state': 'deleted', 'country': 'NZ,AU',
+            'id': 'id', 'category': 'category', 'state': 'deleted', 'country': 'NZ,AU',
+            'rank.gt': 85, 'rank_level': '4,5', 'local_rank.gt': 85, 'local_rank_level': '4,5',
             'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
             'start_around.origin': '2016-03-05', 'start_around.scale': '5d',
             'place.scope': 'place1,place2', 'place.exact': 'place3',
