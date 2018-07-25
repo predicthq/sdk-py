@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpredicthq%2Fsdk-py.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpredicthq%2Fsdk-py?ref=badge_shield)
+
 ###############################
 PredictHQ API Client for Python
 ###############################
@@ -56,3 +58,7 @@ Found a Bug?
 ############
 
 Please `log an issue <https://github.com/predicthq/sdk-py/issues/new>`_.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpredicthq%2Fsdk-py.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpredicthq%2Fsdk-py?ref=badge_large)
