@@ -56,6 +56,9 @@ class Event(Model):
     place_hierarchies = ListType(ListType(StringType()))
     scope = StringType()
     relevance = FloatType()
+    state = StringType()
+    first_seen = DateTimeType()
+    updated = DateTimeType()
 
 
 class EventResultSet(ResultSet):
