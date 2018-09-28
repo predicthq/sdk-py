@@ -25,7 +25,7 @@ notifications:
     secure: Mi4B2z6X0tE2vyfuF359/eXAxu8IgnOWT6REHBGYTGfB+baKtowBmQeMBTXe6aZFUuQ4vgnZAiq7KWgBwkpv4RuaP1BO9XkPwlnfXQOv6u4nIECGJcTiE4XTMl6zX1r4Km0X6kD9jP+Rvm6YCE6eiDf+xqLsMwECQstXYehwrT53fXnOYXhqP2girK+BFhJ5M2OYvz/K+kC+rMOGQjddic9SkNDYczTo22kVJ3OhIBkEC95UkfcFBEGE5/LP25zON9ptXv73aiuWjCNeaO/YBKog/hRJyYPdlwdaY7ENYiJHFCz/dRqDv32cNy28TTzdDOuE5Jic1OTMfvG2xnSjBZA/7R+msHqoVJ6Wn+IGlKvHCc4/etVoNpGyv7/tuXwAIY8s6ied4bLEvpSs/cEK0FMidZRcUoZ1+a2j28/rY7aqYef4sA0DwzplWMEoA680AAA4e0nGXIBbM6eb6aldd4oiIlW2F1PX0wGOXhdKYh7/rb2OxJ27rJTKsW8gbRN2OT3M9P5pdTAj5P7MmNIjKbJSxSemGhcfQIRl3FWn6oKIgQNbtWSkLEVh09JhjZJhnVlRtsPYr8rQQaMSc1EyQqDLicEB4lt0+Oe+Qq82HYWl6XfnzpTYc71mKrtjckdlDxBcAS9Rv1XNmBwQH9AbwcmifM0wOPJ5jiYXLmi4ucw=
 
 before_deploy:
-  - echo $TRAVIS_TAG > VERSION
+  - echo "__version__ = '$TRAVIS_TAG'" > predicthq/version.py
 
 deploy:
   provider: pypi
