@@ -4,6 +4,8 @@ import os
 import codecs
 from setuptools import setup, find_packages
 
+here = os.path.abspath(os.path.dirname(__file__))
+
 
 def read(*parts):
     filename = os.path.join(os.path.dirname(__file__), *parts)
@@ -11,7 +13,11 @@ def read(*parts):
         return fp.read()
 
 
-VERSION = read("VERSION").strip()
+about = {}
+
+# Load version number dynamically
+with open(os.path.join(here, 'predicthq', 'version.py'), 'r') as f:
+    exec(f.read(), about)
 
 REPO_URL = "https://github.com/predicthq/sdk-py"
 
@@ -26,7 +32,7 @@ LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.rst")])
 
 setup(
     name="predicthq",
-    version=VERSION,
+    version=about['__version__'],
     description="PredictHQ Event Intelligence",
     long_description=LONG_DESCRIPTION,
     license="MIT",
