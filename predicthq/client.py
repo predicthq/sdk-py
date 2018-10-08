@@ -35,7 +35,7 @@ class Client(object):
         self.places = endpoints.PlacesEndpoint(proxy(self))
 
     def get_headers(self, headers):
-        _headers = {"Accept": "application/json", "x-user-agent": "PHQ-Python-SDK/{}".format(__version__)}
+        _headers = {"Accept": "application/json", "x-user-agent": "PHQ-Py-SDK/{}".format(__version__)}
         if self.access_token:
             _headers.update({"Authorization": "Bearer {}".format(self.access_token),})
         _headers.update(**headers)
