@@ -30,7 +30,17 @@ Usage
 
     phq = Client(access_token="$ACCESS_TOKEN")
 
+    # the search() method returns an EventResultSet which allows you to iterate over the 1st page of items
     for event in phq.events.search(q="Foo Fighters", rank_level=[4, 5], place={"scope": ["5391959", "5368361"]}):
+        print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+        
+    # if you want to iterate over all the results for your query, you can chain the iter_all() generator
+    for event in phq.events.search(q="matisse", country="FR").iter_all():
+        print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+
+    # you can skip results with the offset parameter and limit the number of results with the limit parameter
+    # the following skips the first 10 results and limits the results to 5 items
+    for event in phq.events.search(q="matisse", country="FR", offset=10, limit=5):
         print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 
 Endpoints
