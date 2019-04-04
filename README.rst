@@ -12,7 +12,7 @@ PredictHQ API Client for Python
     :target: https://coveralls.io/github/predicthq/sdk-py?branch=master
 
 
-`PredictHQ <https://www.predicthq.com/>`_ combines real-world events into one global source of truth to help businesses better understand demand, and plan for the future.
+`PredictHQ <https://www.predicthq.com/>`_ is the demand intelligence company combining real-world events into one global source of truth to help businesses better understand demand and plan for the future.
 
 Installation
 ############
