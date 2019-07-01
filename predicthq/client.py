@@ -12,6 +12,7 @@ from .config import config
 from .exceptions import ClientError, ServerError
 from .version import __version__
 
+
 class Client(object):
 
     @classmethod

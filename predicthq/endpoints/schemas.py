@@ -13,11 +13,15 @@ import pytz
 
 from schematics.models import Model
 from schematics.transforms import Role
-from schematics.types import StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType, DateType as SchematicsDateType
+from schematics.types import (
+    StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType,
+    DateType as SchematicsDateType
+)
 from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType
-from schematics.exceptions import ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
+from schematics.exceptions import (
+    ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
+)
 from schematics.types.serializable import serializable
-
 
 
 class DateTimeType(SchematicsDateTimeType):
