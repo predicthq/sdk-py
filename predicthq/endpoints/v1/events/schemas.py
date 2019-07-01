@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-from predicthq.endpoints.schemas import PaginatedMixin, SortableMixin, Model, ResultSet, \
-    ListType, StringType, GeoJSONPointType, StringListType, StringModelType, Area, \
-    ModelType, IntRange, IntType, DateTimeRange, DateTimeType, FloatType, ResultType, \
-    DictType, DateType, Place, Signal, DateAround, LocationAround, BooleanType
+from predicthq.endpoints.schemas import (
+    PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
+    StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
+    DateTimeType, FloatType, ResultType, DictType, DateType, Place, Signal, DateAround,
+    LocationAround, BooleanType
+)
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):

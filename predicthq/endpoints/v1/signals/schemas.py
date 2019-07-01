@@ -3,8 +3,11 @@ from __future__ import unicode_literals, absolute_import, print_function
 
 from schematics.transforms import blacklist, wholelist, whitelist
 
-from predicthq.endpoints.schemas import Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin, FloatType, IntType, DictType, \
-    PaginatedMixin, DateTimeRange, StringListType, StringModelType, Area, BooleanType, DateType, Place
+from predicthq.endpoints.schemas import (
+    Model, StringType, ListType, ModelType, DateTimeType, ResultSet, ResultType, SortableMixin,
+    FloatType, IntType, DictType, PaginatedMixin, DateTimeRange, StringListType, StringModelType,
+    Area, BooleanType, DateType, Place
+)
 
 
 class SignalsSearchParams(SortableMixin, Model):

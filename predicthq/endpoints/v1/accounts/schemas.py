@@ -5,7 +5,7 @@ from predicthq.endpoints.schemas import Model, StringType, DateTimeType, ModelTy
 
 
 class Industry(Model):
-    
+
     id = StringType()
     name = StringType()
 

@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
 
-from predicthq.endpoints.schemas import LimitMixin, Model, ResultSet, \
-    ListType, StringType, GeoJSONPointType, StringListType, StringModelType, Location, \
-    DateTimeType, ResultType, SchematicsValidationError
+from predicthq.endpoints.schemas import (
+    LimitMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType, StringListType,
+    StringModelType, Location, DateTimeType, ResultType, SchematicsValidationError
+)
 
 
 class SearchParams(LimitMixin, Model):

@@ -12,9 +12,9 @@ from .schemas import Signal, SignalID, SavedSignal, SignalResultSet, SignalDataP
 
 
 def chunks(iterator, size):
-   iterable = iter(iterator)
-   while True:
-       yield itertools.chain([next(iterable)], itertools.islice(iterable, size - 1))
+    iterable = iter(iterator)
+    while True:
+        yield itertools.chain([next(iterable)], itertools.islice(iterable, size - 1))
 
 
 class SignalsEndpoint(UserBaseEndpoint):
@@ -45,9 +45,10 @@ class SignalsEndpoint(UserBaseEndpoint):
 
     @accepts(SignalDataPoints, query_string=False)
     def sink(self, id, data_points, chunk_size):
+        headers = {"Content-Type": "application/x-ldjson"}
         for data_chunk in chunks(data_points, chunk_size):
             data = "\n".join(json.dumps(item, indent=None) for item in data_chunk)
-            self.client.post(self.build_url('v1', 'signals/{}/sink'.format(id)), data=data, headers={"Content-Type": "application/x-ldjson"})
+            self.client.post(self.build_url('v1', 'signals/{}/sink'.format(id)), data=data, headers=headers)
 
     @accepts(SignalID)
     @returns(Dimensions)
