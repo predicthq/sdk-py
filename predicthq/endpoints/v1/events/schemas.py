@@ -61,6 +61,8 @@ class Event(Model):
     state = StringType()
     first_seen = DateTimeType()
     updated = DateTimeType()
+    deleted_reason = StringType()
+    duplicate_of_id = StringType()
 
 
 class EventResultSet(ResultSet):
