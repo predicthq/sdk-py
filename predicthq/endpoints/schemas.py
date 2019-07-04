@@ -211,6 +211,14 @@ class BrandUnsafe(Model):
     exclude = BooleanType()
 
 
+class Entity(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    id = StringType()
+
+
 class LimitMixin(Model):
 
     limit = IntType(min_value=1)

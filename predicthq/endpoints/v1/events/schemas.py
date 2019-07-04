@@ -5,7 +5,7 @@ from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
     DateTimeType, FloatType, ResultType, DictType, DateType, Place, Signal, DateAround,
-    LocationAround, BooleanType, BrandUnsafe
+    LocationAround, BooleanType, BrandUnsafe, Entity
 )
 
 
@@ -36,6 +36,18 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     signal = ModelType(Signal)
     relevance = ListType(StringType)
     brand_unsafe = ModelType(BrandUnsafe)
+    entity = ModelType(Entity)
+
+
+class Entities(Model):
+
+    class Options:
+        serialize_when_none = True
+
+    entity_id = StringType()
+    name = StringType()
+    type = StringType()
+    formatted_address = StringType()
 
 
 class Event(Model):
@@ -55,6 +67,7 @@ class Event(Model):
     country = StringType()
     rank = IntType()
     local_rank = IntType()
+    entities = ListType(ModelType(Entities))
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
     scope = StringType()
