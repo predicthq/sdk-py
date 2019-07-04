@@ -203,6 +203,14 @@ class IntRange(Model):
     lte = IntType()
 
 
+class BrandUnsafe(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    exclude = BooleanType()
+
+
 class LimitMixin(Model):
 
     limit = IntType(min_value=1)
