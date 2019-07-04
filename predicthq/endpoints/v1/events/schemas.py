@@ -38,6 +38,17 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     brand_unsafe = ModelType(BrandUnsafe)
 
 
+class Entities(Model):
+
+    class Options:
+        serialize_when_none = True
+
+    entity_id = StringType()
+    name = StringType()
+    type = StringType()
+    formatted_address = StringType()
+
+
 class Event(Model):
 
     class Options:
@@ -55,6 +66,7 @@ class Event(Model):
     country = StringType()
     rank = IntType()
     local_rank = IntType()
+    entities = ListType(ModelType(Entities))
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
     scope = StringType()
