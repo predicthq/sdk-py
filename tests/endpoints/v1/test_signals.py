@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, print_function
-import csv
-import os
 
 import unittest
 
@@ -76,14 +74,6 @@ class SignalsTest(unittest.TestCase):
 
     @with_client()
     @with_mock_responses()
-    def test_create(self, client, responses):
-        result = client.signals.create(id="", name="Test 1", country="NZ", dimensions=[{"name": "city", "type": "category"}, {"name": "revenue", "type": "number"}])
-        self.assertIsInstance(result, Signal)
-        self.assertIsInstance(result, SavedSignal)
-        self.assertIsNotNone(result.id)
-
-    @with_client()
-    @with_mock_responses()
     def test_create_via_signal(self, client, responses):
         signal = Signal()
         signal.name = "Test"
@@ -124,12 +114,6 @@ class SignalsTest(unittest.TestCase):
     def test_delete_via_signal(self, client, responses):
         signal = client.signals.get(id="zVNLr8tHvWQw")
         result = signal.delete()
-        self.assertIsNone(result)
-
-    @with_client()
-    @with_mock_responses()
-    def test_delete(self, client, responses):
-        result = client.signals.delete(id="zVNLr8tHvWQw")
         self.assertIsNone(result)
 
     @with_client()

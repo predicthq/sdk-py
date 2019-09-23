@@ -36,12 +36,11 @@ setup(
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    test_suite="nose.collector",
     setup_requires=[
-        "nose==1.3.7"
+        'pytest-runner>=5.1,<6.0',
     ],
     tests_require=[
-        "nose==1.3.7",
+        "pytest>=4.6.0,<5.0",
         "coverage>=4.0.0",
         "responses==0.5.1",
         "mock==1.3.0",

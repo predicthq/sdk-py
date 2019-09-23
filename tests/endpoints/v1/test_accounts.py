@@ -2,7 +2,6 @@
 from __future__ import unicode_literals, absolute_import, print_function
 
 import unittest
-from datetime import datetime
 
 from tests import with_mock_client, with_mock_responses, with_client
 
@@ -20,4 +19,4 @@ class AccountsTest(unittest.TestCase):
     @with_mock_responses()
     def test_self(self, client, responses):
         account = client.accounts.self()
-        self.assertIsInstance(account, Account)
+        assert isinstance(account, Account)
