@@ -54,7 +54,7 @@ for event in phq.events.search().iter_all():
 
 ### Events endpoint
 
-Additional examples are available in [usecases/events.py](usecases/events.py) file.
+Additional examples are available in [usecases/events](usecases/events) folder.
 
 The following example searches for the 'Katy Perry' events (full text search) with rank level of 4 or 5 (rank >= 60) in the concerts category.
 
