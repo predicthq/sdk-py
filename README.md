@@ -41,11 +41,11 @@ for event in phq.events.search(q="matisse", country="FR", offset=10, limit=5):
 
 ## Endpoints
 
-* `Client.oauth2`
-* `Client.accounts`
-* `Client.events`
-* `Client.signals`
-* `Client.places`
+* `oauth2`
+* `accounts`
+* `events`
+* `signals`
+* `places`
 
 For a description of all available endpoints, refer to our [API Documentation](https://developer.predicthq.com/).
 
