@@ -19,15 +19,10 @@ about = {}
 with open(os.path.join(here, 'predicthq', 'version.py'), 'r') as f:
     exec(f.read(), about)
 
+
 REPO_URL = "https://github.com/predicthq/sdk-py"
-
-PYPI_README_NOTE = """\
-.. note::
-
-   For the latest source, discussions, bug reports, etc., please visit the `GitHub repository <{}>`_
-""".format(REPO_URL)
-
-LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.rst")])
+PYPI_README_NOTE = "For the latest source, discussions, bug reports, etc., please visit the [GitHub repository]({})".format(REPO_URL)
+LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.md")])
 
 
 setup(
@@ -35,6 +30,7 @@ setup(
     version=about['__version__'],
     description="PredictHQ Event Intelligence",
     long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     license="MIT",
     author="PredictHQ",
     author_email="developers@predicthq.com",
