@@ -45,41 +45,11 @@ for event in phq.events.search():
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```
 
-```
-51 performing-arts Emociones Encontradas 2039-12-31
-0 concerts Sister Hazel 2039-01-02
-0 concerts Tommy Lee 2039-01-02
-70 concerts BE-BOP AUTUMN JAZZ TOUR 2039-01-02
-87 concerts Nsync 2039-01-02
-56 performing-arts RAGTIME 2039-01-02
-48 concerts Styx 2039-01-02
-75 concerts Jimmy Page & the Black Crowes Live 2039-01-02
-76 concerts Aerosmith 2039-01-02
-72 concerts AVALON ANOINTED WITH GUEST NICHOLE NORDEMAN 2039-01-02
-```
-
 You can chain the `iter_all()` generator to iterate over *all* your events.
 
 ```Python
 for event in phq.events.search().iter_all():
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
-```
-
-```
-51 performing-arts Emociones Encontradas 2039-12-31
-0 concerts Sister Hazel 2039-01-02
-0 concerts Tommy Lee 2039-01-02
-70 concerts BE-BOP AUTUMN JAZZ TOUR 2039-01-02
-87 concerts Nsync 2039-01-02
-56 performing-arts RAGTIME 2039-01-02
-48 concerts Styx 2039-01-02
-75 concerts Jimmy Page & the Black Crowes Live 2039-01-02
-76 concerts Aerosmith 2039-01-02
-72 concerts AVALON ANOINTED WITH GUEST NICHOLE NORDEMAN 2039-01-02
-76 concerts MERRY MAYHEM TOUR : OZZY OSBOURNE AND ROB ZOMBIE 2039-01-02
-70 concerts Mormon Tabernacle Choir 2039-01-01
-0 concerts THE ANNUAL LEGEND'S OF RASTA REGGAE FESTIVAL 2039-01-01
-...
 ```
 
 ### Events endpoint
@@ -98,20 +68,25 @@ for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='conc
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```
 
-```
-76 concerts KATY PERRY 2011-11-22
-70 concerts Katy Perry 2011-06-09
-77 concerts Katy Perry 2014-08-11
-73 concerts Katy Perry 2011-08-10
-76 concerts Katy Perry 2014-08-23
-72 concerts Katy Perry 2018-04-08
-75 concerts Katy Perry 2015-10-13
-76 concerts Katy Perry 2014-12-12
-74 concerts Katy Perry 2014-12-10
-74 concerts Katy Perry 2014-11-18
+Please refer to our [Events endpoint documentation](https://developer.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
+
+### Places endpoint
+
+Additional examples are available in [usecases/places.py](usecases/places.py) file.
+
+The following example searches for the 'New York' places (full text search) in the US.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for place in phq.places.search(q='New York', country='US'):
+    print(place.id, place.name, place.type, place.location)
 ```
 
-Please refer to our [Events endpoint documentation](https://developer.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
+Please refer to our [Places endpoint documentation](https://developer.predicthq.com/resources/places/) for the lists of search parameters and place fields available.
 
 ## Running Tests
 
