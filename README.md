@@ -18,7 +18,7 @@ pip install predicthq
 
 ### Events endpoint
 
-Additional examples are available in [usecases/events](usecases/events) directory.
+Additional examples are available in [usecases/events.py](usecases/events.py) file.
 
 ```Python
 from predicthq import Client

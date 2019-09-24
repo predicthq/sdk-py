@@ -8,6 +8,9 @@ ACCESS_TOKEN = 'abc123'
 phq = Client(access_token=ACCESS_TOKEN)
 
 
+# events and places endpoints use the same approach for search pagination.
+
+
 # Remember that by default the search() method only returns the first
 # page of results, which contains at most 10 events.
 # It's because the default values for the offset and limit parameters
