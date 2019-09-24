@@ -1,3 +1,5 @@
+<img align="center" src="ext/logo.png" alt="PredictHQ logo">
+
 # PredictHQ API Client for Python
 
 [![Version](https://badge.fury.io/gh/predicthq%2Fsdk-py.svg)](https://badge.fury.io/gh/predicthq%2Fsdk-py)
