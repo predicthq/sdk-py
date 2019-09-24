@@ -33,14 +33,14 @@ Please refer to our [API Documentation](https://developer.predicthq.com/) for a 
 
 Additional examples are available in [usecases/pagination.py](usecases/pagination.py) file.
 
+By default the `search()` method only returns the first page of results, with a default page size of 10.
+
 ```Python
 from predicthq import Client
 
 phq = Client(access_token="abc123")
 
 
-# By default the search() method only returns the first
-# page of results, which contains at most 10 events.
 for event in phq.events.search():
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```
@@ -58,8 +58,9 @@ for event in phq.events.search():
 72 concerts AVALON ANOINTED WITH GUEST NICHOLE NORDEMAN 2039-01-02
 ```
 
+You can chain the `iter_all()` generator to iterate over *all* your events.
+
 ```Python
-# You can chain the iter_all() generator to iterate over all your events.
 for event in phq.events.search().iter_all():
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```
@@ -85,14 +86,14 @@ for event in phq.events.search().iter_all():
 
 Additional examples are available in [usecases/events.py](usecases/events.py) file.
 
+The following example searches for the 'Katy Perry' events (full text search) with rank level of 4 or 5 (rank >= 60) in the concerts category.
+
 ```Python
 from predicthq import Client
 
 phq = Client(access_token="abc123")
 
 
-# The following example searches for the 'Katy Perry' events (full text search)
-# with rank level of 4 or 5 (rank >= 60) in the concerts category.
 for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='concerts'):
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```

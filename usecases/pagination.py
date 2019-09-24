@@ -12,7 +12,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 
 
 # By default the search() method only returns the first
-# page of results, which contains at most 10 events.
+# page of results, with a default page size of 10.
 # It's because the default values for the offset and limit parameters
 # are respectively 0 and 10.
 for event in phq.events.search():
