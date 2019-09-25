@@ -11,7 +11,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 # The search() method returns an EventResultSet which allows you to iterate
 # over the first page of Event objects (10 events by default)
 for event in phq.events.search():
-    print(vars(event))
+    print(event.to_dict())
 
 
 # You can access the Event object attributes directly.
