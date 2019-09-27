@@ -14,7 +14,10 @@ from .schemas import Signal, SignalID, SavedSignal, SignalResultSet, SignalDataP
 def chunks(iterator, size):
     iterable = iter(iterator)
     while True:
-        yield itertools.chain([next(iterable)], itertools.islice(iterable, size - 1))
+        try:
+            yield itertools.chain([next(iterable)], itertools.islice(iterable, size - 1))
+        except StopIteration:
+            return
 
 
 class SignalsEndpoint(UserBaseEndpoint):
