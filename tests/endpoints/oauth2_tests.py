@@ -14,8 +14,8 @@ class OAuth2Test(unittest.TestCase):
 
     @with_mock_client(request_returns=load_fixture('access_token'))
     def test_get_token_params(self, client):
-        token = client.oauth2.get_token(client_id='client_id', client_secret='client_secret', scope=['account', 'events', 'signals'])
-        client.request.assert_called_once_with('post', '/oauth2/token/', auth=('client_id', 'client_secret'), data={'scope': 'account events signals', 'grant_type': 'client_credentials'})
+        token = client.oauth2.get_token(client_id='client_id', client_secret='client_secret', scope=['account', 'events'])
+        client.request.assert_called_once_with('post', '/oauth2/token/', auth=('client_id', 'client_secret'), data={'scope': 'account events', 'grant_type': 'client_credentials'})
         self.assertIsInstance(token, AccessToken)
         self.assertDictEqual(token.to_primitive(), client.request.return_value)
 
