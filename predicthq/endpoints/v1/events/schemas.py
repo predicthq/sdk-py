@@ -4,7 +4,7 @@ from __future__ import unicode_literals, absolute_import, print_function
 from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
-    DateTimeType, FloatType, ResultType, DictType, DateType, Place, Signal, DateAround,
+    DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
     LocationAround, BooleanType, BrandUnsafe, Entity
 )
 
@@ -40,7 +40,6 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     location_around = ModelType(LocationAround)
     within = StringListType(StringModelType(Area), separator="+")
     place = ModelType(Place)
-    signal = ModelType(Signal)
     relevance = ListType(StringType)
     brand_unsafe = ModelType(BrandUnsafe)
     entity = ModelType(Entity)
