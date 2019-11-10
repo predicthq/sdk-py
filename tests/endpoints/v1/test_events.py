@@ -24,7 +24,6 @@ class EventsTest(unittest.TestCase):
             end__gte="2016-05-01", end__lt=datetime(2016, 6, 1), end__tz="Pacific/Auckland",
             active__gte="2016-03-01", active__lt=datetime(2016, 4, 1), active__tz="Pacific/Auckland",
             updated__gte="2016-03-01", updated__lt=datetime(2016, 4, 1), updated__tz="Pacific/Auckland",
-            signal__id="zVNLr8tHvWQw", signal__explain=datetime(2016, 4, 1)
         )
 
         client.request.assert_called_once_with(
@@ -38,7 +37,6 @@ class EventsTest(unittest.TestCase):
                 'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
                 'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
                 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
-                'signal.id': 'zVNLr8tHvWQw', 'signal.explain': '2016-04-01'
             }
         )
 
@@ -54,7 +52,6 @@ class EventsTest(unittest.TestCase):
             end={"gte": "2016-05-01", "lt": datetime(2016, 6, 1), "tz": "Pacific/Auckland"},
             active={"gte": "2016-03-01", "lt": datetime(2016, 4, 1), "tz": "Pacific/Auckland"},
             updated={"gte": "2016-03-01", "lt": datetime(2016, 4, 1), "tz": "Pacific/Auckland"},
-            signal={"id": "zVNLr8tHvWQw", "explain": datetime(2016, 4, 1)}
         )
 
         client.request.assert_called_once_with(
@@ -67,7 +64,6 @@ class EventsTest(unittest.TestCase):
                 'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
                 'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
                 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
-                'signal.id': 'zVNLr8tHvWQw', 'signal.explain': '2016-04-01'
             }
         )
 
