@@ -39,12 +39,6 @@ setup(
     setup_requires=[
         'pytest-runner>=5.1,<6.0',
     ],
-    tests_require=[
-        "pytest>=4.6.0,<5.0",
-        "pytest-cov>=2.8.1,<3.0"
-        "responses==0.5.1",
-        "mock==1.3.0",
-    ],
     install_requires=[
         "six>=1.9.0",
         "requests>=2.7.0",
