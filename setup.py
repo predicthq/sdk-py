@@ -41,7 +41,7 @@ setup(
     ],
     tests_require=[
         "pytest>=4.6.0,<5.0",
-        "coverage>=4.0.0",
+        "pytest-cov>=2.8.1,<3.0"
         "responses==0.5.1",
         "mock==1.3.0",
     ],

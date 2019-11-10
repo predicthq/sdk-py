@@ -16,7 +16,7 @@ install:
   - pip install "setuptools>=17.1" coveralls
 
 script:
-  - python setup.py test
+  - pytest --cov=predicthq tests/
 
 after_success:
   - coveralls
