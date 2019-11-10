@@ -133,20 +133,6 @@ class Place(Model):
     exact = ListType(StringType)
 
 
-class Signal(Model):
-
-    class Options:
-        serialize_when_none = False
-
-    id = StringType(required=True)
-    analysis_from = DateTimeType()
-    analysis_to = DateTimeType()
-    analysis_tz = StringType(choices=pytz.all_timezones)
-    significance = FloatType(min_value=0, max_value=100)
-    metric = StringType(choices=('demand', 'lead', 'span'))
-    explain = DateType()
-
-
 class DateAround(Model):
 
     class Options:

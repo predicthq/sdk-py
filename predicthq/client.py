@@ -32,7 +32,6 @@ class Client(object):
         self.oauth2 = endpoints.OAuth2Endpoint(proxy(self))
         self.events = endpoints.EventsEndpoint(proxy(self))
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
-        self.signals = endpoints.SignalsEndpoint(proxy(self))
         self.places = endpoints.PlacesEndpoint(proxy(self))
 
     def get_headers(self, headers):

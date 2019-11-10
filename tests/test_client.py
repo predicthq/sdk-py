@@ -24,7 +24,6 @@ class ClientTest(object):
         assert isinstance(self.client.oauth2, endpoints.OAuth2Endpoint)
         assert isinstance(self.client.accounts, endpoints.AccountsEndpoint)
         assert isinstance(self.client.events, endpoints.EventsEndpoint)
-        assert isinstance(self.client.signals, endpoints.SignalsEndpoint)
         assert isinstance(self.client.places, endpoints.PlacesEndpoint)
 
     @with_mock_responses()
@@ -90,8 +89,8 @@ class ClientTest(object):
 
     @with_mock_client(request_returns=load_fixture('access_token'))
     def test_authenticate(self, client):
-        token = self.client.authenticate(client_id='client_id', client_secret='client_secret', scope=['account', 'events', 'signals'])
-        client.request.assert_called_once_with('post', '/oauth2/token/', auth=('client_id', 'client_secret'), data={'scope': 'account events signals', 'grant_type': 'client_credentials'})
+        token = self.client.authenticate(client_id='client_id', client_secret='client_secret', scope=['account', 'events'])
+        client.request.assert_called_once_with('post', '/oauth2/token/', auth=('client_id', 'client_secret'), data={'scope': 'account events', 'grant_type': 'client_credentials'})
 
         assert isinstance(token, AccessToken)
         assert token.to_primitive() == client.request.return_value

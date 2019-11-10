@@ -51,7 +51,7 @@
     "url": "/oauth2/token/",
     "status": 200,
     "content_type": "application/json",
-    "body": {"access_token": "token123", "token_type": "Bearer", "scope": "account events signals"}
+    "body": {"access_token": "token123", "token_type": "Bearer", "scope": "account events"}
   },
   {
     "method": "GET",
