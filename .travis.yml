@@ -13,10 +13,10 @@ cache:
     - $HOME/.cache
 
 install:
-  - pip install "setuptools>=17.1" coveralls
+  - pip install -r requirements.txt
 
 script:
-  - python setup.py nosetests
+  - pytest --cov=predicthq tests/
 
 after_success:
   - coveralls

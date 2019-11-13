@@ -36,22 +36,15 @@ setup(
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    test_suite="nose.collector",
     setup_requires=[
-        "nose==1.3.7"
-    ],
-    tests_require=[
-        "nose==1.3.7",
-        "coverage>=4.0.0",
-        "responses==0.5.1",
-        "mock==1.3.0",
+        'pytest-runner>=5.1,<6.0',
     ],
     install_requires=[
         "six>=1.9.0",
         "requests>=2.7.0",
         "schematics==2.0.0.dev2",
         "python-dateutil>=2.4.2",
-        "pytz>=2015.4",
+        "pytz==2015.4",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
