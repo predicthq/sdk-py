@@ -1,9 +1,9 @@
-import os
 import functools
 import json
+import os
 import re
+
 import responses
-import six
 from mock import mock
 
 from predicthq import Client
@@ -55,13 +55,13 @@ def with_config(**new_config):
         def wrapper(*args, **kwargs):
             old_config = {}
 
-            for key, value in six.iteritems(new_config):
+            for key, value in new_config.items():
                 old_config[key] = getattr(config, key)
                 setattr(config, key, value)
 
             result = f(*args, **kwargs)
 
-            for key, value in six.iteritems(old_config):
+            for key, value in old_config.items():
                 setattr(config, key, value)
 
             return result

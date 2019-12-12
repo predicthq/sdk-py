@@ -1,13 +1,7 @@
+import configparser
 import os
 
-import six
-
 from predicthq.exceptions import ConfigError
-
-try:
-    import ConfigParser
-except ImportError:  # pragma: nocover
-    import configparser as ConfigParser
 
 
 CONFIG_LOCATIONS = (
@@ -42,11 +36,11 @@ class Config(object):
         self.load_defaults_from_environment()
 
     def load_defaults(self):
-        for key, value in six.iteritems(self._defaults):
+        for key, value in self._defaults.items():
             self._config[key] = value
 
     def load_defaults_from_locations(self, config_locations):
-        cp = ConfigParser.SafeConfigParser()
+        cp = configparser.SafeConfigParser()
         for file_location in config_locations:
             if os.path.isfile(file_location):
                 with open(file_location) as fp:
@@ -55,11 +49,11 @@ class Config(object):
                     try:
                         for key, value in cp.items(section):
                             self._config["{0}_{1}".format(section.upper(), key.upper())] = value
-                    except ConfigParser.NoSectionError:  # pragma: nocover
+                    except configparser.NoSectionError:  # pragma: nocover
                         pass
 
     def load_defaults_from_environment(self):
-        for key in six.iterkeys(self._defaults):
+        for key in self._defaults:
             self._config[key] = os.getenv("PREDICTHQ_{}".format(key), self._config[key])
 
     def __getattr__(self, item):

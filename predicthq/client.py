@@ -1,9 +1,9 @@
 import json
 import logging
+from urllib.parse import urljoin, urlparse, urlunparse
 from weakref import proxy
 
 import requests
-import six
 
 from .config import config
 from .exceptions import ClientError, ServerError
@@ -14,9 +14,9 @@ class Client(object):
 
     @classmethod
     def build_url(cls, path):
-        result = list(six.moves.urllib.parse.urlparse(path))
+        result = list(urlparse(path))
         result[2] = "/{}/".format(result[2].strip('/'))
-        return six.moves.urllib.parse.urljoin(config.ENDPOINT_URL, six.moves.urllib.parse.urlunparse(result))
+        return urljoin(config.ENDPOINT_URL, urlunparse(result))
 
     def __init__(self, access_token=None):
         self.logger = logging.getLogger('predicthq')

@@ -1,6 +1,3 @@
-import six
-
-
 class MetaEndpoint(type):
 
     def __new__(mcs, name, bases, data):
@@ -12,7 +9,7 @@ class MetaEndpoint(type):
         return super(MetaEndpoint, mcs).__new__(mcs, name, bases, data)
 
 
-class BaseEndpoint(six.with_metaclass(MetaEndpoint)):
+class BaseEndpoint(metaclass=MetaEndpoint):
 
     def __init__(self, client):
         self.client = client

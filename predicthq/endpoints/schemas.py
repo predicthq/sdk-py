@@ -1,8 +1,8 @@
 import re
 from datetime import datetime, date
+from urllib.parse import parse_qsl, urlparse
 
 import pytz
-import six
 from dateutil.parser import parse as parse_date
 
 from schematics.exceptions import (
@@ -37,7 +37,7 @@ class DateType(SchematicsDateType):
 class StringModelType(ModelType):
 
     def _convert(self, value, context):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return self.model_class._convert(value, context=context)
         else:
             return super(StringModelType, self)._convert(value, context=context)
@@ -54,9 +54,9 @@ class StringModel(Model):
         raise NotImplementedError()
 
     def convert(self, raw_data, **kw):
-        if isinstance(raw_data, six.string_types):
+        if isinstance(raw_data, str):
             try:
-                raw_data = re.match(self.import_format, six.text_type(raw_data)).groupdict()
+                raw_data = re.match(self.import_format, str(raw_data)).groupdict()
             except AttributeError:
                 raise SchematicsValidationError("'{}' is not a valid format for {}".format(raw_data, self.__class__.__name__))
         return super(StringModel, self).convert(raw_data, **kw)
@@ -72,7 +72,7 @@ class StringListType(SchematicsListType):
         super(StringListType, self).__init__(field, **kwargs)
 
     def _coerce(self, value):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return value.split(self.separator)
         elif isinstance(value, dict):
             return [value]
@@ -81,7 +81,7 @@ class StringListType(SchematicsListType):
 
     def _export(self, *args, **kwargs):
         data = super(StringListType, self)._export(*args, **kwargs)
-        return self.separator.join(map(six.text_type, data))
+        return self.separator.join(map(str, data))
 
 
 class ListType(SchematicsListType):
@@ -230,7 +230,7 @@ class ResultSet(Model):
         raise NotImplementedError()
 
     def _parse_params(self, url):
-        return dict(six.moves.urllib.parse.parse_qsl(six.moves.urllib.parse.urlparse(url).query))
+        return dict(parse_qsl(urlparse(url).query))
 
     def has_previous(self):
         return self.previous is not None

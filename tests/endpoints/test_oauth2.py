@@ -1,7 +1,7 @@
 import unittest
+from urllib.parse import parse_qsl
 
 import pytest
-import six
 
 from predicthq.endpoints.oauth2.schemas import AccessToken
 from predicthq.exceptions import ValidationError
@@ -46,7 +46,7 @@ class OAuth2Test(unittest.TestCase):
         assert len(responses.calls) == 1
         assert responses.calls[0].request.headers['Content-Type'] == 'application/x-www-form-urlencoded'
         assert responses.calls[0].request.headers['Authorization'] == 'Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ='
-        assert dict(six.moves.urllib.parse.parse_qsl(responses.calls[0].request.body)) == {'scope': 'account events', 'grant_type': 'client_credentials'}
+        assert dict(parse_qsl(responses.calls[0].request.body)) == {'scope': 'account events', 'grant_type': 'client_credentials'}
 
     @with_client()
     @with_mock_responses()
@@ -56,4 +56,4 @@ class OAuth2Test(unittest.TestCase):
         assert len(responses.calls) == 1
         assert responses.calls[0].request.headers['Content-Type'] == 'application/x-www-form-urlencoded'
         assert responses.calls[0].request.headers['Authorization'] == 'Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ='
-        assert dict(six.moves.urllib.parse.parse_qsl(responses.calls[0].request.body)) == {'token_type_hint': 'access_token', 'token': 'token123'}
+        assert dict(parse_qsl(responses.calls[0].request.body)) == {'token_type_hint': 'access_token', 'token': 'token123'}

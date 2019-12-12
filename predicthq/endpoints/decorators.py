@@ -1,8 +1,6 @@
 import functools
 from collections import defaultdict
 
-import six
-
 from predicthq.endpoints.schemas import ResultSet, Model, SchematicsDataError
 from predicthq.exceptions import ValidationError
 
@@ -12,15 +10,15 @@ def _to_url_params(data, glue=".", separator=","):
     Converts data dictionary to url parameters
     """
     params = {}
-    for key, value in six.iteritems(data):
+    for key, value in data.items():
         if isinstance(value, bool):
             params[key] = 1 if value else 0
         elif isinstance(value, list):
-            params[key] = separator.join(map(six.text_type, value))
+            params[key] = separator.join(map(str, value))
         elif isinstance(value, dict):
-            for subkey, subvalue in six.iteritems(value):
+            for subkey, subvalue in value.items():
                 if isinstance(subvalue, list):
-                    params[glue.join((key, subkey))] = separator.join(map(six.text_type, subvalue))
+                    params[glue.join((key, subkey))] = separator.join(map(str, subvalue))
                 else:
                     params[glue.join((key, subkey))] = subvalue
         else:
@@ -30,7 +28,7 @@ def _to_url_params(data, glue=".", separator=","):
 
 def _process_kwargs(kwargs, separator="__"):
     data = defaultdict(dict)
-    for key, value in six.iteritems(kwargs):
+    for key, value in kwargs.items():
         if separator in key:
             k, subk = key.split(separator)
             data[k][subk] = value
