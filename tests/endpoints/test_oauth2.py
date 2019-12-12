@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
-import pytest
 import unittest
 
+import pytest
 import six
 
 from predicthq.endpoints.oauth2.schemas import AccessToken

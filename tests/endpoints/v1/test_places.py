@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
+import unittest
 
 import pytest
-import unittest
 
 from predicthq.endpoints import schemas
 from predicthq.endpoints.v1.places.schemas import PlaceResultSet

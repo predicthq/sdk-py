@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
+from datetime import datetime, date
 
 import pytest
-
 import pytz
-from datetime import datetime, date
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint

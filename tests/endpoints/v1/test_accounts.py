@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
 import unittest
 
-from tests import with_mock_client, with_mock_responses, with_client
-
 from predicthq.endpoints.v1.accounts.schemas import Account
+from tests import with_mock_client, with_mock_responses, with_client
 
 
 class AccountsTest(unittest.TestCase):

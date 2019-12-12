@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
 from predicthq.config import config
 from predicthq.endpoints.schemas import Model, StringType, StringListType, IntType
 

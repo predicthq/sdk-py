@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
 import re
-
-import itertools
-
 from datetime import datetime, date
 
-from dateutil.parser import parse as parse_date
-import six
 import pytz
+import six
+from dateutil.parser import parse as parse_date
 
+from schematics.exceptions import (
+    ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
+)
 from schematics.models import Model
 from schematics.transforms import Role
 from schematics.types import (
@@ -18,9 +15,6 @@ from schematics.types import (
     DateType as SchematicsDateType
 )
 from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType
-from schematics.exceptions import (
-    ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
-)
 from schematics.types.serializable import serializable
 
 

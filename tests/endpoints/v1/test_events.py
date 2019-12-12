@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
 import unittest
 from datetime import datetime
 
-from tests import with_mock_client, with_mock_responses, with_client
-
 from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, Count
+from tests import with_mock_client, with_mock_responses, with_client
 
 
 class EventsTest(unittest.TestCase):

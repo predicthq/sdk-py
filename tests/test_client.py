@@ -1,13 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals, absolute_import, print_function
-
 import pytest
 
 import predicthq
 from predicthq import endpoints
 from predicthq.endpoints.oauth2.schemas import AccessToken
 from predicthq.exceptions import ClientError, ServerError
-
 from tests import with_mock_responses, with_config, with_mock_client, load_fixture
 
 
