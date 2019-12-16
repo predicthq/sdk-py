@@ -1,7 +1,9 @@
 import unittest
 from datetime import datetime
 
-from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, Count
+from predicthq.endpoints.v1.events.schemas import (
+    EventResultSet, CalendarResultSet, Count, ImpactResultSet
+)
 from tests import with_mock_client, with_mock_responses, with_client
 
 
@@ -89,5 +91,14 @@ class EventsTest(unittest.TestCase):
         result = client.events.calendar(active__gte="2015-12-24", active__lte="2015-12-26", country="NZ", top_events__limit=1, top_events__sort=["rank"], active__tz="Pacific/Auckland")
         assert isinstance(result, CalendarResultSet)
         assert result.count == 60
+        assert len(list(result.iter_all())) == 3
+        assert len(responses.calls) == 1
+
+    @with_client()
+    @with_mock_responses()
+    def test_impact(self, client, responses):
+        result = client.events.impact(active__gte="2015-12-24", active__lte="2015-12-26", country="NZ", impact_rank="rank", active__tz="Pacific/Auckland")
+        assert isinstance(result, ImpactResultSet)
+        assert result.count == 76
         assert len(list(result.iter_all())) == 3
         assert len(responses.calls) == 1

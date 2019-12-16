@@ -1,6 +1,9 @@
 from predicthq.endpoints.base import UserBaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from .schemas import SearchParams, EventResultSet, Count, CalendarParams, CalendarResultSet
+from .schemas import (
+    SearchParams, EventResultSet, Count, CalendarParams, CalendarResultSet,
+    ImpactParams, ImpactResultSet
+)
 
 
 class EventsEndpoint(UserBaseEndpoint):
@@ -19,3 +22,8 @@ class EventsEndpoint(UserBaseEndpoint):
     @returns(CalendarResultSet)
     def calendar(self, **params):
         return self.client.get(self.build_url('v1', 'events/calendar'), params=params)
+
+    @accepts(ImpactParams)
+    @returns(ImpactResultSet)
+    def impact(self, **params):
+        return self.client.get(self.build_url('v1', 'events/impact'), params=params)

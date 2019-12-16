@@ -1,0 +1,119 @@
+[
+  {
+    "method": "GET",
+    "match_querystring": false,
+    "url": "/v1/events/impact/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "count": 76,
+      "next": null,
+      "previous": null,
+      "results": [
+        {
+          "date": "2015-12-24",
+          "count": 37,
+          "impact": 1430,
+          "rank_levels": {
+            "1": 20,
+            "2": 15,
+            "3": 1,
+            "4": 0,
+            "5": 1
+          },
+          "rank_levels_impact": {
+            "1": 400,
+            "2": 1030,
+            "3": 0,
+            "4": 0,
+            "5": 0
+          },
+          "categories": {
+            "concerts": 16,
+            "conferences": 1,
+            "festivals": 16,
+            "observances": 1,
+            "performing-arts": 2,
+            "school-holidays": 1
+          },
+          "categories_impact": {
+            "concerts": 730,
+            "conferences": 20,
+            "festivals": 600,
+            "observances": 0,
+            "performing-arts": 80,
+            "school-holidays": 0
+          }
+        },
+        {
+          "date": "2015-12-25",
+          "count": 17,
+          "impact": 2540,
+          "rank_levels": {
+            "1": 5,
+            "2": 9,
+            "3": 1,
+            "4": 0,
+            "5": 2
+          },
+          "rank_levels_impact": {
+            "1": 100,
+            "2": 540,
+            "3": 1900,
+            "4": 0,
+            "5": 0
+          },
+          "categories": {
+            "concerts": 2,
+            "conferences": 1,
+            "festivals": 12,
+            "public-holidays": 1,
+            "school-holidays": 1
+          },
+          "categories_impact": {
+            "concerts": 80,
+            "conferences": 60,
+            "festivals": 2400,
+            "public-holidays": 0,
+            "school-holidays": 0
+          }
+        },
+        {
+          "date": "2015-12-26",
+          "count": 24,
+          "impact": 8740,
+          "rank_levels": {
+            "1": 9,
+            "2": 11,
+            "3": 1,
+            "4": 1,
+            "5": 2
+          },
+          "rank_levels_impact": {
+            "1": 180,
+            "2": 660,
+            "3": 1900,
+            "4": 6000,
+            "5": 0
+          },
+          "categories": {
+            "concerts": 14,
+            "festivals": 6,
+            "performing-arts": 1,
+            "public-holidays": 1,
+            "school-holidays": 1,
+            "sports": 1
+          },
+          "categories_impact": {
+            "concerts": 2480,
+            "festivals": 200,
+            "performing-arts": 60,
+            "public-holidays": 0,
+            "school-holidays": 0,
+            "sports": 6000
+          }
+        }
+      ]
+    }
+  }
+]

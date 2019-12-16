@@ -112,14 +112,13 @@ class TopEventsSearchParams(SortableMixin, Model):
 class CalendarParams(SearchParams):
 
     top_events = ModelType(TopEventsSearchParams)
-    view = StringType(choices=('active', 'start'))
 
 
 class CalendarDay(Model):
 
     date = DateType()
     count = IntType()
-    top_rank = FloatType()
+    impact = IntType()
     rank_levels = DictType(IntType)
     categories = DictType(IntType)
     labels = DictType(IntType)
@@ -129,3 +128,30 @@ class CalendarDay(Model):
 class CalendarResultSet(ResultSet):
 
     results = ResultType(CalendarDay)
+
+
+class ImpactParams(SearchParams):
+
+    top_events = ModelType(TopEventsSearchParams)
+    impact_rank = StringType(choices=('rank', 'aviation_rank'))
+
+
+class ImpactDay(Model):
+
+    date = DateType()
+    count = IntType()
+    impact = IntType()
+
+    rank_levels = DictType(IntType)
+    rank_levels_impact = DictType(IntType)
+
+    aviation_rank_levels = DictType(IntType)
+    aviation_rank_levels_impact = DictType(IntType)
+
+    categories = DictType(IntType)
+    categories_impact = DictType(IntType)
+
+
+class ImpactResultSet(ResultSet):
+
+    results = ResultType(ImpactDay)
