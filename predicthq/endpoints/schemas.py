@@ -104,7 +104,7 @@ class Area(StringModel):
     import_format = r'(?P<radius>\d+(k?m|ft|mi))@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
     export_format = "{radius}@{latitude},{longitude}"
 
-    radius = StringType(regex='\d+(k?m|ft|mi)', required=True)
+    radius = StringType(regex=r'\d+(k?m|ft|mi)', required=True)
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
@@ -133,8 +133,8 @@ class DateAround(Model):
         serialize_when_none = False
 
     origin = DateType(required=True)
-    offset = StringType(regex='\d+d')
-    scale = StringType(regex='\d+d')
+    offset = StringType(regex=r'\d+d')
+    scale = StringType(regex=r'\d+d')
     decay = FloatType()
 
 
@@ -143,9 +143,9 @@ class LocationAround(Model):
     class Options:
         serialize_when_none = False
 
-    origin = StringType(regex='(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
-    offset = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
-    scale = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    origin = StringType(regex=r'(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
+    offset = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    scale = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
     decay = FloatType()
 
 
