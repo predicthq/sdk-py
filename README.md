@@ -31,7 +31,7 @@ Please refer to our [API Documentation](https://developer.predicthq.com/) for a 
 
 ### Pagination
 
-Additional examples are available in [usecases/pagination.py](usecases/pagination.py) file.
+Additional examples are available in [usecases/pagination.py](https://github.com/predicthq/sdk-py/tree/master/usecases/pagination.py) file.
 
 By default the `search()` method only returns the first page of results, with a default page size of 10.
 
@@ -54,7 +54,7 @@ for event in phq.events.search().iter_all():
 
 ### Events endpoint
 
-Additional examples are available in [usecases/events](usecases/events) folder.
+Additional examples are available in [usecases/events](https://github.com/predicthq/sdk-py/tree/master/usecases/events) folder.
 
 The following example searches for the 'Katy Perry' events (full text search) with rank level of 4 or 5 (rank >= 60) in the concerts category.
 
@@ -72,7 +72,7 @@ Please refer to our [Events endpoint documentation](https://developer.predicthq.
 
 ### Places endpoint
 
-Additional examples are available in [usecases/places.py](usecases/places.py) file.
+Additional examples are available in [usecases/places.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
 
 The following example searches for the 'New York' places (full text search) in the US.
 
