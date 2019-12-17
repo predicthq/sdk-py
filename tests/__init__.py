@@ -2,9 +2,9 @@ import functools
 import json
 import os
 import re
+from unittest import mock
 
 import responses
-from mock import mock
 
 from predicthq import Client
 from predicthq.config import config
