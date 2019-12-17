@@ -29,9 +29,9 @@ class EventsTest(unittest.TestCase):
                 'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
                 'start_around.origin': '2016-03-05', 'start_around.scale': '5d',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
-                'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
+                'start.lt': '2016-04-01', 'start.gte': '2016-03-01', 'start.tz': 'Pacific/Auckland',
+                'end.lt': '2016-06-01', 'end.gte': '2016-05-01', 'end.tz': 'Pacific/Auckland',
+                'active.lt': '2016-04-01', 'active.gte': '2016-03-01', 'active.tz': 'Pacific/Auckland',
                 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
             }
         )
@@ -56,9 +56,9 @@ class EventsTest(unittest.TestCase):
                 'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
                 'location_around.origin': '40.730610,-73.935242', 'location_around.scale': '2km', 'location_around.offset': '0.5km',
-                'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
+                'start.lt': '2016-04-01', 'start.gte': '2016-03-01', 'start.tz': 'Pacific/Auckland',
+                'end.lt': '2016-06-01', 'end.gte': '2016-05-01', 'end.tz': 'Pacific/Auckland',
+                'active.lt': '2016-04-01', 'active.gte': '2016-03-01', 'active.tz': 'Pacific/Auckland',
                 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
             }
         )

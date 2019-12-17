@@ -1,8 +1,8 @@
 from predicthq.endpoints.schemas import (
-    PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
-    StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
-    DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
-    LocationAround, BooleanType, BrandUnsafe, Entity
+    Area, BooleanType, BrandUnsafe, DateAround, DateRange, DateTimeRange, DateTimeType, DateType,
+    DictType, Entity, FloatType, GeoJSONPointType, IntRange, IntType, ListType, LocationAround,
+    Model, ModelType, PaginatedMixin, Place, ResultSet, ResultType, SortableMixin, StringListType,
+    StringModelType, StringType
 )
 
 
@@ -15,11 +15,11 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     q = StringType()
     label = ListType(StringType)
     category = ListType(StringType)
-    start = ModelType(DateTimeRange)
+    start = ModelType(DateRange)
     start_around = ModelType(DateAround)
-    end = ModelType(DateTimeRange)
+    end = ModelType(DateRange)
     end_around = ModelType(DateAround)
-    active = ModelType(DateTimeRange)
+    active = ModelType(DateRange)
     updated = ModelType(DateTimeRange)
     state = StringType(choices=('active', 'deleted'))
     rank = ModelType(IntRange)
