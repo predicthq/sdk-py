@@ -40,11 +40,11 @@ class Config(object):
             self._config[key] = value
 
     def load_defaults_from_locations(self, config_locations):
-        cp = configparser.SafeConfigParser()
+        cp = configparser.ConfigParser()
         for file_location in config_locations:
             if os.path.isfile(file_location):
-                with open(file_location) as fp:
-                    cp.readfp(fp)
+                with open(file_location) as f:
+                    cp.read_file(f)
                 for section in self._config_sections:
                     try:
                         for key, value in cp.items(section):
