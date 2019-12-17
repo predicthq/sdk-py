@@ -149,6 +149,18 @@ class LocationAround(Model):
     decay = FloatType()
 
 
+class DateRange(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    gt = DateType()
+    gte = DateType()
+    lt = DateType()
+    lte = DateType()
+    tz = StringType(choices=pytz.all_timezones)
+
+
 class DateTimeRange(Model):
 
     class Options:
