@@ -5,17 +5,13 @@ from urllib.parse import parse_qsl, urlparse
 import pytz
 from dateutil.parser import parse as parse_date
 
-from schematics.exceptions import (
-    ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
-)
+from schematics.exceptions import ValidationError as SchematicsValidationError
 from schematics.models import Model
-from schematics.transforms import Role
 from schematics.types import (
     StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType,
     DateType as SchematicsDateType
 )
-from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType
-from schematics.types.serializable import serializable
+from schematics.types.compound import ListType as SchematicsListType, ModelType
 
 
 class DateTimeType(SchematicsDateTimeType):

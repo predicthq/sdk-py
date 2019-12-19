@@ -1,2 +1,6 @@
 from .endpoint import AccountsEndpoint
-assert AccountsEndpoint
+
+
+__all__ = [
+    'AccountsEndpoint',
+]

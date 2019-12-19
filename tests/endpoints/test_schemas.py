@@ -3,6 +3,8 @@ from datetime import datetime, date
 import pytest
 import pytz
 
+from schematics.exceptions import DataError as SchematicsDataError
+
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint
 
@@ -64,7 +66,7 @@ def test_string_model_and_string_model_type():
     assert m.import_data(long_data).to_dict() == expected_data
     assert m.import_data(model_data).to_dict() == expected_data
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data(invalid_data)
 
 
@@ -112,7 +114,7 @@ def test_geo_json_point_type():
     m = SchemaExample()
     assert m.import_data({"point": [174.765742, -36.847585]}).to_primitive() == {"point": [174.765742, -36.847585]}
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data({"point": [-36.847585, 174.765742]}, validate=True)
 
 
@@ -125,7 +127,7 @@ def test_date_around_type():
 
     assert m.import_data({"around": {"origin": '2020-01-01', "offset": "1d", "scale": "0d", "decay": "0.1"}}).to_primitive() == {'around': {'origin': '2020-01-01', 'decay': 0.1, 'scale': u'0d', 'offset': u'1d'}}
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data({"around": "2020-01-01"}, validate=True)
 
 
@@ -137,7 +139,7 @@ def test_location_around_type():
 
     assert m.import_data({"around": {"origin": '40.730610,-73.935242', "offset": "1km", "scale": "2km", "decay": "0.1"}}).to_primitive() == {'around': {'origin': u'40.730610,-73.935242', 'decay': 0.1, 'scale': u'2km', 'offset': u'1km'}}
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data({"around": "40.730610,-73.935242"}, validate=True)
 
 
@@ -163,7 +165,7 @@ def test_area_model():
     assert m.import_data(long_data).to_dict() == expected_expected
     assert m.import_data(model_data).to_dict() == expected_expected
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data(invalid_data)
 
 
@@ -189,7 +191,7 @@ def test_location_model():
     assert m.import_data(long_data).to_dict() == expected_expected
     assert m.import_data(model_data).to_dict() == expected_expected
 
-    with pytest.raises(schemas.SchematicsDataError):
+    with pytest.raises(SchematicsDataError):
         m.import_data(invalid_data)
 
 

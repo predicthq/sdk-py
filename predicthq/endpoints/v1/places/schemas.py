@@ -1,6 +1,6 @@
 from predicthq.endpoints.schemas import (
     LimitMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType, StringListType,
-    StringModelType, Location, DateTimeType, ResultType, SchematicsValidationError
+    StringModelType, Location, ResultType, SchematicsValidationError
 )
 
 

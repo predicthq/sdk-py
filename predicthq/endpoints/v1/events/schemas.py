@@ -1,7 +1,9 @@
+from schematics.types.compound import DictType
+
 from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
-    DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
+    DateTimeType, FloatType, ResultType, DateType, Place, DateAround,
     LocationAround, BooleanType, BrandUnsafe, Entity
 )
 

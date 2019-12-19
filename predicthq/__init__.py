@@ -1,2 +1,8 @@
-from .client import Client, __version__
-assert Client
+from .client import Client
+from .version import __version__
+
+
+__all__ = [
+    'Client',
+    '__version__'
+]

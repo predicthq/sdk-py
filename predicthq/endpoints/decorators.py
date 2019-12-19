@@ -1,7 +1,9 @@
 import functools
 from collections import defaultdict
 
-from predicthq.endpoints.schemas import ResultSet, Model, SchematicsDataError
+from schematics.exceptions import DataError as SchematicsDataError
+
+from predicthq.endpoints.schemas import ResultSet, Model
 from predicthq.exceptions import ValidationError
 
 
