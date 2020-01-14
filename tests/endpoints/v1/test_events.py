@@ -16,10 +16,10 @@ class EventsTest(unittest.TestCase):
             label=["label1", "label2"], category="category", state='deleted',
             start_around__origin='2016-03-05', start_around__scale='5d',
             place__scope=["place1", "place2"], place__exact=["place3"],
-            start__gte="2016-03-01", start__lt=datetime(2016, 4, 1), start__tz="Pacific/Auckland",
-            end__gte="2016-05-01", end__lt=datetime(2016, 6, 1), end__tz="Pacific/Auckland",
-            active__gte="2016-03-01", active__lt=datetime(2016, 4, 1), active__tz="Pacific/Auckland",
-            updated__gte="2016-03-01", updated__lt=datetime(2016, 4, 1), updated__tz="Pacific/Auckland",
+            start__gte="2016-03-01", start__lt="2016-04-01", start__tz="Pacific/Auckland",
+            end__gte="2016-05-01", end__lt="2016-06-01", end__tz="Pacific/Auckland",
+            active__gte="2016-03-01", active__lt="2016-04-01", active__tz="Pacific/Auckland",
+            updated__gte="2016-03-01", updated__lt="2016-04-01", updated__tz="Pacific/Auckland",
         )
 
         client.request.assert_called_once_with(
@@ -30,10 +30,10 @@ class EventsTest(unittest.TestCase):
                 'label': 'label1,label2', 'category': 'category', 'state': 'deleted',
                 'start_around.origin': '2016-03-05', 'start_around.scale': '5d',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
-                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
-                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
+                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T23:59:59.999999', 'start.tz': 'Pacific/Auckland',
+                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T23:59:59.999999', 'end.tz': 'Pacific/Auckland',
+                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T23:59:59.999999', 'active.tz': 'Pacific/Auckland',
+                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T23:59:59.999999', 'updated.tz': 'Pacific/Auckland',
             }
         )
 
@@ -46,10 +46,10 @@ class EventsTest(unittest.TestCase):
             label=["label1", "label2"], category="category", state='deleted',
             place={"scope": ["place1", "place2"], "exact": "place3"},
             location_around={'origin': '40.730610,-73.935242', 'scale': '2km', 'offset': '0.5km'},
-            start={"gte": "2016-03-01", "lt": datetime(2016, 4, 1), "tz": "Pacific/Auckland"},
-            end={"gte": "2016-05-01", "lt": datetime(2016, 6, 1), "tz": "Pacific/Auckland"},
-            active={"gte": "2016-03-01", "lt": datetime(2016, 4, 1), "tz": "Pacific/Auckland"},
-            updated={"gte": "2016-03-01", "lt": datetime(2016, 4, 1), "tz": "Pacific/Auckland"},
+            start={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
+            end={"gte": "2016-05-01", "lt": "2016-06-01", "tz": "Pacific/Auckland"},
+            active={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
+            updated={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
         )
 
         client.request.assert_called_once_with(
@@ -60,10 +60,10 @@ class EventsTest(unittest.TestCase):
                 'label': 'label1,label2', 'category': 'category', 'state': 'deleted',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
                 'location_around.origin': '40.730610,-73.935242', 'location_around.scale': '2km', 'location_around.offset': '0.5km',
-                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
-                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
+                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T23:59:59.999999', 'start.tz': 'Pacific/Auckland',
+                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T23:59:59.999999', 'end.tz': 'Pacific/Auckland',
+                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T23:59:59.999999', 'active.tz': 'Pacific/Auckland',
+                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T23:59:59.999999', 'updated.tz': 'Pacific/Auckland',
             }
         )
 

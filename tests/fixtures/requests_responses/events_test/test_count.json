@@ -2,7 +2,7 @@
   {
     "method": "GET",
     "match_querystring": true,
-    "url": "/v1/events/count/?active.gte=2015-01-01T00%3A00%3A00.000000&active.lte=2015-12-31T00%3A00%3A00.000000&within=50km%40-27.470784%2C153.030124",
+    "url": "/v1/events/count/?active.gte=2015-01-01T00%3A00%3A00.000000&active.lte=2015-12-31T23%3A59%3A59.999999&within=50km%40-27.470784%2C153.030124",
     "status": 200,
     "content_type": "application/json",
     "body": {

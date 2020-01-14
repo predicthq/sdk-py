@@ -1,5 +1,5 @@
 import re
-from datetime import datetime, date
+from datetime import datetime, date, time as dt_time
 from urllib.parse import parse_qsl, urlparse
 
 import pytz
@@ -24,6 +24,14 @@ class DateTimeType(SchematicsDateTimeType):
         if isinstance(value, datetime):
             return value
         return parse_date(value)
+
+
+class DateTimeEndType(SchematicsDateTimeType):
+
+    def to_native(self, value, context=None):
+        if isinstance(value, datetime):
+            return value
+        return datetime.combine(parse_date(value), dt_time.max)
 
 
 class DateType(SchematicsDateType):
@@ -156,8 +164,8 @@ class DateTimeRange(Model):
 
     gt = DateTimeType()
     gte = DateTimeType()
-    lt = DateTimeType()
-    lte = DateTimeType()
+    lt = DateTimeEndType()
+    lte = DateTimeEndType()
     tz = StringType(choices=pytz.all_timezones)
 
 
