@@ -24,22 +24,24 @@ class EventsTest(unittest.TestCase):
 
         client.request.assert_called_once_with(
             'get', '/v1/events/', params={
-                'id': 'id', 'category': 'category', 'state': 'deleted', 'country': 'NZ,AU',
-                'rank.gt': 85, 'rank_level': '4,5', 'local_rank.gt': 85, 'local_rank_level': '4,5',
-                'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
+                'id': 'id', 'q': 'query', 'country': 'NZ,AU',
+                'rank_level': '4,5', 'rank.gt': 85, 'local_rank_level': '4,5', 'local_rank.gt': 85,
+                'within': '2km@42.346,-71.0432',
+                'label': 'label1,label2', 'category': 'category', 'state': 'deleted',
                 'start_around.origin': '2016-03-05', 'start_around.scale': '5d',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
-                'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
-                'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
+                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
+                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
+                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
+                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
             }
         )
 
     @with_mock_client()
     def test_search_params_dicts(self, client):
         client.events.search(
-            id="id", q="query", rank_level=[4, 5], rank={"gt": 85}, country=["NZ", "AU"],
+            id="id", q="query", country=["NZ", "AU"],
+            rank_level=[4, 5], rank={"gt": 85},
             within={"radius": "2km", "longitude": -71.0432, "latitude": 42.346},
             label=["label1", "label2"], category="category", state='deleted',
             place={"scope": ["place1", "place2"], "exact": "place3"},
@@ -52,14 +54,16 @@ class EventsTest(unittest.TestCase):
 
         client.request.assert_called_once_with(
             'get', '/v1/events/', params={
-                'id': 'id', 'rank.gt': 85, 'rank_level': '4,5', 'category': 'category', 'state': 'deleted', 'country': 'NZ,AU',
-                'within': '2km@42.346,-71.0432', 'label': 'label1,label2', 'q': 'query',
+                'id': 'id', 'q': 'query', 'country': 'NZ,AU',
+                'rank_level': '4,5', 'rank.gt': 85,
+                'within': '2km@42.346,-71.0432',
+                'label': 'label1,label2', 'category': 'category', 'state': 'deleted',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
                 'location_around.origin': '40.730610,-73.935242', 'location_around.scale': '2km', 'location_around.offset': '0.5km',
-                'start.lt': '2016-04-01T00:00:00.000000', 'start.gte': '2016-03-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
-                'end.lt': '2016-06-01T00:00:00.000000', 'end.gte': '2016-05-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
-                'active.lt': '2016-04-01T00:00:00.000000', 'active.gte': '2016-03-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
-                'updated.lt': '2016-04-01T00:00:00.000000', 'updated.gte': '2016-03-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
+                'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T00:00:00.000000', 'start.tz': 'Pacific/Auckland',
+                'end.gte': '2016-05-01T00:00:00.000000', 'end.lt': '2016-06-01T00:00:00.000000', 'end.tz': 'Pacific/Auckland',
+                'active.gte': '2016-03-01T00:00:00.000000', 'active.lt': '2016-04-01T00:00:00.000000', 'active.tz': 'Pacific/Auckland',
+                'updated.gte': '2016-03-01T00:00:00.000000', 'updated.lt': '2016-04-01T00:00:00.000000', 'updated.tz': 'Pacific/Auckland',
             }
         )
 
