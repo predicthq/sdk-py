@@ -1,5 +1,5 @@
 import re
-from datetime import datetime, date
+from datetime import datetime, date, time as dt_time
 from urllib.parse import parse_qsl, urlparse
 
 import pytz
@@ -24,6 +24,14 @@ class DateTimeType(SchematicsDateTimeType):
         if isinstance(value, datetime):
             return value
         return parse_date(value)
+
+
+class DateTimeEndType(SchematicsDateTimeType):
+
+    def to_native(self, value, context=None):
+        if isinstance(value, datetime):
+            return value
+        return datetime.combine(parse_date(value), dt_time.max)
 
 
 class DateType(SchematicsDateType):
@@ -104,7 +112,7 @@ class Area(StringModel):
     import_format = r'(?P<radius>\d+(k?m|ft|mi))@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
     export_format = "{radius}@{latitude},{longitude}"
 
-    radius = StringType(regex='\d+(k?m|ft|mi)', required=True)
+    radius = StringType(regex=r'\d+(k?m|ft|mi)', required=True)
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
@@ -133,8 +141,8 @@ class DateAround(Model):
         serialize_when_none = False
 
     origin = DateType(required=True)
-    offset = StringType(regex='\d+d')
-    scale = StringType(regex='\d+d')
+    offset = StringType(regex=r'\d+d')
+    scale = StringType(regex=r'\d+d')
     decay = FloatType()
 
 
@@ -143,9 +151,9 @@ class LocationAround(Model):
     class Options:
         serialize_when_none = False
 
-    origin = StringType(regex='(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
-    offset = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
-    scale = StringType(regex='\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    origin = StringType(regex=r'(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
+    offset = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    scale = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
     decay = FloatType()
 
 
@@ -156,8 +164,8 @@ class DateTimeRange(Model):
 
     gt = DateTimeType()
     gte = DateTimeType()
-    lt = DateTimeType()
-    lte = DateTimeType()
+    lt = DateTimeEndType()
+    lte = DateTimeEndType()
     tz = StringType(choices=pytz.all_timezones)
 
 
