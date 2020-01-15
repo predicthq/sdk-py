@@ -95,7 +95,7 @@ class EventResultSet(ResultSet):
     results = ResultType(Event)
 
 
-class Count(Model):
+class CountResultSet(Model):
 
     count = IntType()
     top_rank = FloatType()

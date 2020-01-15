@@ -1,7 +1,7 @@
 import unittest
 
 from predicthq.endpoints.v1.events.schemas import (
-    EventResultSet, CalendarResultSet, Count, ImpactResultSet
+    EventResultSet, CalendarResultSet, CountResultSet, ImpactResultSet
 )
 from tests import with_mock_client, with_mock_responses, with_client
 
@@ -85,7 +85,7 @@ class EventsTest(unittest.TestCase):
     @with_mock_responses()
     def test_count(self, client, responses):
         result = client.events.count(active__gte='2015-01-01', active__lte='2015-12-31', within='50km@-27.470784,153.030124')
-        assert isinstance(result, Count)
+        assert isinstance(result, CountResultSet)
         assert result.count == 2501
 
     @with_client()
