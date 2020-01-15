@@ -1,3 +1,5 @@
+from schematics.common import NONEMPTY
+
 from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
@@ -142,11 +144,11 @@ class ImpactDay(Model):
     count = IntType()
     impact = IntType()
 
-    rank_levels = DictType(IntType)
-    rank_levels_impact = DictType(IntType)
+    rank_levels = DictType(IntType, export_level=NONEMPTY)
+    rank_levels_impact = DictType(IntType, export_level=NONEMPTY)
 
-    aviation_rank_levels = DictType(IntType)
-    aviation_rank_levels_impact = DictType(IntType)
+    aviation_rank_levels = DictType(IntType, export_level=NONEMPTY)
+    aviation_rank_levels_impact = DictType(IntType, export_level=NONEMPTY)
 
     categories = DictType(IntType)
     categories_impact = DictType(IntType)
