@@ -118,7 +118,6 @@ class CalendarDay(Model):
 
     date = DateType()
     count = IntType()
-    impact = IntType()
     rank_levels = DictType(IntType)
     categories = DictType(IntType)
     labels = DictType(IntType)
