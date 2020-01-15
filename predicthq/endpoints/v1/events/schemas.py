@@ -1,3 +1,5 @@
+from schematics.common import NONEMPTY
+
 from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
@@ -95,7 +97,7 @@ class EventResultSet(ResultSet):
     results = ResultType(Event)
 
 
-class Count(Model):
+class CountResultSet(Model):
 
     count = IntType()
     top_rank = FloatType()
@@ -112,7 +114,6 @@ class TopEventsSearchParams(SortableMixin, Model):
 class CalendarParams(SearchParams):
 
     top_events = ModelType(TopEventsSearchParams)
-    view = StringType(choices=('active', 'start'))
 
 
 class CalendarDay(Model):
@@ -129,3 +130,30 @@ class CalendarDay(Model):
 class CalendarResultSet(ResultSet):
 
     results = ResultType(CalendarDay)
+
+
+class ImpactParams(SearchParams):
+
+    top_events = ModelType(TopEventsSearchParams)
+    impact_rank = StringType(choices=('rank', 'aviation_rank'))
+
+
+class ImpactDay(Model):
+
+    date = DateType()
+    count = IntType()
+    impact = IntType()
+
+    rank_levels = DictType(IntType, export_level=NONEMPTY)
+    rank_levels_impact = DictType(IntType, export_level=NONEMPTY)
+
+    aviation_rank_levels = DictType(IntType, export_level=NONEMPTY)
+    aviation_rank_levels_impact = DictType(IntType, export_level=NONEMPTY)
+
+    categories = DictType(IntType)
+    categories_impact = DictType(IntType)
+
+
+class ImpactResultSet(ResultSet):
+
+    results = ResultType(ImpactDay)
