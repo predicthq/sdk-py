@@ -8,15 +8,17 @@ ACCESS_TOKEN = 'abc123'
 phq = Client(access_token=ACCESS_TOKEN)
 
 
-# The PredictHQ API offers two types of aggregation on events.
+# The PredictHQ Aggregate Event Impact endpoint can be used to find the correlation between your demand and the events data.
+# We always aggregate on the date but you can use different impact_rank values to specify how we calculate the impact.
+# You will need Data License to access this endpoint and Aviation Rank subscription for Aviation Rank impact.
 
 # You can either aggregate on PHQ Rank
 # https://developer.predicthq.com/resources/events/#param-impact-rank
-for event in phq.events.impact(active__gte="2015-12-24", active__lte="2015-12-26", impact_rank="rank"):
-    print(event.rank_levels, event.rank_levels_impact, event.categories, event.categories_impact)
+for impact_day in phq.events.impact(active__gte='2015-12-24', active__lte='2015-12-26', impact_rank='rank'):
+    print(impact_day.date, impact_day.impact, impact_day.rank_levels, impact_day.rank_levels_impact, impact_day.categories, impact_day.categories_impact)
 
 
 # or aggregate on Aviation Rank
 # https://developer.predicthq.com/resources/events/#param-impact-rank
-for event in phq.events.impact(active__gte="2015-12-24", active__lte="2015-12-26", impact_rank="aviation_rank"):
-    print(event.aviation_rank_levels, event.aviation_rank_levels_impact, event.categories, event.categories_impact)
+for impact_day in phq.events.impact(active__gte='2015-12-24', active__lte='2015-12-26', impact_rank='aviation_rank'):
+    print(impact_day.date, impact_day.impact, impact_day.aviation_rank_levels, impact_day.aviation_rank_levels_impact, impact_day.categories, impact_day.categories_impact)
