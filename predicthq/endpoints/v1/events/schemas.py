@@ -24,6 +24,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     active = ModelType(DateTimeRange)
     updated = ModelType(DateTimeRange)
     state = StringType(choices=('active', 'deleted'))
+    deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid'))
     rank = ModelType(IntRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
 
