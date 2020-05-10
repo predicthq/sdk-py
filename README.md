@@ -1,4 +1,4 @@
-<img align="center" src="ext/logo.png" alt="PredictHQ logo">
+<img src="ext/logo.png" alt="PredictHQ logo" style="display:block; margin-left:auto; margin-right:auto; width: 50%;">
 
 # PredictHQ API Client for Python
 
@@ -12,7 +12,7 @@
 
 ## Installation
 
-The PredicHQ Python client is distributed as a pip package. You can simply install it by running
+The PredictHQ Python client is distributed as a pip package. You can simply install it by running
 
 ```Shell
 pip install predicthq
@@ -27,7 +27,7 @@ We support all the endpoints available in our API.
 * `events`
 * `places`
 
-Please refer to our [API Documentation](https://developer.predicthq.com/) for a description of each endpoint.
+Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
 ### Pagination
 
@@ -68,7 +68,7 @@ for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='conc
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 ```
 
-Please refer to our [Events endpoint documentation](https://developer.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
+Please refer to our [Events endpoint documentation](https://docs.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
 
 ### Places endpoint
 
@@ -86,7 +86,7 @@ for place in phq.places.search(q='New York', country='US'):
     print(place.id, place.name, place.type, place.location)
 ```
 
-Please refer to our [Places endpoint documentation](https://developer.predicthq.com/resources/places/) for the lists of search parameters and place fields available.
+Please refer to our [Places endpoint documentation](https://docs.predicthq.com/resources/places/) for the lists of search parameters and place fields available.
 
 ## Running Tests
 
@@ -97,4 +97,4 @@ tox
 
 ## Found a Bug?
 
-Please [log an issue](https://github.com/predicthq/sdk-py/issues/new>).
+Please [log an issue](https://github.com/predicthq/sdk-py/issues/new).
