@@ -38,4 +38,3 @@ deploy:
     tags: true
     repo: predicthq/sdk-py
     branch: master
-    condition: $RELEASE_SENTINEL = 1
