@@ -28,13 +28,14 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     rank = ModelType(IntRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
 
-    # `local_rank` and `aviation_rank` are paid features.
+    # `local_rank`, `aviation_rank`, and `phq_attendance` are paid features.
     # If you haven't subscribed to a paid feature, using it as a
     # search param will have no effect on your search results.
     local_rank = ModelType(IntRange)
     local_rank_level = ListType(IntType(min_value=1, max_value=5))
     aviation_rank = ModelType(IntRange)
     aviation_rank_level = ListType(IntType(min_value=1, max_value=5))
+    phq_attendance = ModelType(IntRange)
 
     country = ListType(StringType)
     location_around = ModelType(LocationAround)
@@ -73,11 +74,12 @@ class Event(Model):
     country = StringType()
     rank = IntType()
 
-    # `local_rank` and `aviation_rank` are paid features.
+    # `local_rank`, `aviation_rank`, and `phq_attendance` are paid features.
     # They will only show up in your response body if you
     # have subscribed to them.
     local_rank = IntType()
     aviation_rank = IntType()
+    phq_attendance = IntType()
 
     entities = ListType(ModelType(Entities))
     location = GeoJSONPointType()
