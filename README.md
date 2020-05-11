@@ -1,4 +1,4 @@
-<img src="ext/logo.png" alt="PredictHQ logo" style="display:block; margin-left:auto; margin-right:auto; width: 50%;">
+<p align="center"><img src="ext/logo.png" alt="PredictHQ logo"></p>
 
 # PredictHQ API Client for Python
 
