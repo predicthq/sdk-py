@@ -6,4 +6,4 @@ pytz==2017.2
 requests>=2.7.0,<3.0
 responses>=0.10.8,<1.0
 schematics==2.0.0.dev2
-pandas>=1.0.5
+pandas>=0.20.0
