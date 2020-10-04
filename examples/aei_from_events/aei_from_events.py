@@ -57,6 +57,7 @@ def pivot_event_impact_by_event_type(cal, events_pd):
     """
     all_pd = []
     for day in cal:
+        d_formatted = day + 'T00:00:00Z'
         qualified_events = events_pd[(events_pd['start'] <= d_formatted) & \
                                      (events_pd['end'] >= d_formatted)]
 
