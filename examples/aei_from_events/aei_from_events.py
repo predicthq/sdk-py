@@ -9,7 +9,7 @@ EVENT_ENDPOINT_COLUMNS = ['id', 'title', 'description', 'start', 'end',
        'scope', 'rank', 'local_rank',
        'phq_attendance', 'state', 'deleted_reason', 'first_seen']
 
-ACCESS_TOKEN = 'Ul7SIZ_m-eU8d7O_WIEu-hBH880wQ3LoiIGHBm9N' # USER TO INCLUDE THEIR OWN TOKEN
+ACCESS_TOKEN = '' # USER TO INCLUDE THEIR OWN TOKEN
 phq = Client(access_token=ACCESS_TOKEN)
 
 import pandas as pd
