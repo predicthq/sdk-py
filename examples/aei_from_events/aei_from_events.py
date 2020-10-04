@@ -9,7 +9,7 @@ EVENT_ENDPOINT_COLUMNS = ['id', 'title', 'description', 'start', 'end',
        'scope', 'rank', 'local_rank',
        'phq_attendance', 'state', 'deleted_reason', 'first_seen']
 
-ACCESS_TOKEN = '' # USER TO INCLUDE THEIR OWN TOKEN
+ACCESS_TOKEN = 'Ul7SIZ_m-eU8d7O_WIEu-hBH880wQ3LoiIGHBm9N' # USER TO INCLUDE THEIR OWN TOKEN
 phq = Client(access_token=ACCESS_TOKEN)
 
 import pandas as pd
@@ -57,7 +57,6 @@ def pivot_event_impact_by_event_type(cal, events_pd):
     """
     all_pd = []
     for day in cal:
-        d_formatted = day + 'T00:00:00Z'
         qualified_events = events_pd[(events_pd['start'] <= d_formatted) & \
                                      (events_pd['end'] >= d_formatted)]
 
@@ -90,7 +89,6 @@ def create_aggregate_event_impact(df, event_groupings = ATTENDANCE_CATEGORIES):
     att_df['days_duration'] = [1 if x / 86400 < 1 else round(x / 86400, 0) for x in att_df.duration]
     att_df['impact'] = round(att_df.phq_attendance / att_df.days_duration, 0)
     start_cal, end_cal = att_df.start.min(), att_df.end.max()
-
     print(start_cal, end_cal)
     df_cal = generate_calendar(start_cal, end_cal)
 
