@@ -10,7 +10,7 @@ For an overview of how different types of events are classified, see our [page](
 
 ## Calculating Impact vs. Summing PHQ Attendance
 
-[`phq_attendance`](https://support.predicthq.com/what-is-phq-attendance) is the _overall_ estimated attendance for an event. So now matter if an event with a `phq_attendance` of 10,000 takes place over the course of 1 day or 1 month, the event will show the same value in both cases. To properly model this information on a daily, calendarized basis, we must split the overall attendance figure into equal chunks over the duration of its start and end dates.
+[`phq_attendance`](https://support.predicthq.com/what-is-phq-attendance) is the _overall_ estimated attendance for an event. So no matter if an event with a `phq_attendance` of 10,000 takes place over the course of 1 day or 1 month, the event will show the same value in both cases. To properly model this information on a daily, calendarized basis, we must split the overall attendance figure into equal chunks over the duration of its start and end dates.
 
 ## AEI by Event Category and Log Transforms
 
