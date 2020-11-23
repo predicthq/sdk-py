@@ -70,6 +70,24 @@ for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='conc
 
 Please refer to our [Events endpoint documentation](https://docs.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
 
+### Broadcasts endpoint
+
+Additional examples are available in [usecases/broadcasts](https://github.com/predicthq/sdk-py/tree/master/usecases/broadcasts) folder.
+
+The following example searches for the broadcasts with PHQ viewership gte 100 and with event (the physical event the broadcast links to) label 'nfl'.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for broadcast in phq.broadcasts.search(phq_viewership__gte=100, event__label='nfl'):
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels, broadcast.dates.start.strftime('%Y-%m-%d'))
+```
+
+Please refer to our [Broadcasts endpoint documentation](https://docs.predicthq.com/resources/broadcasts/) for the lists of search parameters and broadcast fields available.
+
 ### Places endpoint
 
 Additional examples are available in [usecases/places.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
