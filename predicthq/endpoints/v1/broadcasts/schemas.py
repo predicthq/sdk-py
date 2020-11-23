@@ -74,8 +74,12 @@ class BroadcastEventDates(Model):
     end = DateTimeType()
     start_local = DateTimeType()
     end_local = DateTimeType()
-    predicted_end_local = DateTimeType()
     timezone = StringType()
+
+    # predicted_end_local is a paid feature.
+    # It will only show up in your response body if you
+    # have subscribed to it.
+    predicted_end_local = DateTimeType()
 
 
 class BroadcastEvent(Model):
