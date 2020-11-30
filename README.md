@@ -24,6 +24,7 @@ We support all the endpoints available in our API.
 
 * `oauth2`
 * `accounts`
+* `broadcasts`
 * `events`
 * `places`
 
