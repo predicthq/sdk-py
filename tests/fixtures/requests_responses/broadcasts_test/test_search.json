@@ -1,0 +1,110 @@
+[
+    {
+        "method": "GET",
+        "match_querystring": true,
+        "url": "/v1/broadcasts/?broadcast_id=PmJUAWRQLsKkg9MGTQU2JA",
+        "status": 200,
+        "content_type": "application/json",
+        "body": {
+            "count": 1,
+            "next": null,
+            "previous": null,
+            "overflow": false,
+            "results": [
+                {
+                    "broadcast_id": "PmJUAWRQLsKkg9MGTQU2JA",
+                    "updated": "2020-11-18T15:29:14Z",
+                    "dates": {
+                        "start": "2018-01-01T17:00:00Z",
+                        "start_local": "2018-01-01T11:00:00",
+                        "timezone": "America/Chicago"
+                    },
+                    "location": {
+                        "geopoint": {
+                            "lon": -94.93765,
+                            "lat": 47.97378
+                        },
+                        "place_hierarchies": [
+                            [
+                                "6295630",
+                                "6255149",
+                                "6252001",
+                                "5037779",
+                                "5017805"
+                            ]
+                        ],
+                        "places": [
+                            {
+                                "place_id": "5017805",
+                                "type": "county",
+                                "name": "Beltrami County",
+                                "county": "Beltrami County",
+                                "region": "Minnesota",
+                                "country": "US"
+                            }
+                        ],
+                        "country": "US"
+                    },
+                    "phq_viewership": 965,
+                    "record_status": "active",
+                    "broadcast_status": "scheduled",
+                    "event": {
+                        "event_id": "BdwY7NpGZYdP",
+                        "title": "Michigan Wolverines vs South Carolina Gamecocks",
+                        "category": "sports",
+                        "labels": [
+                            "american-football",
+                            "ncaa",
+                            "sport"
+                        ],
+                        "dates": {
+                            "start": "2018-01-01T17:00:00Z",
+                            "end": "2018-01-01T20:43:26Z",
+                            "start_local": "2018-01-01T12:00:00",
+                            "end_local": "2018-01-01T15:43:26",
+                            "predicted_end_local": "2018-01-01T15:20:00",
+                            "timezone": "America/New_York"
+                        },
+                        "location": {
+                            "geopoint": {
+                                "lon": -82.5033344,
+                                "lat": 27.9758691
+                            },
+                            "place_hierarchies": [
+                                [
+                                    "6295630",
+                                    "6255149",
+                                    "6252001",
+                                    "4155751",
+                                    "4158712",
+                                    "7217291"
+                                ],
+                                [
+                                    "6295630",
+                                    "6255149",
+                                    "6252001",
+                                    "4155751",
+                                    "4158712",
+                                    "4174757"
+                                ]
+                            ],
+                            "country": "US"
+                        },
+                        "entities": [
+                            {
+                                "entity_id": "FZb6rWbHf2D8SLKvYQAhk",
+                                "type": "venue",
+                                "name": "Raymond James Stadium",
+                                "formatted_address": "4201 North Dale Mabry Highway\nTampa, FL 33607\nUnited States of America"
+                            }
+                        ],
+                        "phq_attendance": 45686,
+                        "phq_rank": 83,
+                        "local_rank": 100,
+                        "aviation_rank": 79
+                    }
+                }
+            ]
+        }
+    }
+]
