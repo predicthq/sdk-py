@@ -16,7 +16,7 @@ for broadcast in phq.broadcasts.search():
 
 # You can access the Broadcast object attributes directly.
 # Broadcast fields and their description are available at
-# https://docs.predicthq.com/resources/broadcasts/#fields.
+# https://docs.predicthq.com/resources/broadcasts/#broadcast-fields.
 for broadcast in phq.broadcasts.search():
     print(broadcast.event.title, broadcast.phq_viewership, broadcast.category, broadcast.start.strftime('%Y-%m-%d'))
 
