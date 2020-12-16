@@ -14,7 +14,7 @@ class EventsTest(unittest.TestCase):
             id='id', q='query', country=['NZ', 'AU'],
             rank_level=[4, 5], rank__gt=85,  local_rank_level=[4, 5], local_rank__gt=85,
             within__radius='2km', within__longitude=-71.0432, within__latitude=42.346,
-            label=['label1', 'label2'], category='category', state='deleted',
+            label=['label1', 'label2'], category='category', state=['active', 'deleted'],
             start_around__origin='2016-03-05', start_around__scale='5d',
             place__scope=['place1', 'place2'], place__exact=['place3'],
             start__gte='2016-03-01', start__lt='2016-04-01', start__tz='Pacific/Auckland',
@@ -28,7 +28,7 @@ class EventsTest(unittest.TestCase):
                 'id': 'id', 'q': 'query', 'country': 'NZ,AU',
                 'rank_level': '4,5', 'rank.gt': 85, 'local_rank_level': '4,5', 'local_rank.gt': 85,
                 'within': '2km@42.346,-71.0432',
-                'label': 'label1,label2', 'category': 'category', 'state': 'deleted',
+                'label': 'label1,label2', 'category': 'category', 'state': 'active,deleted',
                 'start_around.origin': '2016-03-05', 'start_around.scale': '5d',
                 'place.scope': 'place1,place2', 'place.exact': 'place3',
                 'start.gte': '2016-03-01T00:00:00.000000', 'start.lt': '2016-04-01T23:59:59.999999', 'start.tz': 'Pacific/Auckland',
@@ -44,7 +44,7 @@ class EventsTest(unittest.TestCase):
             id='id', q='query', country=['NZ', 'AU'],
             rank_level=[4, 5], rank={'gt': 85},
             within={'radius': '2km', 'longitude': -71.0432, 'latitude': 42.346},
-            label=['label1', 'label2'], category='category', state='deleted',
+            label=['label1', 'label2'], category='category', state=['active', 'deleted'],
             place={'scope': ['place1', 'place2'], 'exact': 'place3'},
             location_around={'origin': '40.730610,-73.935242', 'scale': '2km', 'offset': '0.5km'},
             start={'gte': '2016-03-01', 'lt': '2016-04-01', 'tz': 'Pacific/Auckland'},
@@ -76,7 +76,7 @@ class EventsTest(unittest.TestCase):
     @with_client()
     @with_mock_responses()
     def test_search(self, client, responses):
-        result = client.events.search(q='Foo Fighters', country='AU', limit=10)
+        result = client.events.search(q='Foo Fighters', country='AU', state=['active', 'deleted'], limit=10)
         assert isinstance(result, EventResultSet)
         assert result.count == len(list(result.iter_all()))
         assert len(responses.calls) == 2
