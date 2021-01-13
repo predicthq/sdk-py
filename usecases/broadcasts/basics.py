@@ -18,7 +18,7 @@ for broadcast in phq.broadcasts.search():
 # Broadcast fields and their description are available at
 # https://docs.predicthq.com/resources/broadcasts/#broadcast-fields.
 for broadcast in phq.broadcasts.search():
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.category, broadcast.start.strftime('%Y-%m-%d'))
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.category, broadcast.dates.start.strftime('%Y-%m-%d'))
 
 
 # You can add parameters to filter your search further.
