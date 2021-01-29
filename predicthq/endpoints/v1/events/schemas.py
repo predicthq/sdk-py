@@ -13,37 +13,36 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     class Options:
         serialize_when_none = False
 
-    id = ListType(StringType)
-    q = StringType()
-    label = ListType(StringType)
+    active = ModelType(DateTimeRange)
+    brand_unsafe = ModelType(BrandUnsafe)
     category = ListType(StringType)
-    start = ModelType(DateTimeRange)
-    start_around = ModelType(DateAround)
+    country = ListType(StringType)
+    deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed'))
     end = ModelType(DateTimeRange)
     end_around = ModelType(DateAround)
-    active = ModelType(DateTimeRange)
-    updated = ModelType(DateTimeRange)
-    state = StringType(choices=('active', 'deleted'))
-    deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed'))
+    entity = ModelType(Entity)
+    id = ListType(StringType)
+    label = ListType(StringType)
+    location_around = ModelType(LocationAround)
+    place = ModelType(Place)
+    q = StringType()
     rank = ModelType(IntRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
+    relevance = ListType(StringType)
+    start = ModelType(DateTimeRange)
+    start_around = ModelType(DateAround)
+    state = StringType(choices=('active', 'deleted'))
+    updated = ModelType(DateTimeRange)
+    within = StringListType(StringModelType(Area), separator="+")
 
-    # `local_rank`, `aviation_rank`, and `phq_attendance` are paid features.
-    # If you haven't subscribed to a paid feature, using it as a
-    # search param will have no effect on your search results.
-    local_rank = ModelType(IntRange)
-    local_rank_level = ListType(IntType(min_value=1, max_value=5))
+    # `aviation_rank`, `local_rank`, `phq_attendance` are
+    # paid features. If you haven't subscribed to a paid feature, using it
+    # as a search param will have no effect on your search results.
     aviation_rank = ModelType(IntRange)
     aviation_rank_level = ListType(IntType(min_value=1, max_value=5))
+    local_rank = ModelType(IntRange)
+    local_rank_level = ListType(IntType(min_value=1, max_value=5))
     phq_attendance = ModelType(IntRange)
-
-    country = ListType(StringType)
-    location_around = ModelType(LocationAround)
-    within = StringListType(StringModelType(Area), separator="+")
-    place = ModelType(Place)
-    relevance = ListType(StringType)
-    brand_unsafe = ModelType(BrandUnsafe)
-    entity = ModelType(Entity)
 
 
 class Entities(Model):
@@ -62,35 +61,34 @@ class Event(Model):
     class Options:
         serialize_when_none = True
 
-    id = StringType()
-    title = StringType()
-    description = StringType()
-    start = DateTimeType()
-    end = DateTimeType()
-    timezone = StringType()
-    duration = IntType()
     category = StringType()
-    labels = ListType(StringType())
     country = StringType()
-    rank = IntType()
-
-    # `local_rank`, `aviation_rank`, and `phq_attendance` are paid features.
-    # They will only show up in your response body if you
-    # have subscribed to them.
-    local_rank = IntType()
-    aviation_rank = IntType()
-    phq_attendance = IntType()
-
+    deleted_reason = StringType()
+    description = StringType()
+    duplicate_of_id = StringType()
+    duration = IntType()
+    end = DateTimeType()
     entities = ListType(ModelType(Entities))
+    first_seen = DateTimeType()
+    id = StringType()
+    labels = ListType(StringType())
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
-    scope = StringType()
+    rank = IntType()
     relevance = FloatType()
+    scope = StringType()
+    start = DateTimeType()
     state = StringType()
-    first_seen = DateTimeType()
+    timezone = StringType()
+    title = StringType()
     updated = DateTimeType()
-    deleted_reason = StringType()
-    duplicate_of_id = StringType()
+
+    # `aviation_rank`, `local_rank`, `phq_attendance` are
+    # paid features. They will only show up in your response body if you have
+    # subscribed to them.
+    aviation_rank = IntType()
+    local_rank = IntType()
+    phq_attendance = IntType()
 
 
 class EventResultSet(ResultSet):
