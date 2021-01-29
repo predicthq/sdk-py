@@ -15,6 +15,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
 
     active = ModelType(DateTimeRange)
     brand_unsafe = ModelType(BrandUnsafe)
+    cancelled = ModelType(DateTimeRange)
     category = ListType(StringType)
     country = ListType(StringType)
     deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed'))
@@ -25,6 +26,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     label = ListType(StringType)
     location_around = ModelType(LocationAround)
     place = ModelType(Place)
+    postponed = ModelType(DateTimeRange)
     q = StringType()
     rank = ModelType(IntRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
@@ -35,7 +37,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     updated = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
 
-    # `aviation_rank`, `local_rank`, `phq_attendance` are
+    # `aviation_rank`, `local_rank`, `phq_attendance`, `predicted_end` are
     # paid features. If you haven't subscribed to a paid feature, using it
     # as a search param will have no effect on your search results.
     aviation_rank = ModelType(IntRange)
@@ -43,6 +45,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     local_rank = ModelType(IntRange)
     local_rank_level = ListType(IntType(min_value=1, max_value=5))
     phq_attendance = ModelType(IntRange)
+    predicted_end = ModelType(DateTimeRange)
 
 
 class Entities(Model):
@@ -61,6 +64,8 @@ class Event(Model):
     class Options:
         serialize_when_none = True
 
+    brand_safe = BooleanType()
+    cancelled = DateTimeType()
     category = StringType()
     country = StringType()
     deleted_reason = StringType()
@@ -74,6 +79,7 @@ class Event(Model):
     labels = ListType(StringType())
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
+    postponed = DateTimeType()
     rank = IntType()
     relevance = FloatType()
     scope = StringType()
@@ -83,12 +89,13 @@ class Event(Model):
     title = StringType()
     updated = DateTimeType()
 
-    # `aviation_rank`, `local_rank`, `phq_attendance` are
+    # `aviation_rank`, `local_rank`, `phq_attendance`, `predicted_end` are
     # paid features. They will only show up in your response body if you have
     # subscribed to them.
     aviation_rank = IntType()
     local_rank = IntType()
     phq_attendance = IntType()
+    predicted_end = DateTimeType()
 
 
 class EventResultSet(ResultSet):
