@@ -14,22 +14,18 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
         serialize_when_none = False
 
     active = ModelType(DateTimeRange)
-    brand_unsafe = ModelType(BrandUnsafe)
     cancelled = ModelType(DateTimeRange)
     category = ListType(StringType)
     country = ListType(StringType)
     deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed'))
     end = ModelType(DateTimeRange)
     end_around = ModelType(DateAround)
-    entity = ModelType(Entity)
     id = ListType(StringType)
     label = ListType(StringType)
     location_around = ModelType(LocationAround)
     place = ModelType(Place)
     postponed = ModelType(DateTimeRange)
     q = StringType()
-    rank = ModelType(IntRange)
-    rank_level = ListType(IntType(min_value=1, max_value=5))
     relevance = ListType(StringType)
     start = ModelType(DateTimeRange)
     start_around = ModelType(DateAround)
@@ -37,15 +33,19 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     updated = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
 
-    # `aviation_rank`, `local_rank`, `phq_attendance`, `predicted_end` are
-    # paid features. If you haven't subscribed to a paid feature, using it
-    # as a search param will have no effect on your search results.
+    # The below parameters are only available if they are enabled in your plan.
+    # If you are not subscribed to a feature, using the parameter will have no
+    # effect on your search results.
     aviation_rank = ModelType(IntRange)
     aviation_rank_level = ListType(IntType(min_value=1, max_value=5))
+    brand_unsafe = ModelType(BrandUnsafe)
+    entity = ModelType(Entity)
     local_rank = ModelType(IntRange)
     local_rank_level = ListType(IntType(min_value=1, max_value=5))
     phq_attendance = ModelType(IntRange)
     predicted_end = ModelType(DateTimeRange)
+    rank = ModelType(IntRange)
+    rank_level = ListType(IntType(min_value=1, max_value=5))
 
 
 class Entities(Model):
@@ -64,7 +64,6 @@ class Event(Model):
     class Options:
         serialize_when_none = True
 
-    brand_safe = BooleanType()
     cancelled = DateTimeType()
     category = StringType()
     country = StringType()
@@ -73,14 +72,12 @@ class Event(Model):
     duplicate_of_id = StringType()
     duration = IntType()
     end = DateTimeType()
-    entities = ListType(ModelType(Entities))
     first_seen = DateTimeType()
     id = StringType()
     labels = ListType(StringType())
     location = GeoJSONPointType()
     place_hierarchies = ListType(ListType(StringType()))
     postponed = DateTimeType()
-    rank = IntType()
     relevance = FloatType()
     scope = StringType()
     start = DateTimeType()
@@ -89,13 +86,15 @@ class Event(Model):
     title = StringType()
     updated = DateTimeType()
 
-    # `aviation_rank`, `local_rank`, `phq_attendance`, `predicted_end` are
-    # paid features. They will only show up in your response body if you have
-    # subscribed to them.
-    aviation_rank = IntType()
-    local_rank = IntType()
-    phq_attendance = IntType()
+    # The below fields are only available if they are enabled in your plan.
+    aviation_rank = IntType()  # Aviation Rank add-on
+    brand_safe = BooleanType()
+    entities = ListType(ModelType(Entities))  # Venues and addresses add-on
+    local_rank = IntType()  # Local Rank add-on
+    phq_attendance = IntType()  # PHQ Attendance add-on
     predicted_end = DateTimeType()
+    private = BooleanType()  # Loop add-on
+    rank = IntType()  # PHQ Rank add-on
 
 
 class EventResultSet(ResultSet):
