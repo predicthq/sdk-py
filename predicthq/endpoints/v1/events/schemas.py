@@ -29,7 +29,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     relevance = ListType(StringType)
     start = ModelType(DateTimeRange)
     start_around = ModelType(DateAround)
-    state = StringType(choices=('active', 'deleted'))
+    state = ListType(StringType(choices=('active', 'deleted'), default='active'))
     updated = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
 
