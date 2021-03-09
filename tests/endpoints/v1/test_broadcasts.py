@@ -14,7 +14,7 @@ class BroadcastsTest(unittest.TestCase):
             phq_viewership__gte=1, phq_viewership__lte=10,
             start__gte='2020-10-01', start__lt='2020-10-15', start__tz='Pacific/Auckland',
             updated__gte='2020-11-01', updated__lt='2020-11-30', updated__tz='Pacific/Auckland',
-            record_status=['active', 'deleted'], broadcast_status=['scheduled', 'cancelled'],
+            record_status=['active', 'deleted'], broadcast_status=['scheduled', 'predicted', 'cancelled'],
             event__event_id='event_id', event__category='sports', event__label=['sport', 'nfl']
         )
 
@@ -25,7 +25,7 @@ class BroadcastsTest(unittest.TestCase):
                 'phq_viewership.gte': 1, 'phq_viewership.lte': 10,
                 'start.gte': '2020-10-01T00:00:00.000000', 'start.lt': '2020-10-15T23:59:59.999999', 'start.tz': 'Pacific/Auckland',
                 'updated.gte': '2020-11-01T00:00:00.000000', 'updated.lt': '2020-11-30T23:59:59.999999', 'updated.tz': 'Pacific/Auckland',
-                'record_status': 'active,deleted', 'broadcast_status': 'scheduled,cancelled',
+                'record_status': 'active,deleted', 'broadcast_status': 'scheduled,predicted,cancelled',
                 'event.event_id': 'event_id', 'event.category': 'sports', 'event.label': 'sport,nfl'
             }
         )
@@ -38,7 +38,7 @@ class BroadcastsTest(unittest.TestCase):
             phq_viewership={'gte': 1, 'lte': 10},
             start={'gte': '2020-10-01', 'lt': '2020-10-15', 'tz': 'Pacific/Auckland'},
             updated={'gte': '2020-11-01', 'lt': '2020-11-30', 'tz': 'Pacific/Auckland'},
-            record_status=['active', 'deleted'], broadcast_status=['scheduled', 'cancelled'],
+            record_status=['active', 'deleted'], broadcast_status=['scheduled', 'predicted', 'cancelled'],
             event={'event_id': 'event_id', 'category': 'sports', 'label': ['sport', 'nfl']}
         )
 
@@ -49,7 +49,7 @@ class BroadcastsTest(unittest.TestCase):
                 'phq_viewership.gte': 1, 'phq_viewership.lte': 10,
                 'start.gte': '2020-10-01T00:00:00.000000', 'start.lt': '2020-10-15T23:59:59.999999', 'start.tz': 'Pacific/Auckland',
                 'updated.gte': '2020-11-01T00:00:00.000000', 'updated.lt': '2020-11-30T23:59:59.999999', 'updated.tz': 'Pacific/Auckland',
-                'record_status': 'active,deleted', 'broadcast_status': 'scheduled,cancelled',
+                'record_status': 'active,deleted', 'broadcast_status': 'scheduled,predicted,cancelled',
                 'event.event_id': 'event_id', 'event.category': 'sports', 'event.label': 'sport,nfl'
             }
         )

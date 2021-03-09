@@ -35,7 +35,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     start = ModelType(DateTimeRange)
     updated = ModelType(DateTimeRange)
     record_status = ListType(StringType(choices=('active', 'deleted'), default='active'))
-    broadcast_status = ListType(StringType(choices=('scheduled', 'cancelled')))
+    broadcast_status = ListType(StringType(choices=('scheduled', 'predicted', 'cancelled')))
     event = ModelType(BroadcastEventParams)
 
 
