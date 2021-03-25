@@ -17,7 +17,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     cancelled = ModelType(DateTimeRange)
     category = ListType(StringType)
     country = ListType(StringType)
-    deleted_reason = StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed'))
+    deleted_reason = ListType(StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed')))
     end = ModelType(DateTimeRange)
     end_around = ModelType(DateAround)
     id = ListType(StringType)
