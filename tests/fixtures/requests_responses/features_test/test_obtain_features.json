@@ -1,0 +1,49 @@
+[
+  {
+    "method": "POST",
+    "match_querystring": false,
+    "url": "/v1/features/",
+    "status": 200,
+    "content_type": "application/json",
+    "body": {
+      "results": [
+        {
+          "date": "2017-12-31",
+          "phq_rank_public_holidays": {
+            "rank_levels": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0
+            }
+          }
+        },
+        {
+          "date": "2018-01-01",
+          "phq_rank_public_holidays": {
+            "rank_levels": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            }
+          }
+        },
+        {
+          "date": "2018-01-02",
+          "phq_rank_public_holidays": {
+            "rank_levels": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0
+            }
+          }
+        }
+      ]
+    }
+  }
+]
