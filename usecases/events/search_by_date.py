@@ -32,8 +32,10 @@ for event in phq.events.search(start_around={'origin': '2018-12-24'}, country='N
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'), event.relevance)
 
 
-# If you want to fetch the recently updated events, you can use the updated parameter
+# If you want to fetch the recently updated events, you can use the `updated` parameter
 # with a greater than or equal value.
+# By default, the `updated` timezone is UTC but you can
+# change this using the `updated.tz` parameter.
 # https://docs.predicthq.com/resources/events/#param-updated
-for event in phq.events.search(updated={'gte': '2019-09-24'}):
+for event in phq.events.search(updated={'gte': '2019-09-24', 'tz': 'America/Los_Angeles'}):
     print(event.rank, event.category, event.title, event.updated)

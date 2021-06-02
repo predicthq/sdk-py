@@ -18,7 +18,8 @@ for broadcast in phq.broadcasts.search():
 # Broadcast fields and their description are available at
 # https://docs.predicthq.com/resources/broadcasts/#broadcast-fields.
 for broadcast in phq.broadcasts.search():
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.category, broadcast.dates.start.strftime('%Y-%m-%d'))
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.category,
+          broadcast.dates.start.strftime('%Y-%m-%d'))
 
 
 # You can add parameters to filter your search further.
@@ -27,4 +28,21 @@ for broadcast in phq.broadcasts.search():
 # The full list of parameters is available at
 # https://docs.predicthq.com/resources/broadcasts/#search-broadcasts
 for broadcast in phq.broadcasts.search(phq_viewership__gte=100, event__label='nfl'):
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels, broadcast.dates.start.strftime('%Y-%m-%d'))
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels,
+          broadcast.dates.start.strftime('%Y-%m-%d'))
+
+
+# Please note that for dot ('.') separated parameters in the API,
+# you can use one of the two following formats in the Python SDK:
+# - double underscores: phq.broadcasts.search(location__origin='45.5051,-122.6750')
+# - dictionary: phq.broadcasts.search(location={'origin': '45.5051,-122.6750'})
+for broadcast in phq.broadcasts.search(location={'origin': '45.5051,-122.6750'}):
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.location.places[0].place_id)
+
+
+# Please note that you can use comma separated string parameters in the API
+# when you need to specify multiple options. This translates to Python lists
+# parameters in the Python SDK.
+for broadcast in phq.broadcasts.search(location__place_id=['5742126', '5799783']):
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.location.country,
+          broadcast.location.places[0].place_id)

@@ -30,6 +30,9 @@ We support all the endpoints available in our API.
 
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
+The [usecases/](https://github.com/predicthq/sdk-py/tree/master/usecases/pagination.py) folder is a good starting point to get familiar with the Python SDK.
+You can also review the [tests](https://github.com/predicthq/sdk-py/tree/master/tests/endpoints/v1/) for a kitchen sink of all the parameters available per endpoint.
+
 ### Pagination
 
 Additional examples are available in [usecases/pagination.py](https://github.com/predicthq/sdk-py/tree/master/usecases/pagination.py) file.
