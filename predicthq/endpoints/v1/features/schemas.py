@@ -5,7 +5,6 @@ from predicthq.endpoints.schemas import (
 
 
 class FeatureCriteria(Model):
-
     class Options:
         serialize_when_none = True
 
@@ -14,10 +13,10 @@ class FeatureCriteria(Model):
 
 
 class FeatureGeoPoint(Model):
-    lat = FloatType(required=True)
-    lon = FloatType(required=True)
-    radius = StringType(regex=r'\d+(k?m|mi)', required=True, messages={
-        'regex': 'Radius needs to define a number and unit (m, km, mi) eg. 100km'
+    lat = FloatType(required=True, min_value=-90.0, max_value=90.0)
+    lon = FloatType(required=True, min_value=-180.0, max_value=180.0)
+    radius = StringType(regex=r'^\d+(k?m|mi)$', required=True, messages={
+        'regex': 'Radius needs to define a number and unit (m, km, mi) eg. 100km',
     })
 
 
