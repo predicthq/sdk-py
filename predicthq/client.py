@@ -29,6 +29,7 @@ class Client(object):
         self.oauth2 = endpoints.OAuth2Endpoint(proxy(self))
         self.broadcasts = endpoints.BroadcastsEndpoint(proxy(self))
         self.events = endpoints.EventsEndpoint(proxy(self))
+        self.features = endpoints.FeaturesEndpoint(proxy(self))
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
         self.places = endpoints.PlacesEndpoint(proxy(self))
 

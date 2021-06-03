@@ -169,6 +169,18 @@ class DateTimeRange(Model):
     tz = StringType(choices=pytz.all_timezones)
 
 
+class DateRange(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    gt = DateType()
+    gte = DateType()
+    lt = DateType()
+    lte = DateType()
+    tz = StringType(choices=pytz.all_timezones)
+
+
 class FloatRange(Model):
 
     class Options:
