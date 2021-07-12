@@ -43,7 +43,7 @@ setup(
         "requests>=2.7.0",
         "schematics==2.0.0.dev2",
         "python-dateutil>=2.4.2",
-        "pytz==2017.2",
+        "pytz>=2017.2,<=2018.3",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
