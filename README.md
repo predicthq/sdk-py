@@ -119,6 +119,7 @@ Requested features:
 * rank_levels for public_holidays
 * count and median of sporting events which has a phq_rank greater than 50
 
+By place_id list (e.g. Austin):
 ```Python
 from predicthq import Client
 
@@ -137,6 +138,30 @@ for feature in phq.features.obtain_features(
 ):
     print(feature.date, feature.phq_attendance_sports.stats.count, feature.phq_rank_public_holidays.rank_levels)
 ```
+by geo:
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for feature in phq.features.obtain_features(
+        active__gte="2017-12-31",
+        active__lte="2018-01-02",
+        location__geo={
+            "lon": -97.74306,
+            "lat": 30.26715,
+            "radius": "150km"
+        },
+        phq_rank_public_holidays=True,
+        phq_attendance_sports__stats=['count', 'median'],
+        phq_attendance_sports__phq_rank={
+            "gt": 50
+        }
+):
+    print(feature.date, feature.phq_attendance_sports.stats.count, feature.phq_rank_public_holidays.rank_levels)
+```
+
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
 
