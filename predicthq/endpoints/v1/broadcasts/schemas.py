@@ -34,6 +34,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     phq_viewership = ModelType(IntRange)
     start = ModelType(DateTimeRange)
     updated = ModelType(DateTimeRange)
+    first_seen = ModelType(DateTimeRange)
     record_status = ListType(StringType(choices=('active', 'deleted'), default='active'))
     broadcast_status = ListType(StringType(choices=('scheduled', 'predicted', 'cancelled')))
     event = ModelType(BroadcastEventParams)
@@ -146,6 +147,7 @@ class Broadcast(Model):
 
     broadcast_id = StringType()
     updated = DateTimeType()
+    first_seen = DateTimeType()
     dates = ModelType(BroadcastDates)
     location = ModelType(BroadcastLocation)
     phq_viewership = IntType()
