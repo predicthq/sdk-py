@@ -13,7 +13,20 @@ class SearchParams(LimitMixin, Model):
     id = ListType(StringType)
     location = StringListType(StringModelType(Location), separator="+")
     country = ListType(StringType)
-    type = ListType(StringType(choices=('planet', 'continent', 'country', 'region', 'county', 'local', 'major', 'metro', 'all')))
+    type = ListType(StringType(choices=(
+        'planet',
+        'continent',
+        'country',
+        'region',
+        'county',
+        'localadmin',
+        'locality',
+        'neighbourhood',
+        'local',
+        'metro',
+        'major',
+        'all',
+    )))
 
     def validate(self, *args, **kwargs):
         super(SearchParams, self).validate(*args, **kwargs)
