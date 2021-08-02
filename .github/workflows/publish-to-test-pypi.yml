@@ -25,12 +25,11 @@ jobs:
       - name: Run Tests and coverage
         run: |
           pytest --cov=predicthq tests/
-          coverage report -m > lcov.info
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: lcov.info
+          path-to-lcov: .coverage
       - name: Publish to Test PyPi
         uses: pypa/gh-action-pypi-publish@master
         with:
