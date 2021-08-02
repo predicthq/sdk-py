@@ -2,7 +2,7 @@ name: Test build and deploy python package
 
 on:
   push:
-    branches: fix-ci
+    tags: *
 
 jobs:
   build-and-publish:
@@ -50,11 +50,10 @@ jobs:
           --outdir dist/
           .
 
-      - name: Publish to Test PyPi
+      - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@master
         with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
   slackNotification:
     name: Slack Notification
