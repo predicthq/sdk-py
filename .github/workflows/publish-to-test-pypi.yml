@@ -2,7 +2,8 @@ name: Test build and deploy python package
 
 on:
   push:
-    tags: *
+    tags:
+      - '*'
 
 jobs:
   build-and-publish:
