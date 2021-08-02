@@ -24,12 +24,13 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests and coverage
         run: |
-          pytest --cov=predicthq --cov-report=xml tests/
+          pytest --cov=predicthq tests/
+          coverage report -m > lcov.info
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage.xml
+          path-to-lcov: lcov.info
       - name: Publish to Test PyPi
         uses: pypa/gh-action-pypi-publish@master
         with:
