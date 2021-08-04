@@ -9,8 +9,8 @@ on:
       - '*'
 
 jobs:
-  build-and-publish:
-    name: Build and Publish
+  test-and-coverage:
+    name: Test and run coverage
     runs-on: ubuntu-latest
     strategy:
       # Setting fail-fast to false, will let all concurrent jobs run if one of them fails, instead of cancelling all
@@ -40,6 +40,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  build-and-deploy:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    steps:
       - name: Install pypa/build
         run: |
           python -m pip install build --user
@@ -55,7 +59,7 @@ jobs:
 
   # slackNotification job is dependant on build-and-publish, it means that it will only be triggered if
   # build-and-publish succeeds
-  slackNotification:
+  slack-notification:
     name: Slack Notification
     needs: build-and-publish
     runs-on: ubuntu-latest
