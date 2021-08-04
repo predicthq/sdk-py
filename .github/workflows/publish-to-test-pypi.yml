@@ -42,6 +42,7 @@ jobs:
 
   build-and-deploy:
     name: Build and Publish
+    needs: test-and-coverage
     runs-on: ubuntu-latest
     steps:
       - name: Install pypa/build
@@ -61,7 +62,7 @@ jobs:
   # build-and-publish succeeds
   slack-notification:
     name: Slack Notification
-    needs: build-and-publish
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
