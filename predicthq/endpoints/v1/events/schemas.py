@@ -58,6 +58,30 @@ class Entities(Model):
     type = StringType()
     formatted_address = StringType()
 
+class Geometry(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    type = StringType()
+    coordinates = ListType(FloatType())
+
+
+class Geo(Model):
+
+    class Options:
+        serialize_when_none = True
+
+    geometry = ModelType(Geometry)
+
+
+class ParentEvent(Model):
+
+    class Options:
+        serialize_when_none = True
+
+    parent_event_id = StringType()
+
 
 class Event(Model):
 
@@ -73,9 +97,11 @@ class Event(Model):
     duration = IntType()
     end = DateTimeType()
     first_seen = DateTimeType()
+    geo = ModelType(Geo)
     id = StringType()
     labels = ListType(StringType())
     location = GeoJSONPointType()
+    parent_event = ModelType(ParentEvent)
     place_hierarchies = ListType(ListType(StringType()))
     postponed = DateTimeType()
     relevance = FloatType()
