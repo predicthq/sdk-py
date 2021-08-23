@@ -102,16 +102,10 @@ class MultiPolygon(Model):
 
 class Geo(Model):
 
-    class Options:
-        serialize_when_none = True
-
     geometry = PolyModelType(model_spec=[Point, MultiPoints, Polygon, MultiPolygon])
 
 
 class ParentEvent(Model):
-
-    class Options:
-        serialize_when_none = True
 
     parent_event_id = StringType()
 
