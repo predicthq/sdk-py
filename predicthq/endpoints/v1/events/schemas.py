@@ -58,6 +58,7 @@ class Entities(Model):
     type = StringType()
     formatted_address = StringType()
 
+
 class Geometry(Model):
 
     class Options:
