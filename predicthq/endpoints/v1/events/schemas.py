@@ -4,7 +4,7 @@ from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
     DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
-    LocationAround, BooleanType, BrandUnsafe, Entity
+    LocationAround, BooleanType, BrandUnsafe, Entity, PolyModelType
 )
 
 
@@ -59,13 +59,45 @@ class Entities(Model):
     formatted_address = StringType()
 
 
-class Geometry(Model):
-
-    class Options:
-        serialize_when_none = False
+class Point(Model):
 
     type = StringType()
     coordinates = ListType(FloatType())
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['Point']
+
+
+class MultiPoints(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(FloatType()))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiPoint', 'LineString']
+
+
+
+class Polygon(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(ListType(FloatType())))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiLineString', 'Polygon']
+
+
+class MultiPolygon(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(ListType(ListType(FloatType()))))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiPolygon']
 
 
 class Geo(Model):
@@ -73,7 +105,7 @@ class Geo(Model):
     class Options:
         serialize_when_none = True
 
-    geometry = ModelType(Geometry)
+    geometry = PolyModelType(model_spec=[Point, MultiPoints, Polygon, MultiPolygon])
 
 
 class ParentEvent(Model):
