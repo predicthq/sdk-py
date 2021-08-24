@@ -14,7 +14,7 @@ from schematics.types import (
     StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType,
     DateType as SchematicsDateType
 )
-from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType
+from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType, PolyModelType
 from schematics.types.serializable import serializable
 
 

@@ -4,7 +4,7 @@ from predicthq.endpoints.schemas import (
     PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
     StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
     DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
-    LocationAround, BooleanType, BrandUnsafe, Entity
+    LocationAround, BooleanType, BrandUnsafe, Entity, PolyModelType
 )
 
 
@@ -59,6 +59,57 @@ class Entities(Model):
     formatted_address = StringType()
 
 
+class Point(Model):
+
+    type = StringType()
+    coordinates = ListType(FloatType())
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['Point']
+
+
+class MultiPoint(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(FloatType()))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiPoint', 'LineString']
+
+
+
+class Polygon(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(ListType(FloatType())))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiLineString', 'Polygon']
+
+
+class MultiPolygon(Model):
+
+    type = StringType()
+    coordinates = ListType(ListType(ListType(ListType(FloatType()))))
+
+    @classmethod
+    def _claim_polymorphic(cls, data):
+        return data.get('type') in ['MultiPolygon']
+
+
+class Geo(Model):
+
+    geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
+
+
+class ParentEvent(Model):
+
+    parent_event_id = StringType()
+
+
 class Event(Model):
 
     class Options:
@@ -73,9 +124,11 @@ class Event(Model):
     duration = IntType()
     end = DateTimeType()
     first_seen = DateTimeType()
+    geo = ModelType(Geo)
     id = StringType()
     labels = ListType(StringType())
     location = GeoJSONPointType()
+    parent_event = ModelType(ParentEvent)
     place_hierarchies = ListType(ListType(StringType()))
     postponed = DateTimeType()
     relevance = FloatType()
