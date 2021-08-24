@@ -69,7 +69,7 @@ class Point(Model):
         return data.get('type') in ['Point']
 
 
-class MultiPoints(Model):
+class MultiPoint(Model):
 
     type = StringType()
     coordinates = ListType(ListType(FloatType()))
@@ -102,7 +102,7 @@ class MultiPolygon(Model):
 
 class Geo(Model):
 
-    geometry = PolyModelType(model_spec=[Point, MultiPoints, Polygon, MultiPolygon])
+    geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
 
 
 class ParentEvent(Model):
