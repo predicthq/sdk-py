@@ -23,6 +23,9 @@
               "type": "Point"
             }
           },
+          "parent_event": {
+            "parent_event_id": "umD5ndxXNgkvQYKrLe"
+          },
           "relevance": null,
           "country": "AU",
           "labels": [
