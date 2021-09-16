@@ -162,6 +162,31 @@ for feature in phq.features.obtain_features(
     print(feature.date, feature.phq_attendance_sports.stats.count, feature.phq_rank_public_holidays.rank_levels)
 ```
 
+The following example obtain features of broadcasts which are active between 2017-12-31 and 2018-01-02, with place_id 4671654
+
+Requested features:
+* count and median of broadcasts which starts between 9am - 11am and has a phq_rank greater than 50
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for feature in phq.features.obtain_features(
+        active__gte="2017-12-31",
+        active__lte="2018-01-02",
+        hour_of_day_start__gt=9,
+        hour_of_day_start__lte=11,
+        location__place_id=[4671654],
+        phq_viewership_sports_american_football__stats=["count", "median"],
+        phq_viewership_sports_american_football__phq_rank={
+            "gt": 50
+        }
+):
+    print(feature.date, feature.phq_viewership_sports_american_football.stats.count, feature.phq_viewership_sports_american_football.stats.median)
+```
+
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
 
