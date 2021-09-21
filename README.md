@@ -162,10 +162,10 @@ for feature in phq.features.obtain_features(
     print(feature.date, feature.phq_attendance_sports.stats.count, feature.phq_rank_public_holidays.rank_levels)
 ```
 
-The following example obtain features of broadcasts which are active between 2017-12-31 and 2018-01-02, with place_id 4671654
+The following example obtains features of broadcasts which are active between 2017-12-31 and 2018-01-02, with place_id 4671654
 
 Requested features:
-* count and median of broadcasts which starts between 9am - 11am and has a phq_rank greater than 50
+* count and median of broadcasts which start between 9am - 11am and have a `phq_rank` greater than 50
 
 ```Python
 from predicthq import Client
