@@ -233,3 +233,115 @@ class FeaturesTest(unittest.TestCase):
             },
             phq_rank_public_holidays=True)
         assert isinstance(result, FeatureResultSet)
+
+    @with_mock_client()
+    def test_viewership_request_params_underscores(self, client):
+        feature_stats = ['avg', 'count', 'max', 'median', 'min', 'sum', 'std_dev']
+        client.features.obtain_features(
+            active__gte="2017-12-31",
+            active__lte="2018-01-02",
+            hour_of_day_active__gt=10,
+            hour_of_day_active__lte=19,
+            location__place_id=[4671654],
+            phq_viewership_sports_american_football__stats=feature_stats,
+            phq_viewership_sports_american_football__phq_rank={
+                "gt": 50
+            },
+            phq_viewership_sports_baseball_mlb__stats=feature_stats,
+            phq_viewership_sports_basketball__stats=feature_stats,
+            phq_viewership_sports_ice_hockey_nhl__stats=feature_stats,
+            phq_viewership_sports_soccer__stats=feature_stats,
+        )
+
+        client.request.assert_called_once_with(
+            'post', '/v1/features/',
+            json={
+                "active": {
+                    "gte": "2017-12-31",
+                    "lte": "2018-01-02"
+                },
+                "hour_of_day_active": {
+                    "gt": 10,
+                    "lte": 19
+                },
+                "location": {
+                    "place_id": [
+                        "4671654"
+                    ]
+                },
+                "phq_viewership_sports_american_football": {
+                    "stats": feature_stats,
+                    "phq_rank": {
+                        "gt": 50
+                    }
+                },
+                "phq_viewership_sports_baseball_mlb": {
+                    "stats": feature_stats
+                },
+                "phq_viewership_sports_basketball": {
+                    "stats": feature_stats
+                },
+                "phq_viewership_sports_ice_hockey_nhl": {
+                    "stats": feature_stats
+                },
+                "phq_viewership_sports_soccer": {
+                    "stats": feature_stats
+                }
+            }
+        )
+
+    @with_mock_client()
+    def test_viewership_request_params_dicts(self, client):
+        feature_criteria = {
+            "stats": ['avg', 'count', 'max', 'median', 'min', 'sum', 'std_dev'],
+            "phq_rank": {
+                "gt": 50
+            }
+        }
+        client.features.obtain_features(
+            active={
+                "gte": "2017-12-31",
+                "lte": "2018-01-02"
+            },
+            hour_of_day_start={"gte": 10, "lt": 11},
+            location={
+                "geo": {
+                    "lon": -71.49978,
+                    "lat": 41.75038,
+                    "radius": "30km"
+                }
+            },
+            phq_viewership_sports_american_football_ncaa_men=feature_criteria,
+            phq_viewership_sports_baseball=feature_criteria,
+            phq_viewership_sports_basketball_ncaa_men=feature_criteria,
+            phq_viewership_sports_basketball_nba=feature_criteria,
+            phq_viewership_sports_ice_hockey_nhl=feature_criteria,
+            phq_viewership_sports_soccer_mls=feature_criteria,
+        )
+
+        client.request.assert_called_once_with(
+            'post', '/v1/features/',
+            json={
+                "active": {
+                    "gte": "2017-12-31",
+                    "lte": "2018-01-02"
+                },
+                "hour_of_day_start": {
+                    "gte": 10,
+                    "lt": 11
+                },
+                "location": {
+                    "geo": {
+                        "lat": 41.75038,
+                        "lon": -71.49978,
+                        "radius": "30km"
+                    }
+                },
+                "phq_viewership_sports_american_football_ncaa_men": feature_criteria,
+                "phq_viewership_sports_baseball": feature_criteria,
+                "phq_viewership_sports_basketball_ncaa_men": feature_criteria,
+                "phq_viewership_sports_basketball_nba": feature_criteria,
+                "phq_viewership_sports_ice_hockey_nhl": feature_criteria,
+                "phq_viewership_sports_soccer_mls": feature_criteria
+            }
+        )

@@ -28,11 +28,25 @@ class FeatureLocation(Model):
     place_id = ListType(StringType)
 
 
+class HourOfDayRange(Model):
+
+    class Options:
+        serialize_when_none = False
+
+    gt = IntType(min_value=0, max_value=23)
+    gte = IntType(min_value=0, max_value=23)
+    lt = IntType(min_value=0, max_value=23)
+    lte = IntType(min_value=0, max_value=23)
+
+
 class FeatureRequest(Model):
     class Options:
         serialize_when_none = False
 
     active = ModelType(DateRange, required=True)
+    hour_of_day_active = ModelType(HourOfDayRange)
+    hour_of_day_start = ModelType(HourOfDayRange)
+    hour_of_day_end = ModelType(HourOfDayRange)
     location = ModelType(FeatureLocation, required=True)
     # Attendance based feature criteria
     phq_attendance_academic_graduation = ModelType(FeatureCriteria)
@@ -54,6 +68,19 @@ class FeatureRequest(Model):
     phq_rank_academic_session = BooleanType()
     phq_rank_academic_exam = BooleanType()
     phq_rank_academic_holiday = BooleanType()
+    # Viewership based feature criteria
+    phq_viewership_sports_american_football = ModelType(FeatureCriteria)
+    phq_viewership_sports_american_football_ncaa_men = ModelType(FeatureCriteria)
+    phq_viewership_sports_american_football_nfl = ModelType(FeatureCriteria)
+    phq_viewership_sports_baseball = ModelType(FeatureCriteria)
+    phq_viewership_sports_baseball_mlb = ModelType(FeatureCriteria)
+    phq_viewership_sports_basketball = ModelType(FeatureCriteria)
+    phq_viewership_sports_basketball_ncaa_men = ModelType(FeatureCriteria)
+    phq_viewership_sports_basketball_nba = ModelType(FeatureCriteria)
+    phq_viewership_sports_ice_hockey = ModelType(FeatureCriteria)
+    phq_viewership_sports_ice_hockey_nhl = ModelType(FeatureCriteria)
+    phq_viewership_sports_soccer = ModelType(FeatureCriteria)
+    phq_viewership_sports_soccer_mls = ModelType(FeatureCriteria)
 
 
 class FeatureRankLevel(Model):
@@ -108,6 +135,19 @@ class Feature(Model):
     phq_rank_academic_session = ModelType(FeatureRankLevel)
     phq_rank_academic_exam = ModelType(FeatureRankLevel)
     phq_rank_academic_holiday = ModelType(FeatureRankLevel)
+    # Viewership based features
+    phq_viewership_sports_american_football = ModelType(FeatureStat)
+    phq_viewership_sports_american_football_ncaa = ModelType(FeatureStat)
+    phq_viewership_sports_american_football_nfl = ModelType(FeatureStat)
+    phq_viewership_sports_baseball = ModelType(FeatureStat)
+    phq_viewership_sports_baseball_mlb = ModelType(FeatureStat)
+    phq_viewership_sports_basketball = ModelType(FeatureStat)
+    phq_viewership_sports_basketball_ncaa = ModelType(FeatureStat)
+    phq_viewership_sports_basketball_nba = ModelType(FeatureStat)
+    phq_viewership_sports_ice_hockey = ModelType(FeatureStat)
+    phq_viewership_sports_ice_hockey_nhl = ModelType(FeatureStat)
+    phq_viewership_sports_soccer = ModelType(FeatureStat)
+    phq_viewership_sports_soccer_mls = ModelType(FeatureStat)
 
 
 class FeatureResultSet(ResultSet):
