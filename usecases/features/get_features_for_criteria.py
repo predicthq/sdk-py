@@ -52,10 +52,22 @@ for feature in phq.features.obtain_features(
         hour_of_day_start__gte=9,
         hour_of_day_start__lt=11,
         location__place_id=[5224323, 5811704, 4887398],
+        phq_viewership_sports__stats=["count", "median"],
+        phq_viewership_sports__phq_rank={
+            "gt": 50
+        },
         phq_viewership_sports_american_football__stats=["count", "median"],
         phq_viewership_sports_american_football__phq_rank={
             "gt": 50
+        },
+        phq_viewership_sports_basketball_nba__stats=["count", "median"],
+        phq_viewership_sports_basketball_nba__phq_rank={
+            "gt": 50
         }
 ):
-    print(feature.date, feature.phq_viewership_sports_american_football.stats.count,
-          feature.phq_viewership_sports_american_football.stats.median)
+    print(feature.date, feature.phq_viewership_sports.stats.count,
+          feature.phq_viewership_sports.stats.median,
+          feature.phq_viewership_sports_american_football.stats.count,
+          feature.phq_viewership_sports_american_football.stats.median,
+          feature.phq_viewership_sports_basketball_nba.stats.count,
+          feature.phq_viewership_sports_basketball_nba.stats.median)

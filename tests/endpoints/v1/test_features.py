@@ -243,6 +243,10 @@ class FeaturesTest(unittest.TestCase):
             hour_of_day_active__gt=10,
             hour_of_day_active__lte=19,
             location__place_id=[4671654],
+            phq_viewership_sports__stats=feature_stats,
+            phq_viewership_sports__phq_rank={
+                "gt": 50
+            },
             phq_viewership_sports_american_football__stats=feature_stats,
             phq_viewership_sports_american_football__phq_rank={
                 "gt": 50
@@ -251,6 +255,7 @@ class FeaturesTest(unittest.TestCase):
             phq_viewership_sports_basketball__stats=feature_stats,
             phq_viewership_sports_ice_hockey_nhl__stats=feature_stats,
             phq_viewership_sports_soccer__stats=feature_stats,
+            phq_viewership_sports_golf_pga_championship__stats=feature_stats
         )
 
         client.request.assert_called_once_with(
@@ -269,6 +274,12 @@ class FeaturesTest(unittest.TestCase):
                         "4671654"
                     ]
                 },
+                "phq_viewership_sports": {
+                    "stats": feature_stats,
+                    "phq_rank": {
+                        "gt": 50
+                    }
+                },
                 "phq_viewership_sports_american_football": {
                     "stats": feature_stats,
                     "phq_rank": {
@@ -285,6 +296,9 @@ class FeaturesTest(unittest.TestCase):
                     "stats": feature_stats
                 },
                 "phq_viewership_sports_soccer": {
+                    "stats": feature_stats
+                },
+                "phq_viewership_sports_golf_pga_championship": {
                     "stats": feature_stats
                 }
             }
@@ -317,6 +331,8 @@ class FeaturesTest(unittest.TestCase):
             phq_viewership_sports_basketball_nba=feature_criteria,
             phq_viewership_sports_ice_hockey_nhl=feature_criteria,
             phq_viewership_sports_soccer_mls=feature_criteria,
+            phq_viewership_sports_auto_racing=feature_criteria,
+            phq_viewership_sports_horse_racing=feature_criteria
         )
 
         client.request.assert_called_once_with(
@@ -342,6 +358,8 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_basketball_ncaa_men": feature_criteria,
                 "phq_viewership_sports_basketball_nba": feature_criteria,
                 "phq_viewership_sports_ice_hockey_nhl": feature_criteria,
-                "phq_viewership_sports_soccer_mls": feature_criteria
+                "phq_viewership_sports_soccer_mls": feature_criteria,
+                "phq_viewership_sports_auto_racing": feature_criteria,
+                "phq_viewership_sports_horse_racing": feature_criteria
             }
         )
