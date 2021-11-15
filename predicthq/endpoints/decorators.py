@@ -38,9 +38,7 @@ def _process_kwargs(kwargs, separator="__"):
 
 
 def accepts(schema_class, query_string=True, role=None):
-
     def decorator(f):
-
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
 
@@ -58,6 +56,8 @@ def accepts(schema_class, query_string=True, role=None):
 
             try:
                 data = _process_kwargs(kwargs)
+                if hasattr(endpoint, "mutate_bool_to_default_for_type"):
+                    endpoint.mutate_bool_to_default_for_type(data)
                 model = schema()
                 model.import_data(data, strict=True, partial=False)
                 model.validate()
@@ -77,9 +77,7 @@ def accepts(schema_class, query_string=True, role=None):
 
 
 def returns(schema_class):
-
     def decorator(f):
-
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
 
@@ -95,15 +93,20 @@ def returns(schema_class):
                     model._more = functools.partial(wrapper, endpoint)
 
                     # if results are of type Model, make sure to set the endpoint on each item
-                    if data is not None and 'results' in data \
-                            and hasattr(model._fields['results'], 'model_class') \
-                            and issubclass(model._fields['results'].model_class, Model):
+                    if (
+                        data is not None
+                        and "results" in data
+                        and hasattr(model._fields["results"], "model_class")
+                        and issubclass(model._fields["results"].model_class, Model)
+                    ):
+
                         def initialize_result_type(item_data):
-                            item = model._fields['results'].model_class(item_data, strict=False)
+                            item = model._fields["results"].model_class(item_data, strict=False)
                             item._endpoint = endpoint
                             return item
+
                         # Use generator so results are not iterated over more than necessary
-                        data['results'] = (initialize_result_type(item_data) for item_data in data['results'])
+                        data["results"] = (initialize_result_type(item_data) for item_data in data["results"])
 
                 model.import_data(data, strict=False)
                 model.validate()

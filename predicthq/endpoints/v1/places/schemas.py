@@ -1,11 +1,20 @@
 from predicthq.endpoints.schemas import (
-    LimitMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType, StringListType,
-    StringModelType, Location, DateTimeType, ResultType, SchematicsValidationError
+    LimitMixin,
+    Model,
+    ResultSet,
+    ListType,
+    StringType,
+    GeoJSONPointType,
+    StringListType,
+    StringModelType,
+    Location,
+    DateTimeType,
+    ResultType,
+    SchematicsValidationError,
 )
 
 
 class SearchParams(LimitMixin, Model):
-
     class Options:
         serialize_when_none = False
 
@@ -13,20 +22,24 @@ class SearchParams(LimitMixin, Model):
     id = ListType(StringType)
     location = StringListType(StringModelType(Location), separator="+")
     country = ListType(StringType)
-    type = ListType(StringType(choices=(
-        'planet',
-        'continent',
-        'country',
-        'region',
-        'county',
-        'localadmin',
-        'locality',
-        'neighbourhood',
-        'local',
-        'metro',
-        'major',
-        'all',
-    )))
+    type = ListType(
+        StringType(
+            choices=(
+                "planet",
+                "continent",
+                "country",
+                "region",
+                "county",
+                "localadmin",
+                "locality",
+                "neighbourhood",
+                "local",
+                "metro",
+                "major",
+                "all",
+            )
+        )
+    )
 
     def validate(self, *args, **kwargs):
         super(SearchParams, self).validate(*args, **kwargs)

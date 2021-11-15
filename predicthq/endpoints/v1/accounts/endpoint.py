@@ -4,7 +4,6 @@ from .schemas import Account
 
 
 class AccountsEndpoint(BaseEndpoint):
-
     @returns(Account)
     def self(self):
-        return self.client.get(self.build_url('v1', 'accounts/self'))
+        return self.client.get(self.build_url("v1", "accounts/self"))

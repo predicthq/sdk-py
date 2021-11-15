@@ -5,11 +5,10 @@ from tests import with_mock_client, with_mock_responses, with_client
 
 
 class AccountsTest(unittest.TestCase):
-
     @with_mock_client()
     def test_self_params(self, client):
         client.accounts.self()
-        client.request.assert_called_once_with('get', '/v1/accounts/self/')
+        client.request.assert_called_once_with("get", "/v1/accounts/self/")
 
     @with_client()
     @with_mock_responses()

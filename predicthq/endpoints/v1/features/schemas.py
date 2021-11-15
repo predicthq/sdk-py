@@ -1,6 +1,17 @@
 from predicthq.endpoints.schemas import (
-    BooleanType, DateType, DateRange, DictType, FloatType, IntRange, IntType,
-    ListType, Model, ModelType, ResultSet, ResultType, StringType
+    BooleanType,
+    DateType,
+    DateRange,
+    DictType,
+    FloatType,
+    IntRange,
+    IntType,
+    ListType,
+    Model,
+    ModelType,
+    ResultSet,
+    ResultType,
+    StringType,
 )
 
 
@@ -8,16 +19,20 @@ class FeatureCriteria(Model):
     class Options:
         serialize_when_none = True
 
-    stats = ListType(StringType(choices=('avg', 'count', 'max', 'median', 'min', 'sum', 'std_dev'), default='count'))
+    stats = ListType(StringType(choices=("avg", "count", "max", "median", "min", "sum", "std_dev"), default="count"))
     phq_rank = ModelType(IntRange)
 
 
 class FeatureGeoPoint(Model):
     lat = FloatType(required=True, min_value=-90.0, max_value=90.0)
     lon = FloatType(required=True, min_value=-180.0, max_value=180.0)
-    radius = StringType(regex=r'^\d+(k?m|mi)$', required=True, messages={
-        'regex': 'Radius needs to define a number and unit (m, km, mi) eg. 100km',
-    })
+    radius = StringType(
+        regex=r"^\d+(k?m|mi)$",
+        required=True,
+        messages={
+            "regex": "Radius needs to define a number and unit (m, km, mi) eg. 100km",
+        },
+    )
 
 
 class FeatureLocation(Model):
@@ -29,7 +44,6 @@ class FeatureLocation(Model):
 
 
 class HourOfDayRange(Model):
-
     class Options:
         serialize_when_none = False
 
