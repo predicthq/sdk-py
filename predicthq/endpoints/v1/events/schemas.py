@@ -1,15 +1,36 @@
 from schematics.common import NONEMPTY
 
 from predicthq.endpoints.schemas import (
-    PaginatedMixin, SortableMixin, Model, ResultSet, ListType, StringType, GeoJSONPointType,
-    StringListType, StringModelType, Area, ModelType, IntRange, IntType, DateTimeRange,
-    DateTimeType, FloatType, ResultType, DictType, DateType, Place, DateAround,
-    LocationAround, BooleanType, BrandUnsafe, Entity, PolyModelType
+    PaginatedMixin,
+    SortableMixin,
+    Model,
+    ResultSet,
+    ListType,
+    StringType,
+    GeoJSONPointType,
+    StringListType,
+    StringModelType,
+    Area,
+    ModelType,
+    IntRange,
+    IntType,
+    DateTimeRange,
+    DateTimeType,
+    FloatType,
+    ResultType,
+    DictType,
+    DateType,
+    Place,
+    DateAround,
+    LocationAround,
+    BooleanType,
+    BrandUnsafe,
+    Entity,
+    PolyModelType,
 )
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):
-
     class Options:
         serialize_when_none = False
 
@@ -17,7 +38,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     cancelled = ModelType(DateTimeRange)
     category = ListType(StringType)
     country = ListType(StringType)
-    deleted_reason = ListType(StringType(choices=('cancelled', 'duplicate', 'invalid', 'postponed')))
+    deleted_reason = ListType(StringType(choices=("cancelled", "duplicate", "invalid", "postponed")))
     end = ModelType(DateTimeRange)
     end_around = ModelType(DateAround)
     id = ListType(StringType)
@@ -29,7 +50,7 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     relevance = ListType(StringType)
     start = ModelType(DateTimeRange)
     start_around = ModelType(DateAround)
-    state = ListType(StringType(choices=('active', 'deleted'), default='active'))
+    state = ListType(StringType(choices=("active", "deleted"), default="active"))
     updated = ModelType(DateTimeRange)
     within = StringListType(StringModelType(Area), separator="+")
 
@@ -49,7 +70,6 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
 
 
 class Entities(Model):
-
     class Options:
         serialize_when_none = True
 
@@ -66,7 +86,7 @@ class Point(Model):
 
     @classmethod
     def _claim_polymorphic(cls, data):
-        return data.get('type') in ['Point']
+        return data.get("type") in ["Point"]
 
 
 class MultiPoint(Model):
@@ -76,8 +96,7 @@ class MultiPoint(Model):
 
     @classmethod
     def _claim_polymorphic(cls, data):
-        return data.get('type') in ['MultiPoint', 'LineString']
-
+        return data.get("type") in ["MultiPoint", "LineString"]
 
 
 class Polygon(Model):
@@ -87,7 +106,7 @@ class Polygon(Model):
 
     @classmethod
     def _claim_polymorphic(cls, data):
-        return data.get('type') in ['MultiLineString', 'Polygon']
+        return data.get("type") in ["MultiLineString", "Polygon"]
 
 
 class MultiPolygon(Model):
@@ -97,7 +116,7 @@ class MultiPolygon(Model):
 
     @classmethod
     def _claim_polymorphic(cls, data):
-        return data.get('type') in ['MultiPolygon']
+        return data.get("type") in ["MultiPolygon"]
 
 
 class Geo(Model):
@@ -111,7 +130,6 @@ class ParentEvent(Model):
 
 
 class Event(Model):
-
     class Options:
         serialize_when_none = True
 
@@ -195,7 +213,7 @@ class CalendarResultSet(ResultSet):
 class ImpactParams(SearchParams):
 
     top_events = ModelType(TopEventsSearchParams)
-    impact_rank = StringType(choices=('rank', 'aviation_rank'))
+    impact_rank = StringType(choices=("rank", "aviation_rank"))
 
 
 class ImpactDay(Model):

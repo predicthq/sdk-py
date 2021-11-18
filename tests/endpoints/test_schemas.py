@@ -8,7 +8,6 @@ from predicthq.endpoints.base import BaseEndpoint
 
 
 def test_datetime_type():
-
     class SchemaExample(schemas.Model):
 
         my_datetime = schemas.DateTimeType()
@@ -21,7 +20,6 @@ def test_datetime_type():
 
 
 def test_date_type():
-
     class SchemaExample(schemas.Model):
 
         my_date = schemas.DateType()
@@ -34,7 +32,6 @@ def test_date_type():
 
 
 def test_string_model_and_string_model_type():
-
     class MyModel(schemas.StringModel):
 
         import_format = r"(?P<left>.*)==(?P<right>\d*)"
@@ -69,15 +66,23 @@ def test_string_model_and_string_model_type():
 
 
 def test_string_list_type():
-
     class SchemaExample(schemas.Model):
 
         area_list = schemas.StringListType(schemas.StringModelType(schemas.Area), separator="+")
         string_list = schemas.StringListType(schemas.StringType, separator="+")
 
     string_data = {"string_list": "a+b+c", "area_list": "10km@-36.847585,174.765742+10km@-41.288058,174.778265"}
-    list_data = {"string_list": ["a", "b", "c"], "area_list": ["10km@-36.847585,174.765742", "10km@-41.288058,174.778265"]}
-    dict_data = {"string_list": ["a", "b", "c"], "area_list": [{"radius": "10km", "latitude": -36.847585, "longitude": 174.765742}, {"radius": "10km", "latitude": -41.288058, "longitude": 174.778265}]}
+    list_data = {
+        "string_list": ["a", "b", "c"],
+        "area_list": ["10km@-36.847585,174.765742", "10km@-41.288058,174.778265"],
+    }
+    dict_data = {
+        "string_list": ["a", "b", "c"],
+        "area_list": [
+            {"radius": "10km", "latitude": -36.847585, "longitude": 174.765742},
+            {"radius": "10km", "latitude": -41.288058, "longitude": 174.778265},
+        ],
+    }
 
     expected_data = {"string_list": "a+b+c", "area_list": "10km@-36.847585,174.765742+10km@-41.288058,174.778265"}
 
@@ -87,24 +92,27 @@ def test_string_list_type():
     assert m.import_data(dict_data).to_primitive() == expected_data
 
     unique_item_data = {"string_list": "a", "area_list": "10km@-36.847585,174.765742"}
-    unique_item_dict_data = {"string_list": "a", "area_list": {"radius": "10km", "latitude": -36.847585, "longitude": 174.765742}}
+    unique_item_dict_data = {
+        "string_list": "a",
+        "area_list": {"radius": "10km", "latitude": -36.847585, "longitude": 174.765742},
+    }
     assert m.import_data(unique_item_data).to_primitive() == unique_item_data
     assert m.import_data(unique_item_dict_data).to_primitive() == unique_item_data
 
 
 def test_list_type():
-
     class SchemaExample(schemas.Model):
 
         string_list = schemas.ListType(schemas.StringType)
 
     m = SchemaExample()
     assert m.import_data({"string_list": "string"}).to_primitive() == {"string_list": ["string"]}
-    assert m.import_data({"string_list": ["string1", "string2"]}).to_primitive() == {"string_list": ["string1", "string2"]}
+    assert m.import_data({"string_list": ["string1", "string2"]}).to_primitive() == {
+        "string_list": ["string1", "string2"]
+    }
 
 
 def test_geo_json_point_type():
-
     class SchemaExample(schemas.Model):
 
         point = schemas.GeoJSONPointType()
@@ -117,13 +125,14 @@ def test_geo_json_point_type():
 
 
 def test_date_around_type():
-
     class SchemaExample(schemas.Model):
         around = schemas.ModelType(schemas.DateAround)
 
     m = SchemaExample()
 
-    assert m.import_data({"around": {"origin": '2020-01-01', "offset": "1d", "scale": "0d", "decay": "0.1"}}).to_primitive() == {'around': {'origin': '2020-01-01', 'decay': 0.1, 'scale': u'0d', 'offset': u'1d'}}
+    assert m.import_data(
+        {"around": {"origin": "2020-01-01", "offset": "1d", "scale": "0d", "decay": "0.1"}}
+    ).to_primitive() == {"around": {"origin": "2020-01-01", "decay": 0.1, "scale": u"0d", "offset": u"1d"}}
 
     with pytest.raises(schemas.SchematicsDataError):
         m.import_data({"around": "2020-01-01"}, validate=True)
@@ -135,14 +144,15 @@ def test_location_around_type():
 
     m = SchemaExample()
 
-    assert m.import_data({"around": {"origin": '40.730610,-73.935242', "offset": "1km", "scale": "2km", "decay": "0.1"}}).to_primitive() == {'around': {'origin': u'40.730610,-73.935242', 'decay': 0.1, 'scale': u'2km', 'offset': u'1km'}}
+    assert m.import_data(
+        {"around": {"origin": "40.730610,-73.935242", "offset": "1km", "scale": "2km", "decay": "0.1"}}
+    ).to_primitive() == {"around": {"origin": u"40.730610,-73.935242", "decay": 0.1, "scale": u"2km", "offset": u"1km"}}
 
     with pytest.raises(schemas.SchematicsDataError):
         m.import_data({"around": "40.730610,-73.935242"}, validate=True)
 
 
 def test_area_model():
-
     class SchemaExample(schemas.Model):
 
         area = schemas.StringModelType(schemas.Area)
@@ -168,7 +178,6 @@ def test_area_model():
 
 
 def test_location_model():
-
     class SchemaExample(schemas.Model):
 
         location = schemas.StringModelType(schemas.Location)
@@ -194,7 +203,6 @@ def test_location_model():
 
 
 def test_resultset():
-
     class ResultExample(schemas.Model):
 
         value = schemas.IntType()
@@ -204,7 +212,6 @@ def test_resultset():
         results = schemas.ResultType(ResultExample)
 
     class EndpointExample(BaseEndpoint):
-
         @decorators.returns(ResultSetExample)
         def load_page(self, page):
             page = int(page)
@@ -212,7 +219,11 @@ def test_resultset():
                 "count": 9,
                 "next": "http://example.org/?page={}".format(page + 1) if page < 3 else None,
                 "previous": "http://example.org/?page={}".format(page - 1) if page > 1 else None,
-                "results": [{"value": 1 + (3 * (page - 1))}, {"value": 2 + (3 * (page - 1))}, {"value": 3 + (3 * (page - 1))}]
+                "results": [
+                    {"value": 1 + (3 * (page - 1))},
+                    {"value": 2 + (3 * (page - 1))},
+                    {"value": 3 + (3 * (page - 1))},
+                ],
             }
 
     endpoint = EndpointExample(None)

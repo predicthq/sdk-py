@@ -5,18 +5,18 @@ from predicthq.exceptions import ConfigError
 
 
 CONFIG_LOCATIONS = (
-    '/etc/predicthq.conf',
-    os.path.join(os.path.expanduser('~'), '.predicthq', 'predicthq.conf'),
-    os.path.join(os.getcwd(), 'predicthq.conf'),
+    "/etc/predicthq.conf",
+    os.path.join(os.path.expanduser("~"), ".predicthq", "predicthq.conf"),
+    os.path.join(os.getcwd(), "predicthq.conf"),
 )
 
 
 class Config(object):
 
     _config_sections = (
-        'endpoint',
-        'oauth2',
-        'logging',
+        "endpoint",
+        "oauth2",
+        "logging",
     )
 
     _defaults = {

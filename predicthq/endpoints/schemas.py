@@ -6,20 +6,27 @@ import pytz
 from dateutil.parser import parse as parse_date
 
 from schematics.exceptions import (
-    ValidationError as SchematicsValidationError, DataError as SchematicsDataError, ConversionError
+    ValidationError as SchematicsValidationError,
+    DataError as SchematicsDataError,
+    ConversionError,
 )
 from schematics.models import Model
 from schematics.transforms import Role
 from schematics.types import (
-    StringType, DateTimeType as SchematicsDateTimeType, IntType, FloatType, URLType, GeoPointType, BooleanType,
-    DateType as SchematicsDateType
+    StringType,
+    DateTimeType as SchematicsDateTimeType,
+    IntType,
+    FloatType,
+    URLType,
+    GeoPointType,
+    BooleanType,
+    DateType as SchematicsDateType,
 )
 from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType, PolyModelType
 from schematics.types.serializable import serializable
 
 
 class DateTimeType(SchematicsDateTimeType):
-
     def to_native(self, value, context=None):
         if isinstance(value, datetime):
             return value
@@ -27,7 +34,6 @@ class DateTimeType(SchematicsDateTimeType):
 
 
 class DateTimeEndType(SchematicsDateTimeType):
-
     def to_native(self, value, context=None):
         if isinstance(value, datetime):
             return value
@@ -35,7 +41,6 @@ class DateTimeEndType(SchematicsDateTimeType):
 
 
 class DateType(SchematicsDateType):
-
     def to_native(self, value, context=None):
         if isinstance(value, date):
             return value
@@ -43,7 +48,6 @@ class DateType(SchematicsDateType):
 
 
 class StringModelType(ModelType):
-
     def _convert(self, value, context):
         if isinstance(value, str):
             return self.model_class._convert(value, context=context)
@@ -52,7 +56,6 @@ class StringModelType(ModelType):
 
 
 class StringModel(Model):
-
     @property
     def import_format(self):  # pragma: nocover
         raise NotImplementedError()
@@ -66,7 +69,9 @@ class StringModel(Model):
             try:
                 raw_data = re.match(self.import_format, str(raw_data)).groupdict()
             except AttributeError:
-                raise SchematicsValidationError("'{}' is not a valid format for {}".format(raw_data, self.__class__.__name__))
+                raise SchematicsValidationError(
+                    "'{}' is not a valid format for {}".format(raw_data, self.__class__.__name__)
+                )
         return super(StringModel, self).convert(raw_data, **kw)
 
     def export(self, *args, **kwargs):
@@ -74,7 +79,6 @@ class StringModel(Model):
 
 
 class StringListType(SchematicsListType):
-
     def __init__(self, field, separator=" ", **kwargs):
         self.separator = separator
         super(StringListType, self).__init__(field, **kwargs)
@@ -93,7 +97,6 @@ class StringListType(SchematicsListType):
 
 
 class ListType(SchematicsListType):
-
     def _coerce(self, value):
         if not isinstance(value, (list, tuple)):
             return [value]
@@ -102,24 +105,23 @@ class ListType(SchematicsListType):
 
 
 class GeoJSONPointType(GeoPointType):
-
     def _normalize(self, value):
         return tuple(reversed(super(GeoJSONPointType, self)._normalize(value)))
 
 
 class Area(StringModel):
 
-    import_format = r'(?P<radius>\d+(k?m|ft|mi))@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
+    import_format = r"(?P<radius>\d+(k?m|ft|mi))@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)"
     export_format = "{radius}@{latitude},{longitude}"
 
-    radius = StringType(regex=r'\d+(k?m|ft|mi)', required=True)
+    radius = StringType(regex=r"\d+(k?m|ft|mi)", required=True)
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
 
 class Location(StringModel):
 
-    import_format = r'@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)'
+    import_format = r"@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)"
     export_format = "@{latitude},{longitude}"
 
     latitude = FloatType(required=True)
@@ -127,7 +129,6 @@ class Location(StringModel):
 
 
 class Place(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -136,29 +137,26 @@ class Place(Model):
 
 
 class DateAround(Model):
-
     class Options:
         serialize_when_none = False
 
     origin = DateType(required=True)
-    offset = StringType(regex=r'\d+d')
-    scale = StringType(regex=r'\d+d')
+    offset = StringType(regex=r"\d+d")
+    scale = StringType(regex=r"\d+d")
     decay = FloatType()
 
 
 class LocationAround(Model):
-
     class Options:
         serialize_when_none = False
 
-    origin = StringType(regex=r'(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)', required=True)
-    offset = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
-    scale = StringType(regex=r'\d+(\.\d+)?(cm|m|km|in|ft|mi)')
+    origin = StringType(regex=r"(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)", required=True)
+    offset = StringType(regex=r"\d+(\.\d+)?(cm|m|km|in|ft|mi)")
+    scale = StringType(regex=r"\d+(\.\d+)?(cm|m|km|in|ft|mi)")
     decay = FloatType()
 
 
 class DateTimeRange(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -170,7 +168,6 @@ class DateTimeRange(Model):
 
 
 class DateRange(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -182,7 +179,6 @@ class DateRange(Model):
 
 
 class FloatRange(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -193,7 +189,6 @@ class FloatRange(Model):
 
 
 class IntRange(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -204,7 +199,6 @@ class IntRange(Model):
 
 
 class BrandUnsafe(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -212,7 +206,6 @@ class BrandUnsafe(Model):
 
 
 class Entity(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -259,13 +252,13 @@ class ResultSet(Model):
         return self.next is not None
 
     def get_next(self):
-        if not self.has_next() or not hasattr(self, '_more'):
+        if not self.has_next() or not hasattr(self, "_more"):
             return
         params = self._parse_params(self.next)
         return self._more(**params)
 
     def get_previous(self):
-        if not self.has_previous() or not hasattr(self, '_more'):
+        if not self.has_previous() or not hasattr(self, "_more"):
             return
         params = self._parse_params(self.previous)
         return self._more(**params)
@@ -291,6 +284,5 @@ class ResultSet(Model):
 
 
 class ResultType(SchematicsListType):
-
     def __init__(self, field, *args, **kwargs):
         super(ResultType, self).__init__(ModelType(field), *args, **kwargs)

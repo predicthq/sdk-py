@@ -7,10 +7,10 @@ from .v1.places import PlacesEndpoint
 
 
 __all__ = [
-    'OAuth2Endpoint',
-    'AccountsEndpoint',
-    'BroadcastsEndpoint',
-    'EventsEndpoint',
-    'FeaturesEndpoint',
-    'PlacesEndpoint',
+    "OAuth2Endpoint",
+    "AccountsEndpoint",
+    "BroadcastsEndpoint",
+    "EventsEndpoint",
+    "FeaturesEndpoint",
+    "PlacesEndpoint",
 ]

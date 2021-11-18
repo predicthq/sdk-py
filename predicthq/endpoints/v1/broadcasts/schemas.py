@@ -1,12 +1,22 @@
 from predicthq.endpoints.schemas import (
-    PaginatedMixin, SortableMixin,
-    BooleanType, DateTimeRange, DateTimeType, FloatType, IntRange, IntType,
-    ListType, Model, ModelType, ResultSet, ResultType, StringType
+    PaginatedMixin,
+    SortableMixin,
+    BooleanType,
+    DateTimeRange,
+    DateTimeType,
+    FloatType,
+    IntRange,
+    IntType,
+    ListType,
+    Model,
+    ModelType,
+    ResultSet,
+    ResultType,
+    StringType,
 )
 
 
 class BroadcastEventParams(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -16,16 +26,14 @@ class BroadcastEventParams(Model):
 
 
 class BroadcastLocationParams(Model):
-
     class Options:
         serialize_when_none = False
 
-    origin = origin = StringType(regex=r'(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)')
+    origin = origin = StringType(regex=r"(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)")
     place_id = ListType(StringType)
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):
-
     class Options:
         serialize_when_none = False
 
@@ -35,8 +43,8 @@ class SearchParams(PaginatedMixin, SortableMixin, Model):
     start = ModelType(DateTimeRange)
     updated = ModelType(DateTimeRange)
     first_seen = ModelType(DateTimeRange)
-    record_status = ListType(StringType(choices=('active', 'deleted'), default='active'))
-    broadcast_status = ListType(StringType(choices=('scheduled', 'predicted', 'cancelled')))
+    record_status = ListType(StringType(choices=("active", "deleted"), default="active"))
+    broadcast_status = ListType(StringType(choices=("scheduled", "predicted", "cancelled")))
     event = ModelType(BroadcastEventParams)
 
 
@@ -47,7 +55,6 @@ class GeoPoint(Model):
 
 
 class BroadcastEventEntities(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -58,7 +65,6 @@ class BroadcastEventEntities(Model):
 
 
 class BroadcastEventLocation(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -68,7 +74,6 @@ class BroadcastEventLocation(Model):
 
 
 class BroadcastEventDates(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -85,7 +90,6 @@ class BroadcastEventDates(Model):
 
 
 class BroadcastEvent(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -107,7 +111,6 @@ class BroadcastEvent(Model):
 
 
 class Place(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -120,7 +123,6 @@ class Place(Model):
 
 
 class BroadcastLocation(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -131,7 +133,6 @@ class BroadcastLocation(Model):
 
 
 class BroadcastDates(Model):
-
     class Options:
         serialize_when_none = False
 
@@ -141,7 +142,6 @@ class BroadcastDates(Model):
 
 
 class Broadcast(Model):
-
     class Options:
         serialize_when_none = False
 

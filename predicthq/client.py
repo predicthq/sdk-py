@@ -11,21 +11,21 @@ from .version import __version__
 
 
 class Client(object):
-
     @classmethod
     def build_url(cls, path):
         result = list(urlparse(path))
-        result[2] = "/{}/".format(result[2].strip('/'))
+        result[2] = "/{}/".format(result[2].strip("/"))
         return urljoin(config.ENDPOINT_URL, urlunparse(result))
 
     def __init__(self, access_token=None):
-        self.logger = logging.getLogger('predicthq')
+        self.logger = logging.getLogger("predicthq")
         self.logger.setLevel(config.LOGGING_LOG_LEVEL)
         self.access_token = access_token or config.OAUTH2_ACCESS_TOKEN
         self.initialize_endpoints()
 
     def initialize_endpoints(self):
         from predicthq import endpoints
+
         self.oauth2 = endpoints.OAuth2Endpoint(proxy(self))
         self.broadcasts = endpoints.BroadcastsEndpoint(proxy(self))
         self.events = endpoints.EventsEndpoint(proxy(self))
@@ -36,7 +36,11 @@ class Client(object):
     def get_headers(self, headers):
         _headers = {"Accept": "application/json", "x-user-agent": "PHQ-Py-SDK/{}".format(__version__)}
         if self.access_token:
-            _headers.update({"Authorization": "Bearer {}".format(self.access_token),})
+            _headers.update(
+                {
+                    "Authorization": "Bearer {}".format(self.access_token),
+                }
+            )
         _headers.update(**headers)
         return _headers
 
