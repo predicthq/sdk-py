@@ -1,33 +1,32 @@
-from schematics.common import NONEMPTY
-
 from predicthq.endpoints.schemas import (
-    PaginatedMixin,
-    SortableMixin,
-    Model,
-    ResultSet,
-    ListType,
-    StringType,
-    GeoJSONPointType,
-    StringListType,
-    StringModelType,
     Area,
-    ModelType,
-    IntRange,
-    IntType,
-    DateTimeRange,
-    DateTimeType,
-    FloatType,
-    ResultType,
-    DictType,
-    DateType,
-    Place,
-    DateAround,
-    LocationAround,
     BooleanType,
     BrandUnsafe,
+    DateAround,
+    DateTimeRange,
+    DateTimeType,
+    DateType,
+    DictType,
     Entity,
+    FloatType,
+    GeoJSONPointType,
+    IntRange,
+    IntType,
+    ListType,
+    LocationAround,
+    Model,
+    ModelType,
+    PaginatedMixin,
+    Place,
     PolyModelType,
+    ResultSet,
+    ResultType,
+    SortableMixin,
+    StringListType,
+    StringModelType,
+    StringType,
 )
+from schematics.common import NONEMPTY
 
 
 class SearchParams(PaginatedMixin, SortableMixin, Model):
@@ -129,6 +128,20 @@ class ParentEvent(Model):
     parent_event_id = StringType()
 
 
+class ImpactPatternImpacts(Model):
+
+    date_local = DateType()
+    value = IntType()
+    position = StringType()
+
+
+class ImpactPattern(Model):
+
+    vertical = StringType()
+    impact_type = StringType()
+    impacts = ListType(ModelType(ImpactPatternImpacts))
+
+
 class Event(Model):
     class Options:
         serialize_when_none = True
@@ -144,6 +157,7 @@ class Event(Model):
     first_seen = DateTimeType()
     geo = ModelType(Geo)
     id = StringType()
+    impact_patterns = ListType(ModelType(ImpactPattern))
     labels = ListType(StringType())
     location = GeoJSONPointType()
     parent_event = ModelType(ParentEvent)
