@@ -109,6 +109,7 @@ celerybeat.pid
 .env
 .vscode
 .venv
+.tool-versions
 env/
 venv/
 ENV/
