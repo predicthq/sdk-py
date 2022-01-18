@@ -2,9 +2,9 @@
 
 # PredictHQ API Client for Python
 
-[![PyPI package](https://badge.fury.io/py/predicthq.svg)](https://badge.fury.io/py/predicthq)
 [![Version](https://badge.fury.io/gh/predicthq%2Fsdk-py.svg)](https://badge.fury.io/gh/predicthq%2Fsdk-py)
 [![Build Status](https://travis-ci.org/predicthq/sdk-py.svg?branch=master)](https://travis-ci.org/predicthq/sdk-py)
+[![PyPI package](https://badge.fury.io/py/predicthq.svg)](https://badge.fury.io/py/predicthq)
 [![Coverage Status](https://coveralls.io/repos/github/predicthq/sdk-py/badge.svg?branch=master)](https://coveralls.io/github/predicthq/sdk-py?branch=master)
 
 
