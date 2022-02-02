@@ -32,6 +32,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_boxing": {"stats": ["sum", "count"], "phq_rank": None},
                 "phq_viewership_sports_basketball_nba": {"stats": ["sum", "count"], "phq_rank": None},
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -69,6 +70,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_performing_arts": {"stats": feature_stats},
                 "phq_attendance_sports": {"stats": feature_stats},
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -104,6 +106,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_performing_arts": feature_criteria,
                 "phq_attendance_sports": feature_criteria,
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -139,6 +142,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_rank_academic_exam": True,
                 "phq_rank_academic_holiday": True,
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -173,6 +177,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_rank_academic_exam": True,
                 "phq_rank_academic_holiday": True,
             },
+            verify=True,
         )
 
     @with_client()
@@ -220,6 +225,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_soccer": {"stats": feature_stats},
                 "phq_viewership_sports_golf_pga_championship": {"stats": feature_stats},
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -255,4 +261,5 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_auto_racing": feature_criteria,
                 "phq_viewership_sports_horse_racing": feature_criteria,
             },
+            verify=True,
         )

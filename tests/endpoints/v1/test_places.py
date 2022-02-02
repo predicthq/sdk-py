@@ -11,7 +11,11 @@ class PlacesTest(unittest.TestCase):
     @with_mock_client()
     def test_search_params(self, client):
         client.places.search(country=["NZ", "AU"])
-        client.request.assert_called_once_with("get", "/v1/places/", params={"country": "NZ,AU"})
+        client.request.assert_called_once_with(
+            "get", "/v1/places/",
+            params={"country": "NZ,AU"},
+            verify=True,
+        )
 
     @with_mock_client()
     def test_invalide_search_params(self, client):

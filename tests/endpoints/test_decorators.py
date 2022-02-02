@@ -35,7 +35,7 @@ def test_accepts():
 
     class EndpointExample(BaseEndpoint):
         @decorators.accepts(SchemaExample)
-        def func(self, **kwargs):
+        def func(self, verify_ssl, **kwargs):
             return kwargs
 
     endpoint = EndpointExample(None)
@@ -59,7 +59,7 @@ def test_accepts_for_body_use():
 
     class EndpointExample(BaseEndpoint):
         @decorators.accepts(SchemaExample, query_string=False)
-        def func(self, **kwargs):
+        def func(self, verify_ssl, **kwargs):
             return kwargs
 
     endpoint = EndpointExample(None)

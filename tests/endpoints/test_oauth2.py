@@ -19,6 +19,7 @@ class OAuth2Test(unittest.TestCase):
             "/oauth2/token/",
             auth=("client_id", "client_secret"),
             data={"scope": "account events", "grant_type": "client_credentials"},
+            verify=True,
         )
         assert isinstance(token, AccessToken)
         assert token.to_primitive() == client.request.return_value
@@ -37,6 +38,7 @@ class OAuth2Test(unittest.TestCase):
             "/oauth2/revoke/",
             auth=("client_id", "client_secret"),
             data={"token": "token123", "token_type_hint": "access_token"},
+            verify=True,
         )
         assert result is None
 

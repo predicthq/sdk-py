@@ -53,6 +53,7 @@ class BroadcastsTest(unittest.TestCase):
                 "event.category": "sports",
                 "event.label": "sport,nfl",
             },
+            verify=True,
         )
 
     @with_mock_client()
@@ -93,6 +94,7 @@ class BroadcastsTest(unittest.TestCase):
                 "event.category": "sports",
                 "event.label": "sport,nfl",
             },
+            verify=True,
         )
 
     @with_client()
