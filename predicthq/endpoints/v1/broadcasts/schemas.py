@@ -1,6 +1,4 @@
 from predicthq.endpoints.schemas import (
-    PaginatedMixin,
-    SortableMixin,
     BooleanType,
     DateTimeRange,
     DateTimeType,
@@ -10,8 +8,11 @@ from predicthq.endpoints.schemas import (
     ListType,
     Model,
     ModelType,
+    PaginatedMixin,
+    ConfigMixin,
     ResultSet,
     ResultType,
+    SortableMixin,
     StringType,
 )
 
@@ -33,7 +34,7 @@ class BroadcastLocationParams(Model):
     place_id = ListType(StringType)
 
 
-class SearchParams(PaginatedMixin, SortableMixin, Model):
+class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 
