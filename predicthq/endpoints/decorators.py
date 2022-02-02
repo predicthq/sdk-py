@@ -66,9 +66,10 @@ def accepts(schema_class, query_string=True, role=None):
 
             if query_string:
                 params = _to_url_params(model.to_primitive(role=role))
-                verify_ssl = params.pop("config", {}).get("verify_ssl", True)
             else:
                 params = model.to_primitive(role=role)
+
+            verify_ssl = params.pop("config", {}).get("verify_ssl", True)
 
             return f(endpoint, verify_ssl, *args, **params)
 

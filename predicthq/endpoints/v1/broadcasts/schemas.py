@@ -1,5 +1,6 @@
 from predicthq.endpoints.schemas import (
     BooleanType,
+    ConfigMixin,
     DateTimeRange,
     DateTimeType,
     FloatType,
@@ -9,7 +10,6 @@ from predicthq.endpoints.schemas import (
     Model,
     ModelType,
     PaginatedMixin,
-    ConfigMixin,
     ResultSet,
     ResultType,
     SortableMixin,
