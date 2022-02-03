@@ -57,6 +57,20 @@ class BroadcastsTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_search_params_underscores_without_ssl_verification(self, client):
+        client.broadcasts.search(
+            broadcast_id="broadcast_id",
+            config__verify_ssl=False,
+        )
+
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/broadcasts/",
+            params={"broadcast_id": "broadcast_id"},
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_search_params_dicts(self, client):
         client.broadcasts.search(
             broadcast_id="broadcast_id",
@@ -95,6 +109,20 @@ class BroadcastsTest(unittest.TestCase):
                 "event.label": "sport,nfl",
             },
             verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_params_dicts_without_ssl_verification(self, client):
+        client.broadcasts.search(
+            broadcast_id="broadcast_id",
+            config={"verify_ssl": False},
+        )
+
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/broadcasts/",
+            params={"broadcast_id": "broadcast_id"},
+            verify=False,
         )
 
     @with_client()

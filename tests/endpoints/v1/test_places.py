@@ -18,6 +18,15 @@ class PlacesTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_search_params_without_ssl_verification(self, client):
+        client.places.search(country=["NZ", "AU"], config={"verify_ssl": False})
+        client.request.assert_called_once_with(
+            "get", "/v1/places/",
+            params={"country": "NZ,AU"},
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_invalide_search_params(self, client):
         with pytest.raises(schemas.SchematicsValidationError):
             client.places.search()

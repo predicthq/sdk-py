@@ -74,6 +74,24 @@ class FeaturesTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_attendance_request_params_underscores_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active__gte="2017-12-31",
+            location__place_id=[4671654],
+            config__verify_ssl=False
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31"},
+                "location": {"place_id": ["4671654"]},
+            },
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_attendance_request_params_dicts(self, client):
         feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
         client.features.obtain_features(
@@ -107,6 +125,24 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_sports": feature_criteria,
             },
             verify=True,
+        )
+
+    @with_mock_client()
+    def test_attendance_request_params_dicts_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
+            config={"verify_ssl": False},
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
+            },
+            verify=False,
         )
 
     @with_mock_client()
@@ -146,6 +182,24 @@ class FeaturesTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_rank_request_params_underscores_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active__gte="2017-12-31",
+            location__geo={"lon": -71.49978, "lat": 41.75038, "radius": "30km"},
+            config__verify_ssl=False,
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31"},
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
+            },
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_rank_request_params_dicts(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -178,6 +232,24 @@ class FeaturesTest(unittest.TestCase):
                 "phq_rank_academic_holiday": True,
             },
             verify=True,
+        )
+
+    @with_mock_client()
+    def test_rank_request_params_dicts_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31"},
+            location={"place_id": [4671654]},
+            config={"verify_ssl": False}
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31"},
+                "location": {"place_id": ["4671654"]},
+            },
+            verify=False,
         )
 
     @with_client()
@@ -229,6 +301,24 @@ class FeaturesTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_viewership_request_params_underscores_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active__gte="2017-12-31",
+            location__place_id=[4671654],
+            config__verify_ssl=False,
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31"},
+                "location": {"place_id": ["4671654"]},
+            },
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_viewership_request_params_dicts(self, client):
         feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
         client.features.obtain_features(
@@ -262,4 +352,22 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_horse_racing": feature_criteria,
             },
             verify=True,
+        )
+
+    @with_mock_client()
+    def test_viewership_request_params_dicts_without_ssl_verification(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31"},
+            location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
+            config={"verify_ssl": False}
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31"},
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
+            },
+            verify=False,
         )

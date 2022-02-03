@@ -77,6 +77,19 @@ class EventsTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_search_params_underscores_without_ssl_verification(self, client):
+        client.events.search(
+            q="query",
+            config__verify_ssl=False,
+        )
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/events/",
+            params={"q": "query"},
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_search_params_dicts(self, client):
         client.events.search(
             id="id",
@@ -133,6 +146,19 @@ class EventsTest(unittest.TestCase):
         )
 
     @with_mock_client()
+    def test_search_params_dicts_without_ssl_verification(self, client):
+        client.events.search(
+            q="query",
+            config={"verify_ssl": False},
+        )
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/events/",
+            params={"q": "query"},
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_search_for_account(self, client):
         client.events.for_account("account-id").search(q="query")
         client.request.assert_called_once_with(
@@ -140,6 +166,16 @@ class EventsTest(unittest.TestCase):
             "/v1/accounts/account-id/events/",
             params={"q": "query"},
             verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_for_account_without_ssl_verification(self, client):
+        client.events.for_account("account-id").search(q="query", config__verify_ssl=False)
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/accounts/account-id/events/",
+            params={"q": "query"},
+            verify=False,
         )
 
     @with_client()
