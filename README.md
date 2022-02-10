@@ -47,14 +47,14 @@ phq = Client(access_token="abc123")
 
 
 for event in phq.events.search():
-    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
 ```
 
 You can chain the `iter_all()` generator to iterate over *all* your events.
 
 ```Python
 for event in phq.events.search().iter_all():
-    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
 ```
 
 ### Events endpoint
@@ -70,7 +70,7 @@ phq = Client(access_token="abc123")
 
 
 for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='concerts'):
-    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
 ```
 
 Please refer to our [Events endpoint documentation](https://docs.predicthq.com/resources/events/) for the lists of search parameters and event fields available.
@@ -88,7 +88,7 @@ phq = Client(access_token="abc123")
 
 
 for broadcast in phq.broadcasts.search(phq_viewership__gte=100, event__label='nfl'):
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels, broadcast.dates.start.strftime('%Y-%m-%d'))
+    print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels, broadcast.dates.start.strftime("%Y-%m-%d"))
 ```
 
 Please refer to our [Broadcasts endpoint documentation](https://docs.predicthq.com/resources/broadcasts/) for the lists of search parameters and broadcast fields available.
@@ -105,7 +105,7 @@ from predicthq import Client
 phq = Client(access_token="abc123")
 
 
-for place in phq.places.search(q='New York', country='US'):
+for place in phq.places.search(q="New York", country="US"):
     print(place.id, place.name, place.type, place.location)
 ```
 
@@ -131,7 +131,7 @@ for feature in phq.features.obtain_features(
         active__lte="2018-01-02",
         location__place_id=[4671654],
         phq_rank_public_holidays=True,
-        phq_attendance_sports__stats=['count', 'median'],
+        phq_attendance_sports__stats=["count", "median"],
         phq_attendance_sports__phq_rank={
             "gt": 50
         }
@@ -154,7 +154,7 @@ for feature in phq.features.obtain_features(
             "radius": "150km"
         },
         phq_rank_public_holidays=True,
-        phq_attendance_sports__stats=['count', 'median'],
+        phq_attendance_sports__stats=["count", "median"],
         phq_attendance_sports__phq_rank={
             "gt": 50
         }
@@ -188,6 +188,29 @@ for feature in phq.features.obtain_features(
 ```
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
+
+### Config parameters
+
+We support some `config` parameters for additional flexibility.
+
+Supported config parameters:
+- `verify_ssl`
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+# double underscore syntax
+for event in phq.events.search(config__verify_ssl=False):
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
+
+# dictionary syntax
+for event in phq.events.search(config={"verify_ssl": False}):
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
+```
+
 
 ## Running Tests
 
