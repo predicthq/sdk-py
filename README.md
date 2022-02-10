@@ -26,6 +26,7 @@ We support all the endpoints available in our API.
 * `accounts`
 * `broadcasts`
 * `events`
+* `features`
 * `places`
 
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
@@ -110,7 +111,6 @@ for place in phq.places.search(q='New York', country='US'):
 
 Please refer to our [Places endpoint documentation](https://docs.predicthq.com/resources/places/) for the lists of search parameters and place fields available.
 
-
 ### Features endpoint
 
 The following example obtain features of events which are active between 2017-12-31 and 2018-01-02, with place_id 4671654. 
@@ -186,7 +186,6 @@ for feature in phq.features.obtain_features(
 ):
     print(feature.date, feature.phq_viewership_sports_american_football.stats.count, feature.phq_viewership_sports_american_football.stats.median)
 ```
-
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
 
