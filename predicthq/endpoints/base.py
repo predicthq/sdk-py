@@ -16,7 +16,7 @@ class BaseEndpoint(metaclass=MetaEndpoint):
         self.client = client
 
     def build_url(self, prefix, suffix):
-        return "/{}/{}/".format(prefix.strip("/"), suffix.strip("/"))
+        return f"/{prefix.strip('/')}/{suffix.strip('/')}/"
 
 
 class UserBaseEndpoint(BaseEndpoint):
@@ -35,6 +35,6 @@ class UserBaseEndpoint(BaseEndpoint):
 
     def build_url(self, prefix, suffix):
         if self.account_id is not None:
-            return "/{}/accounts/{}/{}/".format(prefix.strip("/"), self.account_id, suffix.strip("/"))
+            return f"/{prefix.strip('/')}/accounts/{self.account_id}/{suffix.strip('/')}/"
         else:
             return super(UserBaseEndpoint, self).build_url(prefix, suffix)

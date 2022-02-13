@@ -48,23 +48,23 @@ class Config(object):
                 for section in self._config_sections:
                     try:
                         for key, value in cp.items(section):
-                            self._config["{0}_{1}".format(section.upper(), key.upper())] = value
+                            self._config[f"{section.upper()}_{key.upper()}"] = value
                     except configparser.NoSectionError:  # pragma: nocover
                         pass
 
     def load_defaults_from_environment(self):
         for key in self._defaults:
-            self._config[key] = os.getenv("PREDICTHQ_{}".format(key), self._config[key])
+            self._config[key] = os.getenv(f"PREDICTHQ_{key}", self._config[key])
 
     def __getattr__(self, item):
         try:
             return self._config[item]
         except KeyError:
-            raise ConfigError("{} is not a valid config key".format(item))
+            raise ConfigError(f"{item} is not a valid config key")
 
     def __setattr__(self, item, value):
         if item not in self._config:
-            raise ConfigError("{} is not a valid config key".format(item))
+            raise ConfigError(f"{item} is not a valid config key")
         self._config[item] = value
 
 

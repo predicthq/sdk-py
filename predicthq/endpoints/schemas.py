@@ -70,7 +70,7 @@ class StringModel(Model):
                 raw_data = re.match(self.import_format, str(raw_data)).groupdict()
             except AttributeError:
                 raise SchematicsValidationError(
-                    "'{}' is not a valid format for {}".format(raw_data, self.__class__.__name__)
+                    f"'{raw_data}' is not a valid format for {self.__class__.__name__}"
                 )
         return super(StringModel, self).convert(raw_data, **kw)
 

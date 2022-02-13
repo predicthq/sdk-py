@@ -11,21 +11,21 @@ from predicthq.config import config
 
 
 def load_fixture(name):
-    fpath = "{}/fixtures/{}.json".format(os.path.dirname(__file__), name)
+    fpath = f"{os.path.dirname(__file__)}/fixtures/{name}.json"
     with open(fpath) as fp:
         try:
             return json.loads(fp.read())
         except IOError:
-            raise Exception("Fixture for this test does not exist: {}".format(fpath))
+            raise Exception(f"Fixture for this test does not exist: {fpath}")
 
 
 def load_reqresp_fixture(name):
-    fpath = "{}/fixtures/requests_responses/{}.json".format(os.path.dirname(__file__), name)
+    fpath = f"{os.path.dirname(__file__)}/fixtures/requests_responses/{name}.json"
     with open(fpath) as fp:
         try:
             return json.loads(fp.read())
         except IOError:
-            raise Exception("Fixture for this test does not exist: {}".format(fpath))
+            raise Exception(f"Fixture for this test does not exist: {fpath}")
 
 
 def with_mock_responses(req_resp=None):
@@ -36,7 +36,7 @@ def with_mock_responses(req_resp=None):
                 re.sub(r"([A-Z]+)", r"_\1", args[0].__class__.__name__).lower().strip("_"),
                 f.__name__,
             )
-            fixtures = load_reqresp_fixture(req_resp or "{}/{}".format(class_name, func_name))
+            fixtures = load_reqresp_fixture(req_resp or f"{class_name}/{func_name}")
             with responses.RequestsMock(assert_all_requests_are_fired=False) as rsps:
                 for fixture in fixtures:
                     if "url_re" in fixture:

@@ -217,8 +217,8 @@ def test_resultset():
             page = int(page)
             return {
                 "count": 9,
-                "next": "http://example.org/?page={}".format(page + 1) if page < 3 else None,
-                "previous": "http://example.org/?page={}".format(page - 1) if page > 1 else None,
+                "next": f"http://example.org/?page={page + 1}" if page < 3 else None,
+                "previous": f"http://example.org/?page={page - 1}" if page > 1 else None,
                 "results": [
                     {"value": 1 + (3 * (page - 1))},
                     {"value": 2 + (3 * (page - 1))},

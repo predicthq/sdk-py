@@ -21,7 +21,7 @@ with open(os.path.join(here, 'predicthq', 'version.py'), 'r') as f:
 
 
 REPO_URL = "https://github.com/predicthq/sdk-py"
-PYPI_README_NOTE = "For the latest source, discussions, bug reports, etc., please visit the [GitHub repository]({})".format(REPO_URL)
+PYPI_README_NOTE = f"For the latest source, discussions, bug reports, etc., please visit the [GitHub repository]({REPO_URL})"
 LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.md")])
 
 
