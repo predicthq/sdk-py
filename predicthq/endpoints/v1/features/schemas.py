@@ -1,5 +1,6 @@
 from predicthq.endpoints.schemas import (
     BooleanType,
+    ConfigMixin,
     DateType,
     DateRange,
     DictType,
@@ -53,7 +54,7 @@ class HourOfDayRange(Model):
     lte = IntType(min_value=0, max_value=23)
 
 
-class FeatureRequest(Model):
+class FeatureRequest(ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 

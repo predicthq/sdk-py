@@ -73,6 +73,20 @@ class EventsTest(unittest.TestCase):
                 "updated.lt": "2016-04-01T23:59:59.999999",
                 "updated.tz": "Pacific/Auckland",
             },
+            verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_params_underscores_without_ssl_verification(self, client):
+        client.events.search(
+            q="query",
+            config__verify_ssl=False,
+        )
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/events/",
+            params={"q": "query"},
+            verify=False,
         )
 
     @with_mock_client()
@@ -128,20 +142,48 @@ class EventsTest(unittest.TestCase):
                 "updated.lt": "2016-04-01T23:59:59.999999",
                 "updated.tz": "Pacific/Auckland",
             },
+            verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_params_dicts_without_ssl_verification(self, client):
+        client.events.search(
+            q="query",
+            config={"verify_ssl": False},
+        )
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/events/",
+            params={"q": "query"},
+            verify=False,
         )
 
     @with_mock_client()
     def test_search_for_account(self, client):
         client.events.for_account("account-id").search(q="query")
-        client.request.assert_called_once_with("get", "/v1/accounts/account-id/events/", params={"q": "query"})
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/accounts/account-id/events/",
+            params={"q": "query"},
+            verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_for_account_without_ssl_verification(self, client):
+        client.events.for_account("account-id").search(q="query", config__verify_ssl=False)
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/accounts/account-id/events/",
+            params={"q": "query"},
+            verify=False,
+        )
 
     @with_client()
     @with_mock_responses()
     def test_search(self, client, responses):
         result = client.events.search(q="Foo Fighters", country="AU", limit=10)
         assert isinstance(result, EventResultSet)
-        assert result.count == len(list(result.iter_all()))
-        assert len(responses.calls) == 2
+        assert len(responses.calls) == 1
 
     @with_client()
     @with_mock_responses()

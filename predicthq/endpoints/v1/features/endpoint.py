@@ -21,5 +21,9 @@ class FeaturesEndpoint(UserBaseEndpoint):
 
     @accepts(FeatureRequest, query_string=False)
     @returns(FeatureResultSet)
-    def obtain_features(self, **request):
-        return self.client.post(self.build_url("v1", "features"), json=request)
+    def obtain_features(self, verify_ssl, **request):
+        return self.client.post(
+            self.build_url("v1", "features"),
+            json=request,
+            verify=verify_ssl,
+        )

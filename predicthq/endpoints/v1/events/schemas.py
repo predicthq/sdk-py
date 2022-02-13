@@ -2,6 +2,7 @@ from predicthq.endpoints.schemas import (
     Area,
     BooleanType,
     BrandUnsafe,
+    ConfigMixin,
     DateAround,
     DateTimeRange,
     DateTimeType,
@@ -29,7 +30,7 @@ from predicthq.endpoints.schemas import (
 from schematics.common import NONEMPTY
 
 
-class SearchParams(PaginatedMixin, SortableMixin, Model):
+class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 

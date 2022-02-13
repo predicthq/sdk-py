@@ -1,8 +1,14 @@
 from predicthq.config import config
-from predicthq.endpoints.schemas import Model, StringType, StringListType, IntType
+from predicthq.endpoints.schemas import (
+    ConfigMixin,
+    IntType,
+    Model,
+    StringType,
+    StringListType,
+)
 
 
-class GetTokenParams(Model):
+class GetTokenParams(ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 
@@ -12,7 +18,7 @@ class GetTokenParams(Model):
     grant_type = StringType(choices=("client_credentials",), default="client_credentials", required=True)
 
 
-class RevokeTokenParams(Model):
+class RevokeTokenParams(ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 

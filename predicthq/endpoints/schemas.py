@@ -232,6 +232,16 @@ class SortableMixin(Model):
     sort = ListType(StringType())
 
 
+class _Config(Model):
+
+    verify_ssl = BooleanType(default=True)
+
+
+class ConfigMixin(Model):
+
+    config = ModelType(_Config)
+
+
 class ResultSet(Model):
 
     count = IntType()

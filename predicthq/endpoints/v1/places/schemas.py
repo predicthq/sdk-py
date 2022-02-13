@@ -1,20 +1,21 @@
 from predicthq.endpoints.schemas import (
+    ConfigMixin,
+    DateTimeType,
+    GeoJSONPointType,
     LimitMixin,
+    ListType,
+    Location,
     Model,
     ResultSet,
-    ListType,
-    StringType,
-    GeoJSONPointType,
-    StringListType,
-    StringModelType,
-    Location,
-    DateTimeType,
     ResultType,
     SchematicsValidationError,
+    StringType,
+    StringListType,
+    StringModelType,
 )
 
 
-class SearchParams(LimitMixin, Model):
+class SearchParams(LimitMixin, ConfigMixin, Model):
     class Options:
         serialize_when_none = False
 
