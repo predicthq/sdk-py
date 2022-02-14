@@ -31,6 +31,20 @@ class OAuth2Test(unittest.TestCase):
             client.oauth2.get_token(invalid_arg=None)
 
     @with_mock_client()
+    def test_get_token_params_without_ssl_verification(self, client):
+        client.oauth2.get_token(
+            client_id="client_id", client_secret="client_secret", scope=["account", "events"],
+            config__verify_ssl=False,
+        )
+        client.request.assert_called_once_with(
+            "post",
+            "/oauth2/token/",
+            auth=("client_id", "client_secret"),
+            data={"scope": "account events", "grant_type": "client_credentials"},
+            verify=False,
+        )
+
+    @with_mock_client()
     def test_revoke_token_params(self, client):
         result = client.oauth2.revoke_token(client_id="client_id", client_secret="client_secret", token="token123")
         client.request.assert_called_once_with(
@@ -47,6 +61,20 @@ class OAuth2Test(unittest.TestCase):
 
         with pytest.raises(ValidationError):
             client.oauth2.revoke_token(invalid_arg=None)
+
+    @with_mock_client()
+    def test_revoke_token_params_without_ssl_verification(self, client):
+        client.oauth2.revoke_token(
+            client_id="client_id", client_secret="client_secret", token="token123",
+            config__verify_ssl=False,
+        )
+        client.request.assert_called_once_with(
+            "post",
+            "/oauth2/revoke/",
+            auth=("client_id", "client_secret"),
+            data={"token": "token123", "token_type_hint": "access_token"},
+            verify=False,
+        )
 
     @with_client()
     @with_mock_responses()

@@ -183,7 +183,8 @@ class EventsTest(unittest.TestCase):
     def test_search(self, client, responses):
         result = client.events.search(q="Foo Fighters", country="AU", limit=10)
         assert isinstance(result, EventResultSet)
-        assert len(responses.calls) == 1
+        assert result.count == len(list(result.iter_all()))
+        assert len(responses.calls) == 2
 
     @with_client()
     @with_mock_responses()
