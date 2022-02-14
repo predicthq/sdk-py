@@ -14,7 +14,8 @@ from .schemas import (
 class EventsEndpoint(UserBaseEndpoint):
     @accepts(SearchParams)
     @returns(EventResultSet)
-    def search(self, verify_ssl, **params):
+    def search(self, **params):
+        verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.get(
             self.build_url("v1", "events"),
             params=params,
@@ -23,7 +24,8 @@ class EventsEndpoint(UserBaseEndpoint):
 
     @accepts(SearchParams)
     @returns(CountResultSet)
-    def count(self, verify_ssl, **params):
+    def count(self, **params):
+        verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.get(
             self.build_url("v1", "events/count"),
             params=params,
@@ -32,7 +34,8 @@ class EventsEndpoint(UserBaseEndpoint):
 
     @accepts(CalendarParams)
     @returns(CalendarResultSet)
-    def calendar(self, verify_ssl, **params):
+    def calendar(self, **params):
+        verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.get(
             self.build_url("v1", "events/calendar"),
             params=params,
@@ -41,7 +44,8 @@ class EventsEndpoint(UserBaseEndpoint):
 
     @accepts(ImpactParams)
     @returns(ImpactResultSet)
-    def impact(self, verify_ssl, **params):
+    def impact(self, **params):
+        verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.get(
             self.build_url("v1", "events/impact"),
             params=params,
