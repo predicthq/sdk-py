@@ -26,23 +26,22 @@ from schematics.types.compound import ListType as SchematicsListType, ModelType,
 from schematics.types.serializable import serializable
 
 
+class DateOrDateTimeType(SchematicsDateTimeType):
+    def to_native(self, value, context=None):
+        if isinstance(value, datetime) or isinstance(value, date):
+            return value
+
+        if len(value) == 10:
+            return parse_date(value).date()
+
+        return parse_date(value)
+
+
 class DateTimeType(SchematicsDateTimeType):
     def to_native(self, value, context=None):
         if isinstance(value, datetime):
             return value
         return parse_date(value)
-
-
-class DateTimeEndType(SchematicsDateTimeType):
-    def to_native(self, value, context=None):
-        if isinstance(value, datetime):
-            return value
-
-        # When a full datetime is provided, do not override its time by EoD time (23:59:59)
-        if len(value) > 10:
-            return parse_date(value)
-
-        return datetime.combine(parse_date(value), dt_time.max)
 
 
 class DateType(SchematicsDateType):
@@ -165,10 +164,10 @@ class DateTimeRange(Model):
     class Options:
         serialize_when_none = False
 
-    gt = DateTimeType()
-    gte = DateTimeType()
-    lt = DateTimeEndType()
-    lte = DateTimeEndType()
+    gt = DateOrDateTimeType()
+    gte = DateOrDateTimeType()
+    lt = DateOrDateTimeType()
+    lte = DateOrDateTimeType()
     tz = StringType(choices=pytz.all_timezones)
 
 

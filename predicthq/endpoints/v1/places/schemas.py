@@ -1,6 +1,5 @@
 from predicthq.endpoints.schemas import (
     ConfigMixin,
-    DateTimeType,
     GeoJSONPointType,
     LimitMixin,
     ListType,
