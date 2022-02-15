@@ -1,4 +1,5 @@
-from datetime import datetime, date
+from datetime import datetime, date, time
+from dateutil.parser import parse as parse_date
 
 import pytest
 import pytz
@@ -17,6 +18,21 @@ def test_datetime_type():
     assert SchemaExample({"my_datetime": "2016-01-01T00:00:00+0000"}).my_datetime == test_date
     assert SchemaExample({"my_datetime": "2016-01-01T00:00:00Z"}).my_datetime == test_date
     assert SchemaExample({"my_datetime": test_date}).my_datetime == test_date
+
+
+def test_datetime_end_type():
+    class SchemaExample(schemas.Model):
+
+        my_datetime = schemas.DateTimeEndType()
+
+    test_date = datetime.combine(datetime(2016, 1, 1, tzinfo=pytz.UTC), time.max)
+    test_datetime = datetime(2016, 1, 1, 12, 30, 42, tzinfo=pytz.UTC)
+
+    assert SchemaExample({"my_datetime": "2016-01-01"}).my_datetime == test_date
+    assert SchemaExample({"my_datetime": "2016-01-01T12:30:42+00:00"}).my_datetime == test_datetime
+    assert SchemaExample({"my_datetime": "2016-01-01T12:30:42+0000"}).my_datetime == test_datetime
+    assert SchemaExample({"my_datetime": "2016-01-01T12:30:42Z"}).my_datetime == test_datetime
+    assert SchemaExample({"my_datetime": test_datetime}).my_datetime == test_datetime
 
 
 def test_date_type():

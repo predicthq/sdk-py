@@ -37,6 +37,11 @@ class DateTimeEndType(SchematicsDateTimeType):
     def to_native(self, value, context=None):
         if isinstance(value, datetime):
             return value
+
+        # When a full datetime is provided, do not override its time by EoD time (23:59:59)
+        if len(value) > 10:
+            return parse_date(value)
+
         return datetime.combine(parse_date(value), dt_time.max)
 
 
