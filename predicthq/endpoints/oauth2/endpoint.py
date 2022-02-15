@@ -6,7 +6,8 @@ from .schemas import AccessToken, GetTokenParams, RevokeTokenParams
 class OAuth2Endpoint(BaseEndpoint):
     @accepts(GetTokenParams)
     @returns(AccessToken)
-    def get_token(self, verify_ssl, client_id, client_secret, scope, grant_type, **kwargs):
+    def get_token(self, client_id, client_secret, scope, grant_type, **kwargs):
+        verify_ssl = kwargs.pop("config.verify_ssl", True)
         data = {
             "grant_type": grant_type,
             "scope": scope,
@@ -20,7 +21,8 @@ class OAuth2Endpoint(BaseEndpoint):
         )
 
     @accepts(RevokeTokenParams)
-    def revoke_token(self, verify_ssl, client_id, client_secret, token, token_type_hint):
+    def revoke_token(self, client_id, client_secret, token, token_type_hint, **kwargs):
+        verify_ssl = kwargs.pop("config.verify_ssl", True)
         data = {
             "token_type_hint": token_type_hint,
             "token": token,
