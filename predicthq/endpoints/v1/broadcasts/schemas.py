@@ -30,7 +30,7 @@ class BroadcastLocationParams(Model):
     class Options:
         serialize_when_none = False
 
-    origin = origin = StringType(regex=r"(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)")
+    origin = StringType(regex=r"(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)")
     place_id = ListType(StringType)
 
 
