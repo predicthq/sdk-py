@@ -4,6 +4,7 @@ from urllib.parse import parse_qsl, urlparse
 
 import pytz
 from dateutil.parser import parse as parse_date
+from dateutil import parser
 
 from schematics.exceptions import (
     ValidationError as SchematicsValidationError,
@@ -31,10 +32,11 @@ class DateOrDateTimeType(SchematicsDateTimeType):
         if isinstance(value, datetime) or isinstance(value, date):
             return value
 
-        if len(value) == 10:
-            return parse_date(value).date()
-
-        return parse_date(value)
+        try:
+            # Don't send a datetime to the API if we've received a date as parameter
+            return datetime.strptime(value, "%Y-%m-%d").date()
+        except ValueError:
+            return parse_date(value)
 
 
 class DateTimeType(SchematicsDateTimeType):
