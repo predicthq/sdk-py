@@ -4,7 +4,6 @@ from urllib.parse import parse_qsl, urlparse
 
 import pytz
 from dateutil.parser import parse as parse_date
-from dateutil import parser
 
 from schematics.exceptions import (
     ValidationError as SchematicsValidationError,
