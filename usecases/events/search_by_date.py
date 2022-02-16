@@ -23,6 +23,18 @@ for event in phq.events.search(start=start, country='NZ'):
     print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
 
 
+# Our date range filters allow both date (YYYY-MM-DD) and datetime (YYYY-MM-DD hh:mm:ss) formats
+# So if you need a more granular date filtering you can perform the following
+# https://docs.predicthq.com/api/requests/#param-date-range
+start = {
+    'gte': '2018-12-24 14:00:00',
+    'lte': '2018-12-26 08:00:00',
+    'tz': 'Pacific/Auckland',
+}
+for event in phq.events.search(start=start, country='NZ'):
+    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+
+
 # If you are unsure of the exact start date, you can use the fuzzy date search
 # with start_around and/or end_around parameters.
 # https://docs.predicthq.com/resources/events/#param-start-around
