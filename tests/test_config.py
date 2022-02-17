@@ -10,7 +10,7 @@ def test_defaults():
     config = Config()
     assert config.ENDPOINT_URL == "https://api.predicthq.com"
     assert config.OAUTH2_CLIENT_ID is None
-    assert config.OAUTH2_CLIENT_SECRET is not None
+    assert config.OAUTH2_CLIENT_SECRET is None
     assert config.OAUTH2_SCOPE is None
     assert config.OAUTH2_ACCESS_TOKEN is None
     assert config.LOGGING_LOG_LEVEL == "WARNING"

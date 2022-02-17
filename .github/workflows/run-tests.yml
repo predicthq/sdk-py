@@ -39,7 +39,7 @@ jobs:
     needs: run-tests
     steps:
       - name: Success Exit
-        run: exit 0
+        run: exit 1
 
   slack-notification:
     name: Slack Notification
