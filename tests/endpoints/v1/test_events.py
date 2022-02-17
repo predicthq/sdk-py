@@ -27,7 +27,7 @@ class EventsTest(unittest.TestCase):
             place__scope=["place1", "place2"],
             place__exact=["place3"],
             start__gte="2016-03-01",
-            start__lt="2016-04-01 12:12:12",
+            start__lt="2016-04-01",
             start__tz="Pacific/Auckland",
             end__gte="2016-05-01",
             end__lt="2016-06-01",
@@ -61,7 +61,7 @@ class EventsTest(unittest.TestCase):
                 "place.scope": "place1,place2",
                 "place.exact": "place3",
                 "start.gte": "2016-03-01",
-                "start.lt": "2016-04-01T12:12:12.000000",
+                "start.lt": "2016-04-01",
                 "start.tz": "Pacific/Auckland",
                 "end.gte": "2016-05-01",
                 "end.lt": "2016-06-01",
@@ -71,6 +71,43 @@ class EventsTest(unittest.TestCase):
                 "active.tz": "Pacific/Auckland",
                 "updated.gte": "2016-03-01",
                 "updated.lt": "2016-04-01",
+                "updated.tz": "Pacific/Auckland",
+            },
+            verify=True,
+        )
+
+    @with_mock_client()
+    def test_search_datetimerange_params(self, client):
+        client.events.search(
+            start__gte="2016-03-01",
+            start__lt="2016-04-01",
+            start__tz="Pacific/Auckland",
+            end__gte="2016-05-01 13:13:13",
+            end__lt="2016-06-01 12:12:12",
+            end__tz="Pacific/Auckland",
+            active__gt="2016-03-01",
+            active__lte="2016-04-01",
+            active__tz="Pacific/Auckland",
+            updated__gt="2016-03-01 13:13:13",
+            updated__lte="2016-04-01 12:12:12",
+            updated__tz="Pacific/Auckland",
+        )
+
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/events/",
+            params={
+                "start.gte": "2016-03-01",
+                "start.lt": "2016-04-01",
+                "start.tz": "Pacific/Auckland",
+                "end.gte": "2016-05-01T13:13:13.000000",
+                "end.lt": "2016-06-01T12:12:12.000000",
+                "end.tz": "Pacific/Auckland",
+                "active.gt": "2016-03-01",
+                "active.lte": "2016-04-01",
+                "active.tz": "Pacific/Auckland",
+                "updated.gt": "2016-03-01T13:13:13.000000",
+                "updated.lte": "2016-04-01T12:12:12.000000",
                 "updated.tz": "Pacific/Auckland",
             },
             verify=True,
