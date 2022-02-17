@@ -12,9 +12,6 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     strategy:
-      # Setting fail-fast to false, will let all concurrent jobs run if one of them fails, instead of cancelling all
-      # of them as soon as one fails.
-      fail-fast: false
       matrix:
         python-version: [ 3.6, 3.7, 3.8, 3.9 ]
     steps:
@@ -33,9 +30,15 @@ jobs:
         run: |
           pytest
 
+      - name: Slack Notify on failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_COLOR: ${{ job.status }}
+
   slack-notification:
     name: Slack Notification
-    if: ${{ always() }}
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
@@ -44,4 +47,4 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_COLOR: "${{ failure() && 'danger' || 'good' }}"
+          SLACK_COLOR: ${{ job.status }}
