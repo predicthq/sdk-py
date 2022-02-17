@@ -33,9 +33,16 @@ jobs:
         run: |
           pytest
 
+  run-other-test:
+    name: Success Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Success Exit
+        run: exit 0
+
   slack-notification:
     name: Slack Notification
-    needs: run-tests
+    needs: [run-tests, run-other-test]
     if: always()
     runs-on: ubuntu-latest
     steps:
