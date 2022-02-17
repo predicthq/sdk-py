@@ -32,9 +32,16 @@ jobs:
       - name: Run Tests
         run: |
           pytest
+
+  slack-notification:
+    name: Slack Notification
+    if: ${{ always() }}
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Slack Notification
-        if: always()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: "${{ failure() && 'danger' || 'good' }}"
