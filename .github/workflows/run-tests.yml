@@ -30,21 +30,16 @@ jobs:
         run: |
           pytest
 
-      - name: Slack Notify on failure
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_COLOR: ${{ job.status }}
-
   slack-notification:
     name: Slack Notification
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: martialonline/workflow-status@v2
+        id: check
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ steps.check.outputs.status }}
