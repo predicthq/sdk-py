@@ -40,12 +40,11 @@ jobs:
     if: ${{ always() }}
     needs: run-tests
     runs-on: ubuntu-latest
-    env:
-      SLACK_COLOR: ${{ job.status }}
-      SLACK_ICON: https://github.com/predicthq/sdk-py/blob/master/ext/logo.png
     steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/predicthq/sdk-py/blob/master/ext/logo.png
