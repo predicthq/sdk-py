@@ -37,7 +37,8 @@ jobs:
   # build-and-publish succeeds
   slack-notification:
     name: Slack Notification
-    needs: build-and-deploy
+    if: ${{ always() }}
+    needs: run-tests
     runs-on: ubuntu-latest
     env:
       SLACK_COLOR: ${{ job.status }}
