@@ -36,6 +36,7 @@ jobs:
   run-other-test:
     name: Success Test
     runs-on: ubuntu-latest
+    needs: run-tests
     steps:
       - name: Success Exit
         run: exit 0
