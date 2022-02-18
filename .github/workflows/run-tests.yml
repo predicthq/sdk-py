@@ -1,0 +1,34 @@
+name: Run Tests
+
+on:
+  push:
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
+
+jobs:
+  run-tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    strategy:
+      # Setting fail-fast to false, will let all concurrent jobs run if one of them fails, instead of cancelling all
+      # of them as soon as one fails.
+      fail-fast: false
+      matrix:
+        python-version: [ 3.6, 3.7, 3.8, 3.9 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          pytest
