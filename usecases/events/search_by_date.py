@@ -27,8 +27,8 @@ for event in phq.events.search(start=start, country='NZ'):
 # So if you need a more granular date filtering you can perform the following
 # https://docs.predicthq.com/api/requests/#param-date-range
 start = {
-    'gte': '2018-12-24 14:00:00',
-    'lte': '2018-12-26 08:00:00',
+    'gte': '2018-12-24T14:00:00',
+    'lte': '2018-12-26T08:00:00',
     'tz': 'Pacific/Auckland',
 }
 for event in phq.events.search(start=start, country='NZ'):

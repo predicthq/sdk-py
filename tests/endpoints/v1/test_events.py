@@ -82,14 +82,14 @@ class EventsTest(unittest.TestCase):
             start__gte="2016-03-01",
             start__lt="2016-04-01",
             start__tz="Pacific/Auckland",
-            end__gte="2016-05-01 13:13:13",
-            end__lt="2016-06-01 12:12:12",
+            end__gte="2016-05-01T13:13:13",
+            end__lt="2016-06-01T12:12:12",
             end__tz="Pacific/Auckland",
             active__gt="2016-03-01",
             active__lte="2016-04-01",
             active__tz="Pacific/Auckland",
-            updated__gt="2016-03-01 13:13:13",
-            updated__lte="2016-04-01 12:12:12",
+            updated__gt="2016-03-01T13:13:13",
+            updated__lte="2016-04-01T12:12:12",
             updated__tz="Pacific/Auckland",
         )
 
