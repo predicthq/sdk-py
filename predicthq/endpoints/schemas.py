@@ -33,18 +33,33 @@ class DateTimeType(SchematicsDateTimeType):
         return parse_date(value)
 
 
-class DateTimeEndType(SchematicsDateTimeType):
-    def to_native(self, value, context=None):
-        if isinstance(value, datetime):
-            return value
-        return datetime.combine(parse_date(value), dt_time.max)
-
-
 class DateType(SchematicsDateType):
     def to_native(self, value, context=None):
         if isinstance(value, date):
             return value
         return parse_date(value).date()
+
+
+class DateOrDateTimeType(SchematicsDateTimeType):
+    def validate_tz(self, value, context=None):
+        if isinstance(value, datetime):
+            return super().validate_tz(value, context)
+
+    def to_primitive(self, value, context=None):
+        if isinstance(value, datetime):
+            return super().to_primitive(value, context)
+        else:
+            return value.strftime("%Y-%m-%d")
+
+    def to_native(self, value, context=None):
+        if isinstance(value, str):
+            try:
+                return datetime.strptime(value, "%Y-%m-%d").date()
+            except ValueError:
+                return parse_date(value)
+        if isinstance(value, datetime):
+            return value
+        return value
 
 
 class StringModelType(ModelType):
@@ -160,10 +175,10 @@ class DateTimeRange(Model):
     class Options:
         serialize_when_none = False
 
-    gt = DateTimeType()
-    gte = DateTimeType()
-    lt = DateTimeEndType()
-    lte = DateTimeEndType()
+    gt = DateOrDateTimeType()
+    gte = DateOrDateTimeType()
+    lt = DateOrDateTimeType()
+    lte = DateOrDateTimeType()
     tz = StringType(choices=pytz.all_timezones)
 
 
