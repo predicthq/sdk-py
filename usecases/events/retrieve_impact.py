@@ -8,7 +8,7 @@ ACCESS_TOKEN = 'abc123'
 phq = Client(access_token=ACCESS_TOKEN)
 
 
-# The PredictHQ Aggregate Event Impact endpoint can be used to find the correlation between your demand and the events data.
+# The PredictHQ Impact endpoint can be used to find the correlation between your demand and the events data.
 # We always aggregate on the date but you can use different impact_rank values to specify how we calculate the impact.
 # You will need a Premium Plan to access this endpoint and Aviation Rank subscription for Aviation Rank impact.
 
