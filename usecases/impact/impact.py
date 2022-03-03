@@ -76,8 +76,8 @@ def pivot_event_impact_by_event_type(cal, events_pd):
 
         # append the current day to the pivoted result
         d_col = pd.DataFrame([day], columns=['date'])
-        aei_temp = pd.concat([d_col, qualified_events_pivot.reset_index(drop=True)], axis=1)
-        all_pd.append(aei_temp)
+        impact_temp = pd.concat([d_col, qualified_events_pivot.reset_index(drop=True)], axis=1)
+        all_pd.append(impact_temp)
     return all_pd
 
 
@@ -98,8 +98,8 @@ def create_aggregate_event_impact(df, event_groupings=ATTENDANCE_CATEGORIES):
     print(start_cal, end_cal)
     df_cal = generate_calendar(start_cal, end_cal)
 
-    aei_pd = pd.concat(pivot_event_impact_by_event_type(df_cal, att_df), axis=0).fillna(0)
-    return aei_pd
+    impact_pd = pd.concat(pivot_event_impact_by_event_type(df_cal, att_df), axis=0).fillna(0)
+    return impact_pd
 
 
 # Example Usage
@@ -122,6 +122,6 @@ seattle_query = (phq.events.search(start=start,
 expanded_events = [[event[column] for column in EVENT_ENDPOINT_COLUMNS] for event in [*seattle_query]]
 all_seattle_events = pd.DataFrame(expanded_events, columns=EVENT_ENDPOINT_COLUMNS)
 
-# Step 2 - Transform the events into an Aggregate Event Impact (AEI) Dataframe
+# Step 2 - Transform the events into Impact Dataframe
 seattle_aei = (create_aggregate_event_impact(all_seattle_events,
                                              event_groupings=ATTENDANCE_CATEGORIES))
