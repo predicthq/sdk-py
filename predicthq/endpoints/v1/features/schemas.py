@@ -72,6 +72,7 @@ class FeatureRequest(ConfigMixin, Model):
     phq_attendance_expos = ModelType(FeatureCriteria)
     phq_attendance_festivals = ModelType(FeatureCriteria)
     phq_attendance_performing_arts = ModelType(FeatureCriteria)
+    phq_attendance_school_holidays = ModelType(FeatureCriteria)
     phq_attendance_sports = ModelType(FeatureCriteria)
     # Rank based feature criteria
     phq_rank_daylight_savings = BooleanType()
