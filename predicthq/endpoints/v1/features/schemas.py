@@ -169,6 +169,7 @@ class Feature(Model):
     phq_attendance_expos = ModelType(FeatureStat)
     phq_attendance_festivals = ModelType(FeatureStat)
     phq_attendance_performing_arts = ModelType(FeatureStat)
+    phq_attendance_school_holidays = ModelType(FeatureStat)
     phq_attendance_sports = ModelType(FeatureStat)
     # Rank based features
     phq_rank_daylight_savings = ModelType(FeatureRankLevel)
