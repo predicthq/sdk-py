@@ -1,7 +1,7 @@
 import unittest
 
 from predicthq.endpoints.v1.features.schemas import FeatureResultSet
-from tests import with_mock_client, with_mock_responses, with_client
+from tests import with_client, with_mock_client, with_mock_responses
 
 
 class FeaturesTest(unittest.TestCase):

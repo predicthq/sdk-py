@@ -1,8 +1,8 @@
 from predicthq.endpoints.schemas import (
     BooleanType,
     ConfigMixin,
-    DateType,
     DateRange,
+    DateType,
     DictType,
     FloatType,
     IntRange,

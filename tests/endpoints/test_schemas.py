@@ -1,8 +1,8 @@
-from datetime import datetime, date, time
-from dateutil.parser import parse as parse_date
+from datetime import date, datetime, time
 
 import pytest
 import pytz
+from dateutil.parser import parse as parse_date
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint
