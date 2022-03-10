@@ -6,8 +6,6 @@ from .schemas import (
     CountResultSet,
     CalendarParams,
     CalendarResultSet,
-    ImpactParams,
-    ImpactResultSet,
 )
 
 
@@ -38,16 +36,6 @@ class EventsEndpoint(UserBaseEndpoint):
         verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.get(
             self.build_url("v1", "events/calendar"),
-            params=params,
-            verify=verify_ssl,
-        )
-
-    @accepts(ImpactParams)
-    @returns(ImpactResultSet)
-    def impact(self, **params):
-        verify_ssl = params.pop("config.verify_ssl", True)
-        return self.client.get(
-            self.build_url("v1", "events/impact"),
             params=params,
             verify=verify_ssl,
         )
