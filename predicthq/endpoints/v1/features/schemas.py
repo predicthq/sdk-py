@@ -1,8 +1,8 @@
 from predicthq.endpoints.schemas import (
     BooleanType,
     ConfigMixin,
-    DateType,
     DateRange,
+    DateType,
     DictType,
     FloatType,
     IntRange,
@@ -72,6 +72,7 @@ class FeatureRequest(ConfigMixin, Model):
     phq_attendance_expos = ModelType(FeatureCriteria)
     phq_attendance_festivals = ModelType(FeatureCriteria)
     phq_attendance_performing_arts = ModelType(FeatureCriteria)
+    phq_attendance_school_holidays = ModelType(FeatureCriteria)
     phq_attendance_sports = ModelType(FeatureCriteria)
     # Rank based feature criteria
     phq_rank_daylight_savings = BooleanType()
@@ -168,6 +169,7 @@ class Feature(Model):
     phq_attendance_expos = ModelType(FeatureStat)
     phq_attendance_festivals = ModelType(FeatureStat)
     phq_attendance_performing_arts = ModelType(FeatureStat)
+    phq_attendance_school_holidays = ModelType(FeatureStat)
     phq_attendance_sports = ModelType(FeatureStat)
     # Rank based features
     phq_rank_daylight_savings = ModelType(FeatureRankLevel)
