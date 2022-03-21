@@ -9,8 +9,8 @@ on:
       - '*'
 
 jobs:
-  test-and-coverage:
-    name: Test and run coverage
+  test:
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       # Setting fail-fast to false, will let all concurrent jobs run if one of them fails, instead of cancelling all
@@ -30,19 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Tests and coverage
+      - name: Run Tests
         run: |
-          pytest --cov=predicthq tests/
-
-      - name: Upload coverage data to coveralls.io
-        run: |
-          coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pytest tests/
 
   build-and-deploy:
     name: Build and Publish
-    needs: test-and-coverage
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -61,7 +55,7 @@ jobs:
 
   slack-notification:
     name: Slack Notification
-    needs: [test-and-coverage, build-and-deploy]
+    needs: [test, build-and-deploy]
     if: always()
     runs-on: ubuntu-latest
     steps:
