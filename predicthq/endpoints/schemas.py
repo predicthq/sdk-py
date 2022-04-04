@@ -126,10 +126,10 @@ class GeoJSONPointType(GeoPointType):
 
 class Area(StringModel):
 
-    import_format = r"(?P<radius>\d+(k?m|ft|mi))@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)"
+    import_format = r"(?P<radius>(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft))@(?P<latitude>[\-\+]?\d+(\.\d+)?),(?P<longitude>[\-\+]?\d+(\.\d+)?)"
     export_format = "{radius}@{latitude},{longitude}"
 
-    radius = StringType(regex=r"\d+(k?m|ft|mi)", required=True)
+    radius = StringType(regex=r"(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft))", required=True)
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
