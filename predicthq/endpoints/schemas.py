@@ -84,9 +84,7 @@ class StringModel(Model):
             try:
                 raw_data = re.match(self.import_format, str(raw_data)).groupdict()
             except AttributeError:
-                raise SchematicsValidationError(
-                    f"'{raw_data}' is not a valid format for {self.__class__.__name__}"
-                )
+                raise SchematicsValidationError(f"'{raw_data}' is not a valid format for {self.__class__.__name__}")
         return super(StringModel, self).convert(raw_data, **kw)
 
     def export(self, *args, **kwargs):
@@ -122,16 +120,6 @@ class ListType(SchematicsListType):
 class GeoJSONPointType(GeoPointType):
     def _normalize(self, value):
         return tuple(reversed(super(GeoJSONPointType, self)._normalize(value)))
-
-
-class Area(StringModel):
-
-    import_format = r"(?P<radius>(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft))@(?P<latitude>[\-\+]?\d+(\.\d+)?),(?P<longitude>[\-\+]?\d+(\.\d+)?)"
-    export_format = "{radius}@{latitude},{longitude}"
-
-    radius = StringType(regex=r"(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft)", required=True)
-    latitude = FloatType(required=True)
-    longitude = FloatType(required=True)
 
 
 class Location(StringModel):
