@@ -122,6 +122,16 @@ class GeoJSONPointType(GeoPointType):
         return tuple(reversed(super(GeoJSONPointType, self)._normalize(value)))
 
 
+class Area(StringModel):
+
+    import_format = r"(?P<radius>(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft))@(?P<latitude>[\-\+]?\d+(\.\d+)?),(?P<longitude>[\-\+]?\d+(\.\d+)?)"
+    export_format = "{radius}@{latitude},{longitude}"
+
+    radius = StringType(regex=r"(\d+(\.\d+)?)+(km|mi)|(\d+)+(m|ft)", required=True)
+    latitude = FloatType(required=True)
+    longitude = FloatType(required=True)
+
+
 class Location(StringModel):
 
     import_format = r"@(?P<latitude>-?\d+(\.\d+)?),(?P<longitude>-?\d+(\.\d+)?)"
