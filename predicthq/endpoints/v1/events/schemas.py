@@ -1,4 +1,5 @@
 from predicthq.endpoints.schemas import (
+    Area,
     BooleanType,
     BrandUnsafe,
     ConfigMixin,
@@ -23,7 +24,9 @@ from predicthq.endpoints.schemas import (
     ResultType,
     SortableMixin,
     StringListType,
+    StringModelType,
     StringType,
+    
 )
 from schematics.common import NONEMPTY
 
@@ -50,7 +53,7 @@ class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     start_around = ModelType(DateAround)
     state = ListType(StringType(choices=("active", "deleted"), default="active"))
     updated = ModelType(DateTimeRange)
-    within = StringListType(StringType)
+    within = StringListType(StringModelType(Area), separator="+")
 
     # The below parameters are only available if they are enabled in your plan.
     # If you are not subscribed to a feature, using the parameter will have no
