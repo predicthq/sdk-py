@@ -28,7 +28,7 @@ class FeatureGeoPoint(Model):
     lat = FloatType(required=True, min_value=-90.0, max_value=90.0)
     lon = FloatType(required=True, min_value=-180.0, max_value=180.0)
     radius = StringType(
-        regex=r"^([1-9]\d*|0)(\.\d+)?(k?m|mi|ft)$",
+        regex=r"^(([1-9][0-9]*)(\.[0-9]+)?)|(0\.[0-9]+)(k?m|mi|ft)$",
         required=True,
         messages={
             "regex": "Radius needs to define a number and unit (ft, m, km, mi) eg. 100km",
