@@ -187,6 +187,31 @@ def test_location_model():
         m.import_data(invalid_data)
 
 
+def test_area_model():
+    class SchemaExample(schemas.Model):
+
+        area = schemas.StringModelType(schemas.Area)
+
+    short_data = {"area": "10km@-36.847585,174.765742"}
+    long_data = {"area": {"radius": "10km", "latitude": -36.847585, "longitude": 174.765742}}
+    model_data = {"area": schemas.Area("10km@-36.847585,174.765742")}
+    invalid_data = {"area": "10k@-36.847585,174.765742"}
+
+    expected_expected = {"area": "10km@-36.847585,174.765742"}
+
+    m = SchemaExample()
+    assert m.import_data(short_data).to_primitive() == expected_expected
+    assert m.import_data(long_data).to_primitive() == expected_expected
+    assert m.import_data(model_data).to_primitive() == expected_expected
+
+    assert m.import_data(short_data).to_dict() == expected_expected
+    assert m.import_data(long_data).to_dict() == expected_expected
+    assert m.import_data(model_data).to_dict() == expected_expected
+
+    with pytest.raises(schemas.SchematicsDataError):
+        m.import_data(invalid_data)
+
+
 def test_resultset():
     class ResultExample(schemas.Model):
 
