@@ -26,7 +26,6 @@ from predicthq.endpoints.schemas import (
     StringListType,
     StringModelType,
     StringType,
-    
 )
 from schematics.common import NONEMPTY
 
