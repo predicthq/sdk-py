@@ -271,4 +271,3 @@ def test_resultset():
 
     for item in p1.iter_all():
         assert item._endpoint == endpoint
-        
