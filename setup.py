@@ -36,9 +36,6 @@ setup(
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    setup_requires=[
-        'pytest-runner>=5.1,<6.0',
-    ],
     install_requires=[
         "requests>=2.7.0",
         "schematics==2.0.0.dev2",
