@@ -13,6 +13,7 @@ class FeaturesTest(unittest.TestCase):
             location={"geo": {"lon": -93.151959, "lat": 44.835976, "radius": "2km"}},
             phq_attendance_conferences=True,
             phq_attendance_performing_arts=True,
+            phq_impact_severe_weather_air_quality_retail=True,
             phq_viewership_sports=True,
             phq_viewership_sports_american_football=True,
             phq_viewership_sports_boxing=True,
@@ -27,6 +28,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 44.835976, "lon": -93.151959, "radius": "2km"}},
                 "phq_attendance_conferences": {"stats": ["sum", "count"], "phq_rank": None},
                 "phq_attendance_performing_arts": {"stats": ["sum", "count"], "phq_rank": None},
+                "phq_impact_severe_weather_air_quality_retail": {"stats": ["sum", "count"], "phq_rank": None},
                 "phq_viewership_sports": {"stats": ["sum", "count"], "phq_rank": None},
                 "phq_viewership_sports_american_football": {"stats": ["sum", "count"], "phq_rank": None},
                 "phq_viewership_sports_boxing": {"stats": ["sum", "count"], "phq_rank": None},
@@ -76,9 +78,7 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client()
     def test_attendance_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active__gte="2017-12-31",
-            location__place_id=[4671654],
-            config__verify_ssl=False
+            active__gte="2017-12-31", location__place_id=[4671654], config__verify_ssl=False
         )
 
         client.request.assert_called_once_with(
@@ -239,9 +239,7 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client()
     def test_rank_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active={"gte": "2017-12-31"},
-            location={"place_id": [4671654]},
-            config={"verify_ssl": False}
+            active={"gte": "2017-12-31"}, location={"place_id": [4671654]}, config={"verify_ssl": False}
         )
 
         client.request.assert_called_once_with(
@@ -263,6 +261,102 @@ class FeaturesTest(unittest.TestCase):
             phq_rank_public_holidays=True,
         )
         assert isinstance(result, FeatureResultSet)
+
+    @with_mock_client()
+    def test_impact_severe_weather_request_params_underscores(self, client):
+        feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
+        client.features.obtain_features(
+            active__gte="2017-12-31",
+            active__lte="2018-01-02",
+            hour_of_day_active__gt=10,
+            hour_of_day_active__lte=19,
+            location__place_id=[4671654],
+            phq_impact_severe_weather_air_quality_retail__stats=feature_stats,
+            phq_impact_severe_weather_blizzard_retail__stats=feature_stats,
+            phq_impact_severe_weather_blizzard_retail__phq_rank={"gt": 50},
+            phq_impact_severe_weather_cold_wave_retail__stats=feature_stats,
+            phq_impact_severe_weather_cold_wave_snow_retail__stats=feature_stats,
+            phq_impact_severe_weather_cold_wave_snow_retail__phq_rank={"gt": 50},
+            phq_impact_severe_weather_cold_wave_storm_retail__stats=feature_stats,
+            phq_impact_severe_weather_dust_retail__stats=feature_stats,
+            phq_impact_severe_weather_dust_storm_retail__stats=feature_stats,
+            phq_impact_severe_weather_flood_retail__stats=feature_stats,
+            phq_impact_severe_weather_heat_wave_retail__stats=feature_stats,
+            phq_impact_severe_weather_hurricane_retail__stats=feature_stats,
+            phq_impact_severe_weather_thunderstorm_retail__stats=feature_stats,
+            phq_impact_severe_weather_tornado_retail__stats=feature_stats,
+            phq_impact_severe_weather_tropical_storm_retail__stats=feature_stats,
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "hour_of_day_active": {"gt": 10, "lte": 19},
+                "location": {"place_id": ["4671654"]},
+                "phq_impact_severe_weather_air_quality_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_blizzard_retail": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_impact_severe_weather_cold_wave_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_cold_wave_snow_retail": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_impact_severe_weather_cold_wave_storm_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_dust_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_dust_storm_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_flood_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_heat_wave_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_hurricane_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_thunderstorm_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_tornado_retail": {"stats": feature_stats},
+                "phq_impact_severe_weather_tropical_storm_retail": {"stats": feature_stats},
+            },
+            verify=True,
+        )
+
+    @with_mock_client()
+    def test_impact_severe_weather_request_params_dicts(self, client):
+        feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            hour_of_day_start={"gte": 10, "lt": 11},
+            location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
+            phq_impact_severe_weather_air_quality_retail=feature_criteria,
+            phq_impact_severe_weather_blizzard_retail=feature_criteria,
+            phq_impact_severe_weather_cold_wave_retail=feature_criteria,
+            phq_impact_severe_weather_cold_wave_snow_retail=feature_criteria,
+            phq_impact_severe_weather_cold_wave_storm_retail=feature_criteria,
+            phq_impact_severe_weather_dust_retail=feature_criteria,
+            phq_impact_severe_weather_dust_storm_retail=feature_criteria,
+            phq_impact_severe_weather_flood_retail=feature_criteria,
+            phq_impact_severe_weather_heat_wave_retail=feature_criteria,
+            phq_impact_severe_weather_hurricane_retail=feature_criteria,
+            phq_impact_severe_weather_thunderstorm_retail=feature_criteria,
+            phq_impact_severe_weather_tornado_retail=feature_criteria,
+            phq_impact_severe_weather_tropical_storm_retail=feature_criteria,
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "hour_of_day_start": {"gte": 10, "lt": 11},
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
+                "phq_impact_severe_weather_air_quality_retail": feature_criteria,
+                "phq_impact_severe_weather_blizzard_retail": feature_criteria,
+                "phq_impact_severe_weather_cold_wave_retail": feature_criteria,
+                "phq_impact_severe_weather_cold_wave_snow_retail": feature_criteria,
+                "phq_impact_severe_weather_cold_wave_storm_retail": feature_criteria,
+                "phq_impact_severe_weather_dust_retail": feature_criteria,
+                "phq_impact_severe_weather_dust_storm_retail": feature_criteria,
+                "phq_impact_severe_weather_flood_retail": feature_criteria,
+                "phq_impact_severe_weather_heat_wave_retail": feature_criteria,
+                "phq_impact_severe_weather_hurricane_retail": feature_criteria,
+                "phq_impact_severe_weather_thunderstorm_retail": feature_criteria,
+                "phq_impact_severe_weather_tornado_retail": feature_criteria,
+                "phq_impact_severe_weather_tropical_storm_retail": feature_criteria,
+            },
+            verify=True,
+        )
 
     @with_mock_client()
     def test_viewership_request_params_underscores(self, client):
@@ -361,7 +455,7 @@ class FeaturesTest(unittest.TestCase):
         client.features.obtain_features(
             active={"gte": "2017-12-31"},
             location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
-            config={"verify_ssl": False}
+            config={"verify_ssl": False},
         )
 
         client.request.assert_called_once_with(

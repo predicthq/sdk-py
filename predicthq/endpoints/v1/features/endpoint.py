@@ -13,7 +13,11 @@ class FeaturesEndpoint(UserBaseEndpoint):
     def mutate_bool_to_default_for_type(cls, user_request_spec):
         attributes = inspect.getmembers(FeatureRequest, lambda a: not (inspect.isroutine(a)))
         fields_to_mutate = [
-            a[0] for a in attributes if a[0].startswith("phq_attendance_") or a[0].startswith("phq_viewership_sports")
+            a[0]
+            for a in attributes
+            if a[0].startswith("phq_attendance_")
+            or a[0].startswith("phq_viewership_sports")
+            or a[0].startswith("phq_impact_severe_weather_")
         ]
         for key, val in user_request_spec.items():
             if key in fields_to_mutate and isinstance(val, bool):
