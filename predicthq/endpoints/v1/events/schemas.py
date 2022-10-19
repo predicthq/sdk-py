@@ -45,6 +45,7 @@ class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     label = ListType(StringType)
     location_around = ModelType(LocationAround)
     place = ModelType(Place)
+    placekey = StringType()
     postponed = ModelType(DateTimeRange)
     q = StringType()
     relevance = ListType(StringType)
@@ -122,6 +123,7 @@ class MultiPolygon(Model):
 class Geo(Model):
 
     geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
+    placekey = StringType()
 
 
 class ParentEvent(Model):
