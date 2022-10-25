@@ -4,7 +4,7 @@
 
 [![Version](https://badge.fury.io/gh/predicthq%2Fsdk-py.svg)](https://badge.fury.io/gh/predicthq%2Fsdk-py)
 ![build](https://github.com/predicthq/sdk-py/actions/workflows/publish-to-test-pypi.yml/badge.svg)
-[![PyPI package](https://badge.fury.io/py/predicthq.svg)](https://badge.fury.io/py/predicthq)
+[![PyPI version](https://badge.fury.io/py/predicthq.svg)](https://badge.fury.io/py/predicthq)
 
 
 [PredictHQ](https://www.predicthq.com/) is the demand intelligence company combining real-world events into one global source of truth to help businesses better understand demand and plan for the future.
