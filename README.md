@@ -60,7 +60,7 @@ for event in phq.events.search().iter_all():
 
 Additional examples are available in [usecases/events](https://github.com/predicthq/sdk-py/tree/master/usecases/events) folder.
 
-The following example searches for the 'Katy Perry' events (full text search) with rank level of 4 or 5 (rank >= 60) in the concerts category.
+The following example searches for the `Katy Perry` events (full text search) with rank level of 4 or 5 (rank >= 60) in the concerts category.
 
 ```Python
 from predicthq import Client
@@ -68,7 +68,7 @@ from predicthq import Client
 phq = Client(access_token="abc123")
 
 
-for event in phq.events.search(q='Katy Perry', rank_level=[4, 5], category='concerts'):
+for event in phq.events.search(q="Katy Perry", rank_level=[4, 5], category="concerts"):
     print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
 ```
 
@@ -78,7 +78,7 @@ Please refer to our [Events endpoint documentation](https://docs.predicthq.com/r
 
 Additional examples are available in [usecases/broadcasts](https://github.com/predicthq/sdk-py/tree/master/usecases/broadcasts) folder.
 
-The following example searches for the broadcasts with PHQ viewership gte 100 and with event (the physical event the broadcast links to) label 'nfl'.
+The following example searches for the broadcasts with PHQ viewership gte 100 and with event (the physical event the broadcast links to) label `nfl`.
 
 ```Python
 from predicthq import Client
@@ -86,7 +86,7 @@ from predicthq import Client
 phq = Client(access_token="abc123")
 
 
-for broadcast in phq.broadcasts.search(phq_viewership__gte=100, event__label='nfl'):
+for broadcast in phq.broadcasts.search(phq_viewership__gte=100, event__label="nfl"):
     print(broadcast.event.title, broadcast.phq_viewership, broadcast.event.labels, broadcast.dates.start.strftime("%Y-%m-%d"))
 ```
 
@@ -96,7 +96,7 @@ Please refer to our [Broadcasts endpoint documentation](https://docs.predicthq.c
 
 Additional examples are available in [usecases/places.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
 
-The following example searches for the 'New York' places (full text search) in the US.
+The following example searches for the `New York` places (full text search) in the US.
 
 ```Python
 from predicthq import Client
