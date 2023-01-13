@@ -3,6 +3,7 @@
 # PredictHQ API Client for Python
 
 ![PyPI](https://img.shields.io/pypi/v/predicthq)
+![Python](https://img.shields.io/pypi/pyversions/predicthq)
 ![build](https://github.com/predicthq/sdk-py/actions/workflows/publish-to-test-pypi.yml/badge.svg)
 
 
