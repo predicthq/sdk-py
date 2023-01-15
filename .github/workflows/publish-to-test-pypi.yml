@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: martialonline/workflow-status@v2
+      - uses: martialonline/workflow-status@v4
         id: check
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
