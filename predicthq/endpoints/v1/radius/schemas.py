@@ -4,8 +4,6 @@ from predicthq.endpoints.schemas import (
     ListType,
     Model,
     ModelType,
-    ResultSet,
-    ResultType,
     StringType,
 )
 
@@ -46,17 +44,12 @@ class SearchParams(ConfigMixin, Model):
 
 class LocationResult(Model):
 
-    latitude = FloatType(required=True)
-    longitude = FloatType(required=True)
+    lat = FloatType(required=True)
+    lon = FloatType(required=True)
 
 
-class SuggestedRadius(Model):
+class SuggestedRadiusResultSet(Model):
 
     radius = FloatType()
     radius_unit = StringType()
     location = ModelType(LocationResult)
-
-
-class SuggestedRadiusResultSet(ResultSet):
-
-    results = ResultType(SuggestedRadius)

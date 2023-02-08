@@ -1,5 +1,5 @@
 from .endpoint import SuggestedRadiusEndpoint
-from .schemas import SuggestedRadius
+from .schemas import SuggestedRadiusResultSet
 
 
-__all__ = ["SuggestedRadiusEndpoint", "SuggestedRadius"]
+__all__ = ["SuggestedRadiusEndpoint", "SuggestedRadiusResultSet"]
