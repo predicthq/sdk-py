@@ -27,6 +27,7 @@ We support all the endpoints available in our API.
 * `events`
 * `features`
 * `places`
+* `radius`
 
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
@@ -187,6 +188,22 @@ for feature in phq.features.obtain_features(
 ```
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
+
+### Radius endpoint
+
+The following example obtain suggested radius to be used when retrieving events for location {"lat": 45.5051, "lon": -122.6750} and generic industry.
+
+Additional examples are available in [usecases/radius](https://github.com/predicthq/sdk-py/tree/master/usecases/radius) folder.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750")
+print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.to_dict())
+```
 
 ### Config parameters
 

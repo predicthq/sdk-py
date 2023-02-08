@@ -32,6 +32,7 @@ class Client(object):
         self.features = endpoints.FeaturesEndpoint(proxy(self))
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
         self.places = endpoints.PlacesEndpoint(proxy(self))
+        self.radius = endpoints.SuggestedRadiusEndpoint(proxy(self))
 
     def get_headers(self, headers):
         _headers = {"Accept": "application/json", "x-user-agent": f"PHQ-Py-SDK/{__version__}"}
