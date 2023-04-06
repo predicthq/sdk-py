@@ -141,6 +141,13 @@ class Location(StringModel):
     longitude = FloatType(required=True)
 
 
+class Parent(Model):
+    class Options:
+        serialize_when_none = False
+
+    include = StringType()
+
+
 class Place(Model):
     class Options:
         serialize_when_none = False
