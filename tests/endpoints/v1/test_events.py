@@ -143,7 +143,7 @@ class EventsTest(unittest.TestCase):
             category="sports",
             state=["active", "deleted"],
             deleted_reason=["cancelled", "duplicate", "invalid", "postponed"],
-            parent={"include": "only"}
+            parent={"include": "only"},
             place={"scope": ["place1", "place2"], "exact": "place3"},
             placekey="22t-222@627-wc7-rkz",
             location_around={"origin": "40.730610,-73.935242", "scale": "2km", "offset": "0.5km"},
