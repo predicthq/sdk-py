@@ -18,7 +18,7 @@ from predicthq.endpoints.schemas import (
     Model,
     ModelType,
     PaginatedMixin,
-    Parent,
+    ParentType,
     Place,
     PolyModelType,
     ResultSet,
@@ -45,7 +45,7 @@ class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     id = ListType(StringType)
     label = ListType(StringType)
     location_around = ModelType(LocationAround)
-    parent = ModelType(Parent)
+    parent = ModelType(ParentType)
     place = ModelType(Place)
     placekey = StringType()
     postponed = ModelType(DateTimeRange)

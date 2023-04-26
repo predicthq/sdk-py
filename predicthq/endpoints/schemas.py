@@ -140,12 +140,28 @@ class Location(StringModel):
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
+# see https://github.com/predicthq/sdk-py/pull/84#discussion_r1163399743
+# ParentType requires either the value to be a boolean value or an enum value
+# therefore, we need to create a custom type that allows both
+class BooleanOrEnumType(BooleanType):
+    def __init__(self, *args, **kwargs):
+        self.enum_values = kwargs.pop("choices", None)
+        super().__init__(*args, **kwargs)
 
-class Parent(Model):
+    def to_native(self, value, context=None):
+        try:
+            return super().to_native(value, context)
+        except ConversionError:
+            if self.enum_values and value not in self.enum_values:
+                raise ConversionError(u"Must be either a boolean or any of: {}.".format([x for x in self.enum_values]))
+            return value
+
+
+class ParentType(Model):
     class Options:
         serialize_when_none = False
 
-    include = StringType()
+    include = BooleanOrEnumType(choices=("only",))
 
 
 class Place(Model):
