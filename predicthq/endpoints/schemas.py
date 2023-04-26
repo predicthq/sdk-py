@@ -145,14 +145,14 @@ class Location(StringModel):
 # therefore, we need to create a custom type that allows both
 class BooleanOrEnumType(BooleanType):
     def __init__(self, *args, **kwargs):
-        self.enum_values = kwargs.pop("choices", None)
+        self.enum_values = kwargs.pop("choices")
         super().__init__(*args, **kwargs)
 
     def to_native(self, value, context=None):
         try:
             return super().to_native(value, context)
         except ConversionError:
-            if self.enum_values and value not in self.enum_values:
+            if value not in self.enum_values:
                 raise ConversionError(u"Must be either a boolean or any of: {}.".format([x for x in self.enum_values]))
             return value
 
