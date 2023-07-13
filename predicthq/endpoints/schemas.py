@@ -23,7 +23,6 @@ from schematics.types import (
     DateType as SchematicsDateType,
 )
 from schematics.types.compound import ListType as SchematicsListType, ModelType, DictType, PolyModelType
-from schematics.types.serializable import serializable
 
 
 class DateTimeType(SchematicsDateTimeType):

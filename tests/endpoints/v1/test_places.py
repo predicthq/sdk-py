@@ -26,11 +26,6 @@ class PlacesTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
-    def test_invalide_search_params(self, client):
-        with pytest.raises(schemas.SchematicsValidationError):
-            client.places.search()
-
     @with_client()
     @with_mock_responses()
     def test_search(self, client, responses):

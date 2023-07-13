@@ -1,52 +1,15 @@
 from predicthq.endpoints.schemas import (
     BooleanType,
-    ConfigMixin,
-    DateTimeRange,
     DateTimeType,
     FloatType,
-    IntRange,
     IntType,
     ListType,
     Model,
     ModelType,
-    PaginatedMixin,
     ResultSet,
     ResultType,
-    SortableMixin,
     StringType,
 )
-
-
-class BroadcastEventParams(Model):
-    class Options:
-        serialize_when_none = False
-
-    event_id = ListType(StringType)
-    category = ListType(StringType)
-    label = ListType(StringType)
-
-
-class BroadcastLocationParams(Model):
-    class Options:
-        serialize_when_none = False
-
-    origin = StringType(regex=r"(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)")
-    place_id = ListType(StringType)
-
-
-class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
-    class Options:
-        serialize_when_none = False
-
-    broadcast_id = ListType(StringType)
-    location = ModelType(BroadcastLocationParams)
-    phq_viewership = ModelType(IntRange)
-    start = ModelType(DateTimeRange)
-    updated = ModelType(DateTimeRange)
-    first_seen = ModelType(DateTimeRange)
-    record_status = ListType(StringType(choices=("active", "deleted"), default="active"))
-    broadcast_status = ListType(StringType(choices=("scheduled", "predicted", "cancelled")))
-    event = ModelType(BroadcastEventParams)
 
 
 class GeoPoint(Model):

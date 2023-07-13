@@ -29,41 +29,20 @@ def test_kwargs_processor():
 
 
 def test_accepts():
-    class SchemaExample(schemas.Model):
-        arg1 = schemas.StringType(required=True)
-        arg2 = schemas.ListType(schemas.IntType)
-
     class EndpointExample(BaseEndpoint):
-        @decorators.accepts(SchemaExample)
-        def func(self, **kwargs):
-            return kwargs
+        @decorators.accepts()
+        def func(self, *args, **kwargs):
+            return args, kwargs
 
     endpoint = EndpointExample(None)
-    assert endpoint.func(arg1="test", arg2=[1, 2]) == {"arg1": "test", "arg2": "1,2"}
+    transformed_args, transformed_kwargs = endpoint.func(arg1="test", arg2=[1, 2])
+    assert transformed_kwargs == {"arg1": "test", "arg2": "1,2"}
+    assert transformed_args == ()
 
-    assert endpoint.func(SchemaExample({"arg1": "test", "arg2": [1, 2]})) == {"arg1": "test", "arg2": "1,2"}
-
-    assert endpoint.func({"arg1": "test", "arg2": [1, 2]}) == {"arg1": "test", "arg2": "1,2"}
-
-    with pytest.raises(ValidationError):
-        endpoint.func(arg2=[1, 2])
-
-    with pytest.raises(ValidationError):
-        endpoint.func(arg1="value", arg2="invalid")
-
-
-def test_accepts_for_body_use():
-    class SchemaExample(schemas.Model):
-        arg1 = schemas.StringType(required=True)
-        arg2 = schemas.ListType(schemas.IntType)
-
-    class EndpointExample(BaseEndpoint):
-        @decorators.accepts(SchemaExample, query_string=False)
-        def func(self, **kwargs):
-            return kwargs
-
-    endpoint = EndpointExample(None)
-    assert endpoint.func({"arg1": "test", "arg2": [1, 2]}) == {"arg1": "test", "arg2": [1, 2]}
+    transformed_args, transformed_kwargs = endpoint.func({"arg1": "test", "arg2": [1, 2]})
+    endpoint.func(arg1="test", arg2=[1, 2])
+    assert transformed_kwargs == {}
+    assert transformed_args == ({"arg1": "test", "arg2": [1, 2]},)
 
 
 def test_returns():

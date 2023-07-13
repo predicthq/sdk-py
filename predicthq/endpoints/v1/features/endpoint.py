@@ -2,28 +2,21 @@ import inspect
 
 from predicthq.endpoints.base import UserBaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from .schemas import FeatureRequest, FeatureResultSet
+from .schemas import FeatureResultSet
 
 
 class FeaturesEndpoint(UserBaseEndpoint):
 
     BASE_FEATURE_CRITERIA = {"stats": ["sum", "count"], "phq_rank": None}
+    FIELDS_TO_MUTATE = frozenset(["phq_attendance_", "phq_viewership_sports", "phq_impact_severe_weather_"])
 
     @classmethod
     def mutate_bool_to_default_for_type(cls, user_request_spec):
-        attributes = inspect.getmembers(FeatureRequest, lambda a: not (inspect.isroutine(a)))
-        fields_to_mutate = [
-            a[0]
-            for a in attributes
-            if a[0].startswith("phq_attendance_")
-            or a[0].startswith("phq_viewership_sports")
-            or a[0].startswith("phq_impact_severe_weather_")
-        ]
         for key, val in user_request_spec.items():
-            if key in fields_to_mutate and isinstance(val, bool):
+            if any(key.startswith(x) for x in cls.FIELDS_TO_MUTATE) and isinstance(val, bool):
                 user_request_spec[key] = cls.BASE_FEATURE_CRITERIA
 
-    @accepts(FeatureRequest, query_string=False)
+    @accepts(query_string=False)
     @returns(FeatureResultSet)
     def obtain_features(self, **request):
         verify_ssl = request.pop("config", {}).get("verify_ssl", True)

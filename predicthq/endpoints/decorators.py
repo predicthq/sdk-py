@@ -37,39 +37,19 @@ def _process_kwargs(kwargs, separator="__"):
     return data
 
 
-def accepts(schema_class, query_string=True, role=None):
+
+def accepts(query_string=True, role=None):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
-
-            schema = getattr(endpoint.Meta, f.__name__, {}).get("accepts", schema_class)
-
-            if not kwargs:  # accept instance of schema_class
-                new_args = tuple(a for a in args if not isinstance(a, (schema, dict)))
-                if args != new_args:
-                    instance = next(a for a in args if isinstance(a, (schema, dict)))
-                    if isinstance(instance, dict):
-                        kwargs = instance
-                    else:
-                        kwargs = instance.to_dict()
-                    args = new_args
-
-            try:
-                data = _process_kwargs(kwargs)
-                if hasattr(endpoint, "mutate_bool_to_default_for_type"):
-                    endpoint.mutate_bool_to_default_for_type(data)
-                model = schema()
-                model.import_data(data, strict=True, partial=False)
-                model.validate()
-            except SchematicsDataError as e:
-                raise ValidationError(e.messages)
+            data = _process_kwargs(kwargs)
+            if hasattr(endpoint, "mutate_bool_to_default_for_type"):
+                endpoint.mutate_bool_to_default_for_type(data)
 
             if query_string:
-                params = _to_url_params(model.to_primitive(role=role))
-            else:
-                params = model.to_primitive(role=role)
+                data = _to_url_params(data=data)
 
-            return f(endpoint, *args, **params)
+            return f(endpoint, *args, **data)
 
         return wrapper
 

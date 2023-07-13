@@ -43,7 +43,7 @@ class FeaturesTest(unittest.TestCase):
         client.features.obtain_features(
             active__gte="2017-12-31",
             active__lte="2018-01-02",
-            location__place_id=[4671654],
+            location__place_id=["4671654"],
             phq_attendance_academic_graduation__stats=feature_stats,
             phq_attendance_academic_graduation__phq_rank={"gt": 50},
             phq_attendance_academic_social__stats=feature_stats,
@@ -78,7 +78,7 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client()
     def test_attendance_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active__gte="2017-12-31", location__place_id=[4671654], config__verify_ssl=False
+            active__gte="2017-12-31", location__place_id=["4671654"], config__verify_ssl=False
         )
 
         client.request.assert_called_once_with(
@@ -205,7 +205,7 @@ class FeaturesTest(unittest.TestCase):
     def test_rank_request_params_dicts(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
-            location={"place_id": [4671654]},
+            location={"place_id": ["4671654"]},
             phq_rank_daylight_savings=True,
             phq_rank_health_warnings=True,
             phq_rank_observances=True,
@@ -239,7 +239,7 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client()
     def test_rank_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active={"gte": "2017-12-31"}, location={"place_id": [4671654]}, config={"verify_ssl": False}
+            active={"gte": "2017-12-31"}, location={"place_id": ["4671654"]}, config={"verify_ssl": False}
         )
 
         client.request.assert_called_once_with(
@@ -257,7 +257,7 @@ class FeaturesTest(unittest.TestCase):
     def test_obtain_features(self, client, responses):
         result = client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
-            location={"place_id": [4671654]},
+            location={"place_id": ["4671654"]},
             phq_rank_public_holidays=True,
         )
         assert isinstance(result, FeatureResultSet)
@@ -270,7 +270,7 @@ class FeaturesTest(unittest.TestCase):
             active__lte="2018-01-02",
             hour_of_day_active__gt=10,
             hour_of_day_active__lte=19,
-            location__place_id=[4671654],
+            location__place_id=["4671654"],
             phq_impact_severe_weather_air_quality_retail__stats=feature_stats,
             phq_impact_severe_weather_blizzard_retail__stats=feature_stats,
             phq_impact_severe_weather_blizzard_retail__phq_rank={"gt": 50},
@@ -366,7 +366,7 @@ class FeaturesTest(unittest.TestCase):
             active__lte="2018-01-02",
             hour_of_day_active__gt=10,
             hour_of_day_active__lte=19,
-            location__place_id=[4671654],
+            location__place_id=["4671654"],
             phq_viewership_sports__stats=feature_stats,
             phq_viewership_sports__phq_rank={"gt": 50},
             phq_viewership_sports_american_football__stats=feature_stats,
@@ -400,7 +400,7 @@ class FeaturesTest(unittest.TestCase):
     def test_viewership_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
-            location__place_id=[4671654],
+            location__place_id=["4671654"],
             config__verify_ssl=False,
         )
 
