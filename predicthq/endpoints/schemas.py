@@ -140,6 +140,7 @@ class Location(StringModel):
     latitude = FloatType(required=True)
     longitude = FloatType(required=True)
 
+
 # see https://github.com/predicthq/sdk-py/pull/84#discussion_r1163399743
 # ParentType requires either the value to be a boolean value or an enum value
 # therefore, we need to create a custom type that allows both
@@ -246,6 +247,15 @@ class Entity(Model):
         serialize_when_none = False
 
     id = StringType()
+
+
+class PredictedEventSpendIndustry(Model):
+    class Options:
+        serialize_when_none = False
+
+    accommodation = ModelType(IntRange)
+    hospitality = ModelType(IntRange)
+    transportation = ModelType(IntRange)
 
 
 class LimitMixin(Model):
