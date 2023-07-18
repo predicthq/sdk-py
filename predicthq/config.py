@@ -20,7 +20,7 @@ class Config(object):
     )
 
     _defaults = {
-        "ENDPOINT_URL": "https://api.stg.phq.io", # TODO : REVERT TO PROD
+        "ENDPOINT_URL": "https://api.predicthq.com",
         "OAUTH2_CLIENT_ID": None,
         "OAUTH2_CLIENT_SECRET": None,
         "OAUTH2_SCOPE": None,

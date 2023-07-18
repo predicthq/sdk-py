@@ -9,8 +9,6 @@ class OAuth2Endpoint(BaseEndpoint):
     @preload_config_defaults(["client_id", "client_secret", "scope", "grant_type"])
     @returns(AccessToken)
     def get_token(self, client_id, client_secret, scope, grant_type, **kwargs):
-        # TODO: Update to handle defaults
-
         verify_ssl = kwargs.pop("config.verify_ssl", True)
         data = {
             "grant_type": grant_type,
@@ -27,8 +25,6 @@ class OAuth2Endpoint(BaseEndpoint):
     @accepts()
     @preload_config_defaults(["client_id", "client_secret", "token_type_hint"])
     def revoke_token(self, client_id, client_secret, token, token_type_hint, **kwargs):
-        # TODO: Update to handle defaults
-
         verify_ssl = kwargs.pop("config.verify_ssl", True)
         data = {
             "token_type_hint": token_type_hint,
