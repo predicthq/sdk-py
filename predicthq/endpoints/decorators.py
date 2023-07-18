@@ -16,22 +16,22 @@ def _to_url_params(data, glue=".", separator=","):
         elif isinstance(value, list):
             params[key] = separator.join(map(str, value))
         elif isinstance(value, dict):
-            params.update(**_flatten_dict(value, glue, separator, pk=key))
+            params.update(_flatten_dict(value, glue, separator, parent_key=key))
         else:
             params[key] = value
     return params
 
 
-def _flatten_dict(d, glue, separator, pk=""):
+def _flatten_dict(d, glue, separator, parent_key=""):
     flat_dict = {}
     for k, v in d.items():
         if isinstance(v, dict):
-            flat_dict.update(_flatten_dict(v, glue, separator, f"{pk}{glue}{k}" if pk else k))
+            flat_dict.update(_flatten_dict(v, glue, separator, f"{parent_key}{glue}{k}" if parent_key else k))
             continue
         if isinstance(v, list):
-            flat_dict.update({f"{pk}{glue}{k}" if pk else k: separator.join(map(str, v))})
+            flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: separator.join(map(str, v))})
             continue
-        flat_dict.update({f"{pk}{glue}{k}" if pk else k: v})
+        flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: v})
     return flat_dict
 
 
