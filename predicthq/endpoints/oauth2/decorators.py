@@ -18,7 +18,7 @@ def preload_config_defaults(defaults_to_load):
         def wrapper(endpoint, *args, **kwargs):
             for key in defaults_to_load:
                 if key not in kwargs and key in DEFAULT_CONFIG_MAPPING:
-                    kwargs[key] = DEFAULT_CONFIG_MAPPING[key]            
+                    kwargs[key] = DEFAULT_CONFIG_MAPPING[key]
 
             if kwargs.get("scope") and "," in kwargs["scope"]:
                 kwargs["scope"] = " ".join(kwargs["scope"].split(","))
