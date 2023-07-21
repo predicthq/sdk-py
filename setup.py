@@ -36,10 +36,10 @@ setup(
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    python_requires=">=3.6, <3.10",
+    python_requires=">=3.7",
     install_requires=[
+        "pydantic>=2,<3"
         "requests>=2.7.0",
-        "schematics==2.0.0.dev2",
         "python-dateutil>=2.4.2",
         "pytz>=2017.2,<=2021.1",
     ],
