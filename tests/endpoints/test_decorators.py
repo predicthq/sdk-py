@@ -1,4 +1,7 @@
 import pytest
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.base import BaseEndpoint
@@ -46,9 +49,9 @@ def test_accepts():
 
 
 def test_returns():
-    class SchemaExample(schemas.Model):
-        arg1 = schemas.StringType(required=True)
-        arg2 = schemas.ListType(schemas.IntType)
+    class SchemaExample(BaseModel):
+        arg1: str
+        arg2: List[int]
 
     class EndpointExample(BaseEndpoint):
         @decorators.returns(SchemaExample)
@@ -56,19 +59,18 @@ def test_returns():
             return kwargs
 
     endpoint = EndpointExample(None)
-    assert endpoint.func(arg1="test", arg2=[1, 2]) == SchemaExample({"arg1": "test", "arg2": [1, 2]})
+    assert endpoint.func(arg1="test", arg2=[1, 2]).model_dump(exclude_none=True) == SchemaExample(**{"arg1": "test", "arg2": [1, 2]}).model_dump(exclude_none=True)
 
     with pytest.raises(ValidationError):
         endpoint.func(arg2=[1, 2])
 
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError) as e:
         endpoint.func(arg1="value", arg2="invalid")
 
 
 def test_returns_resultset_of_native_types():
     class SchemaExample(schemas.ResultSet):
-
-        results = schemas.ListType(schemas.StringType)
+        results: Optional[List[str]] = []
 
     class EndpointExample(BaseEndpoint):
         @decorators.returns(SchemaExample)
@@ -76,19 +78,17 @@ def test_returns_resultset_of_native_types():
             return kwargs
 
     endpoint = EndpointExample(None)
-    assert endpoint.func(results=["item1", "item2"]) == SchemaExample({"results": ["item1", "item2"]})
-    assert endpoint.func()._more(results=["item3", "item4"]) == SchemaExample({"results": ["item3", "item4"]})
+    assert endpoint.func(results=["item1", "item2"]).model_dump(exclude_none=True) == SchemaExample(**{"results": ["item1", "item2"]}).model_dump(exclude_none=True)
+    assert endpoint.func()._more(results=["item3", "item4"]).model_dump(exclude_none=True) == SchemaExample(**{"results": ["item3", "item4"]}).model_dump(exclude_none=True)
     assert endpoint == endpoint.func()._endpoint
 
 
 def test_returns_resultset_of_models():
     class ModelExample(schemas.ResultSet):
-
-        name = schemas.StringType()
+        name: str
 
     class SchemaExample(schemas.ResultSet):
-
-        results = schemas.ResultType(ModelExample)
+        results: Optional[List[ModelExample]] = None
 
     class EndpointExample(BaseEndpoint):
         @decorators.returns(SchemaExample)
@@ -97,10 +97,7 @@ def test_returns_resultset_of_models():
 
     endpoint = EndpointExample(None)
     results = endpoint.func(results=[{"name": "item1"}, {"name": "item2"}])
-    assert results, SchemaExample({"results": [{"name": "item1"} == {"name": "item2"}]})
-    assert endpoint.func()._more(results=[{"name": "item2"}, {"name": "item4"}]) == SchemaExample(
-        {"results": [{"name": "item2"}, {"name": "item4"}]}
-    )
-
-    for item in results:
-        assert item._endpoint == endpoint
+    assert results, SchemaExample(**{"results": [{"name": "item1"} == {"name": "item2"}]})
+    assert endpoint.func()._more(results=[{"name": "item2"}, {"name": "item4"}]).model_dump(exclude_none=True) == SchemaExample(
+        **{"results": [{"name": "item2"}, {"name": "item4"}]}
+    ).model_dump(exclude_none=True)

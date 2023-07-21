@@ -11,7 +11,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 # The search() method returns an EventResultSet which allows you to iterate
 # over the first page of Broadcast objects (10 results by default)
 for broadcast in phq.broadcasts.search():
-    print(broadcast.to_dict())
+    print(broadcast.model_dump(exclude_none=True))
 
 
 # You can access the Broadcast object attributes directly.

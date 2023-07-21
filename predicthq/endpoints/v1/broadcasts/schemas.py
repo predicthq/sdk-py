@@ -1,126 +1,95 @@
-from predicthq.endpoints.schemas import (
-    BooleanType,
-    DateTimeType,
-    FloatType,
-    IntType,
-    ListType,
-    Model,
-    ModelType,
-    ResultSet,
-    ResultType,
-    StringType,
-)
+from datetime import datetime
+from typing import List, Optional
+
+from pydantic import BaseModel
+
+from predicthq.endpoints.schemas import ResultSet
 
 
-class GeoPoint(Model):
-
-    lat = FloatType()
-    lon = FloatType()
-
-
-class BroadcastEventEntities(Model):
-    class Options:
-        serialize_when_none = False
-
-    entity_id = StringType()
-    type = StringType()
-    name = StringType()
-    formatted_address = StringType()
+class GeoPoint(BaseModel):
+    lat: float
+    lon: float
 
 
-class BroadcastEventLocation(Model):
-    class Options:
-        serialize_when_none = False
-
-    geopoint = ModelType(GeoPoint)
-    place_hierarchies = ListType(ListType(StringType))
-    country = StringType()
+class BroadcastEventEntities(BaseModel):
+    entity_id: str
+    type: str
+    name: str
+    formatted_address: str
 
 
-class BroadcastEventDates(Model):
-    class Options:
-        serialize_when_none = False
+class BroadcastEventLocation(BaseModel):
+    geopoint: GeoPoint
+    place_hierarchies: List[List[str]]
+    country: str
 
-    start = DateTimeType()
-    end = DateTimeType()
-    start_local = DateTimeType()
-    end_local = DateTimeType()
-    timezone = StringType()
+
+class BroadcastEventDates(BaseModel):
+    start: datetime
+    end: Optional[datetime] = None
+    start_local: datetime
+    end_local: Optional[datetime] = None
+    timezone: str
 
     # predicted_end_local is a paid feature.
     # It will only show up in your response body if you
     # have subscribed to it.
-    predicted_end_local = DateTimeType()
+    predicted_end_local: Optional[datetime] = None
 
 
-class BroadcastEvent(Model):
-    class Options:
-        serialize_when_none = False
-
-    event_id = StringType()
-    title = StringType()
-    category = StringType()
-    labels = ListType(StringType)
-    dates = ModelType(BroadcastEventDates)
-    location = ModelType(BroadcastEventLocation)
-    entities = ListType(ModelType(BroadcastEventEntities))
+class BroadcastEvent(BaseModel):
+    event_id: str
+    title: str
+    category: str
+    labels: List[str]
+    dates: BroadcastEventDates
+    location: BroadcastEventLocation
+    entities: List[BroadcastEventEntities]
 
     # The following fields are paid features.
     # They will only show up in your response body if you
     # have subscribed to them.
-    phq_attendance = IntType()
-    phq_rank = IntType()
-    local_rank = IntType()
-    aviation_rank = IntType()
+    phq_attendance: Optional[int] = None
+    phq_rank: Optional[int] = None
+    local_rank: Optional[int] = None
+    aviation_rank: Optional[int] = None
 
 
-class Place(Model):
-    class Options:
-        serialize_when_none = False
-
-    place_id = StringType()
-    type = StringType()
-    name = StringType()
-    county = StringType()
-    region = StringType()
-    country = StringType()
+class Place(BaseModel):
+    place_id: str
+    type: str
+    name: str
+    county: str
+    region: str
+    country: str
 
 
-class BroadcastLocation(Model):
-    class Options:
-        serialize_when_none = False
-
-    geopoint = ModelType(GeoPoint)
-    place_hierarchies = ListType(ListType(StringType))
-    places = ListType(ModelType(Place))
-    country = StringType()
+class BroadcastLocation(BaseModel):
+    geopoint: GeoPoint
+    place_hierarchies: List[List[str]]
+    places: List[Place]
+    country: str
 
 
-class BroadcastDates(Model):
-    class Options:
-        serialize_when_none = False
-
-    start = DateTimeType()
-    start_local = DateTimeType()
-    timezone = StringType()
+class BroadcastDates(BaseModel):
+    start: datetime
+    start_local: datetime
+    timezone: str
 
 
-class Broadcast(Model):
-    class Options:
-        serialize_when_none = False
-
-    broadcast_id = StringType()
-    updated = DateTimeType()
-    first_seen = DateTimeType()
-    dates = ModelType(BroadcastDates)
-    location = ModelType(BroadcastLocation)
-    phq_viewership = IntType()
-    record_status = StringType()
-    broadcast_status = StringType()
-    event = ModelType(BroadcastEvent)
+class Broadcast(BaseModel):
+    broadcast_id: str
+    updated: datetime
+    first_seen: datetime
+    dates: BroadcastDates
+    location: BroadcastLocation
+    phq_viewership: int
+    record_status: str
+    broadcast_status: str
+    event: BroadcastEvent
 
 
 class BroadcastResultSet(ResultSet):
 
-    overflow = BooleanType()
-    results = ResultType(Broadcast)
+    overflow: bool
+    results: List[Broadcast]

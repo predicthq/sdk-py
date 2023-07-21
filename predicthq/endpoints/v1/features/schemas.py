@@ -1,130 +1,114 @@
-from schematics.types.compound import DictType
+from datetime import date
+from typing import List
 
-from predicthq.endpoints.schemas import (
-    DateType,
-    DictType,
-    FloatType,
-    IntRange,
-    IntType,
-    ListType,
-    Model,
-    ModelType,
-    ResultSet,
-    ResultType,
-    StringType,
-)
+from typing import Optional
+
+from pydantic import BaseModel
+
+from predicthq.endpoints.schemas import ResultSet
 
 
-class FeatureRankLevel(Model):
+class FeatureRankLevel(BaseModel):
+    rank_levels: dict
+
+
+class FeatureStats(BaseModel):
+    avg: Optional[float] = None
+    count: Optional[int] = None
+    max: Optional[float] = None
+    median: Optional[float] = None
+    min: Optional[float] = None
+    sum: Optional[float] = None
+    std_dev: Optional[float] = None
+
+
+class FeatureStat(BaseModel):
+    stats: FeatureStats
+
+
+class Feature(BaseModel):
     class Options:
         serialize_when_none = False
 
-    rank_levels = DictType(StringType)
-
-
-class FeatureStats(Model):
-    class Options:
-        serialize_when_none = False
-
-    avg = FloatType()
-    count = IntType()
-    max = FloatType()
-    median = FloatType()
-    min = FloatType()
-    sum = FloatType()
-    std_dev = FloatType()
-
-
-class FeatureStat(Model):
-    class Options:
-        serialize_when_none = False
-
-    stats = ModelType(FeatureStats)
-
-
-class Feature(Model):
-    class Options:
-        serialize_when_none = False
-
-    date = DateType()
+    date: date
     # Attendance based features
-    phq_attendance_academic_graduation = ModelType(FeatureStat)
-    phq_attendance_academic_social = ModelType(FeatureStat)
-    phq_attendance_community = ModelType(FeatureStat)
-    phq_attendance_concerts = ModelType(FeatureStat)
-    phq_attendance_conferences = ModelType(FeatureStat)
-    phq_attendance_expos = ModelType(FeatureStat)
-    phq_attendance_festivals = ModelType(FeatureStat)
-    phq_attendance_performing_arts = ModelType(FeatureStat)
-    phq_attendance_school_holidays = ModelType(FeatureStat)
-    phq_attendance_sports = ModelType(FeatureStat)
+    phq_attendance_academic_graduation: Optional[FeatureStat] = None
+    phq_attendance_academic_social: Optional[FeatureStat] = None
+    phq_attendance_community: Optional[FeatureStat] = None
+    phq_attendance_concerts: Optional[FeatureStat] = None
+    phq_attendance_conferences: Optional[FeatureStat] = None
+    phq_attendance_expos: Optional[FeatureStat] = None
+    phq_attendance_festivals: Optional[FeatureStat] = None
+    phq_attendance_performing_arts: Optional[FeatureStat] = None
+    phq_attendance_school_holidays: Optional[FeatureStat] = None
+    phq_attendance_sports: Optional[FeatureStat] = None
     # Rank based features
-    phq_rank_daylight_savings = ModelType(FeatureRankLevel)
-    phq_rank_health_warnings = ModelType(FeatureRankLevel)
-    phq_rank_observances = ModelType(FeatureRankLevel)
-    phq_rank_public_holidays = ModelType(FeatureRankLevel)
-    phq_rank_school_holidays = ModelType(FeatureRankLevel)
-    phq_rank_politics = ModelType(FeatureRankLevel)
-    phq_rank_academic_session = ModelType(FeatureRankLevel)
-    phq_rank_academic_exam = ModelType(FeatureRankLevel)
-    phq_rank_academic_holiday = ModelType(FeatureRankLevel)
+    phq_rank_daylight_savings: Optional[FeatureRankLevel] = None
+    phq_rank_health_warnings: Optional[FeatureRankLevel] = None
+    phq_rank_observances: Optional[FeatureRankLevel] = None
+    phq_rank_public_holidays: Optional[FeatureRankLevel] = None
+    phq_rank_school_holidays: Optional[FeatureRankLevel] = None
+    phq_rank_politics: Optional[FeatureRankLevel] = None
+    phq_rank_academic_session: Optional[FeatureRankLevel] = None
+    phq_rank_academic_exam: Optional[FeatureRankLevel] = None
+    phq_rank_academic_holiday: Optional[FeatureRankLevel] = None
     # Impact based feature criteria
-    phq_impact_severe_weather_air_quality_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_blizzard_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_cold_wave_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_cold_wave_snow_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_cold_wave_storm_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_dust_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_dust_storm_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_flood_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_heat_wave_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_hurricane_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_thunderstorm_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_tornado_retail = ModelType(FeatureStat)
-    phq_impact_severe_weather_tropical_storm_retail = ModelType(FeatureStat)
+    phq_impact_severe_weather_air_quality_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_blizzard_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_cold_wave_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_cold_wave_snow_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_cold_wave_storm_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_dust_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_dust_storm_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_flood_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_heat_wave_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_hurricane_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_thunderstorm_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_tornado_retail: Optional[FeatureStat] = None
+    phq_impact_severe_weather_tropical_storm_retail: Optional[FeatureStat] = None
     # Viewership based features
-    phq_viewership_sports = ModelType(FeatureStat)
-    phq_viewership_sports_american_football = ModelType(FeatureStat)
-    phq_viewership_sports_american_football_ncaa_men = ModelType(FeatureStat)
-    phq_viewership_sports_american_football_nfl = ModelType(FeatureStat)
-    phq_viewership_sports_auto_racing = ModelType(FeatureStat)
-    phq_viewership_sports_auto_racing_indy_car = ModelType(FeatureStat)
-    phq_viewership_sports_auto_racing_nascar = ModelType(FeatureStat)
-    phq_viewership_sports_baseball = ModelType(FeatureStat)
-    phq_viewership_sports_baseball_mlb = ModelType(FeatureStat)
-    phq_viewership_sports_baseball_ncaa_men = ModelType(FeatureStat)
-    phq_viewership_sports_basketball = ModelType(FeatureStat)
-    phq_viewership_sports_basketball_ncaa_women = ModelType(FeatureStat)
-    phq_viewership_sports_basketball_ncaa_men = ModelType(FeatureStat)
-    phq_viewership_sports_basketball_nba = ModelType(FeatureStat)
-    phq_viewership_sports_boxing = ModelType(FeatureStat)
-    phq_viewership_sports_golf = ModelType(FeatureStat)
-    phq_viewership_sports_golf_masters = ModelType(FeatureStat)
-    phq_viewership_sports_golf_pga_championship = ModelType(FeatureStat)
-    phq_viewership_sports_golf_pga_tour = ModelType(FeatureStat)
-    phq_viewership_sports_golf_us_open = ModelType(FeatureStat)
-    phq_viewership_sports_horse_racing = ModelType(FeatureStat)
-    phq_viewership_sports_horse_racing_belmont_stakes = ModelType(FeatureStat)
-    phq_viewership_sports_horse_racing_kentucky_derby = ModelType(FeatureStat)
-    phq_viewership_sports_horse_racing_preakness_stakes = ModelType(FeatureStat)
-    phq_viewership_sports_ice_hockey = ModelType(FeatureStat)
-    phq_viewership_sports_ice_hockey_nhl = ModelType(FeatureStat)
-    phq_viewership_sports_mma = ModelType(FeatureStat)
-    phq_viewership_sports_mma_ufc = ModelType(FeatureStat)
-    phq_viewership_sports_soccer = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_concacaf_champions_league = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_concacaf_gold_cup = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_copa_america_men = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_fifa_world_cup_women = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_fifa_world_cup_men = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_mls = ModelType(FeatureStat)
-    phq_viewership_sports_soccer_uefa_champions_league_men = ModelType(FeatureStat)
-    phq_viewership_sports_softball = ModelType(FeatureStat)
-    phq_viewership_sports_softball_ncaa_women = ModelType(FeatureStat)
-    phq_viewership_sports_tennis = ModelType(FeatureStat)
-    phq_viewership_sports_tennis_us_open = ModelType(FeatureStat)
-    phq_viewership_sports_tennis_wimbledon = ModelType(FeatureStat)
+    phq_viewership_sports: Optional[FeatureStat] = None
+    phq_viewership_sports_american_football: Optional[FeatureStat] = None
+    phq_viewership_sports_american_football_ncaa_men: Optional[FeatureStat] = None
+    phq_viewership_sports_american_football_nfl: Optional[FeatureStat] = None
+    phq_viewership_sports_auto_racing: Optional[FeatureStat] = None
+    phq_viewership_sports_auto_racing_indy_car: Optional[FeatureStat] = None
+    phq_viewership_sports_auto_racing_nascar: Optional[FeatureStat] = None
+    phq_viewership_sports_baseball: Optional[FeatureStat] = None
+    phq_viewership_sports_baseball_mlb: Optional[FeatureStat] = None
+    phq_viewership_sports_baseball_ncaa_men: Optional[FeatureStat] = None
+    phq_viewership_sports_basketball: Optional[FeatureStat] = None
+    phq_viewership_sports_basketball_ncaa_women: Optional[FeatureStat] = None
+    phq_viewership_sports_basketball_ncaa_men: Optional[FeatureStat] = None
+    phq_viewership_sports_basketball_nba: Optional[FeatureStat] = None
+    phq_viewership_sports_boxing: Optional[FeatureStat] = None
+    phq_viewership_sports_golf: Optional[FeatureStat] = None
+    phq_viewership_sports_golf_masters: Optional[FeatureStat] = None
+    phq_viewership_sports_golf_pga_championship: Optional[FeatureStat] = None
+    phq_viewership_sports_golf_pga_tour: Optional[FeatureStat] = None
+    phq_viewership_sports_golf_us_open: Optional[FeatureStat] = None
+    phq_viewership_sports_horse_racing: Optional[FeatureStat] = None
+    phq_viewership_sports_horse_racing_belmont_stakes: Optional[FeatureStat] = None
+    phq_viewership_sports_horse_racing_kentucky_derby: Optional[FeatureStat] = None
+    phq_viewership_sports_horse_racing_preakness_stakes: Optional[FeatureStat] = None
+    phq_viewership_sports_ice_hockey: Optional[FeatureStat] = None
+    phq_viewership_sports_ice_hockey_nhl: Optional[FeatureStat] = None
+    phq_viewership_sports_mma: Optional[FeatureStat] = None
+    phq_viewership_sports_mma_ufc: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_concacaf_champions_league: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_concacaf_gold_cup: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_copa_america_men: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_fifa_world_cup_women: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_fifa_world_cup_men: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_mls: Optional[FeatureStat] = None
+    phq_viewership_sports_soccer_uefa_champions_league_men: Optional[FeatureStat] = None
+    phq_viewership_sports_softball: Optional[FeatureStat] = None
+    phq_viewership_sports_softball_ncaa_women: Optional[FeatureStat] = None
+    phq_viewership_sports_tennis: Optional[FeatureStat] = None
+    phq_viewership_sports_tennis_us_open: Optional[FeatureStat] = None
+    phq_viewership_sports_tennis_wimbledon: Optional[FeatureStat] = None
 
 
 class FeatureResultSet(ResultSet):
-    results = ResultType(Feature)
+    results: List[Feature]

@@ -1,19 +1,12 @@
-from predicthq.endpoints.schemas import (
-    FloatType,
-    Model,
-    ModelType,
-    StringType,
-)
+from pydantic import BaseModel
 
 
-class LocationResult(Model):
+class LocationResult(BaseModel):
+    lat: float
+    lon: float
 
-    lat = FloatType(required=True)
-    lon = FloatType(required=True)
 
-
-class SuggestedRadiusResultSet(Model):
-
-    radius = FloatType()
-    radius_unit = StringType()
-    location = ModelType(LocationResult)
+class SuggestedRadiusResultSet(BaseModel):
+    radius: float
+    radius_unit: str
+    location: LocationResult
