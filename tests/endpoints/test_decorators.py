@@ -11,6 +11,7 @@ def test_to_params():
         "list_type": [1, 2, 3],
         "dict_type": {"key1": "val1", "key2": "val2"},
         "bool_type": True,
+        "nested_dict_type": {"key1": {"key2": "val2", "key3": "val3"}},
     }
     expected = {
         "string_type": "my-string",
@@ -18,6 +19,8 @@ def test_to_params():
         "dict_type.key1": u"val1",
         "dict_type.key2": "val2",
         "bool_type": 1,
+        "nested_dict_type.key1.key2": "val2",
+        "nested_dict_type.key1.key3": "val3",
     }
     assert decorators._to_url_params(kwargs) == expected
 

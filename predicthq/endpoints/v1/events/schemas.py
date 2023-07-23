@@ -27,6 +27,7 @@ from predicthq.endpoints.schemas import (
     StringListType,
     StringModelType,
     StringType,
+    PredictedEventSpendIndustry,
 )
 from schematics.common import NONEMPTY
 
@@ -70,6 +71,8 @@ class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
     predicted_end = ModelType(DateTimeRange)
     rank = ModelType(IntRange)
     rank_level = ListType(IntType(min_value=1, max_value=5))
+    predicted_event_spend = ModelType(IntRange)
+    predicted_event_spend_industry = ModelType(PredictedEventSpendIndustry)
 
 
 class Entities(Model):
@@ -126,6 +129,12 @@ class Geo(Model):
 
     geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
     placekey = StringType()
+
+
+class PredictedEventSpendIndustries(Model):
+    accommodation = IntType()
+    hospitality = IntType()
+    transportation = IntType()
 
 
 class ParentEvent(Model):
@@ -185,6 +194,8 @@ class Event(Model):
     predicted_end = DateTimeType()
     private = BooleanType()  # Loop add-on
     rank = IntType()  # PHQ Rank add-on
+    predicted_event_spend = IntType()  # Predicted Event Spend add-on
+    predicted_event_spend_industries = ModelType(PredictedEventSpendIndustries)
 
 
 class EventResultSet(ResultSet):
