@@ -40,7 +40,6 @@ def test_accepts():
     assert transformed_args == ()
 
     transformed_args, transformed_kwargs = endpoint.func({"arg1": "test", "arg2": [1, 2]})
-    endpoint.func(arg1="test", arg2=[1, 2])
     assert transformed_kwargs == {}
     assert transformed_args == ({"arg1": "test", "arg2": [1, 2]},)
 
