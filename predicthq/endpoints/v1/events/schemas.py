@@ -1,164 +1,128 @@
-from predicthq.endpoints.schemas import (
-    BooleanType,
-    DateTimeType,
-    DateType,
-    DictType,
-    FloatType,
-    GeoJSONPointType,
-    IntType,
-    ListType,
-    Model,
-    ModelType,
-    PolyModelType,
-    ResultSet,
-    ResultType,
-    StringType,
-)
-from schematics.common import NONEMPTY
+from datetime import date, datetime
+from typing import List, Optional, Tuple, Union
+
+from pydantic import BaseModel, field_validator
+
+from predicthq.endpoints.schemas import ResultSet
 
 
-class Entities(Model):
-    class Options:
-        serialize_when_none = True
-
-    entity_id = StringType()
-    name = StringType()
-    type = StringType()
-    formatted_address = StringType()
+class Entities(BaseModel):
+    entity_id: str
+    name: str
+    type: str
+    formatted_address: Optional[str] = None
 
 
-class Point(Model):
-
-    type = StringType()
-    coordinates = ListType(FloatType())
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["Point"]
+class Point(BaseModel):
+    type: str
+    coordinates: List[float]
 
 
-class MultiPoint(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(FloatType()))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiPoint", "LineString"]
+class MultiPoint(BaseModel):
+    type: str
+    coordinates: List[List[float]]
 
 
-class Polygon(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(ListType(FloatType())))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiLineString", "Polygon"]
+class Polygon(BaseModel):
+    type: str
+    coordinates: List[List[List[float]]]
 
 
-class MultiPolygon(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(ListType(ListType(FloatType()))))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiPolygon"]
+class MultiPolygon(BaseModel):
+    type: str
+    coordinates: List[List[List[List[float]]]]
 
 
-class Geo(Model):
-
-    geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
-    placekey = StringType()
-
-
-class ParentEvent(Model):
-
-    parent_event_id = StringType()
+class Geo(BaseModel):
+    geometry: Union[Point, MultiPoint, Polygon, MultiPolygon]
+    placekey: Optional[str] = None
 
 
-class ImpactPatternImpacts(Model):
-
-    date_local = DateType()
-    value = IntType()
-    position = StringType()
+class ParentEvent(BaseModel):
+    parent_event_id: str
 
 
-class ImpactPattern(Model):
+class ImpactPatternImpacts(BaseModel):
+    date_local: date
+    value: int
+    position: str
 
-    vertical = StringType()
-    impact_type = StringType()
-    impacts = ListType(ModelType(ImpactPatternImpacts))
+
+class ImpactPattern(BaseModel):
+
+    vertical: str
+    impact_type: str
+    impacts: List[ImpactPatternImpacts]
 
 
-class Event(Model):
-    class Options:
-        serialize_when_none = True
-
-    cancelled = DateTimeType()
-    category = StringType()
-    country = StringType()
-    deleted_reason = StringType()
-    description = StringType()
-    duplicate_of_id = StringType()
-    duration = IntType()
-    end = DateTimeType()
-    first_seen = DateTimeType()
-    geo = ModelType(Geo)
-    id = StringType()
-    impact_patterns = ListType(ModelType(ImpactPattern))
-    labels = ListType(StringType())
-    location = GeoJSONPointType()
-    parent_event = ModelType(ParentEvent)
-    place_hierarchies = ListType(ListType(StringType()))
-    postponed = DateTimeType()
-    relevance = FloatType()
-    scope = StringType()
-    start = DateTimeType()
-    state = StringType()
-    timezone = StringType()
-    title = StringType()
-    updated = DateTimeType()
+class Event(BaseModel):
+    cancelled: Optional[datetime] = None
+    category: str
+    country: str
+    deleted_reason: Optional[str] = None
+    description: Optional[str] = None
+    duplicate_of_id: Optional[str] = None
+    duration: Optional[int] = None
+    end: Optional[datetime] = None
+    first_seen: Optional[datetime] = None
+    geo: Optional[Geo] = None
+    id: str
+    impact_patterns: Optional[List[ImpactPattern]] = []
+    labels: List[str]
+    location: Tuple[float, float]
+    parent_event: Optional[ParentEvent] = None
+    place_hierarchies: Optional[List[List[str]]] = None
+    postponed: Optional[datetime] = None
+    relevance: Optional[float] = None
+    scope: Optional[str] = None
+    start: datetime
+    state: Optional[str] = None
+    timezone: Optional[str] = None
+    title: str
+    updated: Optional[datetime] = None
 
     # The below fields are only available if they are enabled in your plan.
-    aviation_rank = IntType()  # Aviation Rank add-on
-    brand_safe = BooleanType()
-    entities = ListType(ModelType(Entities))  # Venues and addresses add-on
-    local_rank = IntType()  # Local Rank add-on
-    phq_attendance = IntType()  # PHQ Attendance add-on
-    predicted_end = DateTimeType()
-    private = BooleanType()  # Loop add-on
-    rank = IntType()  # PHQ Rank add-on
+    aviation_rank: Optional[int] = None  # Aviation Rank add-on
+    brand_safe: Optional[bool] = None
+    entities: Optional[List[Entities]] = []  # Venues and addresses add-on
+    local_rank: Optional[int] = None  # Local Rank add-on
+    phq_attendance: Optional[int] = None  # PHQ Attendance add-on
+    predicted_end: Optional[datetime] = None
+    private: Optional[bool] = None  # Loop add-on
+    rank: Optional[int] = None  # PHQ Rank add-on
+
+    @field_validator("location")
+    def reverse_location(cls, value: Tuple[float, float]):
+        """
+        Location is received as follows:
+        "location": [lon, lat]
+        By convention, we are used to have geopoints formated as lat,lon, which is what this validator enforces
+        """
+        return value[1], value[0]
 
 
 class EventResultSet(ResultSet):
-
-    overflow = BooleanType()
-
-    results = ResultType(Event)
+    overflow: Optional[bool] = False
+    results: List[Event]
 
 
-class CountResultSet(Model):
+class CountResultSet(BaseModel):
+    count: int
+    top_rank: float
+    rank_levels: dict
+    categories: dict
+    labels: dict
 
-    count = IntType()
-    top_rank = FloatType()
-    rank_levels = DictType(IntType)
-    categories = DictType(IntType)
-    labels = DictType(IntType)
 
-
-class CalendarDay(Model):
-
-    date = DateType()
-    count = IntType()
-    top_rank = FloatType()
-    rank_levels = DictType(IntType)
-    categories = DictType(IntType)
-    labels = DictType(IntType)
-    top_events = ModelType(EventResultSet)
+class CalendarDay(BaseModel):
+    date: date
+    count: int
+    top_rank: float
+    rank_levels: dict
+    categories: dict
+    labels: dict
+    top_events: EventResultSet
 
 
 class CalendarResultSet(ResultSet):
-
-    results = ResultType(CalendarDay)
+    results: List[CalendarDay]

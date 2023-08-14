@@ -12,8 +12,8 @@ phq = Client(access_token=ACCESS_TOKEN)
 # to be used when retrieving events. supported industries: "parking",
 # "restaurants", "retail", "accommodation",
 suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750")
-print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.to_dict())
+print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.model_dump(exclude_none=True))
 
 
 suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750", radius_unit="mi", industry="retail")
-print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.to_dict())
+print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.model_dump(exclude_none=True))

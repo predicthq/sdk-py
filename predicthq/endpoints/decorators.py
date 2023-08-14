@@ -1,7 +1,9 @@
 import functools
 from collections import defaultdict
 
-from predicthq.endpoints.schemas import ResultSet, Model, SchematicsDataError
+from pydantic import ValidationError as PydanticValidationError
+
+from predicthq.endpoints.schemas import ResultSet
 from predicthq.exceptions import ValidationError
 
 
@@ -56,43 +58,23 @@ def accepts(query_string=True, role=None):
     return decorator
 
 
-def returns(schema_class):
+def returns(model_class):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
 
-            schema = getattr(endpoint.Meta, f.__name__, {}).get("returns", schema_class)
+            model = getattr(endpoint.Meta, f.__name__, {}).get("returns", model_class)
 
             data = f(endpoint, *args, **kwargs)
             try:
-                model = schema()
-                model._endpoint = endpoint
-
-                # if schema class is a ResultSet, tell it how to load more results
-                if issubclass(schema_class, ResultSet):
-                    model._more = functools.partial(wrapper, endpoint)
-
-                    # if results are of type Model, make sure to set the endpoint on each item
-                    if (
-                        data is not None
-                        and "results" in data
-                        and hasattr(model._fields["results"], "model_class")
-                        and issubclass(model._fields["results"].model_class, Model)
-                    ):
-
-                        def initialize_result_type(item_data):
-                            item = model._fields["results"].model_class(item_data, strict=False)
-                            item._endpoint = endpoint
-                            return item
-
-                        # Use generator so results are not iterated over more than necessary
-                        data["results"] = (initialize_result_type(item_data) for item_data in data["results"])
-
-                model.import_data(data, strict=False)
-                model.validate()
-            except SchematicsDataError as e:
-                raise ValidationError(e.messages)
-            return model
+                loaded_model = model(**data) if data else model()
+                loaded_model._more = functools.partial(wrapper, endpoint)
+                loaded_model._endpoint = endpoint
+                return loaded_model
+            except PydanticValidationError as e:
+                if not data:
+                    return
+                raise ValidationError(e)
 
         return wrapper
 

@@ -1,15 +1,23 @@
-from predicthq.config import config
-from predicthq.endpoints.schemas import (
-    ConfigMixin,
-    IntType,
-    Model,
-    StringType,
-    StringListType,
-)
+from typing import List, Optional, Union
 
-class AccessToken(Model):
-    access_token = StringType()
-    token_type = StringType()
-    scope = StringListType(StringType, separator=" ")
-    refresh_token = StringType(serialize_when_none=False)
-    expires_in = IntType(serialize_when_none=False)
+from pydantic import BaseModel, field_validator
+
+from predicthq.config import config
+
+
+class AccessToken(BaseModel):
+    access_token: str
+    token_type: str
+    scope: List[str]
+    refresh_token: Optional[str] = None
+    expires_in: Optional[int] = None
+
+    @field_validator("scope", mode="before")
+    def parse_scope(cls, value: Optional[Union[List[str], str]] = None):
+        if isinstance(value, str):
+            if " " in value:
+                return value.split(" ")
+            elif "," in value:
+                return value.split(",")
+            return [value]
+        return value
