@@ -12,6 +12,11 @@ class Entities(BaseModel):
     type: str
     formatted_address: Optional[str] = None
 
+class PredictedEventSpendIndustries(BaseModel):
+    accommodation: int
+    hospitality: int
+    transportation: int
+
 
 class Point(BaseModel):
     type: str

@@ -18,14 +18,23 @@ def _to_url_params(data, glue=".", separator=","):
         elif isinstance(value, list):
             params[key] = separator.join(map(str, value))
         elif isinstance(value, dict):
-            for subkey, subvalue in value.items():
-                if isinstance(subvalue, list):
-                    params[glue.join((key, subkey))] = separator.join(map(str, subvalue))
-                else:
-                    params[glue.join((key, subkey))] = subvalue
+            params.update(_flatten_dict(value, glue, separator, parent_key=key))
         else:
             params[key] = value
     return params
+
+
+def _flatten_dict(d, glue, separator, parent_key=""):
+    flat_dict = {}
+    for k, v in d.items():
+        if isinstance(v, dict):
+            flat_dict.update(_flatten_dict(v, glue, separator, f"{parent_key}{glue}{k}" if parent_key else k))
+            continue
+        if isinstance(v, list):
+            flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: separator.join(map(str, v))})
+            continue
+        flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: v})
+    return flat_dict
 
 
 def _process_kwargs(kwargs, separator="__"):
