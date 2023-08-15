@@ -1,4 +1,4 @@
-name: Build
+name: Build Beta
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestbranchestags
 # on.push.tags: "*"
@@ -6,7 +6,7 @@ name: Build
 on:
   push:
     tags:
-      - "*"
+      - "**beta**" # move back to "*" before deploying to a stable version
 
 jobs:
   test:
@@ -18,16 +18,13 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - "3.6"
           - "3.7"
           - "3.8"
           - "3.9"
+          - "3.10"
+          - "3.11"
         include:
           - os: "ubuntu-latest"
-          # There is no build for Python 3.6 in ubuntu>20.04.
-          # This unclude can be removed when we drop support for Python 3.6.
-          - os: "ubuntu-20.04"
-            python-version: "3.6"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
