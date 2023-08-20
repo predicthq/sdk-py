@@ -66,7 +66,7 @@ Those errors will be formatted as follows
 ```
 
 ## Cannot use classes as query parameters anymore
-Our endpoints would allow users to use a `schematics` instance as a query parameter when querying our APIs.
+Our endpoints used to allow users to use a `schematics` instance as a query parameter when querying our APIs.
 
 e.g.
 ```python
