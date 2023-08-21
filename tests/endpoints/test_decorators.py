@@ -41,7 +41,12 @@ def test_accepts():
             return args, kwargs
 
     endpoint = EndpointExample(None)
+
     transformed_args, transformed_kwargs = endpoint.func(arg1="test", arg2=[1, 2])
+    assert transformed_kwargs == {"arg1": "test", "arg2": "1,2"}
+    assert transformed_args == ()
+
+    transformed_args, transformed_kwargs = endpoint.func(**{"arg1": "test", "arg2": [1, 2]})
     assert transformed_kwargs == {"arg1": "test", "arg2": "1,2"}
     assert transformed_args == ()
 
@@ -66,7 +71,7 @@ def test_returns():
     with pytest.raises(ValidationError):
         endpoint.func(arg2=[1, 2])
 
-    with pytest.raises(ValidationError) as e:
+    with pytest.raises(ValidationError):
         endpoint.func(arg1="value", arg2="invalid")
 
 
@@ -99,7 +104,7 @@ def test_returns_resultset_of_models():
 
     endpoint = EndpointExample(None)
     results = endpoint.func(results=[{"name": "item1"}, {"name": "item2"}])
-    assert results, SchemaExample(**{"results": [{"name": "item1"} == {"name": "item2"}]})
+    assert results.model_dump(exclude_none=True) == SchemaExample(**{"results": [{"name": "item1"}, {"name": "item2"}]}).model_dump(exclude_none=True)
     assert endpoint.func()._more(results=[{"name": "item2"}, {"name": "item4"}]).model_dump(exclude_none=True) == SchemaExample(
         **{"results": [{"name": "item2"}, {"name": "item4"}]}
     ).model_dump(exclude_none=True)
