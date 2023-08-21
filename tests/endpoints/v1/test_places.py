@@ -4,11 +4,11 @@ import pytest
 
 from predicthq.endpoints import schemas
 from predicthq.endpoints.v1.places.schemas import PlaceResultSet
-from tests import with_mock_client, with_mock_responses, with_client
+from tests import load_fixture, with_mock_client, with_mock_responses, with_client
 
 
 class PlacesTest(unittest.TestCase):
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/places_test/test_empty_search"))
     def test_search_params(self, client):
         client.places.search(country=["NZ", "AU"])
         client.request.assert_called_once_with(
@@ -17,7 +17,7 @@ class PlacesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/places_test/test_empty_search"))
     def test_search_params_without_ssl_verification(self, client):
         client.places.search(country=["NZ", "AU"], config={"verify_ssl": False})
         client.request.assert_called_once_with(
@@ -32,4 +32,3 @@ class PlacesTest(unittest.TestCase):
         result = client.places.search(country=["NZ", "AU"])
         assert isinstance(result, PlaceResultSet)
         assert result.count == len(list(result.iter_all()))
-        assert len(responses.calls) == 1

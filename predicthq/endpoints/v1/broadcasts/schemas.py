@@ -90,6 +90,5 @@ class Broadcast(BaseModel):
 
 
 class BroadcastResultSet(ResultSet):
-
     overflow: bool
-    results: List[Broadcast]
+    results: List[Optional[Broadcast]]

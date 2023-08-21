@@ -23,7 +23,7 @@ class OAuth2Test(unittest.TestCase):
         token_dump["scope"] = " ".join(token.scope)
         assert token_dump == client.request.return_value
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("access_token"))
     def test_get_token_params_without_ssl_verification(self, client):
         client.oauth2.get_token(
             client_id="client_id", client_secret="client_secret", scope=["account", "events"],

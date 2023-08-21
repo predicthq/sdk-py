@@ -1,11 +1,11 @@
 import unittest
 
 from predicthq.endpoints.v1.features.schemas import FeatureResultSet
-from tests import with_client, with_mock_client, with_mock_responses
+from tests import load_fixture, with_client, with_mock_client, with_mock_responses
 
 
 class FeaturesTest(unittest.TestCase):
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_mutate_default_criteria(self, client):
         client.features.obtain_features(
             active__gte="2021-01-01",
@@ -37,7 +37,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -75,7 +75,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31", location__place_id=["4671654"], config__verify_ssl=False
@@ -91,7 +91,7 @@ class FeaturesTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_dicts(self, client):
         feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
         client.features.obtain_features(
@@ -129,7 +129,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -147,7 +147,7 @@ class FeaturesTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_underscores(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
@@ -183,7 +183,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
@@ -201,7 +201,7 @@ class FeaturesTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_dicts(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -236,7 +236,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31"}, location={"place_id": ["4671654"]}, config={"verify_ssl": False}
@@ -262,7 +262,7 @@ class FeaturesTest(unittest.TestCase):
         )
         assert isinstance(result, FeatureResultSet)
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_impact_severe_weather_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -312,7 +312,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_impact_severe_weather_request_params_dicts(self, client):
         feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
         client.features.obtain_features(
@@ -358,7 +358,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -396,7 +396,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
@@ -414,7 +414,7 @@ class FeaturesTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_dicts(self, client):
         feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
         client.features.obtain_features(
@@ -450,7 +450,7 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31"},

@@ -111,4 +111,4 @@ class Feature(BaseModel):
 
 
 class FeatureResultSet(ResultSet):
-    results: List[Feature]
+    results: List[Optional[Feature]]

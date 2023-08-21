@@ -1,11 +1,11 @@
 import unittest
 
 from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, CountResultSet
-from tests import with_mock_client, with_mock_responses, with_client
+from tests import load_fixture, with_mock_client, with_mock_responses, with_client
 
 
 class EventsTest(unittest.TestCase):
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_underscores(self, client):
         client.events.search(
             id="id",
@@ -78,7 +78,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_datetimerange_params(self, client):
         client.events.search(
             start__gte="2016-03-01",
@@ -115,7 +115,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_underscores_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -128,7 +128,7 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_dicts(self, client):
         client.events.search(
             id="id",
@@ -188,7 +188,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_dicts_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -201,7 +201,7 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_for_account(self, client):
         client.events.for_account("account-id").search(q="query")
         client.request.assert_called_once_with(
@@ -211,7 +211,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_for_account_without_ssl_verification(self, client):
         client.events.for_account("account-id").search(q="query", config__verify_ssl=False)
         client.request.assert_called_once_with(

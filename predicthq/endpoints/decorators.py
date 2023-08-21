@@ -76,13 +76,11 @@ def returns(model_class):
 
             data = f(endpoint, *args, **kwargs)
             try:
-                loaded_model = model(**data) if data else model()
+                loaded_model = model(**data)
                 loaded_model._more = functools.partial(wrapper, endpoint)
                 loaded_model._endpoint = endpoint
                 return loaded_model
             except PydanticValidationError as e:
-                if not data:
-                    return
                 raise ValidationError(e)
 
         return wrapper

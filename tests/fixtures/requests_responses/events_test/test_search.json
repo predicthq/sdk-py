@@ -8,6 +8,7 @@
     "body": {
       "count": 12,
       "previous": null,
+      "overflow": false,
       "results": [
         {
           "category": "concerts",
@@ -361,6 +362,7 @@
     "body": {
       "count": 12,
       "previous": "https://api.predicthq.com/v1/events/?country=AU&limit=10&q=Foo+Fighters",
+      "overflow": false,
       "results": [
         {
           "category": "concerts",

@@ -108,7 +108,7 @@ class Event(BaseModel):
 
 class EventResultSet(ResultSet):
     overflow: Optional[bool] = False
-    results: List[Event]
+    results: List[Optional[Event]]
 
 
 class CountResultSet(BaseModel):
@@ -130,4 +130,4 @@ class CalendarDay(BaseModel):
 
 
 class CalendarResultSet(ResultSet):
-    results: List[CalendarDay]
+    results: List[Optional[CalendarDay]]

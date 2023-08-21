@@ -27,4 +27,4 @@ class Place(BaseModel):
 
 
 class PlaceResultSet(ResultSet):
-    results: List[Place]
+    results: List[Optional[Place]]
