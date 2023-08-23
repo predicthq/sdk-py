@@ -38,7 +38,7 @@ setup(
     packages=find_packages(exclude=("tests*",)),
     python_requires=">=3.7",
     install_requires=[
-        "pydantic>=2,<3"
+        "pydantic>=2,<3",
         "requests>=2.7.0",
         "python-dateutil>=2.4.2",
         "pytz>=2017.2,<=2021.1",
