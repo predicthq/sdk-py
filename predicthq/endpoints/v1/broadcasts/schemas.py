@@ -15,7 +15,7 @@ class BroadcastEventEntities(BaseModel):
     entity_id: str
     type: str
     name: str
-    formatted_address: str
+    formatted_address: Optional[str] = None
 
 
 class BroadcastEventLocation(BaseModel):
@@ -81,12 +81,12 @@ class Broadcast(BaseModel):
     broadcast_id: str
     updated: datetime
     first_seen: datetime
-    dates: BroadcastDates
-    location: BroadcastLocation
-    phq_viewership: int
+    dates: Optional[BroadcastDates] = None
+    location: Optional[BroadcastLocation] = None
+    phq_viewership: Optional[int] = None
     record_status: str
-    broadcast_status: str
-    event: BroadcastEvent
+    broadcast_status: Optional[str] = None
+    event: Optional[BroadcastEvent] = None
 
 
 class BroadcastResultSet(ResultSet):

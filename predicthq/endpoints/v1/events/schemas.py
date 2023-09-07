@@ -74,7 +74,7 @@ class Event(BaseModel):
     id: str
     impact_patterns: Optional[List[ImpactPattern]] = []
     labels: List[str]
-    location: Tuple[float, float]
+    location: Optional[Tuple[float, float]] = None
     parent_event: Optional[ParentEvent] = None
     place_hierarchies: Optional[List[List[str]]] = None
     postponed: Optional[datetime] = None
