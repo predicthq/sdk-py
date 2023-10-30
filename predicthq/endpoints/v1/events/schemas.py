@@ -95,6 +95,8 @@ class Event(BaseModel):
     predicted_end: Optional[datetime] = None
     private: Optional[bool] = None  # Loop add-on
     rank: Optional[int] = None  # PHQ Rank add-on
+    predicted_event_spend: Optional[int] = None  # Predicted Event Spend add-on
+    predicted_event_spend_industry: Optional[PredictedEventSpendIndustries] = None  # Predicted Event Spend add-on
 
     @field_validator("location")
     def reverse_location(cls, value: Tuple[float, float]):
