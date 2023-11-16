@@ -30,6 +30,8 @@ Here follows a list of functions that won't be accessible on returned objects an
 
 For more `Pydantic` objects available methods, please check out [Pydantic Documentation](https://docs.pydantic.dev/latest/usage/models/#model-methods-and-properties).
 
+*Note*: Pydantic will serialize all fields present on the models. If you wish to exclude `None` fields or fields that were missing from the API responses, use the `exclude_none=True` or `exclude_unset=True` function parameters when using the [model_dump](https://docs.pydantic.dev/latest/api/base_model/#pydantic.main.BaseModel.model_dump) and [model_json_dump](https://docs.pydantic.dev/latest/api/base_model/#pydantic.main.BaseModel.model_dump_json) functions.
+
 Please do not hesitate to lodge an [issue](https://github.com/predicthq/sdk-py/issues) if any valuable behaviour that you were using through `schematics` objects are not achievable through `pydantic` objects.
 
 
