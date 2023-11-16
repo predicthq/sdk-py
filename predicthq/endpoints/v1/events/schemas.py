@@ -98,15 +98,6 @@ class Event(BaseModel):
     predicted_event_spend: Optional[int] = None  # Predicted Event Spend add-on
     predicted_event_spend_industries: Optional[PredictedEventSpendIndustries] = None  # Predicted Event Spend add-on
 
-    @field_validator("location")
-    def reverse_location(cls, value: Tuple[float, float]):
-        """
-        Location is received as follows:
-        "location": [lon, lat]
-        By convention, we are used to have geopoints formated as lat,lon, which is what this validator enforces
-        """
-        return value[1], value[0]
-
 
 class EventResultSet(ResultSet):
     overflow: Optional[bool] = False

@@ -28,9 +28,9 @@ def test_place_schema():
     with pytest.raises(ValidationError):
         Place(id="some_id", type="some_type", name="some_name", location=("a", "b"))
 
-    assert Place(id="some_id", type="some_type", name="some_name", location=(32.123, -84.123)).location == (-84.123, 32.123)
+    assert Place(id="some_id", type="some_type", name="some_name", location=(32.123, -84.123)).location == (32.123, -84.123)
 
-    assert Place(id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]).location == (-84.123, 32.123)
+    assert Place(id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]).location == (32.123, -84.123)
 
 
 def test_resultset():

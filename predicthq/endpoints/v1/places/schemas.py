@@ -16,15 +16,6 @@ class Place(BaseModel):
     country_alpha3: Optional[str] = None
     location: Tuple[float, float]
 
-    @field_validator("location")
-    def reverse_location(cls, value: Tuple[float, float]):
-        """
-        Location is received as follows:
-        "location": [lon, lat]
-        By convention, we are used to have geopoints formated as lat,lon, which is what this validator enforces
-        """
-        return value[1], value[0]
-
 
 class PlaceResultSet(ResultSet):
     results: List[Optional[Place]]
