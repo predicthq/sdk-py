@@ -37,12 +37,21 @@ def _flatten_dict(d, glue, separator, parent_key=""):
     return flat_dict
 
 
+def _assign_nested_key(parent_dict, keys, value):
+    current_key = keys[0]
+    if len(keys) > 1:
+        if current_key not in parent_dict:
+            parent_dict[current_key] = dict()
+        _assign_nested_key(parent_dict[current_key], keys[1:], value)
+    else:
+        parent_dict[current_key] = value        
+
+
 def _process_kwargs(kwargs, separator="__"):
-    data = defaultdict(dict)
+    data = dict()
     for key, value in kwargs.items():
         if separator in key:
-            k, subk = key.split(separator)
-            data[k][subk] = value
+            _assign_nested_key(data, key.split(separator), value)
         else:
             data[key] = value
     return data

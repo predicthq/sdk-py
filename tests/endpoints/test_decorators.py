@@ -29,8 +29,8 @@ def test_to_params():
 
 
 def test_kwargs_processor():
-    kwargs = {"normal_arg": "value", "nested__arg": "value"}
-    expected = {"normal_arg": "value", "nested": {"arg": "value"}}
+    kwargs = {"normal_arg": "value", "nested__arg": "value", "multiple__level__nested": "value"}
+    expected = {"normal_arg": "value", "nested": {"arg": "value"}, "multiple": {"level": {"nested": "value"}}}
     assert decorators._process_kwargs(kwargs) == expected
 
 
