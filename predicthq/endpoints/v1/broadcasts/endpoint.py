@@ -1,10 +1,10 @@
 from predicthq.endpoints.base import UserBaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from .schemas import BroadcastResultSet, SearchParams
+from .schemas import BroadcastResultSet
 
 
 class BroadcastsEndpoint(UserBaseEndpoint):
-    @accepts(SearchParams)
+    @accepts()
     @returns(BroadcastResultSet)
     def search(self, **params):
         verify_ssl = params.pop("config.verify_ssl", True)

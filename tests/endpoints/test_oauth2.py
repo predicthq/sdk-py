@@ -1,10 +1,7 @@
 import unittest
 from urllib.parse import parse_qsl
 
-import pytest
-
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.exceptions import ValidationError
 from tests import with_mock_client, load_fixture, with_mock_responses, with_client
 
 
@@ -22,15 +19,11 @@ class OAuth2Test(unittest.TestCase):
             verify=True,
         )
         assert isinstance(token, AccessToken)
-        assert token.to_primitive() == client.request.return_value
+        token_dump = token.model_dump(exclude_none=True)
+        token_dump["scope"] = " ".join(token.scope)
+        assert token_dump == client.request.return_value
 
-        with pytest.raises(ValidationError):
-            client.oauth2.get_token(client_id=None)
-
-        with pytest.raises(ValidationError):
-            client.oauth2.get_token(invalid_arg=None)
-
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("access_token"))
     def test_get_token_params_without_ssl_verification(self, client):
         client.oauth2.get_token(
             client_id="client_id", client_secret="client_secret", scope=["account", "events"],
@@ -55,12 +48,6 @@ class OAuth2Test(unittest.TestCase):
             verify=True,
         )
         assert result is None
-
-        with pytest.raises(ValidationError):
-            client.oauth2.revoke_token(token=None)
-
-        with pytest.raises(ValidationError):
-            client.oauth2.revoke_token(invalid_arg=None)
 
     @with_mock_client()
     def test_revoke_token_params_without_ssl_verification(self, client):

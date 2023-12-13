@@ -1,10 +1,10 @@
 from predicthq.endpoints.base import BaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from .schemas import SearchParams, PlaceResultSet
+from .schemas import PlaceResultSet
 
 
 class PlacesEndpoint(BaseEndpoint):
-    @accepts(SearchParams)
+    @accepts()
     @returns(PlaceResultSet)
     def search(self, **params):
         verify_ssl = params.pop("config.verify_ssl", True)

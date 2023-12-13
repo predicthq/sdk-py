@@ -17,6 +17,10 @@ The PredictHQ Python client is distributed as a pip package. You can simply inst
 pip install predicthq
 ```
 
+## Migrating from version <= 2.4.0
+
+If you are migrating to version 3.0.0 or above from an earlier version, please check the [breaking changes details](./docs/V3_Breaking_Changes.md).
+
 ## Usage
 
 We support all the endpoints available in our API.
@@ -129,7 +133,7 @@ phq = Client(access_token="abc123")
 for feature in phq.features.obtain_features(
         active__gte="2017-12-31",
         active__lte="2018-01-02",
-        location__place_id=[4671654],
+        location__place_id=["4671654"],
         phq_rank_public_holidays=True,
         phq_attendance_sports__stats=["count", "median"],
         phq_attendance_sports__phq_rank={
@@ -178,7 +182,7 @@ for feature in phq.features.obtain_features(
         active__lte="2018-01-02",
         hour_of_day_start__gt=9,
         hour_of_day_start__lte=11,
-        location__place_id=[4671654],
+        location__place_id=["4671654"],
         phq_viewership_sports_american_football__stats=["count", "median"],
         phq_viewership_sports_american_football__phq_rank={
             "gt": 50

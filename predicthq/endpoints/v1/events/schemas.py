@@ -1,240 +1,126 @@
-from predicthq.endpoints.schemas import (
-    Area,
-    BooleanType,
-    BrandUnsafe,
-    ConfigMixin,
-    DateAround,
-    DateTimeRange,
-    DateTimeType,
-    DateType,
-    DictType,
-    Entity,
-    FloatType,
-    GeoJSONPointType,
-    IntRange,
-    IntType,
-    ListType,
-    LocationAround,
-    Model,
-    ModelType,
-    PaginatedMixin,
-    ParentType,
-    Place,
-    PolyModelType,
-    ResultSet,
-    ResultType,
-    SortableMixin,
-    StringListType,
-    StringModelType,
-    StringType,
-    PredictedEventSpendIndustry,
-)
-from schematics.common import NONEMPTY
+from datetime import date, datetime
+from typing import List, Optional, Tuple, Union
+
+from pydantic import BaseModel, field_validator
+
+from predicthq.endpoints.schemas import ResultSet
 
 
-class SearchParams(PaginatedMixin, SortableMixin, ConfigMixin, Model):
-    class Options:
-        serialize_when_none = False
+class Entities(BaseModel):
+    entity_id: str
+    name: str
+    type: str
+    formatted_address: Optional[str] = None
 
-    active = ModelType(DateTimeRange)
-    cancelled = ModelType(DateTimeRange)
-    category = ListType(StringType)
-    country = ListType(StringType)
-    deleted_reason = ListType(StringType(choices=("cancelled", "duplicate", "invalid", "postponed")))
-    end = ModelType(DateTimeRange)
-    end_around = ModelType(DateAround)
-    id = ListType(StringType)
-    label = ListType(StringType)
-    location_around = ModelType(LocationAround)
-    parent = ModelType(ParentType)
-    place = ModelType(Place)
-    placekey = StringType()
-    postponed = ModelType(DateTimeRange)
-    q = StringType()
-    relevance = ListType(StringType)
-    start = ModelType(DateTimeRange)
-    start_around = ModelType(DateAround)
-    state = ListType(StringType(choices=("active", "deleted", "predicted"), default="active"))
-    updated = ModelType(DateTimeRange)
-    within = StringListType(StringModelType(Area), separator="+")
-
-    # The below parameters are only available if they are enabled in your plan.
-    # If you are not subscribed to a feature, using the parameter will have no
-    # effect on your search results.
-    aviation_rank = ModelType(IntRange)
-    aviation_rank_level = ListType(IntType(min_value=1, max_value=5))
-    brand_unsafe = ModelType(BrandUnsafe)
-    entity = ModelType(Entity)
-    local_rank = ModelType(IntRange)
-    local_rank_level = ListType(IntType(min_value=1, max_value=5))
-    phq_attendance = ModelType(IntRange)
-    predicted_end = ModelType(DateTimeRange)
-    rank = ModelType(IntRange)
-    rank_level = ListType(IntType(min_value=1, max_value=5))
-    predicted_event_spend = ModelType(IntRange)
-    predicted_event_spend_industry = ModelType(PredictedEventSpendIndustry)
+class PredictedEventSpendIndustries(BaseModel):
+    accommodation: int
+    hospitality: int
+    transportation: int
 
 
-class Entities(Model):
-    class Options:
-        serialize_when_none = True
-
-    entity_id = StringType()
-    name = StringType()
-    type = StringType()
-    formatted_address = StringType()
+class Point(BaseModel):
+    type: str
+    coordinates: List[float]
 
 
-class Point(Model):
-
-    type = StringType()
-    coordinates = ListType(FloatType())
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["Point"]
+class MultiPoint(BaseModel):
+    type: str
+    coordinates: List[List[float]]
 
 
-class MultiPoint(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(FloatType()))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiPoint", "LineString"]
+class Polygon(BaseModel):
+    type: str
+    coordinates: List[List[List[float]]]
 
 
-class Polygon(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(ListType(FloatType())))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiLineString", "Polygon"]
+class MultiPolygon(BaseModel):
+    type: str
+    coordinates: List[List[List[List[float]]]]
 
 
-class MultiPolygon(Model):
-
-    type = StringType()
-    coordinates = ListType(ListType(ListType(ListType(FloatType()))))
-
-    @classmethod
-    def _claim_polymorphic(cls, data):
-        return data.get("type") in ["MultiPolygon"]
+class Geo(BaseModel):
+    geometry: Union[Point, MultiPoint, Polygon, MultiPolygon]
+    placekey: Optional[str] = None
 
 
-class Geo(Model):
-
-    geometry = PolyModelType(model_spec=[Point, MultiPoint, Polygon, MultiPolygon])
-    placekey = StringType()
+class ParentEvent(BaseModel):
+    parent_event_id: str
 
 
-class PredictedEventSpendIndustries(Model):
-    accommodation = IntType()
-    hospitality = IntType()
-    transportation = IntType()
+class ImpactPatternImpacts(BaseModel):
+    date_local: date
+    value: int
+    position: str
 
 
-class ParentEvent(Model):
+class ImpactPattern(BaseModel):
 
-    parent_event_id = StringType()
-
-
-class ImpactPatternImpacts(Model):
-
-    date_local = DateType()
-    value = IntType()
-    position = StringType()
+    vertical: str
+    impact_type: str
+    impacts: List[ImpactPatternImpacts]
 
 
-class ImpactPattern(Model):
-
-    vertical = StringType()
-    impact_type = StringType()
-    impacts = ListType(ModelType(ImpactPatternImpacts))
-
-
-class Event(Model):
-    class Options:
-        serialize_when_none = True
-
-    cancelled = DateTimeType()
-    category = StringType()
-    country = StringType()
-    deleted_reason = StringType()
-    description = StringType()
-    duplicate_of_id = StringType()
-    duration = IntType()
-    end = DateTimeType()
-    first_seen = DateTimeType()
-    geo = ModelType(Geo)
-    id = StringType()
-    impact_patterns = ListType(ModelType(ImpactPattern))
-    labels = ListType(StringType())
-    location = GeoJSONPointType()
-    parent_event = ModelType(ParentEvent)
-    place_hierarchies = ListType(ListType(StringType()))
-    postponed = DateTimeType()
-    relevance = FloatType()
-    scope = StringType()
-    start = DateTimeType()
-    state = StringType()
-    timezone = StringType()
-    title = StringType()
-    updated = DateTimeType()
+class Event(BaseModel):
+    cancelled: Optional[datetime] = None
+    category: str
+    country: str
+    deleted_reason: Optional[str] = None
+    description: Optional[str] = None
+    duplicate_of_id: Optional[str] = None
+    duration: Optional[int] = None
+    end: Optional[datetime] = None
+    first_seen: Optional[datetime] = None
+    geo: Optional[Geo] = None
+    id: str
+    impact_patterns: Optional[List[ImpactPattern]] = []
+    labels: List[str]
+    location: Optional[Tuple[float, float]] = None
+    parent_event: Optional[ParentEvent] = None
+    place_hierarchies: Optional[List[List[str]]] = None
+    postponed: Optional[datetime] = None
+    relevance: Optional[float] = None
+    scope: Optional[str] = None
+    start: datetime
+    state: Optional[str] = None
+    timezone: Optional[str] = None
+    title: str
+    updated: Optional[datetime] = None
 
     # The below fields are only available if they are enabled in your plan.
-    aviation_rank = IntType()  # Aviation Rank add-on
-    brand_safe = BooleanType()
-    entities = ListType(ModelType(Entities))  # Venues and addresses add-on
-    local_rank = IntType()  # Local Rank add-on
-    phq_attendance = IntType()  # PHQ Attendance add-on
-    predicted_end = DateTimeType()
-    private = BooleanType()  # Loop add-on
-    rank = IntType()  # PHQ Rank add-on
-    predicted_event_spend = IntType()  # Predicted Event Spend add-on
-    predicted_event_spend_industries = ModelType(PredictedEventSpendIndustries)
+    aviation_rank: Optional[int] = None  # Aviation Rank add-on
+    brand_safe: Optional[bool] = None
+    entities: Optional[List[Entities]] = []  # Venues and addresses add-on
+    local_rank: Optional[int] = None  # Local Rank add-on
+    phq_attendance: Optional[int] = None  # PHQ Attendance add-on
+    predicted_end: Optional[datetime] = None
+    private: Optional[bool] = None  # Loop add-on
+    rank: Optional[int] = None  # PHQ Rank add-on
+    predicted_event_spend: Optional[int] = None  # Predicted Event Spend add-on
+    predicted_event_spend_industries: Optional[PredictedEventSpendIndustries] = None  # Predicted Event Spend add-on
 
 
 class EventResultSet(ResultSet):
-
-    overflow = BooleanType()
-
-    results = ResultType(Event)
+    overflow: Optional[bool] = False
+    results: List[Optional[Event]]
 
 
-class CountResultSet(Model):
-
-    count = IntType()
-    top_rank = FloatType()
-    rank_levels = DictType(IntType)
-    categories = DictType(IntType)
-    labels = DictType(IntType)
-
-
-class TopEventsSearchParams(SortableMixin, Model):
-
-    limit = IntType(min_value=0, max_value=10)
+class CountResultSet(BaseModel):
+    count: int
+    top_rank: float
+    rank_levels: dict
+    categories: dict
+    labels: dict
 
 
-class CalendarParams(SearchParams):
-
-    top_events = ModelType(TopEventsSearchParams)
-
-
-class CalendarDay(Model):
-
-    date = DateType()
-    count = IntType()
-    top_rank = FloatType()
-    rank_levels = DictType(IntType)
-    categories = DictType(IntType)
-    labels = DictType(IntType)
-    top_events = ModelType(EventResultSet)
+class CalendarDay(BaseModel):
+    date: date
+    count: int
+    top_rank: float
+    rank_levels: dict
+    categories: dict
+    labels: dict
+    top_events: EventResultSet
 
 
 class CalendarResultSet(ResultSet):
-
-    results = ResultType(CalendarDay)
+    results: List[Optional[CalendarDay]]

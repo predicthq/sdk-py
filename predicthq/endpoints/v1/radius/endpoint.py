@@ -1,10 +1,10 @@
 from predicthq.endpoints.base import BaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from .schemas import SearchParams, SuggestedRadiusResultSet
+from .schemas import SuggestedRadiusResultSet
 
 
 class SuggestedRadiusEndpoint(BaseEndpoint):
-    @accepts(SearchParams)
+    @accepts()
     @returns(SuggestedRadiusResultSet)
     def search(self, **params):
         verify_ssl = params.pop("config.verify_ssl", True)

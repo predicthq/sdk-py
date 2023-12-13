@@ -1,37 +1,23 @@
+from typing import List, Optional, Union
+
+from pydantic import BaseModel, field_validator
+
 from predicthq.config import config
-from predicthq.endpoints.schemas import (
-    ConfigMixin,
-    IntType,
-    Model,
-    StringType,
-    StringListType,
-)
 
 
-class GetTokenParams(ConfigMixin, Model):
-    class Options:
-        serialize_when_none = False
+class AccessToken(BaseModel):
+    access_token: str
+    token_type: str
+    scope: List[str]
+    refresh_token: Optional[str] = None
+    expires_in: Optional[int] = None
 
-    client_id = StringType(default=lambda: config.OAUTH2_CLIENT_ID, required=True)
-    client_secret = StringType(default=lambda: config.OAUTH2_CLIENT_SECRET, required=True)
-    scope = StringListType(StringType, default=lambda: config.OAUTH2_SCOPE, separator=" ")
-    grant_type = StringType(choices=("client_credentials",), default="client_credentials", required=True)
-
-
-class RevokeTokenParams(ConfigMixin, Model):
-    class Options:
-        serialize_when_none = False
-
-    client_id = StringType(default=lambda: config.OAUTH2_CLIENT_ID, required=True)
-    client_secret = StringType(default=lambda: config.OAUTH2_CLIENT_SECRET, required=True)
-    token = StringType(required=True)
-    token_type_hint = StringType(choices=("access_token", "refresh_token"), default="access_token", required=True)
-
-
-class AccessToken(Model):
-
-    access_token = StringType()
-    token_type = StringType()
-    scope = StringListType(StringType, separator=" ")
-    refresh_token = StringType(serialize_when_none=False)
-    expires_in = IntType(serialize_when_none=False)
+    @field_validator("scope", mode="before")
+    def parse_scope(cls, value: Optional[Union[List[str], str]] = None):
+        if isinstance(value, str):
+            if " " in value:
+                return value.split(" ")
+            elif "," in value:
+                return value.split(",")
+            return [value]
+        return value

@@ -1,11 +1,11 @@
 import unittest
 
 from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, CountResultSet
-from tests import with_mock_client, with_mock_responses, with_client
+from tests import load_fixture, with_mock_client, with_mock_responses, with_client
 
 
 class EventsTest(unittest.TestCase):
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_underscores(self, client):
         client.events.search(
             id="id",
@@ -15,9 +15,7 @@ class EventsTest(unittest.TestCase):
             rank__gt=85,
             local_rank_level=[4, 5],
             local_rank__gt=85,
-            within__radius="2km",
-            within__longitude=-71.0432,
-            within__latitude=42.346,
+            within="2km@42.346,-71.0432",
             label=["label1", "label2"],
             category="sports",
             state=["active", "deleted", "predicted"],
@@ -80,7 +78,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_datetimerange_params(self, client):
         client.events.search(
             start__gte="2016-03-01",
@@ -104,20 +102,20 @@ class EventsTest(unittest.TestCase):
                 "start.gte": "2016-03-01",
                 "start.lt": "2016-04-01",
                 "start.tz": "Pacific/Auckland",
-                "end.gte": "2016-05-01T13:13:13.000000",
-                "end.lt": "2016-06-01T12:12:12.000000",
+                "end.gte": "2016-05-01T13:13:13",
+                "end.lt": "2016-06-01T12:12:12",
                 "end.tz": "Pacific/Auckland",
                 "active.gt": "2016-03-01",
                 "active.lte": "2016-04-01",
                 "active.tz": "Pacific/Auckland",
-                "updated.gt": "2016-03-01T13:13:13.000000",
-                "updated.lte": "2016-04-01T12:12:12.000000",
+                "updated.gt": "2016-03-01T13:13:13",
+                "updated.lte": "2016-04-01T12:12:12",
                 "updated.tz": "Pacific/Auckland",
             },
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_underscores_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -130,7 +128,7 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_dicts(self, client):
         client.events.search(
             id="id",
@@ -138,7 +136,7 @@ class EventsTest(unittest.TestCase):
             country=["NZ", "AU"],
             rank_level=[4, 5],
             rank={"gt": 85},
-            within={"radius": "2km", "longitude": -71.0432, "latitude": 42.346},
+            within="2km@42.346,-71.0432",
             label=["label1", "label2"],
             category="sports",
             state=["active", "deleted", "predicted"],
@@ -190,7 +188,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_params_dicts_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -203,7 +201,7 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_for_account(self, client):
         client.events.for_account("account-id").search(q="query")
         client.request.assert_called_once_with(
@@ -213,7 +211,7 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client()
+    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
     def test_search_for_account_without_ssl_verification(self, client):
         client.events.for_account("account-id").search(q="query", config__verify_ssl=False)
         client.request.assert_called_once_with(

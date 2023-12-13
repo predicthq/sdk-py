@@ -1,17 +1,18 @@
-from predicthq.endpoints.schemas import Model, StringType, DateTimeType, ModelType
+from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel
 
 
-class Industry(Model):
+class Industry(BaseModel):
+    id: str
+    name: str
 
-    id = StringType()
-    name = StringType()
 
-
-class Account(Model):
-
-    id = StringType()
-    name = StringType()
-    description = StringType()
-    industry = ModelType(Industry)
-    created_at = DateTimeType()
-    updated_at = DateTimeType()
+class Account(BaseModel):
+    id: str
+    name: str
+    description: Optional[str] = None
+    industry: Optional[Industry] = None
+    created_at: datetime
+    updated_at: datetime
