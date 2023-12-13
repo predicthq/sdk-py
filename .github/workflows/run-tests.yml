@@ -1,11 +1,11 @@
-name: Run Tests Beta
+name: Run Tests
 
 on:
   push:
     tags-ignore:
       - "**"
     branches:
-      - "support-python3-10-and-above" # move back to "**" before deploying to a stable version
+      - "**"
 
 jobs:
   run-tests:
