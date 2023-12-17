@@ -42,6 +42,22 @@ class Feature(BaseModel):
     phq_attendance_performing_arts: Optional[FeatureStat] = None
     phq_attendance_school_holidays: Optional[FeatureStat] = None
     phq_attendance_sports: Optional[FeatureStat] = None
+    # Attendance based feature for accommodation vertical
+    phq_attendance_community_accommodation: Optional[FeatureStat] = None
+    phq_attendance_concerts_accommodation: Optional[FeatureStat] = None
+    phq_attendance_conferences_accommodation: Optional[FeatureStat] = None
+    phq_attendance_expos_accommodation: Optional[FeatureStat] = None
+    phq_attendance_festivals_accommodation: Optional[FeatureStat] = None
+    phq_attendance_performing_arts_accommodation: Optional[FeatureStat] = None
+    phq_attendance_sports_accommodation: Optional[FeatureStat] = None
+    # Attendance based feature for hospitality vertical
+    phq_attendance_community_hospitality: Optional[FeatureStat] = None
+    phq_attendance_concerts_hospitality: Optional[FeatureStat] = None
+    phq_attendance_conferences_hospitality: Optional[FeatureStat] = None
+    phq_attendance_expos_hospitality: Optional[FeatureStat] = None
+    phq_attendance_festivals_hospitality: Optional[FeatureStat] = None
+    phq_attendance_performing_arts_hospitality: Optional[FeatureStat] = None
+    phq_attendance_sports_hospitality: Optional[FeatureStat] = None
     # Rank based features
     phq_rank_daylight_savings: Optional[FeatureRankLevel] = None
     phq_rank_health_warnings: Optional[FeatureRankLevel] = None
@@ -108,6 +124,38 @@ class Feature(BaseModel):
     phq_viewership_sports_tennis: Optional[FeatureStat] = None
     phq_viewership_sports_tennis_us_open: Optional[FeatureStat] = None
     phq_viewership_sports_tennis_wimbledon: Optional[FeatureStat] = None
+    # PHQ spend based feature
+    phq_spend_conferences: Optional[FeatureStat] = None
+    phq_spend_expos: Optional[FeatureStat] = None
+    phq_spend_sports: Optional[FeatureStat] = None
+    phq_spend_community: Optional[FeatureStat] = None
+    phq_spend_concerts: Optional[FeatureStat] = None
+    phq_spend_festivals: Optional[FeatureStat] = None
+    phq_spend_performing_arts: Optional[FeatureStat] = None
+    # PHQ spend accommodation based feature
+    phq_spend_conferences_accommodation: Optional[FeatureStat] = None
+    phq_spend_expos_accommodation: Optional[FeatureStat] = None
+    phq_spend_sports_accommodation: Optional[FeatureStat] = None
+    phq_spend_community_accommodation: Optional[FeatureStat] = None
+    phq_spend_concerts_accommodation: Optional[FeatureStat] = None
+    phq_spend_festivals_accommodation: Optional[FeatureStat] = None
+    phq_spend_performing_arts_accommodation: Optional[FeatureStat] = None
+    # PHQ spend hospitality based feature
+    phq_spend_conferences_hospitality: Optional[FeatureStat] = None
+    phq_spend_expos_hospitality: Optional[FeatureStat] = None
+    phq_spend_sports_hospitality: Optional[FeatureStat] = None
+    phq_spend_community_hospitality: Optional[FeatureStat] = None
+    phq_spend_concerts_hospitality: Optional[FeatureStat] = None
+    phq_spend_festivals_hospitality: Optional[FeatureStat] = None
+    phq_spend_performing_arts_hospitality: Optional[FeatureStat] = None
+    # PHQ spend transportation based feature
+    phq_spend_conferences_transportation: Optional[FeatureStat] = None
+    phq_spend_expos_transportation: Optional[FeatureStat] = None
+    phq_spend_sports_transportation: Optional[FeatureStat] = None
+    phq_spend_community_transportation: Optional[FeatureStat] = None
+    phq_spend_concerts_transportation: Optional[FeatureStat] = None
+    phq_spend_festivals_transportation: Optional[FeatureStat] = None
+    phq_spend_performing_arts_transportation: Optional[FeatureStat] = None
 
 
 class FeatureResultSet(ResultSet):
