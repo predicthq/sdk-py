@@ -76,6 +76,7 @@ class Event(BaseModel):
     labels: List[str]
     location: Optional[Tuple[float, float]] = None
     parent_event: Optional[ParentEvent] = None
+    phq_labels: Optional[List[dict[str, str | float]]] = None
     place_hierarchies: Optional[List[List[str]]] = None
     postponed: Optional[datetime] = None
     relevance: Optional[float] = None
