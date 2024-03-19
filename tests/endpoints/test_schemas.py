@@ -5,7 +5,7 @@ from pydantic import BaseModel, ValidationError
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.endpoints.v1.events.schemas import Event
+from predicthq.endpoints.v1.events.schemas import Event, PHQLabels
 from predicthq.endpoints.v1.places.schemas import Place
 from predicthq.endpoints.base import BaseEndpoint
 
@@ -42,7 +42,7 @@ def test_event_schema():
               start="2023-12-01",
               title="some_title",
               labels=["some_labels"],
-              phq_labels={"key": "value"})
+              phq_labels=PHQLabels.parse_obj({"key": "value"}))
 
     with pytest.raises(ValidationError):
         Event(id="some_id",
@@ -52,16 +52,16 @@ def test_event_schema():
               start="2023-12-01",
               title="some_title",
               labels=["some_labels"],
-              phq_labels=[{5: "value"}])
+              phq_labels=[PHQLabels.parse_obj({5: "value"})])
 
     assert Event(id="some_id",
-          category="some_category",
-          country="some_country",
-          county="some_county",
-          start="2023-12-01",
-          title="some_title",
-          labels=["some_labels"],
-          phq_labels=[{"weight": 2.0}]).phq_labels == [{"weight": 2.0}]
+                 category="some_category",
+                 country="some_country",
+                 county="some_county",
+                 start="2023-12-01",
+                 title="some_title",
+                 labels=["some_labels"],
+                 phq_labels=[PHQLabels.parse_obj({"label": "holiday", "weight": 2.0})])
 
 
 def test_resultset():
