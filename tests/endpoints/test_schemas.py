@@ -5,7 +5,7 @@ from pydantic import BaseModel, ValidationError
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.endpoints.v1.events.schemas import Event, PHQLabels
+from predicthq.endpoints.v1.events.schemas import PHQLabels
 from predicthq.endpoints.v1.places.schemas import Place
 from predicthq.endpoints.base import BaseEndpoint
 
