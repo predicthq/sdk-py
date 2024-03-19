@@ -33,6 +33,37 @@ def test_place_schema():
     assert Place(id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]).location == (32.123, -84.123)
 
 
+def test_event_schema():
+    with pytest.raises(ValidationError):
+        Event(id="some_id",
+              category="some_category",
+              country="some_country",
+              county="some_county",
+              start="2023-12-01",
+              title="some_title",
+              labels=["some_labels"],
+              phq_labels={"key": "value"})
+
+    with pytest.raises(ValidationError):
+        Event(id="some_id",
+              category="some_category",
+              country="some_country",
+              county="some_county",
+              start="2023-12-01",
+              title="some_title",
+              labels=["some_labels"],
+              phq_labels=[{5: "value"}])
+
+    assert Event(id="some_id",
+          category="some_category",
+          country="some_country",
+          county="some_county",
+          start="2023-12-01",
+          title="some_title",
+          labels=["some_labels"],
+          phq_labels=[{"weight": 2.0}]).phq_labels == [{"weight": 2.0}]
+
+
 def test_resultset():
     class ResultExample(BaseModel):
         value: int
