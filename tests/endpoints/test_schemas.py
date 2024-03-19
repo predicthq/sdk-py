@@ -39,7 +39,7 @@ def test_event_schema():
               category="some_category",
               country="some_country",
               county="some_county",
-              start="2023-12-01",
+              start="2023-12-01T00:00:00Z",
               title="some_title",
               labels=["some_labels"],
               phq_labels=PHQLabels.parse_obj({"key": "value"}))
@@ -49,7 +49,7 @@ def test_event_schema():
               category="some_category",
               country="some_country",
               county="some_county",
-              start="2023-12-01",
+              start="2023-12-01T00:00:00Z",
               title="some_title",
               labels=["some_labels"],
               phq_labels=[PHQLabels.parse_obj({5: "value"})])
@@ -58,7 +58,7 @@ def test_event_schema():
                  category="some_category",
                  country="some_country",
                  county="some_county",
-                 start="2023-12-01",
+                 start="2023-12-01T00:00:00Z",
                  title="some_title",
                  labels=["some_labels"],
                  phq_labels=[PHQLabels.parse_obj({"label": "holiday", "weight": 2.0})])
