@@ -34,9 +34,12 @@ def test_place_schema():
 
 
 @pytest.mark.parametrize("phq_labels,raise_validation_error", [({"label": 34, "weight": "holiday"}, True),  # wrong type
+                                                               ({"label": "holiday", "weight": "holiday"}, True),  # wrong type
+                                                               ({"label": 34, "weight": 6}, True),  # wrong type
                                                                ({"weight": 2.0}, True),  # missing label
                                                                ({"label": "holiday"}, True),  # missing weight
-                                                               ({"label": "holiday", "weight": 2.0}, False)])  # correct
+                                                               ({"label": "holiday", "weight": 2.0}, False),  # correct
+                                                               ({"label": "holiday", "weight": 2}, False)])  # correct
 def test_event_schema(phq_labels, raise_validation_error):
     if raise_validation_error:
         with pytest.raises(ValidationError) as e:
