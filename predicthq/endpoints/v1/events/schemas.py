@@ -60,6 +60,11 @@ class ImpactPattern(BaseModel):
     impacts: List[ImpactPatternImpacts]
 
 
+class PHQLabels(BaseModel):
+    label: str
+    weight: float
+
+
 class Event(BaseModel):
     cancelled: Optional[datetime] = None
     category: str
@@ -76,6 +81,7 @@ class Event(BaseModel):
     labels: List[str]
     location: Optional[Tuple[float, float]] = None
     parent_event: Optional[ParentEvent] = None
+    phq_labels: Optional[List[PHQLabels]] = None
     place_hierarchies: Optional[List[List[str]]] = None
     postponed: Optional[datetime] = None
     relevance: Optional[float] = None

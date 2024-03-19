@@ -5,7 +5,7 @@ from pydantic import BaseModel, ValidationError
 
 from predicthq.endpoints import decorators, schemas
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.endpoints.v1.events.schemas import Event
+from predicthq.endpoints.v1.events.schemas import PHQLabels
 from predicthq.endpoints.v1.places.schemas import Place
 from predicthq.endpoints.base import BaseEndpoint
 
@@ -31,6 +31,23 @@ def test_place_schema():
     assert Place(id="some_id", type="some_type", name="some_name", location=(32.123, -84.123)).location == (32.123, -84.123)
 
     assert Place(id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]).location == (32.123, -84.123)
+
+
+@pytest.mark.parametrize("phq_labels,raise_validation_error", [({"label": 34, "weight": "holiday"}, True),  # wrong type
+                                                               ({"label": "holiday", "weight": "holiday"}, True),  # wrong type
+                                                               ({"label": 34, "weight": 6}, True),  # wrong type
+                                                               ({"weight": 2.0}, True),  # missing label
+                                                               ({"label": "holiday"}, True),  # missing weight
+                                                               ({"label": "some_string", "weight": 2.0}, False),  # correct
+                                                               ({"label": "another_string", "weight": 7}, False)])  # correct
+def test_phq_label_schema(phq_labels, raise_validation_error):
+    if raise_validation_error:
+        with pytest.raises(ValidationError) as e:
+            label = PHQLabels.parse_obj(phq_labels)
+    else:
+        label = PHQLabels.parse_obj(phq_labels)
+        assert label.label == phq_labels["label"]
+        assert label.weight == phq_labels["weight"]
 
 
 def test_resultset():
