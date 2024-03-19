@@ -38,8 +38,8 @@ def test_place_schema():
                                                                ({"label": 34, "weight": 6}, True),  # wrong type
                                                                ({"weight": 2.0}, True),  # missing label
                                                                ({"label": "holiday"}, True),  # missing weight
-                                                               ({"label": "holiday", "weight": 2.0}, False),  # correct
-                                                               ({"label": "holiday", "weight": 2}, False)])  # correct
+                                                               ({"label": "some_string", "weight": 2.0}, False),  # correct
+                                                               ({"label": "another_string", "weight": 7}, False)])  # correct
 def test_event_schema(phq_labels, raise_validation_error):
     if raise_validation_error:
         with pytest.raises(ValidationError) as e:
