@@ -28,15 +28,16 @@ def _to_url_params(key_list_mapping, glue=".", separator=",", parent_key=""):
     """
     params = {}
     for key, value in key_list_mapping.items():
+        current_key = f"{parent_key}{glue}{key}" if parent_key else key
         for v in value:
             if isinstance(v, dict):
-                params.update(_to_url_params(v, glue, separator, f"{parent_key}{glue}{key}" if parent_key else key))
+                params.update(_to_url_params(v, glue, separator, current_key))
             elif isinstance(v, list):
-                params.update({f"{parent_key}{glue}{key}" if parent_key else key: separator.join(map(str, v))})
+                params.update({current_key: separator.join(map(str, v))})
             elif isinstance(v, bool):
-                params.update({f"{parent_key}{glue}{key}" if parent_key else key: 1 if v else 0})
+                params.update({current_key: 1 if v else 0})
             else:
-                params.update({f"{parent_key}{glue}{key}" if parent_key else key: v})
+                params.update({current_key: v})
     return params
 
 
