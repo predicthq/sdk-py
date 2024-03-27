@@ -10,11 +10,11 @@ from predicthq.exceptions import ValidationError
 
 def test_to_params():
     kwargs = {
-        "string_type": "my-string",
-        "list_type": [1, 2, 3],
-        "dict_type": {"key1": "val1", "key2": "val2"},
-        "bool_type": True,
-        "nested_dict_type": {"key1": {"key2": "val2", "key3": "val3"}},
+        "string_type": ["my-string"],
+        "list_type": [[1, 2, 3]],
+        "dict_type": [{"key1": ["val1"], "key2": ["val2"]}],
+        "bool_type": [True],
+        "nested_dict_type": [{"key1": [{"key2": ["val2"], "key3": ["val3"]}]}],
     }
     expected = {
         "string_type": "my-string",
@@ -30,8 +30,8 @@ def test_to_params():
 
 def test_kwargs_processor():
     kwargs = {"normal_arg": "value", "nested__arg": "value", "multiple__level__nested": "value"}
-    expected = {"normal_arg": "value", "nested": {"arg": "value"}, "multiple": {"level": {"nested": "value"}}}
-    assert decorators._process_kwargs(kwargs) == expected
+    expected = {"normal_arg": ["value"], "nested": [{"arg": ["value"]}], "multiple": [{"level": [{"nested": ["value"]}]}]}
+    assert decorators._kwargs_to_key_list_mapping(kwargs) == expected
 
 
 def test_accepts():
