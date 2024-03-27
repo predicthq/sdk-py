@@ -1,73 +1,72 @@
 import functools
-from collections import defaultdict
 
 from pydantic import ValidationError as PydanticValidationError
 
-from predicthq.endpoints.schemas import ResultSet
 from predicthq.exceptions import ValidationError
 
 
-def _to_url_params(data, glue=".", separator=","):
+def _kwargs_to_key_list_mapping(kwargs, separator="__"):
     """
-    Converts data dictionary to url parameters
+    Converts kwargs to a nested dictionary mapping keys to lists of values
+    """
+    data = {}
+    for key, value in kwargs.items():
+        keys = key.split(separator, 1)
+        if len(keys) > 1:
+            value = {keys[1]: value}
+        if isinstance(value, dict):
+            value = _kwargs_to_key_list_mapping(value)
+
+        data[keys[0]] = [] if not data.get(keys[0]) else data[keys[0]]
+        data[keys[0]].append(value)
+    return data
+
+
+def _to_url_params(key_list_mapping, glue=".", separator=",", parent_key=""):
+    """
+    Converts key_list_mapping to url parameters
     """
     params = {}
-    for key, value in data.items():
-        if isinstance(value, bool):
-            params[key] = 1 if value else 0
-        elif isinstance(value, list):
-            params[key] = separator.join(map(str, value))
-        elif isinstance(value, dict):
-            params.update(_flatten_dict(value, glue, separator, parent_key=key))
-        else:
-            params[key] = value
+    for key, value in key_list_mapping.items():
+        for v in value:
+            if isinstance(v, dict):
+                params.update(_to_url_params(v, glue, separator, f"{parent_key}{glue}{key}" if parent_key else key))
+            elif isinstance(v, list):
+                params.update({f"{parent_key}{glue}{key}" if parent_key else key: separator.join(map(str, v))})
+            elif isinstance(v, bool):
+                params.update({f"{parent_key}{glue}{key}" if parent_key else key: 1 if v else 0})
+            else:
+                params.update({f"{parent_key}{glue}{key}" if parent_key else key: v})
     return params
 
 
-def _flatten_dict(d, glue, separator, parent_key=""):
-    flat_dict = {}
-    for k, v in d.items():
-        if isinstance(v, dict):
-            flat_dict.update(_flatten_dict(v, glue, separator, f"{parent_key}{glue}{k}" if parent_key else k))
-            continue
-        if isinstance(v, list):
-            flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: separator.join(map(str, v))})
-            continue
-        flat_dict.update({f"{parent_key}{glue}{k}" if parent_key else k: v})
-    return flat_dict
-
-
-def _assign_nested_key(parent_dict, keys, value):
-    current_key = keys[0]
-    if len(keys) > 1:
-        if current_key not in parent_dict:
-            parent_dict[current_key] = dict()
-        _assign_nested_key(parent_dict[current_key], keys[1:], value)
-    else:
-        parent_dict[current_key] = value        
-
-
-def _process_kwargs(kwargs, separator="__"):
-    data = dict()
-    for key, value in kwargs.items():
-        if separator in key:
-            _assign_nested_key(data, key.split(separator), value)
-        else:
-            data[key] = value
-    return data
-
+def _to_json(key_list_mapping):
+    """
+    Converts key_list_mapping to json
+    """
+    json = {}
+    for key, value in key_list_mapping.items():
+        for v in value:
+            json[key] = dict() if not json.get(key) else json[key]
+            if isinstance(v, dict):
+                json[key].update(_to_json(v))
+            else:
+                json[key] = v
+    return json
 
 
 def accepts(query_string=True, role=None):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
-            data = _process_kwargs(kwargs)
+            key_list_mapping = _kwargs_to_key_list_mapping(kwargs)
             if hasattr(endpoint, "mutate_bool_to_default_for_type"):
-                endpoint.mutate_bool_to_default_for_type(data)
+                endpoint.mutate_bool_to_default_for_type(key_list_mapping)
 
             if query_string:
-                data = _to_url_params(data=data)
+                data = _to_url_params(key_list_mapping)
+            else:
+                data = _to_json(key_list_mapping)
 
             return f(endpoint, *args, **data)
 
