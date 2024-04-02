@@ -112,7 +112,7 @@ class EventResultSet(ResultSet):
 
 class CountResultSet(BaseModel):
     count: int
-    top_rank: float
+    top_rank: Optional[float]
     rank_levels: dict
     categories: dict
     labels: dict
