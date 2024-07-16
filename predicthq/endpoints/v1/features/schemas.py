@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Any, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, RootModel
 
@@ -25,7 +25,7 @@ class FeatureStat(BaseModel):
 
 
 class Feature(RootModel):
-    root: dict[str, Union[date, Optional[FeatureStat], Optional[FeatureRankLevel]]]
+    root: Dict[str, Union[date, Optional[FeatureStat], Optional[FeatureRankLevel]]]
 
     def __getattr__(self, name: str) -> Any:
         return self.root[name]
