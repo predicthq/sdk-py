@@ -10,8 +10,8 @@ class FeaturesEndpoint(UserBaseEndpoint):
     BASE_FEATURE_CRITERIA = {"stats": [["sum", "count"]], "phq_rank": [None]}
     FIELDS_TO_MUTATE = frozenset([
         "phq_attendance_",
-        "phq_viewership_sports",
-        "phq_impact_severe_weather_",
+        "phq_viewership_",
+        "phq_impact_",
         "phq_spend_"
     ])
 
