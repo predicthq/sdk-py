@@ -117,7 +117,7 @@ Please refer to our [Places endpoint documentation](https://docs.predicthq.com/r
 
 ### Features endpoint
 
-The following example obtain features of events which are active between 2017-12-31 and 2018-01-02, with place_id 4671654. 
+The following example obtain features of events which are active between 2017-12-31 and 2018-01-02, with place_id 4671654.
 
 Requested features:
 * rank_levels for public_holidays
@@ -207,6 +207,43 @@ phq = Client(access_token="abc123")
 
 suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750")
 print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.to_dict())
+```
+
+### Serializing search results into a dictionary
+
+All search results can be serialized to a dictionary using the `.model_dump(exclude_none=True)` method call.
+
+Examples:
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for event in phq.events.search(q="Katy Perry", rank_level=[4, 5], category="concerts"):
+    # Serialize event data into a dictionary and remove None values
+    print(event.model_dump(exclude_none=True))
+```
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for feature in phq.features.obtain_features(
+        active__gte="2017-12-31",
+        active__lte="2018-01-02",
+        location__place_id=["4671654"],
+        phq_rank_public_holidays=True,
+        phq_attendance_sports__stats=["count", "median"],
+        phq_attendance_sports__phq_rank={
+            "gt": 50
+        }
+):
+    # Serialize feature data into a dictionary and remove None values
+    print(feature.model_dump(exclude_none=True))
 ```
 
 ### Config parameters
