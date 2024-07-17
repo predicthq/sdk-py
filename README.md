@@ -206,12 +206,16 @@ phq = Client(access_token="abc123")
 
 
 suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750")
-print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.to_dict())
+print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.model_dump(exclude_none=True))
 ```
 
 ### Serializing search results into a dictionary
 
-All search results can be serialized to a dictionary using the `.model_dump(exclude_none=True)` method call.
+All search results can be serialized into a dictionary using the `.model_dump()` method call.
+
+To keep `None` values use `.model_dump()`
+
+To remove `None` values use `.model_dump(exclude_none=True)`
 
 Examples:
 
