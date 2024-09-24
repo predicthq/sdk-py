@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional, Tuple, Union
 
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 
 from predicthq.endpoints.schemas import ResultSet
 
@@ -11,6 +11,7 @@ class Entities(BaseModel):
     name: str
     type: str
     formatted_address: Optional[str] = None
+
 
 class PredictedEventSpendIndustries(BaseModel):
     accommodation: int
@@ -38,9 +39,18 @@ class MultiPolygon(BaseModel):
     coordinates: List[List[List[List[float]]]]
 
 
+class GeoAddress(BaseModel):
+    country_code: Optional[str] = None
+    formatted_address: Optional[str] = None
+    locality: Optional[str] = None
+    postcode: Optional[str] = None
+    region: Optional[str] = None
+
+
 class Geo(BaseModel):
     geometry: Union[Point, MultiPoint, Polygon, MultiPolygon]
     placekey: Optional[str] = None
+    address: Optional[GeoAddress] = None
 
 
 class ParentEvent(BaseModel):
@@ -54,7 +64,6 @@ class ImpactPatternImpacts(BaseModel):
 
 
 class ImpactPattern(BaseModel):
-
     vertical: str
     impact_type: str
     impacts: List[ImpactPatternImpacts]
@@ -74,6 +83,7 @@ class Event(BaseModel):
     duplicate_of_id: Optional[str] = None
     duration: Optional[int] = None
     end: Optional[datetime] = None
+    end_local: Optional[datetime] = None
     first_seen: Optional[datetime] = None
     geo: Optional[Geo] = None
     id: str
@@ -87,6 +97,7 @@ class Event(BaseModel):
     relevance: Optional[float] = None
     scope: Optional[str] = None
     start: datetime
+    start_local: Optional[datetime] = None
     state: Optional[str] = None
     timezone: Optional[str] = None
     title: str
@@ -99,6 +110,7 @@ class Event(BaseModel):
     local_rank: Optional[int] = None  # Local Rank add-on
     phq_attendance: Optional[int] = None  # PHQ Attendance add-on
     predicted_end: Optional[datetime] = None
+    predicted_end_local: Optional[datetime] = None
     private: Optional[bool] = None  # Loop add-on
     rank: Optional[int] = None  # PHQ Rank add-on
     predicted_event_spend: Optional[int] = None  # Predicted Event Spend add-on
