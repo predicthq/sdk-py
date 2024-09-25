@@ -42,6 +42,7 @@ setup(
         "requests>=2.7.0",
         "python-dateutil>=2.4.2",
         "pytz>=2017.2,<=2021.1",
+        "stamina>=24.3.0,<25",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

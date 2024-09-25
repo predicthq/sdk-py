@@ -20,3 +20,7 @@ class ServerError(APIError):
 
 class ValidationError(PredictHQError):
     pass
+
+
+class RateLimitError(ClientError):
+    pass
