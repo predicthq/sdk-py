@@ -1,6 +1,6 @@
 # V3 breaking changes details
 
-V3 introduces support for Python versions above 3.9 and drops support for Python3.6.
+V3 introduces support for Python versions above 3.9 and drops support for Python 3.6.
 
 In order to allow the following, we replaced the [Schematics](https://schematics.readthedocs.io/en/latest/) package (which is not maintained anymore and incompatible with python3.10+) by [Pydantic](https://docs.pydantic.dev/latest/).
 
