@@ -25,7 +25,9 @@ pip install predicthq
 
 ## Migrating from version <= 2.4.0
 
-If you are migrating to version 3.0.0 or above from an earlier version, please check the [breaking changes details](./docs/V3_Breaking_Changes.md).
+If you are migrating to version 3.0.0 or above from an earlier version, please check the [V3 breaking changes details](./docs/V3_Breaking_Changes.md).
+
+If you are migrating to version 4.0.0 or above from an earlier version, please check the [V4 breaking changes details](./docs/V4_Breaking_Changes.md).
 
 ## Usage
 
