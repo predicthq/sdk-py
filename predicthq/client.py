@@ -1,5 +1,6 @@
 import json
 import logging
+from platform import python_version
 from urllib.parse import urljoin, urlparse, urlunparse
 from weakref import proxy
 
@@ -36,7 +37,10 @@ class Client(object):
         self.radius = endpoints.SuggestedRadiusEndpoint(proxy(self))
 
     def get_headers(self, headers):
-        _headers = {"Accept": "application/json", "x-user-agent": f"PHQ-Py-SDK/{__version__}"}
+        _headers = {
+            "Accept": "application/json",
+            "x-user-agent": f"PHQ-Py-SDK/{__version__} (python/{python_version()})",
+        }
         if self.access_token:
             _headers.update(
                 {
