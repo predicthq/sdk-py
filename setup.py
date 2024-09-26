@@ -28,7 +28,7 @@ LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.md")])
 setup(
     name="predicthq",
     version=about['__version__'],
-    description="PredictHQ Event Intelligence",
+    description="PredictHQ Demand Intelligence",
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     license="MIT",

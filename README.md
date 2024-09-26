@@ -1,4 +1,10 @@
-<p align="center"><img src="ext/logo.png" alt="PredictHQ logo"></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/predicthq/sdk-py/refs/heads/master/ext/predicthq-logo-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/predicthq/sdk-py/refs/heads/master/ext/predicthq-logo-light.png">
+    <img alt="PredictHQ" src="https://raw.githubusercontent.com/predicthq/sdk-py/refs/heads/master/ext/predicthq-logo-light.png">
+  </picture>
+</p>
 
 # PredictHQ API Client for Python
 
@@ -36,7 +42,7 @@ We support all the endpoints available in our API.
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
 The [usecases/](https://github.com/predicthq/sdk-py/tree/master/usecases/pagination.py) folder is a good starting point to get familiar with the Python SDK.
-You can also review the [tests](https://github.com/predicthq/sdk-py/tree/master/tests/endpoints/v1/) for a kitchen sink of all the parameters available per endpoint.
+You can also review the [tests/](https://github.com/predicthq/sdk-py/tree/master/tests/endpoints/v1/) for a kitchen sink of all the parameters available per endpoint.
 
 ### Pagination
 
@@ -237,8 +243,8 @@ phq = Client(access_token="abc123")
 
 
 for feature in phq.features.obtain_features(
-        active__gte="2017-12-31",
-        active__lte="2018-01-02",
+        active__gte="2024-12-31",
+        active__lte="2025-01-02",
         location__place_id=["4671654"],
         phq_rank_public_holidays=True,
         phq_attendance_sports__stats=["count", "median"],
