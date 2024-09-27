@@ -8,7 +8,7 @@ import requests
 import stamina
 
 from .config import config
-from .exceptions import ClientError, RateLimitError, ServerError
+from .exceptions import ClientError, RetriableError, ServerError
 from .version import __version__
 
 
@@ -50,7 +50,7 @@ class Client(object):
         _headers.update(**headers)
         return _headers
 
-    @stamina.retry(on=(RateLimitError, ServerError), attempts=3)
+    @stamina.retry(on=RetriableError, attempts=3)
     def request(self, method, path, **kwargs):
         headers = self.get_headers(kwargs.pop("headers", {}))
         response = requests.request(method, self.build_url(path), headers=headers, **kwargs)
@@ -63,8 +63,9 @@ class Client(object):
             except ValueError:
                 error = response.content
 
-            if response.status_code == 429:
-                raise RateLimitError(error)
+            if response.status_code in (429, 503, 504):
+                # We want to retry for these http status codes
+                raise RetriableError(error)
             elif 400 <= response.status_code <= 499:
                 raise ClientError(error)
             else:

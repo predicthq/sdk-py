@@ -8,7 +8,7 @@ import stamina
 import predicthq
 from predicthq import endpoints
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.exceptions import ClientError, RateLimitError, ServerError
+from predicthq.exceptions import ClientError, RetriableError, ServerError
 from tests import load_fixture, with_config, with_mock_client, with_mock_responses
 
 
@@ -129,18 +129,15 @@ def client():
     return predicthq.Client()
 
 
-@pytest.mark.parametrize(
-    "status_code,exception_class",
-    [(429, RateLimitError), (500, ServerError), (503, ServerError), (504, ServerError)],
-)
+@pytest.mark.parametrize("status_code", (429, 503, 504))
 @mock.patch("predicthq.client.requests.request")
-def test_retries(mock_request, client, status_code, exception_class):
+def test_retries(mock_request, client, status_code):
     stamina.set_testing(True, attempts=3)  # Disable stamina backoff waiting so the tests can run faster
 
     mock_request.return_value.status_code = status_code
     mock_request.return_value.raise_for_status.side_effect = requests.HTTPError
 
-    with pytest.raises(exception_class):
+    with pytest.raises(RetriableError):
         client.get("/get/")
 
     # Check that the request was retried 3 times

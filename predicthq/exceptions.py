@@ -22,5 +22,5 @@ class ValidationError(PredictHQError):
     pass
 
 
-class RateLimitError(ClientError):
+class RetriableError(APIError):
     pass
