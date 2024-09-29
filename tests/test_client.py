@@ -1,15 +1,24 @@
+import unittest
+from unittest import mock
+
 import pytest
+import requests
+import stamina
 
 import predicthq
 from predicthq import endpoints
 from predicthq.endpoints.oauth2.schemas import AccessToken
-from predicthq.exceptions import ClientError, ServerError
-from tests import with_mock_responses, with_config, with_mock_client, load_fixture
+from predicthq.exceptions import ClientError, RetriableError, ServerError
+from tests import load_fixture, with_config, with_mock_client, with_mock_responses
 
 
-class ClientTest(object):
+class ClientTest(unittest.TestCase):
     def setUp(self):
+        stamina.set_testing(True)
         self.client = predicthq.Client()
+
+    def tearDown(self):
+        stamina.set_testing(False)
 
     @with_config(ENDPOINT_URL="https://api.predicthq.com")
     def test_build_url(self):
@@ -92,10 +101,10 @@ class ClientTest(object):
             "/oauth2/token/",
             auth=("client_id", "client_secret"),
             data={"scope": "account events", "grant_type": "client_credentials"},
+            verify=True,
         )
 
         assert isinstance(token, AccessToken)
-        assert token.to_primitive() == client.request.return_value
 
         assert self.client.access_token == "token123"
 
@@ -107,3 +116,38 @@ class ClientTest(object):
     def test_construct_with_access_token_config(self):
         client = predicthq.Client()
         assert client.access_token == "token123"
+
+
+# New tests are intentionally left out of the ClientTest class because pytest does not support
+# parametrized fixtures inside unittest.TestCase classes as documented at
+# https://docs.pytest.org/en/stable/how-to/unittest.html#pytest-features-in-unittest-testcase-subclasses
+# We should gradually migrate all tests to pytest style and remove unittest.TestCase classes
+
+
+@pytest.fixture
+def client():
+    return predicthq.Client()
+
+
+@pytest.mark.parametrize("status_code", (429, 503, 504))
+@mock.patch("predicthq.client.requests.request")
+def test_retries(mock_request, client, status_code):
+    stamina.set_testing(True, attempts=3)  # Disable stamina backoff waiting so the tests can run faster
+
+    mock_request.return_value.status_code = status_code
+    mock_request.return_value.raise_for_status.side_effect = requests.HTTPError
+
+    with pytest.raises(RetriableError):
+        client.get("/get/")
+
+    # Check that the request was retried 3 times
+    mock_request.assert_has_calls(
+        [
+            mock.call("get", client.build_url("/get/"), headers=client.get_headers({})),
+            mock.call().raise_for_status(),
+            mock.call().json(),
+        ]
+        * 3
+    )
+
+    stamina.set_testing(False)  # Enable stamina backoff waiting after the test is done

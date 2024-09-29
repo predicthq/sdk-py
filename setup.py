@@ -36,12 +36,13 @@ setup(
     author_email="developers@predicthq.com",
     url=REPO_URL,
     packages=find_packages(exclude=("tests*",)),
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
         "pydantic>=2,<3",
         "requests>=2.7.0",
         "python-dateutil>=2.4.2",
         "pytz>=2017.2,<=2021.1",
+        "stamina>=24.3.0,<25",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -51,11 +52,11 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ]
 )
