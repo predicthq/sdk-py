@@ -41,16 +41,17 @@ def _to_url_params(key_list_mapping, glue=".", separator=",", parent_key=""):
     return params
 
 
-def _to_json(key_list_mapping):
+def _to_json(key_list_mapping, json = None):
     """
     Converts key_list_mapping to json
     """
-    json = {}
+    if json is None:
+        json = {}
     for key, value in key_list_mapping.items():
         for v in value:
             json[key] = dict() if not json.get(key) else json[key]
             if isinstance(v, dict):
-                json[key].update(_to_json(v))
+                _to_json(v, json[key])
             else:
                 json[key] = v
     return json
