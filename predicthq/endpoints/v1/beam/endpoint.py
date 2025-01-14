@@ -98,8 +98,8 @@ class BeamEndpoint:
         @overload
         def update(
             self,
-            name: str,
-            location__geopoint: dict,
+            name: str = None,
+            location__geopoint: dict = None,
             location__radius: float = None,
             location__unit: str = None,
             location__google_place_id: str = None,
@@ -144,7 +144,7 @@ class BeamEndpoint:
             )
 
         @overload
-        def get_events(
+        def search_events(
             self,
             analysis_id: str,
             start__gt: date = None,
