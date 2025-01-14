@@ -8,6 +8,9 @@ from .schemas import (
     FeatureImportance,
     ValueQuant,
     CorrelationResultSet,
+    CreateAnalysisGroupResponse,
+    AnalysisGroup,
+    AnalysisGroupResultSet,
 )
 from predicthq.endpoints.decorators import accepts, returns
 from typing import overload, List
@@ -16,9 +19,10 @@ from datetime import date
 
 class BeamEndpoint:
     def __init__(self, client):
-        self.analysis = self.Analysis(client)
+        self.analysis = self.AnalysisEndpoint(client)
+        self.analysis_group = self.AnalysisGroupEndpoint(client)
 
-    class Analysis(BaseEndpoint):
+    class AnalysisEndpoint(BaseEndpoint):
         @overload
         def create(
             self,
@@ -230,6 +234,119 @@ class BeamEndpoint:
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.post(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+    class AnalysisGroupEndpoint(BaseEndpoint):
+        @overload
+        def create(
+            self,
+            name: str,
+            analysis_ids: List[str],
+            demand_type__unit_descriptor: str = None,
+            **params,
+        ): ...
+        @accepts(query_string=False)
+        @returns(CreateAnalysisGroupResponse)
+        def create(self, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.post(
+                f"{self.build_url('v1', 'beam')}analysis-groups/",
+                json=params,
+                verify=verify_ssl,
+            )
+
+        @overload
+        def search(
+            self,
+            updated__gt: str = None,
+            updated__gte: str = None,
+            updated__lt: str = None,
+            updated__lte: str = None,
+            q: str = None,
+            status: list[str] = None,
+            demand_type__interval: list[str] = None,
+            demand_type__industry: list[str] = None,
+            readiness_status: list[str] = None,
+            include_deleted: bool = None,
+            sort: list[str] = None,
+            offset: int = None,
+            limit: int = None,
+            **params,
+        ): ...
+        @accepts()
+        @returns(AnalysisGroupResultSet)
+        def search(self, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(AnalysisGroup)
+        def get(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @overload
+        def update(
+            self,
+            group_id: str,
+            name: str = None,
+            analysis_ids: list[str] = None,
+            demand_type__unit_descriptor: str = None,
+            **params,
+        ): ...
+        @accepts(query_string=False)
+        def update(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.patch(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                json=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        def delete(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.delete(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        def refresh(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.post(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/refresh/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(FeatureImportance)
+        def get_feature_importance(self, group_id: str = None, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/feature-importance/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(ValueQuant)
+        def get_value_quant(self, group_id: str = None, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/value-quant/",
                 params=params,
                 verify=verify_ssl,
             )

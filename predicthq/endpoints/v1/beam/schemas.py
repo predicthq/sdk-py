@@ -61,7 +61,15 @@ class ProcessingCompleted(BaseModel):
     value_quant: bool
 
 
-class DemandType(BaseModel):
+class DemandTypeGroup(BaseModel):
+    interval: str
+    week_start_day: Optional[str] = None
+    industry: Optional[str] = None
+    unit_descriptor: str
+    currency_code: str
+
+
+class DemandType(DemandTypeGroup):
     interval: str
     week_start_day: Optional[str] = None
     industry: Optional[str] = None
@@ -71,7 +79,7 @@ class DemandType(BaseModel):
 
 
 class Analysis(BaseModel):
-    analysis_id: str
+    analysis_id: Optional[str] = None
     name: str
     location: Location
     rank: Rank
@@ -169,3 +177,37 @@ class CorrelationResultSet(ResultSet):
     model_version: str
     version: int
     results: List[dict] = Field(alias="dates")
+
+
+class CreateAnalysisGroupResponse(BaseModel):
+    group_id: str
+
+
+class ExcludedAnalysis(BaseModel):
+    analysis_id: str
+    reason: str
+    excluded_from: List[str]
+
+
+class ProcessingCompletedGroup(BaseModel):
+    feature_importance: bool
+    value_quant: bool
+    excluded_analyses: List[ExcludedAnalysis]
+
+
+class AnalysisGroup(BaseModel):
+    group_id: Optional[str] = None
+    name: str
+    analysis_ids: List[str]
+    user_id: Optional[str] = None
+    processing_completed: ProcessingCompletedGroup
+    readiness_status: Optional[str] = None
+    demand_type: Optional[DemandTypeGroup] = None
+    status: str
+    create_dt: datetime
+    update_dt: datetime
+    processed_dt: Optional[datetime] = None
+
+
+class AnalysisGroupResultSet(ResultSet):
+    results: List[AnalysisGroup] = Field(alias="groups")
