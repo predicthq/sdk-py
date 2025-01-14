@@ -10,7 +10,7 @@ from .schemas import (
     CorrelationResultSet,
 )
 from predicthq.endpoints.decorators import accepts, returns
-from typing import overload
+from typing import overload, List
 
 
 class BeamEndpoint:
@@ -27,7 +27,7 @@ class BeamEndpoint:
             location__radius: float = None,
             location__unit: str = None,
             location__google_place_id: str = None,
-            location__geoscope_paths: list[str] = None,
+            location__geoscope_paths: List[str] = None,
             rank__type: str = None,
             rank__levels__phq: dict = None,
             rank__levels__local: dict = None,
@@ -37,7 +37,7 @@ class BeamEndpoint:
             demand_type__currency_code: str = None,
             tz: str = None,
             external_id: str = None,
-            label: list[str] = None,
+            label: List[str] = None,
             **params,
         ): ...
         @returns(CreateAnalysisResponse)
@@ -58,17 +58,17 @@ class BeamEndpoint:
             updated__lt: str = None,
             updated__lte: str = None,
             q: str = None,
-            status: list[str] = None,
-            group_id: list[str] = None,
-            demand_type__interval: list[str] = None,
-            demand_type__industry: list[str] = None,
-            readiness_status: list[str] = None,
+            status: List[str] = None,
+            group_id: List[str] = None,
+            demand_type__interval: List[str] = None,
+            demand_type__industry: List[str] = None,
+            readiness_status: List[str] = None,
             include_deleted: bool = None,
-            sort: list[str] = None,
+            sort: List[str] = None,
             offset: int = None,
             limit: int = None,
-            external_id: list[str] = None,
-            label: list[str] = None,
+            external_id: List[str] = None,
+            label: List[str] = None,
             **params,
         ): ...
         @returns(AnalysisResultSet)
@@ -99,7 +99,7 @@ class BeamEndpoint:
             location__radius: float = None,
             location__unit: str = None,
             location__google_place_id: str = None,
-            location__geoscope_paths: list[str] = None,
+            location__geoscope_paths: List[str] = None,
             rank__type: str = None,
             rank__levels__phq: dict = None,
             rank__levels__local: dict = None,
@@ -109,7 +109,7 @@ class BeamEndpoint:
             demand_type__currency_code: str = None,
             tz: str = None,
             external_id: str = None,
-            label: list[str] = None,
+            label: List[str] = None,
             **params,
         ): ...
         def update(self, analysis_id: str, **params):
