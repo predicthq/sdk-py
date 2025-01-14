@@ -8,36 +8,40 @@ from .schemas import (
     FeatureImportance,
     ValueQuant,
     CorrelationResultSet,
+    CreateAnalysisGroupResponse,
+    AnalysisGroup,
+    AnalysisGroupResultSet,
 )
 from predicthq.endpoints.decorators import accepts, returns
-from typing import overload, List
+from typing import overload, List, Optional
 from datetime import date
 
 
 class BeamEndpoint:
     def __init__(self, client):
-        self.analysis = self.Analysis(client)
+        self.analysis = self.AnalysisEndpoint(client)
+        self.analysis_group = self.AnalysisGroupEndpoint(client)
 
-    class Analysis(BaseEndpoint):
+    class AnalysisEndpoint(BaseEndpoint):
         @overload
         def create(
             self,
             name: str,
             location__geopoint: dict,
-            location__radius: float = None,
-            location__unit: str = None,
-            location__google_place_id: str = None,
-            location__geoscope_paths: List[str] = None,
-            rank__type: str = None,
-            rank__levels__phq: dict = None,
-            rank__levels__local: dict = None,
-            demand_type__industry: str = None,
-            demand_type__unit_descriptor: str = None,
-            demand_type__unit_currency_multiplier: float = None,
-            demand_type__currency_code: str = None,
-            tz: str = None,
-            external_id: str = None,
-            label: List[str] = None,
+            location__radius: Optional[float] = None,
+            location__unit: Optional[str] = None,
+            location__google_place_id: Optional[str] = None,
+            location__geoscope_paths: Optional[List[str]] = None,
+            rank__type: Optional[str] = None,
+            rank__levels__phq: Optional[dict] = None,
+            rank__levels__local: Optional[dict] = None,
+            demand_type__industry: Optional[str] = None,
+            demand_type__unit_descriptor: Optional[str] = None,
+            demand_type__unit_currency_multiplier: Optional[float] = None,
+            demand_type__currency_code: Optional[str] = None,
+            tz: Optional[str] = None,
+            external_id: Optional[str] = None,
+            label: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts(query_string=False)
@@ -53,22 +57,22 @@ class BeamEndpoint:
         @overload
         def search(
             self,
-            updated__gt: str = None,
-            updated__gte: str = None,
-            updated__lt: str = None,
-            updated__lte: str = None,
-            q: str = None,
-            status: List[str] = None,
-            group_id: List[str] = None,
-            demand_type__interval: List[str] = None,
-            demand_type__industry: List[str] = None,
-            readiness_status: List[str] = None,
-            include_deleted: bool = None,
-            sort: List[str] = None,
-            offset: int = None,
-            limit: int = None,
-            external_id: List[str] = None,
-            label: List[str] = None,
+            updated__gt: Optional[str] = None,
+            updated__gte: Optional[str] = None,
+            updated__lt: Optional[str] = None,
+            updated__lte: Optional[str] = None,
+            q: Optional[str] = None,
+            status: Optional[List[str]] = None,
+            group_id: Optional[List[str]] = None,
+            demand_type__interval: Optional[List[str]] = None,
+            demand_type__industry: Optional[List[str]] = None,
+            readiness_status: Optional[List[str]] = None,
+            include_deleted: Optional[bool] = None,
+            sort: Optional[List[str]] = None,
+            offset: Optional[int] = None,
+            limit: Optional[int] = None,
+            external_id: Optional[List[str]] = None,
+            label: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts()
@@ -94,22 +98,22 @@ class BeamEndpoint:
         @overload
         def update(
             self,
-            name: str,
-            location__geopoint: dict,
-            location__radius: float = None,
-            location__unit: str = None,
-            location__google_place_id: str = None,
-            location__geoscope_paths: List[str] = None,
-            rank__type: str = None,
-            rank__levels__phq: dict = None,
-            rank__levels__local: dict = None,
-            demand_type__industry: str = None,
-            demand_type__unit_descriptor: str = None,
-            demand_type__unit_currency_multiplier: float = None,
-            demand_type__currency_code: str = None,
-            tz: str = None,
-            external_id: str = None,
-            label: List[str] = None,
+            name: Optional[str] = None,
+            location__geopoint: Optional[dict] = None,
+            location__radius: Optional[float] = None,
+            location__unit: Optional[str] = None,
+            location__google_place_id: Optional[str] = None,
+            location__geoscope_paths: Optional[List[str]] = None,
+            rank__type: Optional[str] = None,
+            rank__levels__phq: Optional[dict] = None,
+            rank__levels__local: Optional[dict] = None,
+            demand_type__industry: Optional[str] = None,
+            demand_type__unit_descriptor: Optional[str] = None,
+            demand_type__unit_currency_multiplier: Optional[float] = None,
+            demand_type__currency_code: Optional[str] = None,
+            tz: Optional[str] = None,
+            external_id: Optional[str] = None,
+            label: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts(query_string=False)
@@ -140,25 +144,25 @@ class BeamEndpoint:
             )
 
         @overload
-        def get_events(
+        def search_events(
             self,
             analysis_id: str,
-            start__gt: date = None,
-            start__gte: date = None,
-            start__lt: date = None,
-            start__lte: date = None,
-            end__gt: date = None,
-            end__gte: date = None,
-            end__lt: date = None,
-            end__lte: date = None,
-            active__gt: date = None,
-            active__gte: date = None,
-            active__lt: date = None,
-            active__lte: date = None,
-            impact__gt: date = None,
-            impact__gte: date = None,
-            impact__lt: date = None,
-            impact__lte: date = None,
+            start__gt: Optional[date] = None,
+            start__gte: Optional[date] = None,
+            start__lt: Optional[date] = None,
+            start__lte: Optional[date] = None,
+            end__gt: Optional[date] = None,
+            end__gte: Optional[date] = None,
+            end__lt: Optional[date] = None,
+            end__lte: Optional[date] = None,
+            active__gt: Optional[date] = None,
+            active__gte:Optional[ date] = None,
+            active__lt: Optional[date] = None,
+            active__lte: Optional[date] = None,
+            impact__gt: Optional[date] = None,
+            impact__gte: Optional[date] = None,
+            impact__lt: Optional[date] = None,
+            impact__lte: Optional[date] = None,
             **params,
         ): ...
         @accepts()
@@ -185,13 +189,13 @@ class BeamEndpoint:
         def get_correlation(
             self,
             analysis_id: str,
-            date__gt: date = None,
-            date__gte: date = None,
-            date__lt: date = None,
-            date__lte: date = None,
-            offset: int = None,
-            limit: int = None,
-            include_features: List[str] = None,
+            date__gt: Optional[date] = None,
+            date__gte: Optional[date] = None,
+            date__lt: Optional[date] = None,
+            date__lte: Optional[date] = None,
+            offset: Optional[int] = None,
+            limit: Optional[int] = None,
+            include_features: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts()
@@ -230,6 +234,119 @@ class BeamEndpoint:
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.post(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+    class AnalysisGroupEndpoint(BaseEndpoint):
+        @overload
+        def create(
+            self,
+            name: str,
+            analysis_ids: List[str],
+            demand_type__unit_descriptor: Optional[str] = None,
+            **params,
+        ): ...
+        @accepts(query_string=False)
+        @returns(CreateAnalysisGroupResponse)
+        def create(self, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.post(
+                f"{self.build_url('v1', 'beam')}analysis-groups/",
+                json=params,
+                verify=verify_ssl,
+            )
+
+        @overload
+        def search(
+            self,
+            updated__gt: Optional[str] = None,
+            updated__gte: Optional[str] = None,
+            updated__lt: Optional[str] = None,
+            updated__lte: Optional[str] = None,
+            q: Optional[str] = None,
+            status: Optional[List[str]] = None,
+            demand_type__interval: Optional[List[str]] = None,
+            demand_type__industry: Optional[List[str]] = None,
+            readiness_status: Optional[List[str]] = None,
+            include_deleted: Optional[bool] = None,
+            sort: Optional[List[str]] = None,
+            offset: Optional[int] = None,
+            limit: Optional[int] = None,
+            **params,
+        ): ...
+        @accepts()
+        @returns(AnalysisGroupResultSet)
+        def search(self, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(AnalysisGroup)
+        def get(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @overload
+        def update(
+            self,
+            group_id: str,
+            name: Optional[str] = None,
+            analysis_ids: Optional[List[str]] = None,
+            demand_type__unit_descriptor: Optional[str] = None,
+            **params,
+        ): ...
+        @accepts(query_string=False)
+        def update(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.patch(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                json=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        def delete(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.delete(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        def refresh(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.post(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/refresh/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(FeatureImportance)
+        def get_feature_importance(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/feature-importance/",
+                params=params,
+                verify=verify_ssl,
+            )
+
+        @accepts()
+        @returns(ValueQuant)
+        def get_value_quant(self, group_id: str, **params):
+            verify_ssl = params.pop("config.verify_ssl", True)
+            return self.client.get(
+                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/value-quant/",
                 params=params,
                 verify=verify_ssl,
             )
