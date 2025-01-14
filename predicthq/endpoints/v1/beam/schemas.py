@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 from predicthq.endpoints.schemas import ResultSet
+from typing import Optional
 
 
 class CreateAnalysisResponse(BaseModel):
@@ -16,22 +17,22 @@ class Location(BaseModel):
     geopoint: GeoPoint
     radius: float
     unit: str
-    google_place_id: str | None = None
+    google_place_id: Optional[str] = None
 
 
 class RankLevel(BaseModel):
     min: int
-    max: int | None = None
+    max: Optional[int] = None
 
 
 class RankLevels(BaseModel):
-    phq: RankLevel | None = None
-    local: RankLevel | None = None
+    phq: Optional[RankLevel] = None
+    local: Optional[RankLevel] = None
 
 
 class Rank(BaseModel):
     type: str
-    levels: RankLevels | None = None
+    levels: Optional[RankLevels] = None
 
 
 class AnalysisDateRange(BaseModel):
@@ -46,10 +47,10 @@ class BestPracticeChecks(BaseModel):
 
 
 class AnalysisReadinessChecks(BaseModel):
-    date_range: AnalysisDateRange | None = None
-    error_code: str | None = None
-    missing_dates: list[str] | None = None
-    validation_response: dict | None = None
+    date_range: Optional[AnalysisDateRange] = None
+    error_code: Optional[str] = None
+    missing_dates: Optional[list[str]] = None
+    validation_response: Optional[dict] = None
     best_practice: bool
     best_practice_checks: BestPracticeChecks
 
@@ -62,8 +63,8 @@ class ProcessingCompleted(BaseModel):
 
 class DemandType(BaseModel):
     interval: str
-    week_start_day: str | None = None
-    industry: str | None = None
+    week_start_day: Optional[str] = None
+    industry: Optional[str] = None
     unit_descriptor: str
     unit_currency_multiplier: float
     currency_code: str
@@ -74,20 +75,20 @@ class Analysis(BaseModel):
     name: str
     location: Location
     rank: Rank
-    user_id: str | None = None
+    user_id: Optional[str] = None
     access_type: str
     status: str
-    readiness_status: str | None = None
+    readiness_status: Optional[str] = None
     readiness_checks: AnalysisReadinessChecks
     processing_completed: ProcessingCompleted
     demand_type: DemandType
-    group_ids: list[str] | None = None
-    tz: str | None = None
+    group_ids: Optional[list[str]] = None
+    tz: Optional[str] = None
     create_dt: datetime
     update_dt: datetime
-    processed_dt: datetime | None = None
-    external_id: str | None = None
-    label: list[str] | None = None
+    processed_dt: Optional[datetime] = None
+    external_id: Optional[str] = None
+    label: Optional[list[str]] = None
 
 
 class AnalysisResultSet(ResultSet):
@@ -95,15 +96,15 @@ class AnalysisResultSet(ResultSet):
 
 
 class Address(BaseModel):
-    locality: str | None = None
-    country_code: str | None = None
-    formatted_address: str | None = None
-    postcode: str | None = None
-    region: str | None = None
+    locality: Optional[str] = None
+    country_code: Optional[str] = None
+    formatted_address: Optional[str] = None
+    postcode: Optional[str] = None
+    region: Optional[str] = None
 
 
 class Geo(BaseModel):
-    address: Address | None = None
+    address: Optional[Address] = None
 
 
 class Event(BaseModel):
@@ -112,11 +113,11 @@ class Event(BaseModel):
     geo: Geo
     labels: list
     title: str
-    timezone: str | None = None
-    phq_rank: int | None = None
-    local_rank: int | None = None
-    formatted_address: str | None = None
-    impact_patterns: list | None = None
+    timezone: Optional[str] = None
+    phq_rank: Optional[int] = None
+    local_rank: Optional[int] = None
+    formatted_address: Optional[str] = None
+    impact_patterns: Optional[list] = None
 
 
 class EventResultSet(BaseModel):
@@ -151,8 +152,8 @@ class Historical(BaseModel):
     anomalous_demand_pct: float
     event_contribution_pct: float
     total_event_contribution_pct: float
-    incremental: HistoricalInfo | None = None
-    decremental: HistoricalInfo | None = None
+    incremental: Optional[HistoricalInfo] = None
+    decremental: Optional[HistoricalInfo] = None
 
 
 class Prediction(BaseModel):
@@ -160,8 +161,8 @@ class Prediction(BaseModel):
 
 
 class ValueQuant(BaseModel):
-    prediction: Prediction | None = None
-    historical: Historical | None = None
+    prediction: Optional[Prediction] = None
+    historical: Optional[Historical] = None
 
 
 class CorrelationResultSet(ResultSet):
