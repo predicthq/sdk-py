@@ -108,7 +108,7 @@ class Geo(BaseModel):
 
 
 class Event(BaseModel):
-    even_id: str
+    event_id: str
     category: str
     geo: Geo
     labels: List
@@ -120,8 +120,8 @@ class Event(BaseModel):
     impact_patterns: Optional[List] = None
 
 
-class EventResultSet(BaseModel):
-    events: List[Event]
+class EventResultSet(ResultSet):
+    results: List[Event] = Field(alias="events")
 
 
 class FeatureGroup(BaseModel):
@@ -167,5 +167,5 @@ class ValueQuant(BaseModel):
 
 class CorrelationResultSet(ResultSet):
     model_version: str
-    version: str
+    version: int
     results: List[dict] = Field(alias="dates")
