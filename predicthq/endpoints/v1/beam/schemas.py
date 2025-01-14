@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from datetime import date, datetime
+from datetime import datetime
 from predicthq.endpoints.schemas import ResultSet
 
 
