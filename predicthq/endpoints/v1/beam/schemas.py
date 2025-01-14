@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 from predicthq.endpoints.schemas import ResultSet
-from typing import Optional
+from typing import Optional, List
 
 
 class CreateAnalysisResponse(BaseModel):
@@ -49,7 +49,7 @@ class BestPracticeChecks(BaseModel):
 class AnalysisReadinessChecks(BaseModel):
     date_range: Optional[AnalysisDateRange] = None
     error_code: Optional[str] = None
-    missing_dates: Optional[list[str]] = None
+    missing_dates: Optional[List[str]] = None
     validation_response: Optional[dict] = None
     best_practice: bool
     best_practice_checks: BestPracticeChecks
@@ -82,17 +82,17 @@ class Analysis(BaseModel):
     readiness_checks: AnalysisReadinessChecks
     processing_completed: ProcessingCompleted
     demand_type: DemandType
-    group_ids: Optional[list[str]] = None
+    group_ids: Optional[List[str]] = None
     tz: Optional[str] = None
     create_dt: datetime
     update_dt: datetime
     processed_dt: Optional[datetime] = None
     external_id: Optional[str] = None
-    label: Optional[list[str]] = None
+    label: Optional[List[str]] = None
 
 
 class AnalysisResultSet(ResultSet):
-    results: list[Analysis] = Field(alias="analyses")
+    results: List[Analysis] = Field(alias="analyses")
 
 
 class Address(BaseModel):
@@ -111,28 +111,28 @@ class Event(BaseModel):
     even_id: str
     category: str
     geo: Geo
-    labels: list
+    labels: List
     title: str
     timezone: Optional[str] = None
     phq_rank: Optional[int] = None
     local_rank: Optional[int] = None
     formatted_address: Optional[str] = None
-    impact_patterns: Optional[list] = None
+    impact_patterns: Optional[List] = None
 
 
 class EventResultSet(BaseModel):
-    events: list[Event]
+    events: List[Event]
 
 
 class FeatureGroup(BaseModel):
     feature_group: str
-    features: list[str]
+    features: List[str]
     p_value: float
     important: bool
 
 
 class FeatureImportance(BaseModel):
-    feature_importance: list[FeatureGroup]
+    feature_importance: List[FeatureGroup]
 
 
 class Incremental(BaseModel):
@@ -168,4 +168,4 @@ class ValueQuant(BaseModel):
 class CorrelationResultSet(ResultSet):
     model_version: str
     version: str
-    results: list[dict] = Field(alias="dates")
+    results: List[dict] = Field(alias="dates")
