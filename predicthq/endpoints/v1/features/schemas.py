@@ -8,7 +8,7 @@ from predicthq.endpoints.schemas import ResultSet
 
 
 class CsvMixin:
-    def _flatten_json(self, separator: str) -> list[dict] | None:
+    def _flatten_json(self, separator: str) -> Optional[List[dict]]:
         def __flatten_json(d: dict, pk: str = "") -> dict:
             flat_json = {}
             for k, v in d.items():
