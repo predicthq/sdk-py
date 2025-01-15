@@ -95,6 +95,7 @@ class BeamEndpoint:
         @overload
         def update(
             self,
+            analysis_id: str,
             name: Optional[str] = None,
             location__geopoint: Optional[dict] = None,
             location__radius: Optional[float] = None,
