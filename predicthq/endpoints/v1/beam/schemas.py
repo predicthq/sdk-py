@@ -1,52 +1,56 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ResultSet
 from typing import Optional, List
 
 
-class CreateAnalysisResponse(BaseModel):
+class AllowExtra(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
+
+class CreateAnalysisResponse(AllowExtra):
     analysis_id: str
 
 
-class GeoPoint(BaseModel):
+class GeoPoint(AllowExtra):
     lat: str
     lon: str
 
 
-class Location(BaseModel):
+class Location(AllowExtra):
     geopoint: GeoPoint
     radius: float
     unit: str
     google_place_id: Optional[str] = None
 
 
-class RankLevel(BaseModel):
+class RankLevel(AllowExtra):
     min: int
     max: Optional[int] = None
 
 
-class RankLevels(BaseModel):
+class RankLevels(AllowExtra):
     phq: Optional[RankLevel] = None
     local: Optional[RankLevel] = None
 
 
-class Rank(BaseModel):
+class Rank(AllowExtra):
     type: str
     levels: Optional[RankLevels] = None
 
 
-class AnalysisDateRange(BaseModel):
+class AnalysisDateRange(AllowExtra):
     start: datetime
     end: datetime
 
 
-class BestPracticeChecks(BaseModel):
+class BestPracticeChecks(AllowExtra):
     industry: bool = False
     rank: bool = False
     radius: bool = False
 
 
-class AnalysisReadinessChecks(BaseModel):
+class AnalysisReadinessChecks(AllowExtra):
     date_range: Optional[AnalysisDateRange] = None
     error_code: Optional[str] = None
     missing_dates: Optional[List[str]] = None
@@ -55,13 +59,13 @@ class AnalysisReadinessChecks(BaseModel):
     best_practice_checks: BestPracticeChecks
 
 
-class ProcessingCompleted(BaseModel):
+class ProcessingCompleted(AllowExtra):
     correlation: bool
     feature_importance: bool
     value_quant: bool
 
 
-class DemandTypeGroup(BaseModel):
+class DemandTypeGroup(AllowExtra):
     interval: str
     week_start_day: Optional[str] = None
     industry: Optional[str] = None
@@ -78,7 +82,7 @@ class DemandType(DemandTypeGroup):
     currency_code: str
 
 
-class Analysis(BaseModel):
+class Analysis(AllowExtra):
     analysis_id: Optional[str] = None
     name: str
     location: Location
@@ -103,7 +107,7 @@ class AnalysisResultSet(ResultSet):
     results: List[Analysis] = Field(alias="analyses")
 
 
-class Address(BaseModel):
+class Address(AllowExtra):
     locality: Optional[str] = None
     country_code: Optional[str] = None
     formatted_address: Optional[str] = None
@@ -111,11 +115,11 @@ class Address(BaseModel):
     region: Optional[str] = None
 
 
-class Geo(BaseModel):
+class Geo(AllowExtra):
     address: Optional[Address] = None
 
 
-class Event(BaseModel):
+class Event(AllowExtra):
     event_id: str
     category: str
     geo: Geo
@@ -132,31 +136,31 @@ class EventResultSet(ResultSet):
     results: List[Event] = Field(alias="events")
 
 
-class FeatureGroup(BaseModel):
+class FeatureGroup(AllowExtra):
     feature_group: str
     features: List[str]
     p_value: float
     important: bool
 
 
-class FeatureImportance(BaseModel):
+class FeatureImportance(AllowExtra):
     feature_importance: List[FeatureGroup]
 
 
-class Incremental(BaseModel):
+class Incremental(AllowExtra):
     forecast_uplift_pct_relative: float
     forecast_uplift_pct_absolute: float
     financial_uplift_annual: float
     unit_uplift_annual: float
 
 
-class HistoricalInfo(BaseModel):
+class HistoricalInfo(AllowExtra):
     anomalous_demand_pct: float
     event_contribution_pct: float
     event_financial_impact_annual: float
 
 
-class Historical(BaseModel):
+class Historical(AllowExtra):
     anomalous_demand_pct: float
     event_contribution_pct: float
     total_event_contribution_pct: float
@@ -164,11 +168,11 @@ class Historical(BaseModel):
     decremental: Optional[HistoricalInfo] = None
 
 
-class Prediction(BaseModel):
+class Prediction(AllowExtra):
     incremental: Incremental
 
 
-class ValueQuant(BaseModel):
+class ValueQuant(AllowExtra):
     prediction: Optional[Prediction] = None
     historical: Optional[Historical] = None
 
@@ -179,23 +183,23 @@ class CorrelationResultSet(ResultSet):
     results: List[dict] = Field(alias="dates")
 
 
-class CreateAnalysisGroupResponse(BaseModel):
+class CreateAnalysisGroupResponse(AllowExtra):
     group_id: str
 
 
-class ExcludedAnalysis(BaseModel):
+class ExcludedAnalysis(AllowExtra):
     analysis_id: str
     reason: str
     excluded_from: List[str]
 
 
-class ProcessingCompletedGroup(BaseModel):
+class ProcessingCompletedGroup(AllowExtra):
     feature_importance: bool
     value_quant: bool
     excluded_analyses: List[ExcludedAnalysis]
 
 
-class AnalysisGroup(BaseModel):
+class AnalysisGroup(AllowExtra):
     group_id: Optional[str] = None
     name: str
     analysis_ids: List[str]
