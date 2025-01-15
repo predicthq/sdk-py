@@ -13,7 +13,7 @@ from .schemas import (
     AnalysisGroupResultSet,
 )
 from predicthq.endpoints.decorators import accepts, returns
-from typing import overload, List, Optional
+from typing import overload, List, Optional, TextIO, Union
 from datetime import date
 
 
@@ -156,7 +156,7 @@ class BeamEndpoint:
             end__lt: Optional[date] = None,
             end__lte: Optional[date] = None,
             active__gt: Optional[date] = None,
-            active__gte:Optional[ date] = None,
+            active__gte: Optional[date] = None,
             active__lt: Optional[date] = None,
             active__lte: Optional[date] = None,
             impact__gt: Optional[date] = None,
@@ -228,13 +228,41 @@ class BeamEndpoint:
                 verify=verify_ssl,
             )
 
-        # TODO this function needs to accept various types of demand data to upload
         @accepts(query_string=False)
+        @overload
+        def upload_demand(
+            self,
+            analysis_id: str,
+            json: Optional[Union[str, TextIO]] = None,
+            ndjson:  Optional[Union[str, TextIO]] = None,
+            csv:  Optional[Union[str, TextIO]] = None,
+            **params,
+        ): ...
         def upload_demand(self, analysis_id: str, **params):
             verify_ssl = params.pop("config.verify_ssl", True)
+            if json := params.pop("json", None):
+                headers = {"Content-Type": "application/json"}
+                file = json
+            if ndjson := params.pop("ndjson", None):
+                headers = {"Content-Type": "application/x-ndjson"}
+                file = ndjson
+            if csv := params.pop("csv", None):
+                headers = {"Content-Type": "text/csv"}
+                file = csv
+
+            if isinstance(file, str):
+                with open(file) as f:
+                    return self.client.post(
+                        f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
+                        data=f,
+                        headers=headers,
+                        verify=verify_ssl,
+                    )
+
             return self.client.post(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
-                params=params,
+                data=file,
+                headers=headers,
                 verify=verify_ssl,
             )
 
