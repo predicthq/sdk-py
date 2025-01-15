@@ -107,35 +107,6 @@ class AnalysisResultSet(ResultSet):
     results: List[Analysis] = Field(alias="analyses")
 
 
-class Address(AllowExtra):
-    locality: Optional[str] = None
-    country_code: Optional[str] = None
-    formatted_address: Optional[str] = None
-    postcode: Optional[str] = None
-    region: Optional[str] = None
-
-
-class Geo(AllowExtra):
-    address: Optional[Address] = None
-
-
-class Event(AllowExtra):
-    event_id: str
-    category: str
-    geo: Geo
-    labels: List
-    title: str
-    timezone: Optional[str] = None
-    phq_rank: Optional[int] = None
-    local_rank: Optional[int] = None
-    formatted_address: Optional[str] = None
-    impact_patterns: Optional[List] = None
-
-
-class EventResultSet(ResultSet):
-    results: List[Event] = Field(alias="events")
-
-
 class FeatureGroup(AllowExtra):
     feature_group: str
     features: List[str]
@@ -145,36 +116,6 @@ class FeatureGroup(AllowExtra):
 
 class FeatureImportance(AllowExtra):
     feature_importance: List[FeatureGroup]
-
-
-class Incremental(AllowExtra):
-    forecast_uplift_pct_relative: float
-    forecast_uplift_pct_absolute: float
-    financial_uplift_annual: float
-    unit_uplift_annual: float
-
-
-class HistoricalInfo(AllowExtra):
-    anomalous_demand_pct: float
-    event_contribution_pct: float
-    event_financial_impact_annual: float
-
-
-class Historical(AllowExtra):
-    anomalous_demand_pct: float
-    event_contribution_pct: float
-    total_event_contribution_pct: float
-    incremental: Optional[HistoricalInfo] = None
-    decremental: Optional[HistoricalInfo] = None
-
-
-class Prediction(AllowExtra):
-    incremental: Incremental
-
-
-class ValueQuant(AllowExtra):
-    prediction: Optional[Prediction] = None
-    historical: Optional[Historical] = None
 
 
 class CorrelationResultSet(ResultSet):

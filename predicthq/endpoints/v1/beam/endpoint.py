@@ -3,10 +3,7 @@ from .schemas import (
     CreateAnalysisResponse,
     AnalysisResultSet,
     Analysis,
-    EventResultSet,
-    Event,
     FeatureImportance,
-    ValueQuant,
     CorrelationResultSet,
     CreateAnalysisGroupResponse,
     AnalysisGroup,
@@ -144,49 +141,7 @@ class BeamEndpoint:
             )
 
         @overload
-        def search_events(
-            self,
-            analysis_id: str,
-            start__gt: Optional[date] = None,
-            start__gte: Optional[date] = None,
-            start__lt: Optional[date] = None,
-            start__lte: Optional[date] = None,
-            end__gt: Optional[date] = None,
-            end__gte: Optional[date] = None,
-            end__lt: Optional[date] = None,
-            end__lte: Optional[date] = None,
-            active__gt: Optional[date] = None,
-            active__gte: Optional[date] = None,
-            active__lt: Optional[date] = None,
-            active__lte: Optional[date] = None,
-            impact__gt: Optional[date] = None,
-            impact__gte: Optional[date] = None,
-            impact__lt: Optional[date] = None,
-            impact__lte: Optional[date] = None,
-            **params,
-        ): ...
-        @accepts()
-        @returns(EventResultSet)
-        def search_events(self, analysis_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/events/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @accepts()
-        @returns(Event)
-        def get_event(self, analysis_id: str, event_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/events/{event_id}/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @overload
-        def get_correlation(
+        def get_correlation_results(
             self,
             analysis_id: str,
             date__gt: Optional[date] = None,
@@ -200,7 +155,7 @@ class BeamEndpoint:
         ): ...
         @accepts()
         @returns(CorrelationResultSet)
-        def get_correlation(self, analysis_id: str, **params):
+        def get_correlation_results(self, analysis_id: str, **params):
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.get(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/correlate/",
@@ -214,16 +169,6 @@ class BeamEndpoint:
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.get(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/feature-importance/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @accepts()
-        @returns(ValueQuant)
-        def get_value_quant(self, analysis_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/value-quant/",
                 params=params,
                 verify=verify_ssl,
             )
@@ -365,16 +310,6 @@ class BeamEndpoint:
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.get(
                 f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/feature-importance/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @accepts()
-        @returns(ValueQuant)
-        def get_value_quant(self, group_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/value-quant/",
                 params=params,
                 verify=verify_ssl,
             )
