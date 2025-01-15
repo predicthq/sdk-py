@@ -89,6 +89,8 @@ def returns(model_class):
                 loaded_model = model(**data)
                 loaded_model._more = functools.partial(wrapper, endpoint)
                 loaded_model._endpoint = endpoint
+                if hasattr(loaded_model, "_kwargs"):
+                    loaded_model._kwargs = kwargs
                 return loaded_model
             except PydanticValidationError as e:
                 raise ValidationError(e)

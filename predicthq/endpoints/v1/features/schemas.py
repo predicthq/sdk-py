@@ -59,4 +59,5 @@ class Feature(RootModel):
 
 
 class FeatureResultSet(ResultSet, CsvMixin):
+    _kwargs: Optional[Dict] = None
     results: List[Optional[Feature]]

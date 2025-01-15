@@ -1,4 +1,3 @@
-from urllib.parse import parse_qsl, urlparse
 from typing import Callable, Optional
 
 from pydantic import BaseModel, HttpUrl
@@ -33,6 +32,8 @@ class ResultSet(BaseModel):
         if not self.has_next() or not hasattr(self, "_more"):
             return
         params = self._parse_params(self.next)
+        if kwargs := getattr(self, "_kwargs", {}):
+            return self._more(_params=params, _json=kwargs.get("_json", {}) or kwargs)
         return self._more(**params)
 
     def get_previous(self):
