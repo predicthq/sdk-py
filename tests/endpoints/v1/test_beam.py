@@ -500,7 +500,7 @@ class BeamTest(unittest.TestCase):
 
     @with_mock_client(
         request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_feature_importance"
+            "requests_responses/beam_test/test_feature_importance"
         )
     )
     def test_feature_importance(self, client):
@@ -772,7 +772,7 @@ class BeamTest(unittest.TestCase):
 
     @with_mock_client(
         request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_feature_importance"
+            "requests_responses/beam_test/test_feature_importance"
         )
     )
     def test_group_feature_importance(self, client):
