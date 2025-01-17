@@ -25,6 +25,8 @@ class FeaturesEndpoint(UserBaseEndpoint):
 
     @accepts(query_string=False)
     @returns(FeatureResultSet)
+    # This is a temporary solution to get the next page for Features API
+    # _params and _json are for internal use only
     def obtain_features(self, _params: dict = None, _json: dict = None, **request):
         verify_ssl = request.pop("config", {}).get("verify_ssl", True)
         return self.client.post(

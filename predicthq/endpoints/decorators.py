@@ -89,6 +89,7 @@ def returns(model_class):
                 loaded_model = model(**data)
                 loaded_model._more = functools.partial(wrapper, endpoint)
                 loaded_model._endpoint = endpoint
+                # This is a temporary solution to get the next page for Features API
                 if hasattr(loaded_model, "_kwargs"):
                     loaded_model._kwargs = kwargs
                 return loaded_model

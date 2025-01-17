@@ -32,6 +32,8 @@ class ResultSet(BaseModel):
         if not self.has_next() or not hasattr(self, "_more"):
             return
         params = self._parse_params(self.next)
+        # This is a temporary solution to get the next page for Features API
+        # where the post request requires a json body as well as query params
         if kwargs := getattr(self, "_kwargs", {}):
             return self._more(_params=params, _json=kwargs.get("_json", {}) or kwargs)
         return self._more(**params)
