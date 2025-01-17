@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
-from predicthq.endpoints.schemas import ResultSet
+from predicthq.endpoints.schemas import ArgKwargResultSet, ResultSet
 from typing import Optional, List
 
 
@@ -103,8 +103,18 @@ class Analysis(AllowExtra):
     label: Optional[List[str]] = None
 
 
-class AnalysisResultSet(ResultSet):
+class AnalysisResultSet(ArgKwargResultSet):
     results: List[Analysis] = Field(alias="analyses")
+
+    def has_next(self):
+        return self._kwargs.get("offset", 0) + len(self.results) < self.count
+
+    def get_next(self):
+        if "offset" in self._kwargs:
+            self._kwargs["offset"] = self._kwargs.get("offset") + len(self.results)
+        else:
+            self._kwargs["offset"] = len(self.results)
+        return self._more(**self._kwargs)
 
 
 class FeatureGroup(AllowExtra):
