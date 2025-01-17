@@ -4,6 +4,8 @@ from pydantic import ValidationError as PydanticValidationError
 
 from predicthq.exceptions import ValidationError
 
+from predicthq.endpoints.schemas import ArgKwargResultSet
+
 
 def _kwargs_to_key_list_mapping(kwargs, separator="__"):
     """
@@ -41,7 +43,7 @@ def _to_url_params(key_list_mapping, glue=".", separator=",", parent_key=""):
     return params
 
 
-def _to_json(key_list_mapping, json = None):
+def _to_json(key_list_mapping, json=None):
     """
     Converts key_list_mapping to json
     """
@@ -81,7 +83,6 @@ def returns(model_class):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(endpoint, *args, **kwargs):
-
             model = getattr(endpoint.Meta, f.__name__, {}).get("returns", model_class)
 
             data = f(endpoint, *args, **kwargs)
@@ -89,6 +90,9 @@ def returns(model_class):
                 loaded_model = model(**data)
                 loaded_model._more = functools.partial(wrapper, endpoint)
                 loaded_model._endpoint = endpoint
+                if isinstance(loaded_model, ArgKwargResultSet):
+                    loaded_model._args = args
+                    loaded_model._kwargs = kwargs
                 return loaded_model
             except PydanticValidationError as e:
                 raise ValidationError(e)

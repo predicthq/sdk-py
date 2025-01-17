@@ -1,4 +1,3 @@
-from urllib.parse import parse_qsl, urlparse
 from typing import Callable, Optional
 
 from pydantic import BaseModel, HttpUrl
@@ -59,3 +58,8 @@ class ResultSet(BaseModel):
 
     def __iter__(self):
         return self.iter_items()
+
+
+class ArgKwargResultSet(ResultSet):
+    _args: Optional[dict] = None
+    _kwargs: Optional[dict] = None

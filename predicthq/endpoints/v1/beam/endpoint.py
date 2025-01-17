@@ -3,17 +3,14 @@ from .schemas import (
     CreateAnalysisResponse,
     AnalysisResultSet,
     Analysis,
-    EventResultSet,
-    Event,
     FeatureImportance,
-    ValueQuant,
     CorrelationResultSet,
     CreateAnalysisGroupResponse,
     AnalysisGroup,
     AnalysisGroupResultSet,
 )
 from predicthq.endpoints.decorators import accepts, returns
-from typing import overload, List, Optional
+from typing import overload, List, Optional, TextIO, Union
 from datetime import date
 
 
@@ -98,6 +95,7 @@ class BeamEndpoint:
         @overload
         def update(
             self,
+            analysis_id: str,
             name: Optional[str] = None,
             location__geopoint: Optional[dict] = None,
             location__radius: Optional[float] = None,
@@ -144,49 +142,7 @@ class BeamEndpoint:
             )
 
         @overload
-        def search_events(
-            self,
-            analysis_id: str,
-            start__gt: Optional[date] = None,
-            start__gte: Optional[date] = None,
-            start__lt: Optional[date] = None,
-            start__lte: Optional[date] = None,
-            end__gt: Optional[date] = None,
-            end__gte: Optional[date] = None,
-            end__lt: Optional[date] = None,
-            end__lte: Optional[date] = None,
-            active__gt: Optional[date] = None,
-            active__gte:Optional[ date] = None,
-            active__lt: Optional[date] = None,
-            active__lte: Optional[date] = None,
-            impact__gt: Optional[date] = None,
-            impact__gte: Optional[date] = None,
-            impact__lt: Optional[date] = None,
-            impact__lte: Optional[date] = None,
-            **params,
-        ): ...
-        @accepts()
-        @returns(EventResultSet)
-        def search_events(self, analysis_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/events/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @accepts()
-        @returns(Event)
-        def get_event(self, analysis_id: str, event_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/events/{event_id}/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @overload
-        def get_correlation(
+        def get_correlation_results(
             self,
             analysis_id: str,
             date__gt: Optional[date] = None,
@@ -200,7 +156,7 @@ class BeamEndpoint:
         ): ...
         @accepts()
         @returns(CorrelationResultSet)
-        def get_correlation(self, analysis_id: str, **params):
+        def get_correlation_results(self, analysis_id: str, **params):
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.get(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/correlate/",
@@ -218,23 +174,41 @@ class BeamEndpoint:
                 verify=verify_ssl,
             )
 
-        @accepts()
-        @returns(ValueQuant)
-        def get_value_quant(self, analysis_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/value-quant/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        # TODO this function needs to accept various types of demand data to upload
         @accepts(query_string=False)
+        @overload
+        def upload_demand(
+            self,
+            analysis_id: str,
+            json: Optional[Union[str, TextIO]] = None,
+            ndjson:  Optional[Union[str, TextIO]] = None,
+            csv:  Optional[Union[str, TextIO]] = None,
+            **params,
+        ): ...
         def upload_demand(self, analysis_id: str, **params):
             verify_ssl = params.pop("config.verify_ssl", True)
+            if json := params.pop("json", None):
+                headers = {"Content-Type": "application/json"}
+                file = json
+            if ndjson := params.pop("ndjson", None):
+                headers = {"Content-Type": "application/x-ndjson"}
+                file = ndjson
+            if csv := params.pop("csv", None):
+                headers = {"Content-Type": "text/csv"}
+                file = csv
+
+            if isinstance(file, str):
+                with open(file) as f:
+                    return self.client.post(
+                        f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
+                        data=f,
+                        headers=headers,
+                        verify=verify_ssl,
+                    )
+
             return self.client.post(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
-                params=params,
+                data=file,
+                headers=headers,
                 verify=verify_ssl,
             )
 
@@ -337,16 +311,6 @@ class BeamEndpoint:
             verify_ssl = params.pop("config.verify_ssl", True)
             return self.client.get(
                 f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/feature-importance/",
-                params=params,
-                verify=verify_ssl,
-            )
-
-        @accepts()
-        @returns(ValueQuant)
-        def get_value_quant(self, group_id: str, **params):
-            verify_ssl = params.pop("config.verify_ssl", True)
-            return self.client.get(
-                f"{self.build_url('v1', 'beam')}analysis-groups/{group_id}/value-quant/",
                 params=params,
                 verify=verify_ssl,
             )
