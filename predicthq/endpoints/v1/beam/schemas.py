@@ -1,7 +1,19 @@
 from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
-from predicthq.endpoints.schemas import ArgKwargResultSet, ResultSet
+from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
+
+
+class BeamPaginationResultSet(ArgKwargResultSet):
+    def has_next(self):
+        return self._kwargs.get("offset", 0) + len(self.results) < self.count
+
+    def get_next(self):
+        if "offset" in self._kwargs:
+            self._kwargs["offset"] = self._kwargs.get("offset") + len(self.results)
+        else:
+            self._kwargs["offset"] = len(self.results)
+        return self._more(**self._kwargs)
 
 
 class AllowExtra(BaseModel):
@@ -103,18 +115,8 @@ class Analysis(AllowExtra):
     label: Optional[List[str]] = None
 
 
-class AnalysisResultSet(ArgKwargResultSet):
+class AnalysisResultSet(BeamPaginationResultSet):
     results: List[Analysis] = Field(alias="analyses")
-
-    def has_next(self):
-        return self._kwargs.get("offset", 0) + len(self.results) < self.count
-
-    def get_next(self):
-        if "offset" in self._kwargs:
-            self._kwargs["offset"] = self._kwargs.get("offset") + len(self.results)
-        else:
-            self._kwargs["offset"] = len(self.results)
-        return self._more(**self._kwargs)
 
 
 class FeatureGroup(AllowExtra):
@@ -128,7 +130,7 @@ class FeatureImportance(AllowExtra):
     feature_importance: List[FeatureGroup]
 
 
-class CorrelationResultSet(ResultSet):
+class CorrelationResultSet(BeamPaginationResultSet):
     model_version: str
     version: int
     results: List[dict] = Field(alias="dates")
@@ -164,5 +166,5 @@ class AnalysisGroup(AllowExtra):
     processed_dt: Optional[datetime] = None
 
 
-class AnalysisGroupResultSet(ResultSet):
+class AnalysisGroupResultSet(BeamPaginationResultSet):
     results: List[AnalysisGroup] = Field(alias="groups")
