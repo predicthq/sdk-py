@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel, RootModel
 
-from predicthq.endpoints.schemas import ResultSet
+from predicthq.endpoints.schemas import ArgKwargResultSet
 
 
 class CsvMixin:
@@ -58,6 +58,11 @@ class Feature(RootModel):
         return self.root[name]
 
 
-class FeatureResultSet(ResultSet, CsvMixin):
-    _kwargs: Optional[Dict] = None  # temporary solution to get the next page
+class FeatureResultSet(ArgKwargResultSet, CsvMixin):
     results: List[Optional[Feature]]
+
+    def get_next(self):
+        if not self.has_next() or not hasattr(self, "_more"):
+            return
+        params = self._parse_params(self.next)
+        return self._more(_params=params, _json=self._kwargs.get("_json", {}) or self._kwargs)
