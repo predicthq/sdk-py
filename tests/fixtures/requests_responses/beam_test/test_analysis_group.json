@@ -1,0 +1,34 @@
+{
+    "name": "test group",
+    "analysis_ids": [
+        "2r2f23f2",
+        "sgds2356"
+    ],
+    "user_id": "sdf25g",
+    "processing_completed": {
+        "feature_importance": true,
+        "value_quant": true,
+        "excluded_analyses": [
+            {
+                "analysis_id": "sdgsg35",
+                "reason": "analysis_deleted",
+                "excluded_from": [
+                    "feature_importance",
+                    "value_quant"
+                ]
+            }
+        ]
+    },
+    "readiness_status": "ready",
+    "demand_type": {
+        "interval": "day",
+        "week_start_day": null,
+        "industry": "retail",
+        "unit_descriptor": "Sales",
+        "currency_code": "USD"
+    },
+    "status": "active",
+    "create_dt": "2024-09-13T03:59:45Z",
+    "update_dt": "2024-12-17T01:55:45Z",
+    "processed_dt": "2024-12-17T01:55:46Z"
+}

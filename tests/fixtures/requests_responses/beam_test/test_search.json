@@ -1,0 +1,673 @@
+{
+    "count": 1142,
+    "analyses": [
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "37.7749",
+                    "lon": "-122.4194"
+                },
+                "radius": 3345.52,
+                "unit": "m",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "local",
+                "levels": {
+                    "phq": null,
+                    "local": {
+                        "min": 35,
+                        "max": null
+                    }
+                }
+            },
+            "user_id": null,
+            "access_type": "limited",
+            "status": "active",
+            "readiness_status": null,
+            "readiness_checks": {
+                "date_range": null,
+                "error_code": null,
+                "missing_dates": null,
+                "validation_response": null,
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": false,
+                    "rank": true,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": false,
+                "feature_importance": false,
+                "value_quant": false
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "other",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": null,
+            "create_dt": "2025-01-15T23:45:01Z",
+            "update_dt": "2025-01-15T23:45:01Z",
+            "processed_dt": null,
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "37.7749",
+                    "lon": "-122.4194"
+                },
+                "radius": 3345.52,
+                "unit": "m",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "local",
+                "levels": {
+                    "phq": null,
+                    "local": {
+                        "min": 35,
+                        "max": null
+                    }
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2019-01-01T00:00:00",
+                    "end": "2021-09-26T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [],
+                "validation_response": {
+                    "missing_data_percentage": 0.0,
+                    "consecutive_nan": 0
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": false,
+                    "rank": true,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "other",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "America/Los_Angeles",
+            "create_dt": "2025-01-15T00:30:44Z",
+            "update_dt": "2025-01-15T00:53:48Z",
+            "processed_dt": "2025-01-15T00:53:30Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "38.9808979",
+                    "lon": "-76.5400824"
+                },
+                "radius": 9.23,
+                "unit": "mi",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 35,
+                        "max": null
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2024-01-01T00:00:00",
+                    "end": "2024-11-12T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [],
+                "validation_response": {
+                    "missing_data_percentage": 0.0,
+                    "consecutive_nan": 0
+                },
+                "best_practice": true,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": true,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "accommodation",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "America/New_York",
+            "create_dt": "2024-12-17T02:11:22Z",
+            "update_dt": "2025-01-14T02:11:24Z",
+            "processed_dt": "2025-01-14T02:11:15Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "41.4917972",
+                    "lon": "-72.0903866"
+                },
+                "radius": 7.14,
+                "unit": "mi",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "local",
+                "levels": {
+                    "phq": null,
+                    "local": {
+                        "min": 50,
+                        "max": null
+                    }
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2019-06-01T00:00:00",
+                    "end": "2019-12-31T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [
+                    "2019-11-28",
+                    "2019-12-25"
+                ],
+                "validation_response": {
+                    "missing_data_percentage": 0.935,
+                    "consecutive_nan": 1
+                },
+                "best_practice": true,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": true,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "accommodation",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "America/New_York",
+            "create_dt": "2025-01-08T03:02:14Z",
+            "update_dt": "2025-01-08T03:03:43Z",
+            "processed_dt": "2025-01-08T03:03:33Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "41.657871",
+                    "lon": "-91.534637"
+                },
+                "radius": 1.76,
+                "unit": "km",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 30,
+                        "max": 100
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "draft",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2021-06-01T00:00:00",
+                    "end": "2022-07-04T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [
+                    "2022-01-15",
+                    "2022-01-16"
+                ],
+                "validation_response": {
+                    "missing_data_percentage": 0.501,
+                    "consecutive_nan": 2
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": false,
+                    "rank": false,
+                    "radius": false
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 75.0
+            },
+            "group_ids": null,
+            "tz": "America/Chicago",
+            "create_dt": "2022-09-15T03:21:44.436078Z",
+            "update_dt": "2024-12-16T23:02:47Z",
+            "processed_dt": "2024-12-16T23:02:30Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "25.793463",
+                    "lon": "-80.337645"
+                },
+                "radius": 10.0,
+                "unit": "km",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 30,
+                        "max": null
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "draft",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2017-01-02T00:00:00",
+                    "end": "2019-12-31T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [
+                    "2017-04-16",
+                    "2017-09-08",
+                    "2017-09-09",
+                    "2017-09-10",
+                    "2017-09-11",
+                    "2017-09-12",
+                    "2017-11-23",
+                    "2017-12-25",
+                    "2018-04-01",
+                    "2018-11-22",
+                    "2018-12-25",
+                    "2019-04-21",
+                    "2019-09-02",
+                    "2019-11-28",
+                    "2019-12-25"
+                ],
+                "validation_response": {
+                    "missing_data_percentage": 1.371,
+                    "consecutive_nan": 5
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": false,
+                    "radius": false
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "retail",
+                "unit_descriptor": "Rooms",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": [
+                "nbH6wEfXKA4"
+            ],
+            "tz": "America/New_York",
+            "create_dt": "2024-08-11T22:41:03.603998Z",
+            "update_dt": "2024-12-16T19:32:49Z",
+            "processed_dt": "2024-12-16T19:32:12Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "-36.84440239999999",
+                    "lon": "174.7648646"
+                },
+                "radius": 2.28,
+                "unit": "mi",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 35,
+                        "max": null
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2019-06-01T00:00:00",
+                    "end": "2019-12-31T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [
+                    "2019-11-28",
+                    "2019-12-25"
+                ],
+                "validation_response": {
+                    "missing_data_percentage": 0.935,
+                    "consecutive_nan": 1
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": false,
+                    "radius": false
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "parking",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "Pacific/Auckland",
+            "create_dt": "2024-10-06T20:42:57Z",
+            "update_dt": "2024-12-16T19:32:03Z",
+            "processed_dt": "2024-12-16T19:31:52Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "38.9808979",
+                    "lon": "-76.5400824"
+                },
+                "radius": 9.23,
+                "unit": "mi",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 35,
+                        "max": null
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "limited",
+            "status": "active",
+            "readiness_status": null,
+            "readiness_checks": {
+                "date_range": null,
+                "error_code": null,
+                "missing_dates": null,
+                "validation_response": null,
+                "best_practice": true,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": true,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": false,
+                "feature_importance": false,
+                "value_quant": false
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "accommodation",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": null,
+            "create_dt": "2024-12-16T02:08:29Z",
+            "update_dt": "2024-12-16T02:08:29Z",
+            "processed_dt": null,
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "-36.848448",
+                    "lon": "174.7596161"
+                },
+                "radius": 3418.29,
+                "unit": "m",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "local",
+                "levels": {
+                    "phq": null,
+                    "local": {
+                        "min": 30,
+                        "max": null
+                    }
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2024-01-01T00:00:00",
+                    "end": "2024-07-01T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [],
+                "validation_response": {
+                    "missing_data_percentage": 0.0,
+                    "consecutive_nan": 0
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": false,
+                    "radius": true
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "retail",
+                "unit_descriptor": "omitted",
+                "currency_code": "USD",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "Pacific/Auckland",
+            "create_dt": "2024-12-16T01:58:18Z",
+            "update_dt": "2024-12-16T01:58:50Z",
+            "processed_dt": "2024-12-16T01:58:39Z",
+            "external_id": null,
+            "label": null
+        },
+        {
+            "analysis_id": "abc123",
+            "name": "test name",
+            "location": {
+                "geopoint": {
+                    "lat": "-36.84440239999999",
+                    "lon": "174.7648646"
+                },
+                "radius": 4.04,
+                "unit": "km",
+                "google_place_id": null
+            },
+            "rank": {
+                "type": "phq",
+                "levels": {
+                    "phq": {
+                        "min": 35,
+                        "max": null
+                    },
+                    "local": null
+                }
+            },
+            "user_id": null,
+            "access_type": "full",
+            "status": "active",
+            "readiness_status": "ready",
+            "readiness_checks": {
+                "date_range": {
+                    "start": "2019-06-01T00:00:00",
+                    "end": "2019-12-31T00:00:00"
+                },
+                "error_code": null,
+                "missing_dates": [
+                    "2019-11-28",
+                    "2019-12-25"
+                ],
+                "validation_response": {
+                    "missing_data_percentage": 0.935,
+                    "consecutive_nan": 1
+                },
+                "best_practice": false,
+                "best_practice_checks": {
+                    "industry": true,
+                    "rank": false,
+                    "radius": false
+                }
+            },
+            "processing_completed": {
+                "correlation": true,
+                "feature_importance": true,
+                "value_quant": true
+            },
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "accommodation",
+                "unit_descriptor": "Sales",
+                "currency_code": "EUR",
+                "unit_currency_multiplier": 1.0
+            },
+            "group_ids": null,
+            "tz": "Pacific/Auckland",
+            "create_dt": "2024-12-15T20:36:50Z",
+            "update_dt": "2024-12-16T01:46:37Z",
+            "processed_dt": "2024-12-16T01:46:26Z",
+            "external_id": null,
+            "label": null
+        }
+    ]
+}
