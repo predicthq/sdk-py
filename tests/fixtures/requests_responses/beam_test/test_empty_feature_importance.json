@@ -1,0 +1,100 @@
+{
+    "feature_importance": [
+        {
+            "feature_group": "concerts",
+            "features": [
+                "phq_attendance_concerts"
+            ],
+            "p_value": 0.0,
+            "important": true
+        },
+        {
+            "feature_group": "severe-weather",
+            "features": [
+                "phq_impact_severe_weather_heat_wave_retail"
+            ],
+            "p_value": 0.0015,
+            "important": true
+        },
+        {
+            "feature_group": "performing-arts",
+            "features": [
+                "phq_attendance_performing_arts"
+            ],
+            "p_value": 0.2646,
+            "important": false
+        },
+        {
+            "feature_group": "school-holidays",
+            "features": [
+                "phq_attendance_school_holidays"
+            ],
+            "p_value": 0.4283,
+            "important": false
+        },
+        {
+            "feature_group": "festivals",
+            "features": [
+                "phq_attendance_festivals"
+            ],
+            "p_value": 0.4689,
+            "important": false
+        },
+        {
+            "feature_group": "public-holidays",
+            "features": [
+                "phq_rank_public_holidays"
+            ],
+            "p_value": 0.5,
+            "important": false
+        },
+        {
+            "feature_group": "expos",
+            "features": [
+                "phq_attendance_expos"
+            ],
+            "p_value": 0.5611,
+            "important": false
+        },
+        {
+            "feature_group": "conferences",
+            "features": [
+                "phq_attendance_conferences"
+            ],
+            "p_value": 0.9605,
+            "important": false
+        },
+        {
+            "feature_group": "observances",
+            "features": [
+                "phq_rank_observances"
+            ],
+            "p_value": 0.9945,
+            "important": false
+        },
+        {
+            "feature_group": "sports",
+            "features": [
+                "phq_attendance_sports"
+            ],
+            "p_value": 0.9974,
+            "important": false
+        },
+        {
+            "feature_group": "community",
+            "features": [
+                "phq_attendance_community"
+            ],
+            "p_value": 0.998,
+            "important": false
+        },
+        {
+            "feature_group": "academic",
+            "features": [
+                "phq_rank_academic_holiday"
+            ],
+            "p_value": 0.999,
+            "important": false
+        }
+    ]
+}
