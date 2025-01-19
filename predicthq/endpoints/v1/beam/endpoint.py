@@ -200,14 +200,14 @@ class BeamEndpoint:
                 with open(file) as f:
                     return self.client.post(
                         f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
-                        data=f,
+                        data=f.read(),
                         headers=headers,
                         verify=verify_ssl,
                     )
 
             return self.client.post(
                 f"{self.build_url('v1', 'beam')}analyses/{analysis_id}/sink/",
-                data=file,
+                data=file.read(),
                 headers=headers,
                 verify=verify_ssl,
             )
