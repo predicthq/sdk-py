@@ -40,6 +40,7 @@ We support all the endpoints available in our API.
 * `features`
 * `places`
 * `radius`
+* `beam`
 
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
