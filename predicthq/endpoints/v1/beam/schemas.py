@@ -16,53 +16,68 @@ class BeamPaginationResultSet(ArgKwargResultSet):
         return self._more(**self._kwargs)
 
 
-class AllowExtra(BaseModel):
+
+class CreateAnalysisResponse(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
-
-class CreateAnalysisResponse(AllowExtra):
     analysis_id: str
 
 
-class GeoPoint(AllowExtra):
+class GeoPoint(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     lat: str
     lon: str
 
 
-class Location(AllowExtra):
+class Location(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     geopoint: GeoPoint
     radius: float
     unit: str
     google_place_id: Optional[str] = None
 
 
-class RankLevel(AllowExtra):
+class RankLevel(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     min: int
     max: Optional[int] = None
 
 
-class RankLevels(AllowExtra):
+class RankLevels(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     phq: Optional[RankLevel] = None
     local: Optional[RankLevel] = None
 
 
-class Rank(AllowExtra):
+class Rank(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     type: str
     levels: Optional[RankLevels] = None
 
 
-class AnalysisDateRange(AllowExtra):
+class AnalysisDateRange(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     start: datetime
     end: datetime
 
 
-class BestPracticeChecks(AllowExtra):
+class BestPracticeChecks(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     industry: bool = False
     rank: bool = False
     radius: bool = False
 
 
-class AnalysisReadinessChecks(AllowExtra):
+class AnalysisReadinessChecks(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     date_range: Optional[AnalysisDateRange] = None
     error_code: Optional[str] = None
     missing_dates: Optional[List[str]] = None
@@ -71,13 +86,17 @@ class AnalysisReadinessChecks(AllowExtra):
     best_practice_checks: BestPracticeChecks
 
 
-class ProcessingCompleted(AllowExtra):
+class ProcessingCompleted(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     correlation: bool
     feature_importance: bool
     value_quant: bool
 
 
-class DemandTypeGroup(AllowExtra):
+class DemandTypeGroup(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     interval: str
     week_start_day: Optional[str] = None
     industry: Optional[str] = None
@@ -94,7 +113,9 @@ class DemandType(DemandTypeGroup):
     currency_code: str
 
 
-class Analysis(AllowExtra):
+class Analysis(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     analysis_id: Optional[str] = None
     name: str
     location: Location
@@ -119,14 +140,18 @@ class AnalysisResultSet(BeamPaginationResultSet):
     results: List[Analysis] = Field(alias="analyses")
 
 
-class FeatureGroup(AllowExtra):
+class FeatureGroup(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     feature_group: str
     features: List[str]
     p_value: float
     important: bool
 
 
-class FeatureImportance(AllowExtra):
+class FeatureImportance(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     feature_importance: List[FeatureGroup]
 
 
@@ -136,23 +161,31 @@ class CorrelationResultSet(BeamPaginationResultSet):
     results: List[dict] = Field(alias="dates")
 
 
-class CreateAnalysisGroupResponse(AllowExtra):
+class CreateAnalysisGroupResponse(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     group_id: str
 
 
-class ExcludedAnalysis(AllowExtra):
+class ExcludedAnalysis(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     analysis_id: str
     reason: str
     excluded_from: List[str]
 
 
-class ProcessingCompletedGroup(AllowExtra):
+class ProcessingCompletedGroup(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     feature_importance: bool
     value_quant: bool
     excluded_analyses: List[ExcludedAnalysis]
 
 
-class AnalysisGroup(AllowExtra):
+class AnalysisGroup(BaseModel):
+    model_config: ConfigDict = ConfigDict(extra="allow")
+
     group_id: Optional[str] = None
     name: str
     analysis_ids: List[str]
