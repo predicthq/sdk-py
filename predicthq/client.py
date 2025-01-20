@@ -16,7 +16,7 @@ class Client(object):
     @classmethod
     def build_url(cls, path):
         result = list(urlparse(path))
-        result[2] = f"/{result[2].strip('/')}/"
+        result[2] = f"/{result[2].strip('/')}"
         return urljoin(config.ENDPOINT_URL, urlunparse(result))
 
     def __init__(self, access_token=None):
@@ -35,6 +35,7 @@ class Client(object):
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
         self.places = endpoints.PlacesEndpoint(proxy(self))
         self.radius = endpoints.SuggestedRadiusEndpoint(proxy(self))
+        self.beam = endpoints.BeamEndpoint(proxy(self))
 
     def get_headers(self, headers):
         _headers = {

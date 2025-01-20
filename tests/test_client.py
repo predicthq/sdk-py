@@ -22,7 +22,7 @@ class ClientTest(unittest.TestCase):
 
     @with_config(ENDPOINT_URL="https://api.predicthq.com")
     def test_build_url(self):
-        assert self.client.build_url("v1") == "https://api.predicthq.com/v1/"
+        assert self.client.build_url("v1") == "https://api.predicthq.com/v1"
 
     def test_endpoints_initialization(self):
         assert isinstance(self.client.oauth2, endpoints.OAuth2Endpoint)

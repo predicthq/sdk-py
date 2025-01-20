@@ -1,0 +1,308 @@
+{
+    "count": 88,
+    "groups": [
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": [
+                    {
+                        "analysis_id": "analysis id",
+                        "reason": "analysis_deleted",
+                        "excluded_from": [
+                            "feature_importance",
+                            "value_quant"
+                        ]
+                    }
+                ]
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": "retail",
+                "unit_descriptor": "Sales",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-09-13T03:59:45Z",
+            "update_dt": "2024-12-17T01:55:45Z",
+            "processed_dt": "2024-12-17T01:55:46Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "week",
+                "week_start_day": "monday",
+                "industry": null,
+                "unit_descriptor": "Sales",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-16T21:14:03.204830Z",
+            "update_dt": "2024-12-15T20:45:24Z",
+            "processed_dt": "2024-12-15T20:45:26Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": false,
+                "value_quant": false,
+                "excluded_analyses": [
+                    {
+                        "analysis_id": "analysis id",
+                        "reason": "analysis_demand_type_inconsistent",
+                        "excluded_from": [
+                            "feature_importance",
+                            "value_quant"
+                        ]
+                    },
+                    {
+                        "analysis_id": "analysis id",
+                        "reason": "analysis_demand_type_inconsistent",
+                        "excluded_from": [
+                            "feature_importance",
+                            "value_quant"
+                        ]
+                    }
+                ]
+            },
+            "readiness_status": "failed",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-07T01:45:28.369118Z",
+            "update_dt": "2024-11-04T03:35:35Z",
+            "processed_dt": "2024-11-04T03:36:02Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": false,
+                "value_quant": false,
+                "excluded_analyses": [
+                    {
+                        "analysis_id": "analysis id",
+                        "reason": "analysis_demand_type_inconsistent",
+                        "excluded_from": [
+                            "feature_importance",
+                            "value_quant"
+                        ]
+                    },
+                    {
+                        "analysis_id": "analysis id",
+                        "reason": "analysis_demand_type_inconsistent",
+                        "excluded_from": [
+                            "feature_importance",
+                            "value_quant"
+                        ]
+                    }
+                ]
+            },
+            "readiness_status": "failed",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-03T01:17:21.981509Z",
+            "update_dt": "2024-11-04T03:35:35Z",
+            "processed_dt": "2024-11-04T03:36:03Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "week",
+                "week_start_day": "monday",
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-07-17T21:27:50.392447Z",
+            "update_dt": "2024-10-16T21:31:59Z",
+            "processed_dt": "2024-10-16T21:40:03Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-06T00:10:40.455098Z",
+            "update_dt": "2024-10-16T21:21:02Z",
+            "processed_dt": "2024-10-16T21:36:26Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "week",
+                "week_start_day": "monday",
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-16T20:07:33.503432Z",
+            "update_dt": "2024-10-16T21:14:41Z",
+            "processed_dt": "2024-10-16T21:19:15Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-08T00:04:55.402304Z",
+            "update_dt": "2024-10-16T21:14:05Z",
+            "processed_dt": "2024-10-16T21:19:06Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-08T00:06:04.760846Z",
+            "update_dt": "2024-10-16T21:14:05Z",
+            "processed_dt": "2024-10-16T21:19:05Z"
+        },
+        {
+            "group_id": "abc123",
+            "name": "test group name",
+            "analysis_ids": [
+                "id1",
+                "id2"
+            ],
+            "user_id": "test user id",
+            "processing_completed": {
+                "feature_importance": true,
+                "value_quant": true,
+                "excluded_analyses": []
+            },
+            "readiness_status": "ready",
+            "demand_type": {
+                "interval": "day",
+                "week_start_day": null,
+                "industry": null,
+                "unit_descriptor": "omitted",
+                "currency_code": "USD"
+            },
+            "status": "active",
+            "create_dt": "2024-05-07T02:32:16.855072Z",
+            "update_dt": "2024-10-16T21:13:58Z",
+            "processed_dt": "2024-10-16T21:31:01Z"
+        }
+    ]
+}

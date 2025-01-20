@@ -47,6 +47,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_spend_performing_arts_transportation": {"stats": ["sum", "count"], "phq_rank": None},
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -114,6 +115,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_sports_hospitality": {"stats": feature_stats},
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -130,6 +132,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
+            params=None
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -196,6 +199,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_sports_hospitality": feature_criteria,
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -214,6 +218,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
+            params=None
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -250,6 +255,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_rank_academic_holiday": True,
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -268,6 +274,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
+            params=None
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -303,6 +310,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_rank_academic_holiday": True,
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -319,6 +327,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
+            params=None
         )
 
     @with_client()
@@ -379,6 +388,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_impact_severe_weather_tropical_storm_retail": {"stats": feature_stats},
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -425,6 +435,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_impact_severe_weather_tropical_storm_retail": feature_criteria,
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -463,6 +474,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_golf_pga_championship": {"stats": feature_stats},
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -481,6 +493,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
+            params=None
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -517,6 +530,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_viewership_sports_horse_racing": feature_criteria,
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -535,6 +549,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
+            params=None
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -610,6 +625,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_spend_performing_arts_transportation": {"stats": feature_stats},
             },
             verify=True,
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -684,4 +700,5 @@ class FeaturesTest(unittest.TestCase):
                 "phq_spend_performing_arts_transportation": feature_criteria,
             },
             verify=True,
+            params=None,
         )

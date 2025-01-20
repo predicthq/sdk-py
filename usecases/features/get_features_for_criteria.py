@@ -71,3 +71,13 @@ for feature in phq.features.obtain_features(
           feature.phq_viewership_sports_american_football.stats.median,
           feature.phq_viewership_sports_basketball_nba.stats.count,
           feature.phq_viewership_sports_basketball_nba.stats.median)
+
+# Convert the obtained features to a CSV file called features.csv in the current directory
+phq.features.obtain_features(
+    active__gte="2019-11-28",
+    active__lte="2020-01-05",
+    location__geo={"lon": -71.49978, "lat": 41.62064, "radius": "150km"},
+    phq_rank_public_holidays=True,
+    phq_attendance_sports__stats=["count", "median"],
+    phq_attendance_sports__phq_rank={"gt": 50},
+).to_csv("./features.csv", mode="w+")

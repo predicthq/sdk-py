@@ -217,6 +217,36 @@ suggested_radius = phq.radius.search(location__origin="45.5051,-122.6750")
 print(suggested_radius.radius, suggested_radius.radius_unit, suggested_radius.location.model_dump(exclude_none=True))
 ```
 
+### Beam endpoints
+
+Get Analysis.
+
+Additional examples are available in [usecases/beam/analysis](https://github.com/predicthq/sdk-py/tree/master/usecases/beam/analysis) folder.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+analysis = phq.beam.analysis.get(analysis_id="abc123")
+print(analysis.model_dump(exclude_none=True))
+```
+
+Get Analysis Group.
+
+Additional examples are available in [usecases/beam/analysis_group](https://github.com/predicthq/sdk-py/tree/master/usecases/beam/analysis_group) folder.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+analysis_group = phq.beam.analysis_group.get(group_id="abc123")
+print(analysis_group.model_dump(exlcude_none=True))
+```
+
 ### Serializing search results into a dictionary
 
 All search results can be serialized into a dictionary using the `.model_dump()` method call.
