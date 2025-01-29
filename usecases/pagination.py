@@ -8,9 +8,9 @@ ACCESS_TOKEN = 'abc123'
 phq = Client(access_token=ACCESS_TOKEN)
 
 
-# broadcasts and events endpoints use the same approach for search pagination.
+# broadcasts, features, beam and events endpoints use the same approach for search pagination.
 # The following examples are on the events endpoint but you can reuse them
-# for the broadcasts endpoint.
+# interchangably with the other endpoints.
 
 
 # By default the search() method only returns the first
