@@ -126,6 +126,8 @@ Please refer to our [Places endpoint documentation](https://docs.predicthq.com/r
 
 ### Features endpoint
 
+**Note:** If you're trying to retrieve over 90 days worth of features, you will need to paginate through all pages using `.iter_all()` as outlined in [usecases/pagination.py](https://github.com/predicthq/sdk-py/tree/master/usecases/pagination.py).
+
 The following example obtain features of events which are active between 2017-12-31 and 2018-01-02, with place_id 4671654.
 
 Requested features:
