@@ -41,7 +41,7 @@ setup(
         "pydantic>=2,<3",
         "requests>=2.7.0",
         "python-dateutil>=2.4.2",
-        "pytz>=2017.2,<=2021.1",
+        "pytz>=2017.2,<=2023.3",
         "stamina>=24.3.0,<25",
     ],
     classifiers=[

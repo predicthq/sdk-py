@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, with_config
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
@@ -155,10 +155,25 @@ class FeatureImportance(BaseModel):
     feature_importance: List[FeatureGroup]
 
 
+class CorrelationResult(BaseModel):
+    date: str
+    actual_demand: float
+    baseline_demand: float
+    remainder: float
+    impact_significance: str
+    impact_significance_score: int
+    features: dict
+    phq_impact_sum: int
+    phq_spend_sum: int
+    phq_attendance_sum: int
+    phq_rank_count: int
+
+
 class CorrelationResultSet(BeamPaginationResultSet):
+    model_config = ConfigDict(protected_namespaces=())
     model_version: str
     version: int
-    results: List[dict] = Field(alias="dates")
+    results: List[CorrelationResult] = Field(alias="dates")
 
 
 class CreateAnalysisGroupResponse(BaseModel):
