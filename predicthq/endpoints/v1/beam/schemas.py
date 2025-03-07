@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict, with_config
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
@@ -157,11 +157,11 @@ class FeatureImportance(BaseModel):
 
 class CorrelationResult(BaseModel):
     date: str
-    actual_demand: float
-    baseline_demand: float
-    remainder: float
+    actual_demand: float | None = None
+    baseline_demand: float | None = None
+    remainder: float | None = None
     impact_significance: str
-    impact_significance_score: int
+    impact_significance_score: int | None = None
     features: dict
     phq_impact_sum: int
     phq_spend_sum: int
