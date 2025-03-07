@@ -157,11 +157,11 @@ class FeatureImportance(BaseModel):
 
 class CorrelationResult(BaseModel):
     date: str
-    actual_demand: float | None = None
-    baseline_demand: float | None = None
-    remainder: float | None = None
+    actual_demand: Optional[float] = None
+    baseline_demand: Optional[float] = None
+    remainder: Optional[float] = None
     impact_significance: str
-    impact_significance_score: int | None = None
+    impact_significance_score: Optional[int] = None
     features: dict
     phq_impact_sum: int
     phq_spend_sum: int
