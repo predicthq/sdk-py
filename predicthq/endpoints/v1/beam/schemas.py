@@ -100,7 +100,7 @@ class DemandTypeGroup(BaseModel):
     interval: str
     week_start_day: Optional[str] = None
     industry: Optional[str] = None
-    unit_descriptor: str
+    unit_descriptor: Optional[str] = None
     currency_code: str
 
 
@@ -108,7 +108,7 @@ class DemandType(DemandTypeGroup):
     interval: str
     week_start_day: Optional[str] = None
     industry: Optional[str] = None
-    unit_descriptor: str
+    unit_descriptor: Optional[str] = None
     unit_currency_multiplier: float
     currency_code: str
 
