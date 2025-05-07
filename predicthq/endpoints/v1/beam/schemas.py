@@ -162,11 +162,6 @@ class CorrelationResult(BaseModel):
     remainder: Optional[float] = None
     impact_significance: str
     impact_significance_score: Optional[int] = None
-    features: dict
-    phq_impact_sum: int
-    phq_spend_sum: int
-    phq_attendance_sum: int
-    phq_rank_count: int
 
 
 class CorrelationResultSet(BeamPaginationResultSet):
