@@ -29,6 +29,8 @@ If you are migrating to version 3.0.0 or above from an earlier version, please c
 
 If you are migrating to version 4.0.0 or above from an earlier version, please check the [V4 breaking changes details](./docs/V4_Breaking_Changes.md).
 
+If you are migrating to version 5.0.0 or above from an earlier version, please check the [V5 breaking changes details](./docs/V5_Breaking_Changes.md).
+
 ## Usage
 
 We support all the endpoints available in our API.
