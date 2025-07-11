@@ -42,13 +42,6 @@ class BeamEndpoint:
             tz: Optional[str] = None,
             external_id: Optional[str] = None,
             label: Optional[List[str]] = None,
-            # saved_location__name: Optional[str] = None,
-            # saved_location__formatted_address: Optional[str] = None,
-            # saved_location__geojson: Optional[GeoJson] = None,
-            # saved_location__h3: Optional[list[str]] = None,
-            # saved_location__place_ids: Optional[list[int]] = None,
-            # saved_location__place_hierarchies: Optional[list[str]] = None,
-            # saved_location__places: Optional[list[Place]] = None,
             **params,
         ): ...
         @accepts(query_string=False)
