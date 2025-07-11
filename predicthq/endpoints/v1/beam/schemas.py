@@ -2,6 +2,8 @@ from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
+from enum import StrEnum
+from typing import Annotated, Literal
 
 
 class BeamPaginationResultSet(ArgKwargResultSet):
@@ -113,6 +115,58 @@ class DemandType(DemandTypeGroup):
     currency_code: str
 
 
+class RadiusUnit(StrEnum):
+    m = "m"
+    km = "km"
+    mi = "mi"
+    ft = "ft"
+
+
+class GeoJsonGeometryType(StrEnum):
+    POINT = "Point"
+    POLYGON = "Polygon"
+    MULTI_POLYGON = "MultiPolygon"
+    LINE_STRING = "LineString"
+    MULTI_LINE_STRING = "MultiLineString"
+
+
+class GeoJsonProperties(BaseModel):
+    radius: Annotated[float, Field(gt=0)]
+    radius_unit: RadiusUnit
+
+
+class GeoJsonGeometry(BaseModel):
+    type: GeoJsonGeometryType
+    coordinates: Annotated[list, Field(min_length=1)]
+
+
+class GeoJson(BaseModel):
+    type: Literal["Feature"]
+    properties: GeoJsonProperties | None = None
+    geometry: GeoJsonGeometry
+
+
+class Place(BaseModel):
+    place_id: int
+    type: str
+    name: str
+    county: str | None = None
+    region: str | None = None
+    country: str | None = None
+    geojson: GeoJson
+
+
+class SavedLocation(BaseModel):
+    name: str | None = None
+    formatted_address: str | None = None
+    geojson: GeoJson | None = None
+    h3: list[str] | None = None
+    place_ids: list[int] | None = None
+    place_hierarchies: list[str] | None = None
+    places: list[Place] | None = None
+    location_id: str
+
+
 class Analysis(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
@@ -134,6 +188,7 @@ class Analysis(BaseModel):
     processed_dt: Optional[datetime] = None
     external_id: Optional[str] = None
     label: Optional[List[str]] = None
+    saved_location: SavedLocation | None = None
 
 
 class AnalysisResultSet(BeamPaginationResultSet):

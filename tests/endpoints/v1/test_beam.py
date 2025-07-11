@@ -50,6 +50,7 @@ class BeamTest(unittest.TestCase):
             limit=10,
             external_id="external_id",
             label=["label1", "label2"],
+            location__saved_location_id="saved_location_id",
         )
 
         client.request.assert_called_once_with(
@@ -72,6 +73,7 @@ class BeamTest(unittest.TestCase):
                 "limit": 10,
                 "external_id": "external_id",
                 "label": "label1,label2",
+                "location.saved_location_id": "saved_location_id",
             },
             verify=True,
         )
@@ -98,6 +100,7 @@ class BeamTest(unittest.TestCase):
             limit=10,
             external_id="external_id",
             label=["label1", "label2"],
+            location__saved_location_id="saved_location_id",
         )
 
         client.request.assert_called_once_with(
@@ -120,6 +123,7 @@ class BeamTest(unittest.TestCase):
                 "limit": 10,
                 "external_id": "external_id",
                 "label": "label1,label2",
+                "location.saved_location_id": "saved_location_id",
             },
             verify=True,
         )
@@ -135,6 +139,7 @@ class BeamTest(unittest.TestCase):
             location__unit="km",
             location__google_place_id="google_place_id",
             location__geoscope_paths=["geoscope_path1", "geoscope_path2"],
+            location__saved_location_id="saved_location_id",
             rank__type="type",
             rank__levels__phq={"min": 1.0, "max": 2.0},
             rank__levels__local={"min": 3.0, "max": 4.0},
@@ -158,6 +163,7 @@ class BeamTest(unittest.TestCase):
                     "unit": "km",
                     "google_place_id": "google_place_id",
                     "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                    "saved_location_id": "saved_location_id",
                 },
                 "rank": {
                     "type": "type",
@@ -192,6 +198,7 @@ class BeamTest(unittest.TestCase):
                 "unit": "km",
                 "google_place_id": "google_place_id",
                 "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                "saved_location_id": "saved_location_id",
             },
             rank={
                 "type": "type",
@@ -222,6 +229,7 @@ class BeamTest(unittest.TestCase):
                     "unit": "km",
                     "google_place_id": "google_place_id",
                     "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                    "saved_location_id": "saved_location_id",
                 },
                 "rank": {
                     "type": "type",
@@ -255,6 +263,7 @@ class BeamTest(unittest.TestCase):
             location__unit="km",
             location__google_place_id="google_place_id",
             location__geoscope_paths=["geoscope_path1", "geoscope_path2"],
+            location__saved_location_id="saved_location_id",
             rank__type="type",
             rank__levels__phq={"min": 1.0, "max": 2.0},
             rank__levels__local={"min": 3.0, "max": 4.0},
@@ -278,6 +287,7 @@ class BeamTest(unittest.TestCase):
                     "unit": "km",
                     "google_place_id": "google_place_id",
                     "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                    "saved_location_id": "saved_location_id",
                 },
                 "rank": {
                     "type": "type",
@@ -310,6 +320,7 @@ class BeamTest(unittest.TestCase):
                 "unit": "km",
                 "google_place_id": "google_place_id",
                 "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                "saved_location_id": "saved_location_id",
             },
             rank={
                 "type": "type",
@@ -340,6 +351,7 @@ class BeamTest(unittest.TestCase):
                     "unit": "km",
                     "google_place_id": "google_place_id",
                     "geoscope_paths": ["geoscope_path1", "geoscope_path2"],
+                    "saved_location_id": "saved_location_id",
                 },
                 "rank": {
                     "type": "type",

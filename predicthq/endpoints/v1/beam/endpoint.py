@@ -8,6 +8,8 @@ from .schemas import (
     CreateAnalysisGroupResponse,
     AnalysisGroup,
     AnalysisGroupResultSet,
+    GeoJson,
+    Place
 )
 from predicthq.endpoints.decorators import accepts, returns
 from typing import overload, List, Optional, TextIO, Union
@@ -29,6 +31,7 @@ class BeamEndpoint:
             location__unit: Optional[str] = None,
             location__google_place_id: Optional[str] = None,
             location__geoscope_paths: Optional[List[str]] = None,
+            location__saved_location_id: Optional[str] = None,
             rank__type: Optional[str] = None,
             rank__levels__phq: Optional[dict] = None,
             rank__levels__local: Optional[dict] = None,
@@ -39,6 +42,13 @@ class BeamEndpoint:
             tz: Optional[str] = None,
             external_id: Optional[str] = None,
             label: Optional[List[str]] = None,
+            # saved_location__name: Optional[str] = None,
+            # saved_location__formatted_address: Optional[str] = None,
+            # saved_location__geojson: Optional[GeoJson] = None,
+            # saved_location__h3: Optional[list[str]] = None,
+            # saved_location__place_ids: Optional[list[int]] = None,
+            # saved_location__place_hierarchies: Optional[list[str]] = None,
+            # saved_location__places: Optional[list[Place]] = None,
             **params,
         ): ...
         @accepts(query_string=False)
@@ -70,6 +80,7 @@ class BeamEndpoint:
             limit: Optional[int] = None,
             external_id: Optional[List[str]] = None,
             label: Optional[List[str]] = None,
+            location__saved_location_id: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts()
@@ -102,6 +113,7 @@ class BeamEndpoint:
             location__unit: Optional[str] = None,
             location__google_place_id: Optional[str] = None,
             location__geoscope_paths: Optional[List[str]] = None,
+            location__saved_location_id: Optional[str] = None,
             rank__type: Optional[str] = None,
             rank__levels__phq: Optional[dict] = None,
             rank__levels__local: Optional[dict] = None,
