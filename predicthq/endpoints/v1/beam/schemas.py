@@ -170,20 +170,20 @@ class Place(BaseModel):
     place_id: int
     type: str
     name: str
-    county: str | None = None
-    region: str | None = None
-    country: str | None = None
+    county: Optional[str] = None
+    region: Optional[str] = None
+    country: Optional[str] = None
     geojson: GeoJson
 
 
 class SavedLocation(BaseModel):
-    name: str | None = None
-    formatted_address: str | None = None
-    geojson: GeoJson | None = None
-    h3: list[str] | None = None
-    place_ids: list[int] | None = None
-    place_hierarchies: list[str] | None = None
-    places: list[Place] | None = None
+    name: Optional[str] = None
+    formatted_address: Optional[str] = None
+    geojson: Optional[GeoJson] = None
+    h3: Optional[List[str]] = None
+    place_ids: Optional[List[int]] = None
+    place_hierarchies: Optional[List[str]] = None
+    places: Optional[List[Place]] = None
     location_id: str
 
 
