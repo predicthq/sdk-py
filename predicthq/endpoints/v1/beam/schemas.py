@@ -208,7 +208,7 @@ class Analysis(BaseModel):
     processed_dt: Optional[datetime] = None
     external_id: Optional[str] = None
     label: Optional[List[str]] = None
-    saved_location: SavedLocation | None = None
+    saved_location: Optional[SavedLocation] = None
 
 
 class AnalysisResultSet(BeamPaginationResultSet):
