@@ -2,8 +2,18 @@ from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
-from enum import StrEnum
 from typing import Annotated, Literal
+
+# Check if we're running on Python < 3.11
+# Python < 3.11 does not have StrEnum in the enum module
+import sys
+if sys.version_info < (3, 11):
+    import enum
+
+    class StrEnum(str, enum.Enum):
+        pass
+else:
+    from enum import StrEnum
 
 
 class BeamPaginationResultSet(ArgKwargResultSet):
