@@ -162,7 +162,7 @@ class GeoJsonGeometry(BaseModel):
 
 class GeoJson(BaseModel):
     type: Literal["Feature"]
-    properties: GeoJsonProperties | None = None
+    properties: Optional[GeoJsonProperties] = None
     geometry: GeoJsonGeometry
 
 
