@@ -2,9 +2,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
-from typing import Annotated, Literal
 
-# Check if we're running on Python < 3.11
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
 if sys.version_info < (3, 11):
@@ -14,6 +12,18 @@ if sys.version_info < (3, 11):
         pass
 else:
     from enum import StrEnum
+
+# Python < 3.9 does not have Annotated in the enum module
+if sys.version_info < (3, 9):
+    from typing_extensions import Annotated
+else:
+    from typing import Annotated, Literal
+
+# Python < 3.8 does not have Literal in the enum module
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
 
 
 class BeamPaginationResultSet(ArgKwargResultSet):
