@@ -13,13 +13,13 @@ if sys.version_info < (3, 11):
 else:
     from enum import StrEnum
 
-# Python < 3.9 does not have Annotated in the enum module
+# Python < 3.9 does not have Annotated
 if sys.version_info < (3, 9):
     from typing_extensions import Annotated
 else:
-    from typing import Annotated, Literal
+    from typing import Annotated
 
-# Python < 3.8 does not have Literal in the enum module
+# Python < 3.8 does not have Literal
 if sys.version_info < (3, 8):
     from typing_extensions import Literal
 else:
