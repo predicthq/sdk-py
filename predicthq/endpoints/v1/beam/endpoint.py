@@ -8,6 +8,8 @@ from .schemas import (
     CreateAnalysisGroupResponse,
     AnalysisGroup,
     AnalysisGroupResultSet,
+    GeoJson,
+    Place
 )
 from predicthq.endpoints.decorators import accepts, returns
 from typing import overload, List, Optional, TextIO, Union
@@ -29,6 +31,7 @@ class BeamEndpoint:
             location__unit: Optional[str] = None,
             location__google_place_id: Optional[str] = None,
             location__geoscope_paths: Optional[List[str]] = None,
+            location__saved_location_id: Optional[str] = None,
             rank__type: Optional[str] = None,
             rank__levels__phq: Optional[dict] = None,
             rank__levels__local: Optional[dict] = None,
@@ -70,6 +73,7 @@ class BeamEndpoint:
             limit: Optional[int] = None,
             external_id: Optional[List[str]] = None,
             label: Optional[List[str]] = None,
+            location__saved_location_id: Optional[List[str]] = None,
             **params,
         ): ...
         @accepts()
@@ -102,6 +106,7 @@ class BeamEndpoint:
             location__unit: Optional[str] = None,
             location__google_place_id: Optional[str] = None,
             location__geoscope_paths: Optional[List[str]] = None,
+            location__saved_location_id: Optional[str] = None,
             rank__type: Optional[str] = None,
             rank__levels__phq: Optional[dict] = None,
             rank__levels__local: Optional[dict] = None,

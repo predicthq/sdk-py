@@ -3,6 +3,28 @@ from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
 from typing import Optional, List
 
+# Python < 3.11 does not have StrEnum in the enum module
+import sys
+if sys.version_info < (3, 11):
+    import enum
+
+    class StrEnum(str, enum.Enum):
+        pass
+else:
+    from enum import StrEnum
+
+# Python < 3.9 does not have Annotated
+if sys.version_info < (3, 9):
+    from typing_extensions import Annotated
+else:
+    from typing import Annotated
+
+# Python < 3.8 does not have Literal
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
+
 
 class BeamPaginationResultSet(ArgKwargResultSet):
     def has_next(self):
@@ -113,6 +135,58 @@ class DemandType(DemandTypeGroup):
     currency_code: str
 
 
+class RadiusUnit(StrEnum):
+    m = "m"
+    km = "km"
+    mi = "mi"
+    ft = "ft"
+
+
+class GeoJsonGeometryType(StrEnum):
+    POINT = "Point"
+    POLYGON = "Polygon"
+    MULTI_POLYGON = "MultiPolygon"
+    LINE_STRING = "LineString"
+    MULTI_LINE_STRING = "MultiLineString"
+
+
+class GeoJsonProperties(BaseModel):
+    radius: Annotated[float, Field(gt=0)]
+    radius_unit: RadiusUnit
+
+
+class GeoJsonGeometry(BaseModel):
+    type: GeoJsonGeometryType
+    coordinates: Annotated[list, Field(min_length=1)]
+
+
+class GeoJson(BaseModel):
+    type: Literal["Feature"]
+    properties: Optional[GeoJsonProperties] = None
+    geometry: GeoJsonGeometry
+
+
+class Place(BaseModel):
+    place_id: int
+    type: str
+    name: str
+    county: Optional[str] = None
+    region: Optional[str] = None
+    country: Optional[str] = None
+    geojson: GeoJson
+
+
+class SavedLocation(BaseModel):
+    name: Optional[str] = None
+    formatted_address: Optional[str] = None
+    geojson: Optional[GeoJson] = None
+    h3: Optional[List[str]] = None
+    place_ids: Optional[List[int]] = None
+    place_hierarchies: Optional[List[str]] = None
+    places: Optional[List[Place]] = None
+    location_id: str
+
+
 class Analysis(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
@@ -134,6 +208,7 @@ class Analysis(BaseModel):
     processed_dt: Optional[datetime] = None
     external_id: Optional[str] = None
     label: Optional[List[str]] = None
+    saved_location: Optional[SavedLocation] = None
 
 
 class AnalysisResultSet(BeamPaginationResultSet):
