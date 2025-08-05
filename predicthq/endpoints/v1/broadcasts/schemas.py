@@ -41,7 +41,7 @@ class BroadcastEvent(BaseModel):
     event_id: str
     title: str
     category: str
-    labels: List[str]
+    labels: Optional[List[str]] = None
     dates: BroadcastEventDates
     location: BroadcastEventLocation
     entities: List[BroadcastEventEntities]

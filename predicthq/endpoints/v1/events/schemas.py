@@ -88,7 +88,7 @@ class Event(BaseModel):
     geo: Optional[Geo] = None
     id: str
     impact_patterns: Optional[List[ImpactPattern]] = []
-    labels: List[str]
+    labels: Optional[List[str]] = None
     location: Optional[Tuple[float, float]] = None
     parent_event: Optional[ParentEvent] = None
     phq_labels: Optional[List[PHQLabels]] = None
