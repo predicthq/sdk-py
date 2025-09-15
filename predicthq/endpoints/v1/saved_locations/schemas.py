@@ -136,13 +136,12 @@ class SummaryInsights(PhqModel):
     attended_event_count: int
     non_attended_event_count: int
     unscheduled_event_count: int
-    # TODO: remove Optional when implemented
-    demand_surge_count: int | None = None
-    venue_count: int | None = None
-    pes_total_sum: int | None = None
-    pes_accommodation_sum: int | None = None
-    pes_hospitality_sum: int | None = None
-    pes_transportation_sum: int | None = None
+    demand_surge_count: Optional[int] = None
+    venue_count: Optional[int] = None
+    pes_total_sum: Optional[int] = None
+    pes_accommodation_sum: Optional[int] = None
+    pes_hospitality_sum: Optional[int] = None
+    pes_transportation_sum: Optional[int] = None
 
 
 Position = tuple[float, float] | tuple[float, float, float]
@@ -185,9 +184,9 @@ class Place(PhqModel):
     place_id: int
     type: str
     name: str
-    county: str | None = None
-    region: str | None = None
-    country: str | None = None
+    county: Optional[str] = None
+    region: Optional[str] = None
+    country: Optional[str] = None
     geojson: PlaceGeoJson
 
 
@@ -205,13 +204,13 @@ class GeoJson(PhqModel):
 
 
 class SavedLocationBase(PhqModel):
-    location_code: str | None = None
-    name: str | None = None
-    description: str | None = None
-    labels: list[str] | None = None
+    location_code: Optional[str] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    labels: Optional[list[str]] = None
     geojson: GeoJson | None = None
-    place_ids: list[int] | None = None
-    formatted_address: str | None = None
+    place_ids: Optional[list[int]] = None
+    formatted_address: Optional[str] = None
 
 
 class SavedLocation(SavedLocationBase):
@@ -226,7 +225,7 @@ class SavedLocation(SavedLocationBase):
     user_id: Optional[str] = None
     subscription_valid_types: Annotated[
         list[SubscriptionValidType], Field(default_factory=list)
-    ]  # indicates if location is within org subscription
+    ]
     status: SavedLocationStatus
     summary_insights: Annotated[list[SummaryInsights], Field(default_factory=list)]
     places: Annotated[list[Place], Field(default_factory=list)]
