@@ -6,6 +6,7 @@ from .v1.features import FeaturesEndpoint
 from .v1.places import PlacesEndpoint
 from .v1.radius import SuggestedRadiusEndpoint
 from .v1.beam import BeamEndpoint
+from .v1.saved_locations import SavedLocationsEndpoint
 
 
 __all__ = [
@@ -17,4 +18,5 @@ __all__ = [
     "PlacesEndpoint",
     "SuggestedRadiusEndpoint",
     "BeamEndpoint",
+    "SavedLocationsEndpoint",
 ]

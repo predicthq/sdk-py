@@ -36,6 +36,7 @@ class Client(object):
         self.places = endpoints.PlacesEndpoint(proxy(self))
         self.radius = endpoints.SuggestedRadiusEndpoint(proxy(self))
         self.beam = endpoints.BeamEndpoint(proxy(self))
+        self.saved_locations = endpoints.SavedLocationsEndpoint(proxy(self))
 
     def get_headers(self, headers):
         _headers = {

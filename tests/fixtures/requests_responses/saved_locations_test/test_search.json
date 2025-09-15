@@ -1,0 +1,440 @@
+{
+  "count": 6504,
+  "locations": [
+    {
+      "location_id": "yfQpe0p43Q5Clkqdei6n_g",
+      "create_dt": "2022-04-05T22:26:00+00:00",
+      "update_dt": "2022-04-20T02:18:15+00:00",
+      "enrich_dt": "2022-04-20T02:18:17+00:00",
+      "insights_dt": "2025-09-09T19:12:32+00:00",
+      "user_id": "hjqkKozgS8mm",
+      "name": "Canada ",
+      "labels": [
+        "pete"
+      ],
+      "place_ids": [
+        6251999
+      ],
+      "formatted_address": "Canada [Country]",
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T19:12:32+00:00",
+            "end_dt": "2025-12-08T19:12:32+00:00"
+          },
+          "phq_attendance_sum": 24994700,
+          "attended_event_count": 14852,
+          "non_attended_event_count": 53,
+          "unscheduled_event_count": 50,
+          "pes_total_sum": 1970901762,
+          "pes_accommodation_sum": 602247668,
+          "pes_hospitality_sum": 1011405453,
+          "pes_transportation_sum": 357236355
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active",
+      "share_url": "https://events.predicthq.com/locations/PaT5zxJ6z6BOaIV2b_J8HQ"
+    },
+    {
+      "location_id": "nyDfNoEJbaTiG0v6-EBt7Q",
+      "create_dt": "2022-04-05T22:27:10+00:00",
+      "update_dt": "2022-04-05T22:27:10+00:00",
+      "enrich_dt": "2022-04-05T22:27:16+00:00",
+      "insights_dt": "2025-09-09T21:31:17+00:00",
+      "user_id": "BvKaMaGa6PMA",
+      "name": "Cracker Barrel Store 676",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 20,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -96.321664,
+            30.663105
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T21:31:17+00:00",
+            "end_dt": "2025-12-08T21:31:17+00:00"
+          },
+          "phq_attendance_sum": 726509,
+          "attended_event_count": 295,
+          "non_attended_event_count": 144,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 53765963,
+          "pes_accommodation_sum": 17007717,
+          "pes_hospitality_sum": 26536742,
+          "pes_transportation_sum": 10221360
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "7x0-1G0StP_4mRlChiLN2A",
+      "create_dt": "2022-04-05T22:27:10+00:00",
+      "update_dt": "2022-04-05T22:27:10+00:00",
+      "enrich_dt": "2022-04-05T22:27:19+00:00",
+      "insights_dt": "2025-09-09T18:10:01+00:00",
+      "user_id": "BvKaMaGa6PMA",
+      "name": "Cracker Barrel Store 122",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 20,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -87.94217,
+            42.37883
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T18:10:01+00:00",
+            "end_dt": "2025-12-08T18:10:01+00:00"
+          },
+          "phq_attendance_sum": 236042,
+          "attended_event_count": 651,
+          "non_attended_event_count": 217,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 10061000,
+          "pes_accommodation_sum": 2508958,
+          "pes_hospitality_sum": 5358683,
+          "pes_transportation_sum": 2192936
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "QEwJrvMD3c7ixy5LPvfUzg",
+      "create_dt": "2022-04-05T22:27:10+00:00",
+      "update_dt": "2022-04-05T22:27:10+00:00",
+      "enrich_dt": "2022-04-05T22:27:15+00:00",
+      "insights_dt": "2025-09-09T22:58:20+00:00",
+      "user_id": "BvKaMaGa6PMA",
+      "name": "Cracker Barrel Store 614",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 20,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -82.1214,
+            36.6285
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T22:58:20+00:00",
+            "end_dt": "2025-12-08T22:58:20+00:00"
+          },
+          "phq_attendance_sum": 739152,
+          "attended_event_count": 231,
+          "non_attended_event_count": 145,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 60517863,
+          "pes_accommodation_sum": 18498267,
+          "pes_hospitality_sum": 31198305,
+          "pes_transportation_sum": 10821126
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "dptDoUORpSZAGURYmkr4Pg",
+      "create_dt": "2022-04-05T22:27:10+00:00",
+      "update_dt": "2022-04-05T22:27:10+00:00",
+      "enrich_dt": "2022-04-05T22:27:11+00:00",
+      "insights_dt": "2025-09-09T19:17:03+00:00",
+      "user_id": "BvKaMaGa6PMA",
+      "name": "Cracker Barrel Store 45",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 20,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -86.09517,
+            39.666
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T19:17:03+00:00",
+            "end_dt": "2025-12-08T19:17:03+00:00"
+          },
+          "phq_attendance_sum": 2308236,
+          "attended_event_count": 1550,
+          "non_attended_event_count": 171,
+          "unscheduled_event_count": 1,
+          "pes_total_sum": 195034148,
+          "pes_accommodation_sum": 67653323,
+          "pes_hospitality_sum": 95322121,
+          "pes_transportation_sum": 32057662
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "P6J49l0m5J5Io1KVhUhkCA",
+      "create_dt": "2022-04-05T22:27:10+00:00",
+      "update_dt": "2022-04-05T22:27:10+00:00",
+      "enrich_dt": "2022-04-05T22:27:11+00:00",
+      "insights_dt": "2025-09-09T19:30:43+00:00",
+      "user_id": "BvKaMaGa6PMA",
+      "name": "Cracker Barrel Store 145",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 20,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -92.28933,
+            38.9635
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T19:30:43+00:00",
+            "end_dt": "2025-12-08T19:30:43+00:00"
+          },
+          "phq_attendance_sum": 529334,
+          "attended_event_count": 348,
+          "non_attended_event_count": 139,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 39161340,
+          "pes_accommodation_sum": 11300562,
+          "pes_hospitality_sum": 20597745,
+          "pes_transportation_sum": 7262782
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "m2I7SEsftLrwjE_KkcyFJQ",
+      "create_dt": "2022-04-07T16:09:07+00:00",
+      "update_dt": "2022-04-07T16:09:07+00:00",
+      "enrich_dt": "2022-04-07T16:09:08+00:00",
+      "insights_dt": "2025-09-09T18:08:17+00:00",
+      "user_id": "b85Dy_r9Kpo",
+      "name": "Wrigley Field",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 1,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -87.65532197282239,
+            41.94866180583685
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T18:08:17+00:00",
+            "end_dt": "2025-12-08T18:08:17+00:00"
+          },
+          "phq_attendance_sum": 2293888,
+          "attended_event_count": 187,
+          "non_attended_event_count": 211,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 220296343,
+          "pes_accommodation_sum": 80775227,
+          "pes_hospitality_sum": 104925084,
+          "pes_transportation_sum": 34595902
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active",
+      "share_url": "https://events.predicthq.com/locations/m91tIoXocq6CU-9hxZLkaQ"
+    },
+    {
+      "location_id": "a3_RAkg9BUiKWEnvNvNyQg",
+      "create_dt": "2022-04-07T16:13:48+00:00",
+      "update_dt": "2022-04-07T16:13:48+00:00",
+      "enrich_dt": "2022-04-07T16:13:49+00:00",
+      "insights_dt": "2025-09-09T17:37:34+00:00",
+      "user_id": "b85Dy_r9Kpo",
+      "name": "Scotia Bank Arena",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 1,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -79.37909890161842,
+            43.64357477370534
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T17:37:34+00:00",
+            "end_dt": "2025-12-08T17:37:34+00:00"
+          },
+          "phq_attendance_sum": 4245839,
+          "attended_event_count": 486,
+          "non_attended_event_count": 20,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 413176642,
+          "pes_accommodation_sum": 114856110,
+          "pes_hospitality_sum": 222415114,
+          "pes_transportation_sum": 75904934
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "FeZP_c9YXadY9Vn0rPkPmA",
+      "create_dt": "2022-04-07T16:14:37+00:00",
+      "update_dt": "2022-04-07T16:14:37+00:00",
+      "enrich_dt": "2022-04-07T16:14:38+00:00",
+      "insights_dt": "2025-09-09T19:45:10+00:00",
+      "user_id": "b85Dy_r9Kpo",
+      "name": "Minute Maid Park",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 1,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -95.35551430189841,
+            29.75750223389298
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T19:45:10+00:00",
+            "end_dt": "2025-12-08T19:45:10+00:00"
+          },
+          "phq_attendance_sum": 1802007,
+          "attended_event_count": 487,
+          "non_attended_event_count": 145,
+          "unscheduled_event_count": 1,
+          "pes_total_sum": 146458329,
+          "pes_accommodation_sum": 38657793,
+          "pes_hospitality_sum": 79887985,
+          "pes_transportation_sum": 27912211
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    },
+    {
+      "location_id": "2Bqeuf64QO9tTIvloxJFfA",
+      "create_dt": "2022-04-07T16:16:33+00:00",
+      "update_dt": "2022-04-07T16:16:33+00:00",
+      "enrich_dt": "2022-04-07T16:16:34+00:00",
+      "insights_dt": "2025-09-09T19:16:26+00:00",
+      "user_id": "b85Dy_r9Kpo",
+      "name": "State Farm Arena",
+      "geojson": {
+        "type": "Feature",
+        "properties": {
+          "radius": 1,
+          "radius_unit": "km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -84.39623857114731,
+            33.75749423912181
+          ]
+        }
+      },
+      "summary_insights": [
+        {
+          "date_range": {
+            "type": "next_90d",
+            "start_dt": "2025-09-09T19:16:26+00:00",
+            "end_dt": "2025-12-08T19:16:26+00:00"
+          },
+          "phq_attendance_sum": 1636183,
+          "attended_event_count": 368,
+          "non_attended_event_count": 135,
+          "unscheduled_event_count": 0,
+          "pes_total_sum": 125752562,
+          "pes_accommodation_sum": 46066170,
+          "pes_hospitality_sum": 53910823,
+          "pes_transportation_sum": 25775129
+        }
+      ],
+      "subscription_valid_types": [
+        "events"
+      ],
+      "status": "active"
+    }
+  ]
+}

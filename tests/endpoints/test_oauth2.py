@@ -93,3 +93,40 @@ class OAuth2Test(unittest.TestCase):
             "token_type_hint": "access_token",
             "token": "token123",
         }
+
+
+    def test_oauth2_endpoint_method_deprecation_warning(self):
+        from predicthq.endpoints.oauth2.endpoint import OAuth2Endpoint
+        import warnings
+
+        expected_text = (
+            "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
+            "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
+        )
+
+        endpoint = OAuth2Endpoint(client=None)
+
+        # Test get_token
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            try:
+                endpoint.get_token("id", "secret", "scope", "grant_type")
+            except Exception:
+                pass  # Ignore errors from None client
+            assert any(
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message)
+                for warning in w
+            )
+
+        # Test revoke_token
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            try:
+                endpoint.revoke_token("id", "secret", "token", "hint")
+            except Exception:
+                pass  # Ignore errors from None client
+            assert any(
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message)
+                for warning in w
+            )
+

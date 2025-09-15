@@ -1,0 +1,38 @@
+{
+  "location_id": "some_location_id",
+  "create_dt": "2022-04-05T22:26:00+00:00",
+  "update_dt": "2022-04-20T02:18:15+00:00",
+  "enrich_dt": "2022-04-20T02:18:17+00:00",
+  "insights_dt": "2025-09-10T01:16:47+00:00",
+  "user_id": "some_user_id",
+  "name": "Canada ",
+  "labels": [
+    "pete"
+  ],
+  "place_ids": [
+    6251999
+  ],
+  "formatted_address": "Canada [Country]",
+  "summary_insights": [
+    {
+      "date_range": {
+        "type": "next_90d",
+        "start_dt": "2025-09-10T01:16:47+00:00",
+        "end_dt": "2025-12-09T01:16:47+00:00"
+      },
+      "phq_attendance_sum": 25167675,
+      "attended_event_count": 14758,
+      "non_attended_event_count": 53,
+      "unscheduled_event_count": 16,
+      "pes_total_sum": 1989050096,
+      "pes_accommodation_sum": 605036441,
+      "pes_hospitality_sum": 1023421938,
+      "pes_transportation_sum": 360579488
+    }
+  ],
+  "subscription_valid_types": [
+    "events"
+  ],
+  "status": "active",
+  "share_url": "https://events.predicthq.com/locations/PaT5zxJ6z6BOaIV2b_J8HQ"
+}

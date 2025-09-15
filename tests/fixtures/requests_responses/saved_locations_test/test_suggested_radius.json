@@ -1,0 +1,8 @@
+{
+  "radius": 1.23,
+  "radius_unit": "km",
+  "location": {
+    "lat": "37.747767",
+    "lon": "-122.415202"
+  }
+}
