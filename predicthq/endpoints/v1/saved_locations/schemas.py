@@ -1,13 +1,11 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import List, Optional, Tuple, Union
-from ..events.schemas import Event
 
 from pydantic import BaseModel
-from pydantic import Field, field_validator, model_validator, ConfigDict
+from pydantic import Field, ConfigDict
 
 from predicthq.endpoints.schemas import ResultSet
 
-from typing import Optional, List
 
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
@@ -153,22 +151,22 @@ class Point(PhqModel):
 
 class Polygon(PhqModel):
     type: Literal["Polygon"] = "Polygon"
-    coordinates: list[list[Position]]
+    coordinates: List[List[Position]]
 
 
 class MultiPolygon(PhqModel):
     type: Literal["MultiPolygon"] = "MultiPolygon"
-    coordinates: list[list[list[Position]]]
+    coordinates: List[List[List[Position]]]
 
 
 class LineString(PhqModel):
     type: Literal["LineString"] = "LineString"
-    coordinates: list[Position]
+    coordinates: List[Position]
 
 
 class MultiLineString(PhqModel):
     type: Literal["MultiLineString"] = "MultiLineString"
-    coordinates: list[list[Position]]
+    coordinates: List[List[Position]]
 
 
 Geometry = Union[Point, Polygon, MultiPolygon, LineString, MultiLineString]
@@ -204,9 +202,9 @@ class SavedLocationBase(PhqModel):
     location_code: Optional[str] = None
     name: Optional[str] = None
     description: Optional[str] = None
-    labels: Optional[list[str]] = None
+    labels: Optional[List[str]] = None
     geojson: Optional[GeoJson] = None
-    place_ids: Optional[list[int]] = None
+    place_ids: Optional[List[int]] = None
     formatted_address: Optional[str] = None
 
 
@@ -221,11 +219,11 @@ class SavedLocation(SavedLocationBase):
     insights_dt: Optional[datetime] = None
     user_id: Optional[str] = None
     subscription_valid_types: Annotated[
-        list[SubscriptionValidType], Field(default_factory=list)
+        List[SubscriptionValidType], Field(default_factory=list)
     ]
     status: SavedLocationStatus
-    summary_insights: Annotated[list[SummaryInsights], Field(default_factory=list)]
-    places: Annotated[list[Place], Field(default_factory=list)]
+    summary_insights: Annotated[List[SummaryInsights], Field(default_factory=list)]
+    places: Annotated[List[Place], Field(default_factory=list)]
 
 
 class SavedLocationResultSet(ResultSet):
