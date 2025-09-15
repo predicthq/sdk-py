@@ -1,6 +1,5 @@
 from datetime import date, datetime
 from typing import List, Optional, Tuple, Union
-from enum import StrEnum
 from ..events.schemas import Event
 
 from pydantic import BaseModel
