@@ -190,15 +190,13 @@ class Place(PhqModel):
 
 
 class Properties(PhqModel):
-    """Custom properties for embedding the radius information"""
-
-    radius: float | None = None
-    radius_unit: RadiusUnit | None = None
+    radius: Optional[float] = None
+    radius_unit: Optional[RadiusUnit] = None
 
 
 class GeoJson(PhqModel):
     type: Literal["Feature"]
-    properties: Properties | None = None
+    properties: Optional[Properties] = None
     geometry: Geometry = Field(discriminator="type")
 
 
@@ -207,7 +205,7 @@ class SavedLocationBase(PhqModel):
     name: Optional[str] = None
     description: Optional[str] = None
     labels: Optional[list[str]] = None
-    geojson: GeoJson | None = None
+    geojson: Optional[GeoJson] = None
     place_ids: Optional[list[int]] = None
     formatted_address: Optional[str] = None
 
@@ -215,7 +213,7 @@ class SavedLocationBase(PhqModel):
 class SavedLocation(SavedLocationBase):
     location_id: str
 
-    share_url: str | None = None
+    share_url: Optional[str] = None
 
     create_dt: datetime
     update_dt: datetime
