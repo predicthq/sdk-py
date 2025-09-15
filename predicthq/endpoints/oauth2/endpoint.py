@@ -6,11 +6,10 @@ from deprecated import deprecated
 
 
 class OAuth2Endpoint(BaseEndpoint):
-
     @deprecated(
         reason=(
-                "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
-                "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
+            "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
+            "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
         ),
         category=FutureWarning,
     )
@@ -31,11 +30,10 @@ class OAuth2Endpoint(BaseEndpoint):
             verify=verify_ssl,
         )
 
-
     @deprecated(
         reason=(
-                "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
-                "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
+            "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
+            "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
         ),
         category=FutureWarning,
     )

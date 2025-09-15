@@ -1,11 +1,17 @@
 import unittest
 
-from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, CountResultSet
+from predicthq.endpoints.v1.events.schemas import (
+    EventResultSet,
+    CalendarResultSet,
+    CountResultSet,
+)
 from tests import load_fixture, with_mock_client, with_mock_responses, with_client
 
 
 class EventsTest(unittest.TestCase):
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_params_underscores(self, client):
         client.events.search(
             id="id",
@@ -78,7 +84,9 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_datetimerange_params(self, client):
         client.events.search(
             start__gte="2016-03-01",
@@ -115,7 +123,9 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_params_underscores_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -128,7 +138,9 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_params_dicts(self, client):
         client.events.search(
             id="id",
@@ -144,7 +156,11 @@ class EventsTest(unittest.TestCase):
             parent={"include": "only"},
             place={"scope": ["place1", "place2"], "exact": "place3"},
             placekey="22t-222@627-wc7-rkz",
-            location_around={"origin": "40.730610,-73.935242", "scale": "2km", "offset": "0.5km"},
+            location_around={
+                "origin": "40.730610,-73.935242",
+                "scale": "2km",
+                "offset": "0.5km",
+            },
             start={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
             end={"gte": "2016-05-01", "lt": "2016-06-01", "tz": "Pacific/Auckland"},
             active={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
@@ -188,7 +204,9 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_params_dicts_without_ssl_verification(self, client):
         client.events.search(
             q="query",
@@ -201,7 +219,9 @@ class EventsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_for_account(self, client):
         client.events.for_account("account-id").search(q="query")
         client.request.assert_called_once_with(
@@ -211,9 +231,13 @@ class EventsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/events_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/events_test/test_empty_search")
+    )
     def test_search_for_account_without_ssl_verification(self, client):
-        client.events.for_account("account-id").search(q="query", config__verify_ssl=False)
+        client.events.for_account("account-id").search(
+            q="query", config__verify_ssl=False
+        )
         client.request.assert_called_once_with(
             "get",
             "/v1/accounts/account-id/events/",
@@ -233,7 +257,9 @@ class EventsTest(unittest.TestCase):
     @with_mock_responses()
     def test_count(self, client, responses):
         result = client.events.count(
-            active__gte="2015-01-01", active__lte="2015-12-31", within="50km@-27.470784,153.030124"
+            active__gte="2015-01-01",
+            active__lte="2015-12-31",
+            within="50km@-27.470784,153.030124",
         )
         assert isinstance(result, CountResultSet)
         assert result.count == 2501

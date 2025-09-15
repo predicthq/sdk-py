@@ -33,7 +33,9 @@ def with_mock_responses(req_resp=None):
         @functools.wraps(f)
         def wrapper(*args, **kwargs):
             class_name, func_name = (
-                re.sub(r"([A-Z]+)", r"_\1", args[0].__class__.__name__).lower().strip("_"),
+                re.sub(r"([A-Z]+)", r"_\1", args[0].__class__.__name__)
+                .lower()
+                .strip("_"),
                 f.__name__,
             )
             fixtures = load_reqresp_fixture(req_resp or f"{class_name}/{func_name}")
@@ -44,7 +46,10 @@ def with_mock_responses(req_resp=None):
                         fixture["url"] = re.compile(Client.build_url(url_re))
                     else:
                         fixture["url"] = Client.build_url(fixture["url"])
-                    if "content_type" in fixture and fixture["content_type"] == "application/json":
+                    if (
+                        "content_type" in fixture
+                        and fixture["content_type"] == "application/json"
+                    ):
                         fixture["body"] = json.dumps(fixture["body"])
                     rsps.add(**fixture)
                 return f(responses=rsps, *args, **kwargs)
@@ -76,11 +81,18 @@ def with_config(**new_config):
     return decorator
 
 
-def with_mock_client(request_returns=None, request_raises=None, *client_args, **client_kwargs):
+def with_mock_client(
+    request_returns=None, request_raises=None, *client_args, **client_kwargs
+):
     def decorator(f):
         @functools.wraps(f)
         def wrapper(*args, **kwargs):
-            with mock.patch.object(Client, "request", return_value=request_returns, side_effect=request_raises):
+            with mock.patch.object(
+                Client,
+                "request",
+                return_value=request_returns,
+                side_effect=request_raises,
+            ):
                 return f(client=Client(*client_args, **client_kwargs), *args, **kwargs)
 
         return wrapper

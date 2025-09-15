@@ -5,6 +5,7 @@ from typing import Optional, List
 
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
+
 if sys.version_info < (3, 11):
     import enum
 
@@ -36,7 +37,6 @@ class BeamPaginationResultSet(ArgKwargResultSet):
         else:
             self._kwargs["offset"] = len(self.results)
         return self._more(**self._kwargs)
-
 
 
 class CreateAnalysisResponse(BaseModel):

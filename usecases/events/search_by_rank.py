@@ -3,7 +3,7 @@ from predicthq import Client
 # Please copy paste your access token here
 # or read our Quickstart documentation if you don't have a token yet
 # https://docs.predicthq.com/guides/quickstart/
-ACCESS_TOKEN = 'abc123'
+ACCESS_TOKEN = "abc123"
 
 phq = Client(access_token=ACCESS_TOKEN)
 
@@ -12,8 +12,8 @@ phq = Client(access_token=ACCESS_TOKEN)
 
 # You can either filter by rank value
 # https://docs.predicthq.com/resources/events/#param-rank
-for event in phq.events.search(rank={'gte': 60, 'lt': 80}):
-    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+for event in phq.events.search(rank={"gte": 60, "lt": 80}):
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
 
 
 # or filter by rank level
@@ -25,4 +25,4 @@ for event in phq.events.search(rank={'gte': 60, 'lt': 80}):
 # 5 - Major (rank between 81 and 100)
 # rank_level accepts either a single value or a list of values
 for event in phq.events.search(rank_level=[4]):
-    print(event.rank, event.category, event.title, event.start.strftime('%Y-%m-%d'))
+    print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))

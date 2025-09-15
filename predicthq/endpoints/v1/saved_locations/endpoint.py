@@ -1,83 +1,54 @@
-from predicthq.endpoints.base import UserBaseEndpoint
-from predicthq.endpoints.base import BaseEndpoint
+from predicthq.endpoints.base import UserBaseEndpoint, BaseEndpoint
 from predicthq.endpoints.decorators import accepts, returns
-from typing import overload, List, Optional, TextIO, Union
-from pydantic import BaseModel
-from predicthq.endpoints.decorators import accepts, returns
+from typing import overload, List, Optional
 from .schemas import (
     SavedLocation,
     SavedLocationResultSet,
     CreateSavedLocationResponse,
     PostSharingEnableResponse,
-    SuggestedRadiusResponse,Location
+    SuggestedRadiusResponse,
+    Location,
 )
 from ..events.schemas import EventResultSet
 
 
-from typing import Optional, List
-
-# Python < 3.11 does not have StrEnum in the enum module
-import sys
-if sys.version_info < (3, 11):
-    import enum
-
-    class StrEnum(str, enum.Enum):
-        pass
-else:
-    from enum import StrEnum
-
-# Python < 3.9 does not have Annotated
-if sys.version_info < (3, 9):
-    from typing_extensions import Annotated
-else:
-    from typing import Annotated
-
-# Python < 3.8 does not have Literal
-if sys.version_info < (3, 8):
-    from typing_extensions import Literal
-else:
-    from typing import Literal
-
-
 class SavedLocationsEndpoint(UserBaseEndpoint):
-
     @overload
     def search(
-            self,
-            location_id: Optional[List[str]] = None,
-            location_code: Optional[List[str]] = None,
-            labels: Optional[List[str]] = None,
-            user_id: Optional[List[str]] = None,
-            subscription_valid_types: Optional[List[str]] = None,
-            q: Optional[str] = None,
-            sort: Optional[List[str]] = None,
-            offset: Optional[int] = None,
-            limit: Optional[int] = None,
-            **params,
+        self,
+        location_id: Optional[List[str]] = None,
+        location_code: Optional[List[str]] = None,
+        labels: Optional[List[str]] = None,
+        user_id: Optional[List[str]] = None,
+        subscription_valid_types: Optional[List[str]] = None,
+        q: Optional[str] = None,
+        sort: Optional[List[str]] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
+        **params,
     ): ...
     @accepts()
     @returns(SavedLocationResultSet)
     def search(self, **params):
         verify_ssl = params.pop("config.verify_ssl", True)
-        result =  self.client.get(
+        result = self.client.get(
             self.build_url("v1", "saved-locations"),
             params=params,
             verify=verify_ssl,
         )
         return result
 
-
     @overload
     def create(
-            self,
-            name: str,
-            geojson: dict,
-            labels: Optional[List[str]] = None,
-            location_code: Optional[str] = None,
-            formatted_address: Optional[str] = None,
-            description: Optional[str] = None,
-            place_ids: Optional[List[str]] = None,
-            **params,
+        self,
+        name: str,
+        geojson: dict,
+        labels: Optional[List[str]] = None,
+        location_code: Optional[str] = None,
+        formatted_address: Optional[str] = None,
+        description: Optional[str] = None,
+        place_ids: Optional[List[str]] = None,
+        **params,
     ): ...
     @accepts(query_string=False)
     @returns(CreateSavedLocationResponse)
@@ -91,7 +62,6 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
         )
         return result
 
-
     @accepts()
     @returns(SavedLocation)
     def get(self, location_id, **params):
@@ -102,30 +72,16 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
             verify=verify_ssl,
         )
 
-
     @overload
     def search_event_result_set(
-        location_id : str,
-        date_range_type : Optional[str] = None,
-        offset : Optional[int] = None,
-        limit : Optional[int] = None,
+        location_id: str,
+        date_range_type: Optional[str] = None,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None,
         **params,
-    ):...
+    ): ...
     @returns(EventResultSet)
     def search_event_result_set(self, location_id, **params):
-        """
-        Search for events for a saved location.
-
-        Args:
-            location_id (str): The ID of the location.
-            date_range_type (str, optional): The date range type filter.
-            offset (int, optional): Pagination offset.
-            limit (int, optional): Pagination limit.
-            ... (other query params)
-
-        Returns:
-            EventResultSet: The result set of events.
-        """
         verify_ssl = params.pop("config.verify_ssl", True)
         url = f"{self.build_url('v1', 'saved-locations')}{location_id}/insights/events"
         response = self.client.get(
@@ -135,31 +91,29 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
         )
         return response
 
-
     @accepts()
     def refresh_location_insights(self, location_id: str, **params):
         verify_ssl = params.pop("config.verify_ssl", True)
         return self.client.post(
-            f"{self.build_url('v1', 'saved-locations')}{location_id}/insights/refresh/",
+            f"{self.build_url('v1', 'saved-locations')}{location_id}/insights/refresh",
             params=params,
             verify=verify_ssl,
         )
 
-
     @overload
     def replace_location_data(
-            self,
-            location_id: str,
-            name: str,
-            geojson: dict,
-            labels: Optional[List[str]] = None,
-            location_code: Optional[str] = None,
-            formatted_address: Optional[str] = None,
-            description: Optional[str] = None,
-            place_ids: Optional[List[str]] = None,
-            external_id: Optional[str] = None,
-            **params,
-    ):...
+        self,
+        location_id: str,
+        name: str,
+        geojson: dict,
+        labels: Optional[List[str]] = None,
+        location_code: Optional[str] = None,
+        formatted_address: Optional[str] = None,
+        description: Optional[str] = None,
+        place_ids: Optional[List[str]] = None,
+        external_id: Optional[str] = None,
+        **params,
+    ): ...
     @accepts(query_string=False)
     def replace_location_data(self, location_id: str, **params):
         verify_ssl = params.pop("config.verify_ssl", True)
@@ -171,7 +125,6 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
         )
         return response
 
-
     @accepts()
     def delete_location(self, location_id: str, **params):
         verify_ssl = params.pop("config.verify_ssl", True)
@@ -180,8 +133,7 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
             params=params,
             verify=verify_ssl,
         )
-    #
-    #
+
     @accepts()
     @returns(PostSharingEnableResponse)
     def sharing_enable(self, location_id: str, **params):
@@ -192,7 +144,6 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
             verify=verify_ssl,
         )
 
-
     @overload
     def suggested_radius(
         self,
@@ -200,7 +151,7 @@ class SavedLocationsEndpoint(UserBaseEndpoint):
         radius_unit: str,
         industry: str,
         **params,
-    ):...
+    ): ...
     @accepts(query_string=False)
     @returns(SuggestedRadiusResponse)
     def suggested_radius(self, **params):

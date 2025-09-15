@@ -1,14 +1,11 @@
 from datetime import datetime
 from typing import List, Optional, Tuple, Union
-
-from pydantic import BaseModel
-from pydantic import Field, ConfigDict
-
+from pydantic import BaseModel, Field, ConfigDict
 from predicthq.endpoints.schemas import ResultSet
-
 
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
+
 if sys.version_info < (3, 11):
     import enum
 
@@ -52,6 +49,7 @@ class SuggestedRadiusResponse(BaseModel):
     radius_unit: RadiusUnit
     location: Location
 
+
 class Entities(BaseModel):
     entity_id: str
     name: str
@@ -91,12 +89,6 @@ class GeoAddress(BaseModel):
     locality: Optional[str] = None
     postcode: Optional[str] = None
     region: Optional[str] = None
-
-
-class Geo(BaseModel):
-    geometry: Union[Point, MultiPoint, Polygon, MultiPolygon]
-    placekey: Optional[str] = None
-    address: Optional[GeoAddress] = None
 
 
 class SubscriptionValidType(StrEnum):
@@ -240,5 +232,3 @@ class PostSharingEnableResponse(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
     share_url: str
-
-

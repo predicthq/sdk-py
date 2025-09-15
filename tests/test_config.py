@@ -34,7 +34,9 @@ def test_defaults_from_locations():
 def test_defaults_from_environment():
     os.environ["PREDICTHQ_ENDPOINT_URL"] = "https://example.org/endpoint/"
     try:
-        config = Config(os.path.join(os.path.dirname(__file__), "fixtures", "test.conf"))
+        config = Config(
+            os.path.join(os.path.dirname(__file__), "fixtures", "test.conf")
+        )
         assert config.ENDPOINT_URL == "https://example.org/endpoint/"
         assert config.OAUTH2_CLIENT_ID == "client_id"
         assert config.OAUTH2_CLIENT_SECRET == "client_secret"

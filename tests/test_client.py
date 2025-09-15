@@ -53,9 +53,17 @@ class ClientTest(unittest.TestCase):
         assert excinfo.value.args[0] == responses.calls[5].response.content
 
         # Test headers
-        self.client.authenticate(client_id="client_id", client_secret="client_secret", scope=["account"])
-        assert responses.calls[6].request.headers["Authorization"] == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
-        assert responses.calls[6].request.headers["Content-Type"] == "application/x-www-form-urlencoded"
+        self.client.authenticate(
+            client_id="client_id", client_secret="client_secret", scope=["account"]
+        )
+        assert (
+            responses.calls[6].request.headers["Authorization"]
+            == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
+        )
+        assert (
+            responses.calls[6].request.headers["Content-Type"]
+            == "application/x-www-form-urlencoded"
+        )
 
         self.client.accounts.self()
         assert responses.calls[7].request.headers["Authorization"] == "Bearer token123"
@@ -82,7 +90,9 @@ class ClientTest(unittest.TestCase):
     @with_mock_client(request_returns={"result": "value"})
     def test_patch(self, client):
         result = self.client.patch("/patch/", data={"key": "value"})
-        client.request.assert_called_once_with("patch", "/patch/", data={"key": "value"})
+        client.request.assert_called_once_with(
+            "patch", "/patch/", data={"key": "value"}
+        )
         assert result == client.request.return_value
 
     @with_mock_client()
@@ -94,7 +104,9 @@ class ClientTest(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("access_token"))
     def test_authenticate(self, client):
         token = self.client.authenticate(
-            client_id="client_id", client_secret="client_secret", scope=["account", "events"]
+            client_id="client_id",
+            client_secret="client_secret",
+            scope=["account", "events"],
         )
         client.request.assert_called_once_with(
             "post",
@@ -132,7 +144,9 @@ def client():
 @pytest.mark.parametrize("status_code", (429, 503, 504))
 @mock.patch("predicthq.client.requests.request")
 def test_retries(mock_request, client, status_code):
-    stamina.set_testing(True, attempts=3)  # Disable stamina backoff waiting so the tests can run faster
+    stamina.set_testing(
+        True, attempts=3
+    )  # Disable stamina backoff waiting so the tests can run faster
 
     mock_request.return_value.status_code = status_code
     mock_request.return_value.raise_for_status.side_effect = requests.HTTPError

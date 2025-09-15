@@ -8,20 +8,26 @@ from tests import load_fixture, with_mock_client, with_mock_responses, with_clie
 
 
 class PlacesTest(unittest.TestCase):
-    @with_mock_client(request_returns=load_fixture("requests_responses/places_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/places_test/test_empty_search")
+    )
     def test_search_params(self, client):
         client.places.search(country=["NZ", "AU"])
         client.request.assert_called_once_with(
-            "get", "/v1/places/",
+            "get",
+            "/v1/places/",
             params={"country": "NZ,AU"},
             verify=True,
         )
 
-    @with_mock_client(request_returns=load_fixture("requests_responses/places_test/test_empty_search"))
+    @with_mock_client(
+        request_returns=load_fixture("requests_responses/places_test/test_empty_search")
+    )
     def test_search_params_without_ssl_verification(self, client):
         client.places.search(country=["NZ", "AU"], config={"verify_ssl": False})
         client.request.assert_called_once_with(
-            "get", "/v1/places/",
+            "get",
+            "/v1/places/",
             params={"country": "NZ,AU"},
             verify=False,
         )

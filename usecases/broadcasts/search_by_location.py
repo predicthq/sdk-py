@@ -3,7 +3,7 @@ from predicthq import Client
 # Please copy paste your access token here
 # or read our Quickstart documentation if you don't have a token yet
 # https://docs.predicthq.com/guides/quickstart/
-ACCESS_TOKEN = 'abc123'
+ACCESS_TOKEN = "abc123"
 
 phq = Client(access_token=ACCESS_TOKEN)
 
@@ -17,8 +17,12 @@ phq = Client(access_token=ACCESS_TOKEN)
 # happening in the county of the provided geopoint
 # (a latitude and longitude coordinate string in the form {latitude},{longitude}).
 # https://docs.predicthq.com/resources/broadcasts/#param-location.origin
-for broadcast in phq.broadcasts.search(location__origin='45.5051,-122.6750'):
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.location.places[0].place_id)
+for broadcast in phq.broadcasts.search(location__origin="45.5051,-122.6750"):
+    print(
+        broadcast.event.title,
+        broadcast.phq_viewership,
+        broadcast.location.places[0].place_id,
+    )
 
 
 # You can also specify a geoname place ID or a list of place IDs.
@@ -28,6 +32,10 @@ for broadcast in phq.broadcasts.search(location__origin='45.5051,-122.6750'):
 # is the county level. If you specify a city place ID, you'll get all
 # the broadcasts for this city's county.
 # https://docs.predicthq.com/resources/events/#param-place
-for broadcast in phq.broadcasts.search(location__place_id='5746545'):
-    print(broadcast.event.title, broadcast.phq_viewership, broadcast.location.country,
-          broadcast.location.places[0].place_id)
+for broadcast in phq.broadcasts.search(location__place_id="5746545"):
+    print(
+        broadcast.event.title,
+        broadcast.phq_viewership,
+        broadcast.location.country,
+        broadcast.location.places[0].place_id,
+    )

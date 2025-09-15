@@ -16,7 +16,7 @@ def read(*parts):
 about = {}
 
 # Load version number dynamically
-with open(os.path.join(here, 'predicthq', 'version.py'), 'r') as f:
+with open(os.path.join(here, "predicthq", "version.py"), "r") as f:
     exec(f.read(), about)
 
 
@@ -27,10 +27,10 @@ LONG_DESCRIPTION = "\n\n".join([PYPI_README_NOTE, read("README.md")])
 
 setup(
     name="predicthq",
-    version=about['__version__'],
+    version=about["__version__"],
     description="PredictHQ Demand Intelligence",
     long_description=LONG_DESCRIPTION,
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     license="MIT",
     author="PredictHQ",
     author_email="developers@predicthq.com",
@@ -58,5 +58,5 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Libraries :: Python Modules",
-    ]
+    ],
 )
