@@ -143,7 +143,7 @@ class SummaryInsights(PhqModel):
     pes_transportation_sum: Optional[int] = None
 
 
-Position = tuple[float, float] | tuple[float, float, float]
+Position = Union[Tuple[float, float], Tuple[float, float, float]]
 
 
 class Point(PhqModel):
@@ -171,7 +171,7 @@ class MultiLineString(PhqModel):
     coordinates: list[list[Position]]
 
 
-Geometry = Point | Polygon | MultiPolygon | LineString | MultiLineString
+Geometry = Union[Point, Polygon, MultiPolygon, LineString, MultiLineString]
 
 
 class PlaceGeoJson(PhqModel):
