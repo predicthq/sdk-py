@@ -55,14 +55,11 @@ class GeoPoint(BaseModel):
 class Location(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
-    geopoint: GeoPoint
-    radius: float
-    unit: str
+    geopoint: GeoPoint = None
+    radius: float = None
+    unit: str = None
     google_place_id: Optional[str] = None
-
-
-class LocationId(BaseModel):
-    saved_location_id: str
+    saved_location_id: str = None
 
 
 class RankLevel(BaseModel):
@@ -196,7 +193,7 @@ class Analysis(BaseModel):
 
     analysis_id: Optional[str] = None
     name: str
-    location: Union[Location, LocationId]
+    location: Location
     rank: Rank
     user_id: Optional[str] = None
     access_type: str

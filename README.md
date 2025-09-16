@@ -330,13 +330,9 @@ phq = Client(access_token="abc123")
 
 
 for saved_location in phq.saved_locations.search(
-            updated__gt="2016-03-01",
-            updated__gte="2016-03-01",
-            updated__lt="2016-04-01",
-            updated__lte="2016-04-01",
             labels=["test", "retail"],
-            user_id="user_id",
-            subscription_valid_types=["events"],
+            q="London", 
+            sort="-created",
         ):
     print(saved_location.location_id, saved_location.create_dt, saved_location.status)
 ```

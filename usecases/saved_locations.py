@@ -16,6 +16,10 @@ for savedLocation in phq.saved_locations.search():
 for savedLocation in phq.saved_locations.search(labels=["venue"]):
     print(savedLocation.location_id, savedLocation.create_dt, savedLocation.status)
 
+# Retrieve via query string search, and sort
+result = phq.saved_locations.get(q="London", sort="-created")
+print(result.location_id, result.create_dt, result.status, result.geojson)
+
 
 # You can also create a new saved-location by providing a name and a geojson polygon
 polygon_geojson = {
@@ -44,13 +48,16 @@ point_geojson = {
 phq.saved_locations.create(name="new_created_location_3", geojson=point_geojson)
 
 
+# You can replace location data, given its location_id
+phq.saved_locations.replace_location_data(
+    location_id="location_id_here",
+    name="location_name_udpated",
+    geojson=polygon_geojson,
+)
+
+
 # Retrieve a certain location by its location_id
 result = phq.saved_locations.get(location_id="location_id_here")
-print(result.location_id, result.create_dt, result.status, result.geojson)
-
-
-# Retrieve a certain location by a query string search, and sort
-result = phq.saved_locations.get(q="London", sort="-created")
 print(result.location_id, result.create_dt, result.status, result.geojson)
 
 
@@ -65,14 +72,6 @@ for event in phq.saved_locations.search_event_result_set(
 
 # You can also refresh the insights for a certain saved-location by providing its location_id
 phq.saved_locations.refresh_location_insights(location_id="location_id_here")
-
-
-# You can replace location data, given its location_id
-phq.saved_locations.replace_location_data(
-    location_id="location_id_here",
-    name="location_name_udpated",
-    geojson=polygon_geojson,
-)
 
 
 # You can delete a certain saved-location by providing its location_id
