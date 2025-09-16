@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
-from typing import Optional, List
+from typing import Optional, List, Union
 
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
@@ -59,6 +59,10 @@ class Location(BaseModel):
     radius: float
     unit: str
     google_place_id: Optional[str] = None
+
+
+class LocationId(BaseModel):
+    saved_location_id: str
 
 
 class RankLevel(BaseModel):
@@ -192,7 +196,7 @@ class Analysis(BaseModel):
 
     analysis_id: Optional[str] = None
     name: str
-    location: Location
+    location: Union[Location, LocationId]
     rank: Rank
     user_id: Optional[str] = None
     access_type: str

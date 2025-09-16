@@ -865,3 +865,69 @@ class FeaturesTest(unittest.TestCase):
             verify=True,
             params=None,
         )
+
+    @with_mock_client(
+        request_returns=load_fixture(
+            "requests_responses/features_test/test_empty_search"
+        )
+    )
+    def test_saved_location_ids_params_dicts(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            location={
+                "saved_location_id": [
+                    "BN7ZSw8xza9FviPVfyCycd",
+                    "X3uyTFbDOUaX2q_Qh5i31b",
+                    "X3uyTFbDOUhrfq_Qh5i31A",
+                ]
+            },
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "location": {
+                    "saved_location_id": [
+                        "BN7ZSw8xza9FviPVfyCycd",
+                        "X3uyTFbDOUaX2q_Qh5i31b",
+                        "X3uyTFbDOUhrfq_Qh5i31A",
+                    ]
+                },
+            },
+            verify=True,
+            params=None,
+        )
+
+    @with_mock_client(
+        request_returns=load_fixture(
+            "requests_responses/features_test/test_empty_search"
+        )
+    )
+    def test_saved_location_ids_params_undersores(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            location__saved_location_id=[
+                "BN7ZSw8xza9FviPVfyCycd",
+                "X3uyTFbDOUaX2q_Qh5i31b",
+                "X3uyTFbDOUhrfq_Qh5i31A",
+            ],
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "location": {
+                    "saved_location_id": [
+                        "BN7ZSw8xza9FviPVfyCycd",
+                        "X3uyTFbDOUaX2q_Qh5i31b",
+                        "X3uyTFbDOUhrfq_Qh5i31A",
+                    ]
+                },
+            },
+            verify=True,
+            params=None,
+        )

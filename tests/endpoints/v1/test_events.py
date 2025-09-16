@@ -44,6 +44,7 @@ class EventsTest(unittest.TestCase):
             updated__gte="2016-03-01",
             updated__lt="2016-04-01",
             updated__tz="Pacific/Auckland",
+            saved_location__location_id="UVel7RGxM7U2ISE1AQOwJQ",
         )
 
         client.request.assert_called_once_with(
@@ -80,6 +81,7 @@ class EventsTest(unittest.TestCase):
                 "updated.gte": "2016-03-01",
                 "updated.lt": "2016-04-01",
                 "updated.tz": "Pacific/Auckland",
+                "saved_location.location_id": "UVel7RGxM7U2ISE1AQOwJQ",
             },
             verify=True,
         )
@@ -165,6 +167,7 @@ class EventsTest(unittest.TestCase):
             end={"gte": "2016-05-01", "lt": "2016-06-01", "tz": "Pacific/Auckland"},
             active={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
             updated={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
+            saved_location={"location_id": "UVel7RGxM7U2ISE1AQOwJQ"},
         )
 
         client.request.assert_called_once_with(
@@ -200,6 +203,7 @@ class EventsTest(unittest.TestCase):
                 "updated.gte": "2016-03-01",
                 "updated.lt": "2016-04-01",
                 "updated.tz": "Pacific/Auckland",
+                "saved_location.location_id": "UVel7RGxM7U2ISE1AQOwJQ",
             },
             verify=True,
         )
