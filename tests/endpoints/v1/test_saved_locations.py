@@ -45,7 +45,7 @@ class SavedLocationsTest(unittest.TestCase):
     def test_create(self, client):
         result = client.saved_locations.create(
             name="name",
-            location_code="4t855453234t5623",
+            location_code="some_location_code",
             description="saved location description",
             labels=["test", "retail"],
             geojson={
@@ -84,7 +84,7 @@ class SavedLocationsTest(unittest.TestCase):
                         "type": "Polygon",
                     },
                 },
-                "location_code": "4t855453234t5623",
+                "location_code": "some_location_code",
                 "description": "saved location description",
                 "place_ids": ["5391959", "5391960"],
                 "formatted_address": "formatted_address",
@@ -99,7 +99,7 @@ class SavedLocationsTest(unittest.TestCase):
         client.saved_locations.replace_location_data(
             location_id="abc123",
             name="name",
-            location_code="4t855453234t5623",
+            location_code="some_location_code",
             description="saved location description",
             labels=["test", "retail"],
             geojson={
@@ -138,7 +138,7 @@ class SavedLocationsTest(unittest.TestCase):
                         "type": "Polygon",
                     },
                 },
-                "location_code": "4t855453234t5623",
+                "location_code": "some_location_code",
                 "description": "saved location description",
                 "place_ids": ["5391959", "5391960"],
                 "formatted_address": "formatted_address",
@@ -195,11 +195,10 @@ class SavedLocationsTest(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_event_result_set"))
     def test_search_event_result_set(self, client):
         result = client.saved_locations.search_event_result_set(
-            updated__gt="2016-03-01",
-            updated__gte="2016-03-01",
-            updated__lt="2016-04-01",
-            updated__lte="2016-04-01",
-            location_id="yfQpe0p43Q5Clkqdei6n_g",
+            location_id="some_location_id_here",
+            date_range_type="next_90d",
+            category="concerts,community",
+            limit=3,
         )
 
         assert isinstance(result, EventResultSet)
