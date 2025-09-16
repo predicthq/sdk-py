@@ -330,11 +330,11 @@ phq = Client(access_token="abc123")
 
 
 for saved_location in phq.saved_locations.search(
-            labels=["test", "retail"],
-            q="London", 
-            sort="-created",
-        ):
-    print(saved_location.location_id, saved_location.create_dt, saved_location.status)
+        labels=["test", "retail"],
+        q="London", 
+        sort="-created",
+    ):
+        print(saved_location.location_id, saved_location.create_dt, saved_location.status)
 ```
 
 
