@@ -63,13 +63,12 @@ print(result.location_id, result.create_dt, result.status, result.geojson)
 
 # You can search for events within a certain saved-location by providing its location_id
 for event in phq.saved_locations.search_event_result_set(
-        location_id="some_location_id_here",
-        date_range_type="next_90d",
-        category="concerts,community",
-        limit=10,
-    ):
+    location_id="some_location_id_here",
+    date_range_type="next_90d",
+    category="concerts,community",
+    limit=10,
+):
     print(event.title, event.start.strftime("%Y-%m-%d"), event.category)
-
 
 
 # You can also refresh the insights for a certain saved-location by providing its location_id
