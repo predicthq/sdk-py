@@ -63,26 +63,6 @@ class PredictedEventSpendIndustries(BaseModel):
     transportation: int
 
 
-class Point(BaseModel):
-    type: str
-    coordinates: List[float]
-
-
-class MultiPoint(BaseModel):
-    type: str
-    coordinates: List[List[float]]
-
-
-class Polygon(BaseModel):
-    type: str
-    coordinates: List[List[List[float]]]
-
-
-class MultiPolygon(BaseModel):
-    type: str
-    coordinates: List[List[List[List[float]]]]
-
-
 class GeoAddress(BaseModel):
     country_code: Optional[str] = None
     formatted_address: Optional[str] = None
