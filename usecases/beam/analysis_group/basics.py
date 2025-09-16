@@ -9,9 +9,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 
 # Create a new analysis group
 # The created group id will be returned
-group = phq.beam.analysis_group.create(
-    name="New Analysis Group", analysis_ids=["abc123", "def456"]
-)
+group = phq.beam.analysis_group.create(name="New Analysis Group", analysis_ids=["abc123", "def456"])
 print(group.model_dump(exclude_none=True))
 
 
@@ -40,7 +38,5 @@ phq.beam.analysis_group.refresh(group_id="abc123")
 
 
 # Get feature importance results
-group_feature_importance = phq.beam.analysis_group.get_feature_importance(
-    group_id="abc123"
-)
+group_feature_importance = phq.beam.analysis_group.get_feature_importance(group_id="abc123")
 print(group_feature_importance.model_dump(exclude_none=True))

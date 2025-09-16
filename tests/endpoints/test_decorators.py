@@ -110,15 +110,11 @@ def test_accepts():
     assert transformed_kwargs == {"arg1": "test", "arg2": "1,2"}
     assert transformed_args == ()
 
-    transformed_args, transformed_kwargs = endpoint.func(
-        **{"arg1": "test", "arg2": [1, 2]}
-    )
+    transformed_args, transformed_kwargs = endpoint.func(**{"arg1": "test", "arg2": [1, 2]})
     assert transformed_kwargs == {"arg1": "test", "arg2": "1,2"}
     assert transformed_args == ()
 
-    transformed_args, transformed_kwargs = endpoint.func(
-        {"arg1": "test", "arg2": [1, 2]}
-    )
+    transformed_args, transformed_kwargs = endpoint.func({"arg1": "test", "arg2": [1, 2]})
     assert transformed_kwargs == {}
     assert transformed_args == ({"arg1": "test", "arg2": [1, 2]},)
 
@@ -134,9 +130,9 @@ def test_returns():
             return kwargs
 
     endpoint = EndpointExample(None)
-    assert endpoint.func(arg1="test", arg2=[1, 2]).model_dump(
-        exclude_none=True
-    ) == SchemaExample(**{"arg1": "test", "arg2": [1, 2]}).model_dump(exclude_none=True)
+    assert endpoint.func(arg1="test", arg2=[1, 2]).model_dump(exclude_none=True) == SchemaExample(
+        **{"arg1": "test", "arg2": [1, 2]}
+    ).model_dump(exclude_none=True)
 
     with pytest.raises(ValidationError):
         endpoint.func(arg2=[1, 2])
@@ -155,12 +151,12 @@ def test_returns_resultset_of_native_types():
             return kwargs
 
     endpoint = EndpointExample(None)
-    assert endpoint.func(results=["item1", "item2"]).model_dump(
-        exclude_none=True
-    ) == SchemaExample(**{"results": ["item1", "item2"]}).model_dump(exclude_none=True)
-    assert endpoint.func()._more(results=["item3", "item4"]).model_dump(
-        exclude_none=True
-    ) == SchemaExample(**{"results": ["item3", "item4"]}).model_dump(exclude_none=True)
+    assert endpoint.func(results=["item1", "item2"]).model_dump(exclude_none=True) == SchemaExample(
+        **{"results": ["item1", "item2"]}
+    ).model_dump(exclude_none=True)
+    assert endpoint.func()._more(results=["item3", "item4"]).model_dump(exclude_none=True) == SchemaExample(
+        **{"results": ["item3", "item4"]}
+    ).model_dump(exclude_none=True)
     assert endpoint == endpoint.func()._endpoint
 
 
@@ -181,8 +177,6 @@ def test_returns_resultset_of_models():
     assert results.model_dump(exclude_none=True) == SchemaExample(
         **{"results": [{"name": "item1"}, {"name": "item2"}]}
     ).model_dump(exclude_none=True)
-    assert endpoint.func()._more(
-        results=[{"name": "item2"}, {"name": "item4"}]
-    ).model_dump(exclude_none=True) == SchemaExample(
-        **{"results": [{"name": "item2"}, {"name": "item4"}]}
-    ).model_dump(exclude_none=True)
+    assert endpoint.func()._more(results=[{"name": "item2"}, {"name": "item4"}]).model_dump(
+        exclude_none=True
+    ) == SchemaExample(**{"results": [{"name": "item2"}, {"name": "item4"}]}).model_dump(exclude_none=True)

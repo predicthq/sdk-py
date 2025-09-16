@@ -5,11 +5,7 @@ from tests import load_fixture, with_mock_client, with_mock_responses, with_clie
 
 
 class BroadcastsTest(unittest.TestCase):
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/broadcasts_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/broadcasts_test/test_empty_search"))
     def test_search_params_underscores(self, client):
         client.broadcasts.search(
             broadcast_id="broadcast_id",
@@ -60,11 +56,7 @@ class BroadcastsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/broadcasts_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/broadcasts_test/test_empty_search"))
     def test_search_params_underscores_without_ssl_verification(self, client):
         client.broadcasts.search(
             broadcast_id="broadcast_id",
@@ -78,11 +70,7 @@ class BroadcastsTest(unittest.TestCase):
             verify=False,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/broadcasts_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/broadcasts_test/test_empty_search"))
     def test_search_params_dicts(self, client):
         client.broadcasts.search(
             broadcast_id="broadcast_id",
@@ -131,11 +119,7 @@ class BroadcastsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/broadcasts_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/broadcasts_test/test_empty_search"))
     def test_search_params_dicts_without_ssl_verification(self, client):
         client.broadcasts.search(
             broadcast_id="broadcast_id",

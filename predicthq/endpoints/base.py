@@ -35,8 +35,6 @@ class UserBaseEndpoint(BaseEndpoint):
 
     def build_url(self, prefix, suffix):
         if self.account_id is not None:
-            return (
-                f"/{prefix.strip('/')}/accounts/{self.account_id}/{suffix.strip('/')}/"
-            )
+            return f"/{prefix.strip('/')}/accounts/{self.account_id}/{suffix.strip('/')}/"
         else:
             return super(UserBaseEndpoint, self).build_url(prefix, suffix)

@@ -9,9 +9,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 
 # Create a new analysis
 # The created analysis id will be returned
-analysis = phq.beam.analysis.create(
-    name="New Analysis", location__geopoint={"lat": "37.7749", "lon": "-122.4194"}
-)
+analysis = phq.beam.analysis.create(name="New Analysis", location__geopoint={"lat": "37.7749", "lon": "-122.4194"})
 print(analysis.model_dump(exclude_none=True))
 
 

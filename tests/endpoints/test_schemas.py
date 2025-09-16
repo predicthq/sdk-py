@@ -12,9 +12,7 @@ from predicthq.endpoints.base import BaseEndpoint
 
 def test_access_token_schema():
     with pytest.raises(ValidationError):
-        AccessToken(
-            access_token="some_access_token", token_type="some_token_type", scope=123
-        )
+        AccessToken(access_token="some_access_token", token_type="some_token_type", scope=123)
 
     assert AccessToken(
         access_token="some_access_token",
@@ -42,13 +40,15 @@ def test_place_schema():
     with pytest.raises(ValidationError):
         Place(id="some_id", type="some_type", name="some_name", location=("a", "b"))
 
-    assert Place(
-        id="some_id", type="some_type", name="some_name", location=(32.123, -84.123)
-    ).location == (32.123, -84.123)
+    assert Place(id="some_id", type="some_type", name="some_name", location=(32.123, -84.123)).location == (
+        32.123,
+        -84.123,
+    )
 
-    assert Place(
-        id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]
-    ).location == (32.123, -84.123)
+    assert Place(id="some_id", type="some_type", name="some_name", location=[32.123, -84.123]).location == (
+        32.123,
+        -84.123,
+    )
 
 
 @pytest.mark.parametrize(
@@ -87,9 +87,7 @@ def test_resultset():
             return {
                 "count": 9,
                 "next": f"http://example.org/?page={page + 1}" if page < 3 else None,
-                "previous": f"http://example.org/?page={page - 1}"
-                if page > 1
-                else None,
+                "previous": f"http://example.org/?page={page - 1}" if page > 1 else None,
                 "results": [
                     {"value": 1 + (3 * (page - 1))},
                     {"value": 2 + (3 * (page - 1))},

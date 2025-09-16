@@ -34,7 +34,5 @@ for broadcast in phq.broadcasts.search(
 # By default, the `updated` timezone is UTC but you can
 # change this using the `updated.tz` parameter.
 # https://docs.predicthq.com/resources/events/#param-updated
-for event in phq.events.search(
-    updated={"gte": "2019-09-24", "tz": "America/Los_Angeles"}
-):
+for event in phq.events.search(updated={"gte": "2019-09-24", "tz": "America/Los_Angeles"}):
     print(event.rank, event.category, event.title, event.updated)

@@ -15,9 +15,7 @@ phq = Client(access_token=ACCESS_TOKEN)
 
 # You can filter by predicted_event_spend when searching.
 # See https://docs.predicthq.com/resources/events/#param-predicted_event_spend
-for event in phq.events.search(
-    predicted_event_spend={"gte": 5000, "lte": 10000}, sort="predicted_event_spend"
-):
+for event in phq.events.search(predicted_event_spend={"gte": 5000, "lte": 10000}, sort="predicted_event_spend"):
     print(
         event.predicted_event_spend,
         event.category,

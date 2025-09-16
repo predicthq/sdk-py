@@ -43,9 +43,7 @@ class OAuth2Test(unittest.TestCase):
 
     @with_mock_client()
     def test_revoke_token_params(self, client):
-        result = client.oauth2.revoke_token(
-            client_id="client_id", client_secret="client_secret", token="token123"
-        )
+        result = client.oauth2.revoke_token(client_id="client_id", client_secret="client_secret", token="token123")
         client.request.assert_called_once_with(
             "post",
             "/oauth2/revoke/",
@@ -84,14 +82,8 @@ class OAuth2Test(unittest.TestCase):
         assert token.token_type == "Bearer"
         assert token.scope == ["account", "events"]
         assert len(responses.calls) == 1
-        assert (
-            responses.calls[0].request.headers["Content-Type"]
-            == "application/x-www-form-urlencoded"
-        )
-        assert (
-            responses.calls[0].request.headers["Authorization"]
-            == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
-        )
+        assert responses.calls[0].request.headers["Content-Type"] == "application/x-www-form-urlencoded"
+        assert responses.calls[0].request.headers["Authorization"] == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
         assert dict(parse_qsl(responses.calls[0].request.body)) == {
             "scope": "account events",
             "grant_type": "client_credentials",
@@ -100,19 +92,11 @@ class OAuth2Test(unittest.TestCase):
     @with_client()
     @with_mock_responses()
     def test_revoke_token(self, client, responses):
-        result = client.oauth2.revoke_token(
-            client_id="client_id", client_secret="client_secret", token="token123"
-        )
+        result = client.oauth2.revoke_token(client_id="client_id", client_secret="client_secret", token="token123")
         assert result is None
         assert len(responses.calls) == 1
-        assert (
-            responses.calls[0].request.headers["Content-Type"]
-            == "application/x-www-form-urlencoded"
-        )
-        assert (
-            responses.calls[0].request.headers["Authorization"]
-            == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
-        )
+        assert responses.calls[0].request.headers["Content-Type"] == "application/x-www-form-urlencoded"
+        assert responses.calls[0].request.headers["Authorization"] == "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
         assert dict(parse_qsl(responses.calls[0].request.body)) == {
             "token_type_hint": "access_token",
             "token": "token123",
@@ -137,9 +121,7 @@ class OAuth2Test(unittest.TestCase):
             except Exception:
                 pass  # Ignore errors from None client
             assert any(
-                issubclass(warning.category, FutureWarning)
-                and expected_text in str(warning.message)
-                for warning in w
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message) for warning in w
             )
 
         # Test revoke_token
@@ -150,7 +132,5 @@ class OAuth2Test(unittest.TestCase):
             except Exception:
                 pass  # Ignore errors from None client
             assert any(
-                issubclass(warning.category, FutureWarning)
-                and expected_text in str(warning.message)
-                for warning in w
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message) for warning in w
             )

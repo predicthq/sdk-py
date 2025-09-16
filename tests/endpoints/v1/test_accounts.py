@@ -5,11 +5,7 @@ from tests import load_fixture, with_mock_client, with_mock_responses, with_clie
 
 
 class AccountsTest(unittest.TestCase):
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/accounts_test/test_self")[0][
-            "body"
-        ]
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/accounts_test/test_self")[0]["body"])
     def test_self_params(self, client):
         client.accounts.self()
         client.request.assert_called_once_with("get", "/v1/accounts/self/")
@@ -21,11 +17,7 @@ class AccountsTest(unittest.TestCase):
         assert isinstance(account, Account)
 
     class AccountsTest(unittest.TestCase):
-        @with_mock_client(
-            request_returns=load_fixture("requests_responses/accounts_test/test_self")[
-                0
-            ]["body"]
-        )
+        @with_mock_client(request_returns=load_fixture("requests_responses/accounts_test/test_self")[0]["body"])
         def test_self_params(self, client):
             client.accounts.self()
             client.request.assert_called_once_with("get", "/v1/accounts/self/")
@@ -53,7 +45,5 @@ class AccountsTest(unittest.TestCase):
             except Exception:
                 pass  # Ignore errors due to None client
             assert any(
-                issubclass(warning.category, FutureWarning)
-                and expected_text in str(warning.message)
-                for warning in w
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message) for warning in w
             )

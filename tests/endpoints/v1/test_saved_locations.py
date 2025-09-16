@@ -11,11 +11,7 @@ from predicthq.endpoints.v1.saved_locations.schemas import (
 
 
 class SavedLocationsTest(unittest.TestCase):
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_search"))
     def test_search(self, client):
         result = client.saved_locations.search()
 
@@ -28,11 +24,7 @@ class SavedLocationsTest(unittest.TestCase):
 
         assert isinstance(result, SavedLocationResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_empty_search"))
     def test_search_params(self, client):
         client.saved_locations.search(
             q="query",
@@ -49,11 +41,7 @@ class SavedLocationsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_create"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_create"))
     def test_create(self, client):
         result = client.saved_locations.create(
             name="name",
@@ -192,11 +180,7 @@ class SavedLocationsTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_saved_location"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_saved_location"))
     def test_get_location(self, client):
         result = client.saved_locations.get(location_id="some_location_id")
 
@@ -208,11 +192,7 @@ class SavedLocationsTest(unittest.TestCase):
         )
         assert isinstance(result, SavedLocation)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_event_result_set"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_event_result_set"))
     def test_search_event_result_set(self, client):
         result = client.saved_locations.search_event_result_set(
             updated__gt="2016-03-01",
@@ -224,11 +204,7 @@ class SavedLocationsTest(unittest.TestCase):
 
         assert isinstance(result, EventResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/saved_locations_test/test_suggested_radius"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/saved_locations_test/test_suggested_radius"))
     def test_suggested_radius(self, client):
         result = client.saved_locations.suggested_radius(
             location_origin="37.747767,-122.415202",

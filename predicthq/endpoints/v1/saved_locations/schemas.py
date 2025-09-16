@@ -210,9 +210,7 @@ class SavedLocation(SavedLocationBase):
     enrich_dt: Optional[datetime] = None
     insights_dt: Optional[datetime] = None
     user_id: Optional[str] = None
-    subscription_valid_types: Annotated[
-        List[SubscriptionValidType], Field(default_factory=list)
-    ]
+    subscription_valid_types: Annotated[List[SubscriptionValidType], Field(default_factory=list)]
     status: SavedLocationStatus
     summary_insights: Annotated[List[SummaryInsights], Field(default_factory=list)]
     places: Annotated[List[Place], Field(default_factory=list)]

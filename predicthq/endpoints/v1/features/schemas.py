@@ -13,16 +13,12 @@ class CsvMixin:
             flat_json = {}
             for k, v in d.items():
                 if isinstance(v, dict):
-                    flat_json.update(
-                        __flatten_json(v, f"{pk}{separator}{k}" if pk else k)
-                    )
+                    flat_json.update(__flatten_json(v, f"{pk}{separator}{k}" if pk else k))
                     continue
                 flat_json.update({f"{pk}{separator}{k}" if pk else k: v})
             return flat_json
 
-        return [
-            __flatten_json(d.model_dump(exclude_none=True)) for d in self.iter_all()
-        ]
+        return [__flatten_json(d.model_dump(exclude_none=True)) for d in self.iter_all()]
 
     def to_csv(self, file: str, mode: str = "w+", separator: str = "_") -> None:
         header = None
@@ -67,6 +63,4 @@ class FeatureResultSet(ArgKwargResultSet, CsvMixin):
         if not self.has_next() or not hasattr(self, "_more"):
             return
         params = self._parse_params(self.next)
-        return self._more(
-            _params=params, _json=self._kwargs.get("_json", {}) or self._kwargs
-        )
+        return self._more(_params=params, _json=self._kwargs.get("_json", {}) or self._kwargs)

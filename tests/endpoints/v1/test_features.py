@@ -5,11 +5,7 @@ from tests import load_fixture, with_client, with_mock_client, with_mock_respons
 
 
 class FeaturesTest(unittest.TestCase):
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_mutate_default_criteria(self, client):
         client.features.obtain_features(
             active__gte="2021-01-01",
@@ -35,9 +31,7 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2021-01-01", "lte": "2021-01-30"},
-                "location": {
-                    "geo": {"lat": 44.835976, "lon": -93.151959, "radius": "2km"}
-                },
+                "location": {"geo": {"lat": 44.835976, "lon": -93.151959, "radius": "2km"}},
                 "phq_attendance_conferences": {
                     "stats": ["sum", "count"],
                     "phq_rank": None,
@@ -89,11 +83,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -149,9 +139,7 @@ class FeaturesTest(unittest.TestCase):
                 "phq_attendance_conferences_accommodation": {"stats": feature_stats},
                 "phq_attendance_expos_accommodation": {"stats": feature_stats},
                 "phq_attendance_festivals_accommodation": {"stats": feature_stats},
-                "phq_attendance_performing_arts_accommodation": {
-                    "stats": feature_stats
-                },
+                "phq_attendance_performing_arts_accommodation": {"stats": feature_stats},
                 "phq_attendance_sports_accommodation": {"stats": feature_stats},
                 "phq_attendance_community_hospitality": {"stats": feature_stats},
                 "phq_attendance_concerts_hospitality": {"stats": feature_stats},
@@ -165,14 +153,8 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
-    def test_attendance_request_params_underscores_without_ssl_verification(
-        self, client
-    ):
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
+    def test_attendance_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
             location__place_id=["4671654"],
@@ -190,11 +172,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_dicts(self, client):
         feature_criteria = {
             "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
@@ -234,9 +212,7 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
                 "phq_attendance_academic_graduation": feature_criteria,
                 "phq_attendance_academic_social": feature_criteria,
                 "phq_attendance_community": feature_criteria,
@@ -266,11 +242,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -283,19 +255,13 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_underscores(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
@@ -317,9 +283,7 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
                 "phq_rank_daylight_savings": True,
                 "phq_rank_health_warnings": True,
                 "phq_rank_observances": True,
@@ -334,11 +298,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
@@ -351,19 +311,13 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_dicts(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -399,11 +353,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31"},
@@ -432,11 +382,7 @@ class FeaturesTest(unittest.TestCase):
         )
         assert isinstance(result, FeatureResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_impact_severe_weather_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -469,9 +415,7 @@ class FeaturesTest(unittest.TestCase):
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
                 "hour_of_day_active": {"gt": 10, "lte": 19},
                 "location": {"place_id": ["4671654"]},
-                "phq_impact_severe_weather_air_quality_retail": {
-                    "stats": feature_stats
-                },
+                "phq_impact_severe_weather_air_quality_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_blizzard_retail": {
                     "stats": feature_stats,
                     "phq_rank": {"gt": 50},
@@ -481,31 +425,21 @@ class FeaturesTest(unittest.TestCase):
                     "stats": feature_stats,
                     "phq_rank": {"gt": 50},
                 },
-                "phq_impact_severe_weather_cold_wave_storm_retail": {
-                    "stats": feature_stats
-                },
+                "phq_impact_severe_weather_cold_wave_storm_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_dust_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_dust_storm_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_flood_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_heat_wave_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_hurricane_retail": {"stats": feature_stats},
-                "phq_impact_severe_weather_thunderstorm_retail": {
-                    "stats": feature_stats
-                },
+                "phq_impact_severe_weather_thunderstorm_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_tornado_retail": {"stats": feature_stats},
-                "phq_impact_severe_weather_tropical_storm_retail": {
-                    "stats": feature_stats
-                },
+                "phq_impact_severe_weather_tropical_storm_retail": {"stats": feature_stats},
             },
             verify=True,
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_impact_severe_weather_request_params_dicts(self, client):
         feature_criteria = {
             "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
@@ -536,9 +470,7 @@ class FeaturesTest(unittest.TestCase):
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
                 "hour_of_day_start": {"gte": 10, "lt": 11},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
                 "phq_impact_severe_weather_air_quality_retail": feature_criteria,
                 "phq_impact_severe_weather_blizzard_retail": feature_criteria,
                 "phq_impact_severe_weather_cold_wave_retail": feature_criteria,
@@ -557,11 +489,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -606,14 +534,8 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
-    def test_viewership_request_params_underscores_without_ssl_verification(
-        self, client
-    ):
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
+    def test_viewership_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
             active__gte="2017-12-31",
             location__place_id=["4671654"],
@@ -631,11 +553,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_dicts(self, client):
         feature_criteria = {
             "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
@@ -661,9 +579,7 @@ class FeaturesTest(unittest.TestCase):
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
                 "hour_of_day_start": {"gte": 10, "lt": 11},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
                 "phq_viewership_sports_american_football_ncaa_men": feature_criteria,
                 "phq_viewership_sports_baseball": feature_criteria,
                 "phq_viewership_sports_basketball_ncaa_men": feature_criteria,
@@ -677,11 +593,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31"},
@@ -694,19 +606,13 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_spend_request_params_underscores(self, client):
         feature_stats = ["avg", "count", "max", "median", "min", "sum", "std_dev"]
         client.features.obtain_features(
@@ -782,11 +688,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_spend_request_params_dicts(self, client):
         feature_criteria = {
             "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
@@ -830,9 +732,7 @@ class FeaturesTest(unittest.TestCase):
             "/v1/features/",
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
-                "location": {
-                    "geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}
-                },
+                "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
                 "phq_spend_conferences": feature_criteria,
                 "phq_spend_expos": feature_criteria,
                 "phq_spend_sports": feature_criteria,
@@ -866,11 +766,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_saved_location_ids_params_dicts(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
@@ -900,11 +796,7 @@ class FeaturesTest(unittest.TestCase):
             params=None,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/features_test/test_empty_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_saved_location_ids_params_undersores(self, client):
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},

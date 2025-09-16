@@ -55,9 +55,7 @@ class Client(object):
     @stamina.retry(on=RetriableError, attempts=3)
     def request(self, method, path, **kwargs):
         headers = self.get_headers(kwargs.pop("headers", {}))
-        response = requests.request(
-            method, self.build_url(path), headers=headers, **kwargs
-        )
+        response = requests.request(method, self.build_url(path), headers=headers, **kwargs)
         self.logger.debug(response.request.url)
         try:
             response.raise_for_status()
