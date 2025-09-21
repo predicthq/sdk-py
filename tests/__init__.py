@@ -80,7 +80,12 @@ def with_mock_client(request_returns=None, request_raises=None, *client_args, **
     def decorator(f):
         @functools.wraps(f)
         def wrapper(*args, **kwargs):
-            with mock.patch.object(Client, "request", return_value=request_returns, side_effect=request_raises):
+            with mock.patch.object(
+                Client,
+                "request",
+                return_value=request_returns,
+                side_effect=request_raises,
+            ):
                 return f(client=Client(*client_args, **client_kwargs), *args, **kwargs)
 
         return wrapper

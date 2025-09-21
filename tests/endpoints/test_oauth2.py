@@ -9,7 +9,9 @@ class OAuth2Test(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("access_token"))
     def test_get_token_params(self, client):
         token = client.oauth2.get_token(
-            client_id="client_id", client_secret="client_secret", scope=["account", "events"]
+            client_id="client_id",
+            client_secret="client_secret",
+            scope=["account", "events"],
         )
         client.request.assert_called_once_with(
             "post",
@@ -26,7 +28,9 @@ class OAuth2Test(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("access_token"))
     def test_get_token_params_without_ssl_verification(self, client):
         client.oauth2.get_token(
-            client_id="client_id", client_secret="client_secret", scope=["account", "events"],
+            client_id="client_id",
+            client_secret="client_secret",
+            scope=["account", "events"],
             config__verify_ssl=False,
         )
         client.request.assert_called_once_with(
@@ -52,7 +56,9 @@ class OAuth2Test(unittest.TestCase):
     @with_mock_client()
     def test_revoke_token_params_without_ssl_verification(self, client):
         client.oauth2.revoke_token(
-            client_id="client_id", client_secret="client_secret", token="token123",
+            client_id="client_id",
+            client_secret="client_secret",
+            token="token123",
             config__verify_ssl=False,
         )
         client.request.assert_called_once_with(
@@ -67,7 +73,9 @@ class OAuth2Test(unittest.TestCase):
     @with_mock_responses()
     def test_get_token(self, client, responses):
         token = client.oauth2.get_token(
-            client_id="client_id", client_secret="client_secret", scope=["account", "events"]
+            client_id="client_id",
+            client_secret="client_secret",
+            scope=["account", "events"],
         )
         assert isinstance(token, AccessToken)
         assert token.access_token == "token123"
@@ -93,3 +101,36 @@ class OAuth2Test(unittest.TestCase):
             "token_type_hint": "access_token",
             "token": "token123",
         }
+
+    def test_oauth2_endpoint_method_deprecation_warning(self):
+        from predicthq.endpoints.oauth2.endpoint import OAuth2Endpoint
+        import warnings
+
+        expected_text = (
+            "OAuth2 endpoints in the SDK are deprecated and will be removed in future releases. "
+            "Use TokenAuth (API Access Token) with Client(..., access_token=...)."
+        )
+
+        endpoint = OAuth2Endpoint(client=None)
+
+        # Test get_token
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            try:
+                endpoint.get_token("id", "secret", "scope", "grant_type")
+            except Exception:
+                pass  # Ignore errors from None client
+            assert any(
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message) for warning in w
+            )
+
+        # Test revoke_token
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            try:
+                endpoint.revoke_token("id", "secret", "token", "hint")
+            except Exception:
+                pass  # Ignore errors from None client
+            assert any(
+                issubclass(warning.category, FutureWarning) and expected_text in str(warning.message) for warning in w
+            )

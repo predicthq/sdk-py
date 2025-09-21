@@ -12,7 +12,8 @@ class PlacesTest(unittest.TestCase):
     def test_search_params(self, client):
         client.places.search(country=["NZ", "AU"])
         client.request.assert_called_once_with(
-            "get", "/v1/places/",
+            "get",
+            "/v1/places/",
             params={"country": "NZ,AU"},
             verify=True,
         )
@@ -21,7 +22,8 @@ class PlacesTest(unittest.TestCase):
     def test_search_params_without_ssl_verification(self, client):
         client.places.search(country=["NZ", "AU"], config={"verify_ssl": False})
         client.request.assert_called_once_with(
-            "get", "/v1/places/",
+            "get",
+            "/v1/places/",
             params={"country": "NZ,AU"},
             verify=False,
         )

@@ -1,0 +1,476 @@
+{
+  "count": 219,
+  "results": [
+    {
+      "relevance": 0,
+      "id": "vAhyZQbxddoKt4C6NL",
+      "title": "Holiday Hoopsgiving 2025",
+      "description": "",
+      "category": "community",
+      "labels": [
+        "community"
+      ],
+      "rank": 30,
+      "local_rank": 48,
+      "phq_attendance": 100,
+      "entities": [],
+      "duration": 7200,
+      "start": "2025-12-14T03:00:00Z",
+      "start_local": "2025-12-13T22:00:00",
+      "end": "2025-12-14T05:00:00Z",
+      "end_local": "2025-12-14T00:00:00",
+      "updated": "2025-08-31T03:45:39Z",
+      "first_seen": "2025-08-31T02:20:31Z",
+      "timezone": "America/New_York",
+      "location": [
+        -84.3969,
+        33.7566
+      ],
+      "geo": {
+        "geometry": {
+          "coordinates": [
+            -84.3969,
+            33.7566
+          ],
+          "type": "Point"
+        },
+        "placekey": "1zibxwepug@8g7-477-8jv",
+        "address": {
+          "country_code": "US",
+          "formatted_address": "Centennial Olympic Park Drive Northwest, Atlanta, GA 30303, United States of America",
+          "locality": "Atlanta",
+          "postcode": "30303",
+          "region": "Georgia"
+        }
+      },
+      "impact_patterns": [
+        {
+          "vertical": "accommodation",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-13",
+              "value": 55,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 45,
+              "position": "event_day"
+            }
+          ]
+        },
+        {
+          "vertical": "hospitality",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-13",
+              "value": 55,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 45,
+              "position": "event_day"
+            }
+          ]
+        },
+        {
+          "vertical": "retail",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-13",
+              "value": 55,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 45,
+              "position": "event_day"
+            }
+          ]
+        }
+      ],
+      "scope": "locality",
+      "country": "US",
+      "place_hierarchies": [
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4195207"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4191014",
+          "4180439"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4180439"
+        ]
+      ],
+      "state": "active",
+      "private": false,
+      "predicted_event_spend": 1211,
+      "predicted_event_spend_industries": {
+        "accommodation": 0,
+        "hospitality": 754,
+        "transportation": 457
+      },
+      "phq_labels": [
+        {
+          "label": "market",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "relevance": 0,
+      "id": "3qiWTj8WMKCRDxPh9T",
+      "title": "Thievery Corporation",
+      "alternate_titles": [
+        "Thievery Corporation North American Tour 2025",
+        "Thievery Corporation at The Tabernacle",
+        "Thievery Corporation in Atlanta"
+      ],
+      "description": "",
+      "category": "concerts",
+      "labels": [
+        "concert",
+        "music"
+      ],
+      "rank": 54,
+      "local_rank": 74,
+      "phq_attendance": 1567,
+      "entities": [
+        {
+          "entity_id": "yA69ZZsm8mMMxeu2vyhQkp",
+          "name": "Thievery Corporation",
+          "type": "organization"
+        },
+        {
+          "entity_id": "39yXb48Vegb6D6KzuFZMFxB",
+          "name": "Tabernacle",
+          "type": "venue",
+          "formatted_address": "152 Luckie St NW, Atlanta, GA 30303, USA"
+        }
+      ],
+      "duration": 0,
+      "start": "2025-12-14T01:00:00Z",
+      "start_local": "2025-12-13T20:00:00",
+      "end": "2025-12-14T01:00:00Z",
+      "end_local": "2025-12-13T20:00:00",
+      "predicted_end": "2025-12-14T07:40:00Z",
+      "predicted_end_local": "2025-12-14T02:40:00",
+      "updated": "2025-09-15T16:19:47Z",
+      "first_seen": "2025-05-06T01:57:19Z",
+      "timezone": "America/New_York",
+      "location": [
+        -84.3913931,
+        33.7587418
+      ],
+      "geo": {
+        "geometry": {
+          "coordinates": [
+            -84.3913931,
+            33.7587418
+          ],
+          "type": "Point"
+        },
+        "placekey": "zzw-222@8g7-46m-kfz",
+        "address": {
+          "country_code": "US",
+          "formatted_address": "152 Luckie St NW, Atlanta, GA 30303, USA",
+          "postcode": "30303",
+          "locality": "Atlanta",
+          "region": "Georgia"
+        }
+      },
+      "impact_patterns": [
+        {
+          "vertical": "accommodation",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-12",
+              "value": 314,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-13",
+              "value": 1567,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 157,
+              "position": "lagging"
+            }
+          ]
+        },
+        {
+          "vertical": "hospitality",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-12",
+              "value": 236,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-13",
+              "value": 1567,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 48,
+              "position": "lagging"
+            }
+          ]
+        },
+        {
+          "vertical": "retail",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-13",
+              "value": 1567,
+              "position": "event_day"
+            }
+          ]
+        }
+      ],
+      "scope": "locality",
+      "country": "US",
+      "place_hierarchies": [
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4195207"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4191014",
+          "4180439"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4180439"
+        ]
+      ],
+      "state": "active",
+      "private": false,
+      "predicted_event_spend": 48072,
+      "predicted_event_spend_industries": {
+        "accommodation": 10459,
+        "hospitality": 19697,
+        "transportation": 17915
+      },
+      "phq_labels": [
+        {
+          "label": "electronic",
+          "weight": 0.71
+        },
+        {
+          "label": "other",
+          "weight": 0.29
+        }
+      ]
+    },
+    {
+      "relevance": 0,
+      "id": "7qe4FD6cNVR7hZt2Au",
+      "title": "2025 Band Of The Year",
+      "description": "",
+      "category": "community",
+      "labels": [
+        "community",
+        "family"
+      ],
+      "rank": 87,
+      "local_rank": 100,
+      "phq_attendance": 71000,
+      "entities": [
+        {
+          "entity_id": "LJZrFdZT95u9qZ6p4q4ZuK",
+          "name": "Mercedes-Benz Stadium",
+          "type": "venue",
+          "formatted_address": "1 AMB Dr NW, Atlanta, GA 30313, USA"
+        }
+      ],
+      "duration": 0,
+      "start": "2025-12-12T21:00:00Z",
+      "start_local": "2025-12-12T16:00:00",
+      "end": "2025-12-12T21:00:00Z",
+      "end_local": "2025-12-12T16:00:00",
+      "updated": "2025-09-16T01:28:35Z",
+      "first_seen": "2025-09-16T01:24:12Z",
+      "timezone": "America/New_York",
+      "location": [
+        -84.40089219999999,
+        33.75540290000001
+      ],
+      "geo": {
+        "geometry": {
+          "coordinates": [
+            -84.40089219999999,
+            33.75540290000001
+          ],
+          "type": "Point"
+        },
+        "placekey": "222-22d@8g7-477-vj9",
+        "address": {
+          "country_code": "US",
+          "formatted_address": "1 AMB Dr NW, Atlanta, GA 30313, USA",
+          "postcode": "30313",
+          "locality": "Atlanta",
+          "region": "Georgia"
+        }
+      },
+      "impact_patterns": [
+        {
+          "vertical": "accommodation",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-09",
+              "value": 3550,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-10",
+              "value": 39050,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-11",
+              "value": 39050,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-12",
+              "value": 71000,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-13",
+              "value": 10650,
+              "position": "lagging"
+            },
+            {
+              "date_local": "2025-12-14",
+              "value": 5680,
+              "position": "lagging"
+            }
+          ]
+        },
+        {
+          "vertical": "hospitality",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-10",
+              "value": 1420,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-11",
+              "value": 28400,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-12",
+              "value": 71000,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-13",
+              "value": 9230,
+              "position": "lagging"
+            }
+          ]
+        },
+        {
+          "vertical": "retail",
+          "impact_type": "phq_attendance",
+          "impacts": [
+            {
+              "date_local": "2025-12-11",
+              "value": 14200,
+              "position": "leading"
+            },
+            {
+              "date_local": "2025-12-12",
+              "value": 71000,
+              "position": "event_day"
+            },
+            {
+              "date_local": "2025-12-13",
+              "value": 3550,
+              "position": "lagging"
+            }
+          ]
+        }
+      ],
+      "scope": "locality",
+      "country": "US",
+      "place_hierarchies": [
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4195207"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4196508",
+          "4180439"
+        ],
+        [
+          "6295630",
+          "6255149",
+          "6252001",
+          "4197000",
+          "4191014",
+          "4180439"
+        ]
+      ],
+      "state": "active",
+      "private": false,
+      "predicted_event_spend": 3669100,
+      "predicted_event_spend_industries": {
+        "accommodation": 277442,
+        "hospitality": 2560053,
+        "transportation": 831604
+      }
+    }
+  ]
+}

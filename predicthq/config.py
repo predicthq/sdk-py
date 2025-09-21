@@ -12,7 +12,6 @@ CONFIG_LOCATIONS = (
 
 
 class Config(object):
-
     _config_sections = (
         "endpoint",
         "oauth2",

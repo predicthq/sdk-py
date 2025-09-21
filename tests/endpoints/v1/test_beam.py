@@ -14,9 +14,7 @@ from predicthq.endpoints.v1.beam.schemas import (
 
 
 class BeamTest(unittest.TestCase):
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_search")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_search"))
     def test_search(self, client):
         result = client.beam.analysis.search()
 
@@ -29,9 +27,7 @@ class BeamTest(unittest.TestCase):
 
         assert isinstance(result, AnalysisResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_empty_search")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_search"))
     def test_search_params_underscores(self, client):
         client.beam.analysis.search(
             updated__gt="2016-03-01",
@@ -78,9 +74,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_empty_search")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_search"))
     def test_search_params_dicts(self, client):
         client.beam.analysis.search(
             updated={
@@ -128,9 +122,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_create")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_create"))
     def test_create_params_underscores(self, client):
         result = client.beam.analysis.create(
             name="name",
@@ -186,9 +178,7 @@ class BeamTest(unittest.TestCase):
         )
         assert isinstance(result, CreateAnalysisResponse)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_create")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_create"))
     def test_create_params_dicts(self, client):
         result = client.beam.analysis.create(
             name="name",
@@ -395,11 +385,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_correlation"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_correlation"))
     def test_get_correlation_results_params_underscores(self, client):
         client.beam.analysis.get_correlation_results(
             analysis_id="abc123",
@@ -427,11 +413,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_correlation"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_correlation"))
     def test_get_correlation_results_empty_params_dicts(self, client):
         client.beam.analysis.get_correlation_results(
             analysis_id="abc123",
@@ -461,9 +443,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_correlation")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_correlation"))
     def test_get_correlation_results_params_dicts(self, client):
         result = client.beam.analysis.get_correlation_results(
             analysis_id="abc123",
@@ -495,11 +475,7 @@ class BeamTest(unittest.TestCase):
 
         assert isinstance(result, CorrelationResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_feature_importance"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_feature_importance"))
     def test_feature_empty_importance(self, client):
         client.beam.analysis.get_feature_importance(analysis_id="abc123")
 
@@ -510,11 +486,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_feature_importance"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_feature_importance"))
     def test_feature_importance(self, client):
         result = client.beam.analysis.get_feature_importance(analysis_id="abc123")
 
@@ -526,9 +498,7 @@ class BeamTest(unittest.TestCase):
         )
         assert isinstance(result, FeatureImportance)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_analysis")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_analysis"))
     def test_get_analysis(self, client):
         result = client.beam.analysis.get(analysis_id="abc123")
 
@@ -540,9 +510,7 @@ class BeamTest(unittest.TestCase):
         )
         assert isinstance(result, Analysis)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_create_group")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_create_group"))
     def test_create_group_params_underscores(self, client):
         result = client.beam.analysis_group.create(
             name="name",
@@ -563,9 +531,7 @@ class BeamTest(unittest.TestCase):
 
         assert isinstance(result, CreateAnalysisGroupResponse)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_create_group")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_create_group"))
     def test_create_group_params_dicts(self, client):
         result = client.beam.analysis_group.create(
             name="name",
@@ -586,9 +552,7 @@ class BeamTest(unittest.TestCase):
 
         assert isinstance(result, CreateAnalysisGroupResponse)
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_group_search")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_group_search"))
     def test_search_group(self, client):
         result = client.beam.analysis_group.search()
 
@@ -601,11 +565,7 @@ class BeamTest(unittest.TestCase):
 
         assert isinstance(result, AnalysisGroupResultSet)
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_group_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_group_search"))
     def test_search_group_params_underscores(self, client):
         client.beam.analysis_group.search(
             updated__gt="2016-03-01",
@@ -644,11 +604,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_group_search"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_group_search"))
     def test_search_group_params_dicts(self, client):
         client.beam.analysis_group.search(
             updated={
@@ -691,9 +647,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture("requests_responses/beam_test/test_analysis_group")
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_analysis_group"))
     def test_get_analysis_group(self, client):
         result = client.beam.analysis_group.get(group_id="abc123")
 
@@ -767,11 +721,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_empty_feature_importance"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_empty_feature_importance"))
     def test_group_feature_empty_importance(self, client):
         client.beam.analysis_group.get_feature_importance(group_id="abc123")
 
@@ -782,11 +732,7 @@ class BeamTest(unittest.TestCase):
             verify=True,
         )
 
-    @with_mock_client(
-        request_returns=load_fixture(
-            "requests_responses/beam_test/test_feature_importance"
-        )
-    )
+    @with_mock_client(request_returns=load_fixture("requests_responses/beam_test/test_feature_importance"))
     def test_group_feature_importance(self, client):
         result = client.beam.analysis_group.get_feature_importance(group_id="abc123")
 

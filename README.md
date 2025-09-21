@@ -35,14 +35,15 @@ If you are migrating to version 5.0.0 or above from an earlier version, please c
 
 We support all the endpoints available in our API.
 
-* `oauth2`
-* `accounts`
+* `oauth2` (deprecated, use `access_token` instead)
+* `accounts` (deprecated)
 * `broadcasts`
 * `events`
 * `features`
 * `places`
 * `radius`
 * `beam`
+* `saved_locations`
 
 Please refer to our [API Documentation](https://docs.predicthq.com/) for a description of each endpoint.
 
@@ -313,6 +314,27 @@ for event in phq.events.search(config__verify_ssl=False):
 # dictionary syntax
 for event in phq.events.search(config={"verify_ssl": False}):
     print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
+```
+
+
+### Saved_Locations endpoints
+
+Additional examples are available in [usecases/saved_locations.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
+
+The following example searches for the saved_locations according to the parameters defined:
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for saved_location in phq.saved_locations.search(
+        labels=["test", "retail"],
+        q="London", 
+        sort="-created",
+    ):
+        print(saved_location.location_id, saved_location.create_dt, saved_location.status)
 ```
 
 

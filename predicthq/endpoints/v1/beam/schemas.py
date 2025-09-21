@@ -1,10 +1,11 @@
 from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from predicthq.endpoints.schemas import ArgKwargResultSet
-from typing import Optional, List
+from typing import Optional, List, Union
 
 # Python < 3.11 does not have StrEnum in the enum module
 import sys
+
 if sys.version_info < (3, 11):
     import enum
 
@@ -38,7 +39,6 @@ class BeamPaginationResultSet(ArgKwargResultSet):
         return self._more(**self._kwargs)
 
 
-
 class CreateAnalysisResponse(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
@@ -55,10 +55,11 @@ class GeoPoint(BaseModel):
 class Location(BaseModel):
     model_config: ConfigDict = ConfigDict(extra="allow")
 
-    geopoint: GeoPoint
-    radius: float
-    unit: str
+    geopoint: Optional[GeoPoint] = None
+    radius: Optional[float] = None
+    unit: Optional[str] = None
     google_place_id: Optional[str] = None
+    saved_location_id: Optional[str] = None
 
 
 class RankLevel(BaseModel):

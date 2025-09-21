@@ -78,10 +78,18 @@ class BroadcastsTest(unittest.TestCase):
             phq_viewership={"gte": 1, "lte": 10},
             start={"gte": "2020-10-01", "lt": "2020-10-15", "tz": "Pacific/Auckland"},
             updated={"gte": "2020-11-01", "lt": "2020-11-30", "tz": "Pacific/Auckland"},
-            first_seen={"gte": "2020-10-10", "lt": "2020-10-20", "tz": "Pacific/Auckland"},
+            first_seen={
+                "gte": "2020-10-10",
+                "lt": "2020-10-20",
+                "tz": "Pacific/Auckland",
+            },
             record_status=["active", "deleted"],
             broadcast_status=["scheduled", "predicted", "cancelled"],
-            event={"event_id": "event_id", "category": "sports", "label": ["sport", "nfl"]},
+            event={
+                "event_id": "event_id",
+                "category": "sports",
+                "label": ["sport", "nfl"],
+            },
         )
 
         client.request.assert_called_once_with(

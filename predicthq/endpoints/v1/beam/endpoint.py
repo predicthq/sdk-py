@@ -9,7 +9,7 @@ from .schemas import (
     AnalysisGroup,
     AnalysisGroupResultSet,
     GeoJson,
-    Place
+    Place,
 )
 from predicthq.endpoints.decorators import accepts, returns
 from typing import overload, List, Optional, TextIO, Union
@@ -185,8 +185,8 @@ class BeamEndpoint:
             self,
             analysis_id: str,
             json: Optional[Union[str, TextIO]] = None,
-            ndjson:  Optional[Union[str, TextIO]] = None,
-            csv:  Optional[Union[str, TextIO]] = None,
+            ndjson: Optional[Union[str, TextIO]] = None,
+            csv: Optional[Union[str, TextIO]] = None,
             **params,
         ): ...
         def upload_demand(self, analysis_id: str, **params):

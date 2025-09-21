@@ -3,7 +3,7 @@ class MetaEndpoint(type):
         if "Meta" not in data:
 
             class Meta:
-                """ Used by decorators when overriding schema classes """
+                """Used by decorators when overriding schema classes"""
 
                 pass
 

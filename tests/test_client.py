@@ -94,7 +94,9 @@ class ClientTest(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("access_token"))
     def test_authenticate(self, client):
         token = self.client.authenticate(
-            client_id="client_id", client_secret="client_secret", scope=["account", "events"]
+            client_id="client_id",
+            client_secret="client_secret",
+            scope=["account", "events"],
         )
         client.request.assert_called_once_with(
             "post",

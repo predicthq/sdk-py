@@ -1,6 +1,10 @@
 import unittest
 
-from predicthq.endpoints.v1.events.schemas import EventResultSet, CalendarResultSet, CountResultSet
+from predicthq.endpoints.v1.events.schemas import (
+    EventResultSet,
+    CalendarResultSet,
+    CountResultSet,
+)
 from tests import load_fixture, with_mock_client, with_mock_responses, with_client
 
 
@@ -38,6 +42,7 @@ class EventsTest(unittest.TestCase):
             updated__gte="2016-03-01",
             updated__lt="2016-04-01",
             updated__tz="Pacific/Auckland",
+            saved_location__location_id="UVel7RGxM7U2ISE1AQOwJQ",
         )
 
         client.request.assert_called_once_with(
@@ -74,6 +79,7 @@ class EventsTest(unittest.TestCase):
                 "updated.gte": "2016-03-01",
                 "updated.lt": "2016-04-01",
                 "updated.tz": "Pacific/Auckland",
+                "saved_location.location_id": "UVel7RGxM7U2ISE1AQOwJQ",
             },
             verify=True,
         )
@@ -144,11 +150,16 @@ class EventsTest(unittest.TestCase):
             parent={"include": "only"},
             place={"scope": ["place1", "place2"], "exact": "place3"},
             placekey="22t-222@627-wc7-rkz",
-            location_around={"origin": "40.730610,-73.935242", "scale": "2km", "offset": "0.5km"},
+            location_around={
+                "origin": "40.730610,-73.935242",
+                "scale": "2km",
+                "offset": "0.5km",
+            },
             start={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
             end={"gte": "2016-05-01", "lt": "2016-06-01", "tz": "Pacific/Auckland"},
             active={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
             updated={"gte": "2016-03-01", "lt": "2016-04-01", "tz": "Pacific/Auckland"},
+            saved_location={"location_id": "UVel7RGxM7U2ISE1AQOwJQ"},
         )
 
         client.request.assert_called_once_with(
@@ -184,6 +195,7 @@ class EventsTest(unittest.TestCase):
                 "updated.gte": "2016-03-01",
                 "updated.lt": "2016-04-01",
                 "updated.tz": "Pacific/Auckland",
+                "saved_location.location_id": "UVel7RGxM7U2ISE1AQOwJQ",
             },
             verify=True,
         )
@@ -233,7 +245,9 @@ class EventsTest(unittest.TestCase):
     @with_mock_responses()
     def test_count(self, client, responses):
         result = client.events.count(
-            active__gte="2015-01-01", active__lte="2015-12-31", within="50km@-27.470784,153.030124"
+            active__gte="2015-01-01",
+            active__lte="2015-12-31",
+            within="50km@-27.470784,153.030124",
         )
         assert isinstance(result, CountResultSet)
         assert result.count == 2501

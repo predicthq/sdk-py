@@ -32,19 +32,52 @@ class FeaturesTest(unittest.TestCase):
             json={
                 "active": {"gte": "2021-01-01", "lte": "2021-01-30"},
                 "location": {"geo": {"lat": 44.835976, "lon": -93.151959, "radius": "2km"}},
-                "phq_attendance_conferences": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_attendance_performing_arts": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_attendance_performing_arts_accommodation": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_attendance_performing_arts_hospitality": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_impact_severe_weather_air_quality_retail": {"stats": ["sum", "count"], "phq_rank": None},
+                "phq_attendance_conferences": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_attendance_performing_arts": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_attendance_performing_arts_accommodation": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_attendance_performing_arts_hospitality": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_impact_severe_weather_air_quality_retail": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
                 "phq_viewership_sports": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_viewership_sports_american_football": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_viewership_sports_boxing": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_viewership_sports_basketball_nba": {"stats": ["sum", "count"], "phq_rank": None},
+                "phq_viewership_sports_american_football": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_viewership_sports_boxing": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_viewership_sports_basketball_nba": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
                 "phq_spend_expos": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_spend_community_accommodation": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_spend_festivals_hospitality": {"stats": ["sum", "count"], "phq_rank": None},
-                "phq_spend_performing_arts_transportation": {"stats": ["sum", "count"], "phq_rank": None},
+                "phq_spend_community_accommodation": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_spend_festivals_hospitality": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
+                "phq_spend_performing_arts_transportation": {
+                    "stats": ["sum", "count"],
+                    "phq_rank": None,
+                },
             },
             verify=True,
             params=None,
@@ -81,7 +114,6 @@ class FeaturesTest(unittest.TestCase):
             phq_attendance_festivals_hospitality__stats=feature_stats,
             phq_attendance_performing_arts_hospitality__stats=feature_stats,
             phq_attendance_sports_hospitality__stats=feature_stats,
-
         )
 
         client.request.assert_called_once_with(
@@ -90,7 +122,10 @@ class FeaturesTest(unittest.TestCase):
             json={
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
                 "location": {"place_id": ["4671654"]},
-                "phq_attendance_academic_graduation": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_attendance_academic_graduation": {
+                    "stats": feature_stats,
+                    "phq_rank": {"gt": 50},
+                },
                 "phq_attendance_academic_social": {"stats": feature_stats},
                 "phq_attendance_community": {"stats": feature_stats},
                 "phq_attendance_concerts": {"stats": feature_stats},
@@ -121,7 +156,9 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_underscores_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active__gte="2017-12-31", location__place_id=["4671654"], config__verify_ssl=False
+            active__gte="2017-12-31",
+            location__place_id=["4671654"],
+            config__verify_ssl=False,
         )
 
         client.request.assert_called_once_with(
@@ -132,12 +169,15 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_attendance_request_params_dicts(self, client):
-        feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
+        feature_criteria = {
+            "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
+            "phq_rank": {"gt": 50},
+        }
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
             location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
@@ -218,7 +258,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -274,7 +314,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -316,7 +356,9 @@ class FeaturesTest(unittest.TestCase):
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_rank_request_params_dicts_without_ssl_verification(self, client):
         client.features.obtain_features(
-            active={"gte": "2017-12-31"}, location={"place_id": ["4671654"]}, config={"verify_ssl": False}
+            active={"gte": "2017-12-31"},
+            location={"place_id": ["4671654"]},
+            config={"verify_ssl": False},
         )
 
         client.request.assert_called_once_with(
@@ -327,7 +369,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_client()
@@ -374,9 +416,15 @@ class FeaturesTest(unittest.TestCase):
                 "hour_of_day_active": {"gt": 10, "lte": 19},
                 "location": {"place_id": ["4671654"]},
                 "phq_impact_severe_weather_air_quality_retail": {"stats": feature_stats},
-                "phq_impact_severe_weather_blizzard_retail": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_impact_severe_weather_blizzard_retail": {
+                    "stats": feature_stats,
+                    "phq_rank": {"gt": 50},
+                },
                 "phq_impact_severe_weather_cold_wave_retail": {"stats": feature_stats},
-                "phq_impact_severe_weather_cold_wave_snow_retail": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_impact_severe_weather_cold_wave_snow_retail": {
+                    "stats": feature_stats,
+                    "phq_rank": {"gt": 50},
+                },
                 "phq_impact_severe_weather_cold_wave_storm_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_dust_retail": {"stats": feature_stats},
                 "phq_impact_severe_weather_dust_storm_retail": {"stats": feature_stats},
@@ -393,7 +441,10 @@ class FeaturesTest(unittest.TestCase):
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_impact_severe_weather_request_params_dicts(self, client):
-        feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
+        feature_criteria = {
+            "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
+            "phq_rank": {"gt": 50},
+        }
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
             hour_of_day_start={"gte": 10, "lt": 11},
@@ -465,8 +516,14 @@ class FeaturesTest(unittest.TestCase):
                 "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
                 "hour_of_day_active": {"gt": 10, "lte": 19},
                 "location": {"place_id": ["4671654"]},
-                "phq_viewership_sports": {"stats": feature_stats, "phq_rank": {"gt": 50}},
-                "phq_viewership_sports_american_football": {"stats": feature_stats, "phq_rank": {"gt": 50}},
+                "phq_viewership_sports": {
+                    "stats": feature_stats,
+                    "phq_rank": {"gt": 50},
+                },
+                "phq_viewership_sports_american_football": {
+                    "stats": feature_stats,
+                    "phq_rank": {"gt": 50},
+                },
                 "phq_viewership_sports_baseball_mlb": {"stats": feature_stats},
                 "phq_viewership_sports_basketball": {"stats": feature_stats},
                 "phq_viewership_sports_ice_hockey_nhl": {"stats": feature_stats},
@@ -493,12 +550,15 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"place_id": ["4671654"]},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_viewership_request_params_dicts(self, client):
-        feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
+        feature_criteria = {
+            "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
+            "phq_rank": {"gt": 50},
+        }
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
             hour_of_day_start={"gte": 10, "lt": 11},
@@ -549,7 +609,7 @@ class FeaturesTest(unittest.TestCase):
                 "location": {"geo": {"lat": 41.75038, "lon": -71.49978, "radius": "30km"}},
             },
             verify=False,
-            params=None
+            params=None,
         )
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
@@ -630,7 +690,10 @@ class FeaturesTest(unittest.TestCase):
 
     @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
     def test_spend_request_params_dicts(self, client):
-        feature_criteria = {"stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"], "phq_rank": {"gt": 50}}
+        feature_criteria = {
+            "stats": ["avg", "count", "max", "median", "min", "sum", "std_dev"],
+            "phq_rank": {"gt": 50},
+        }
         client.features.obtain_features(
             active={"gte": "2017-12-31", "lte": "2018-01-02"},
             location={"geo": {"lon": -71.49978, "lat": 41.75038, "radius": "30km"}},
@@ -698,6 +761,64 @@ class FeaturesTest(unittest.TestCase):
                 "phq_spend_concerts_transportation": feature_criteria,
                 "phq_spend_festivals_transportation": feature_criteria,
                 "phq_spend_performing_arts_transportation": feature_criteria,
+            },
+            verify=True,
+            params=None,
+        )
+
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
+    def test_saved_location_ids_params_dicts(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            location={
+                "saved_location_id": [
+                    "BN7ZSw8xza9FviPVfyCycd",
+                    "X3uyTFbDOUaX2q_Qh5i31b",
+                    "X3uyTFbDOUhrfq_Qh5i31A",
+                ]
+            },
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "location": {
+                    "saved_location_id": [
+                        "BN7ZSw8xza9FviPVfyCycd",
+                        "X3uyTFbDOUaX2q_Qh5i31b",
+                        "X3uyTFbDOUhrfq_Qh5i31A",
+                    ]
+                },
+            },
+            verify=True,
+            params=None,
+        )
+
+    @with_mock_client(request_returns=load_fixture("requests_responses/features_test/test_empty_search"))
+    def test_saved_location_ids_params_undersores(self, client):
+        client.features.obtain_features(
+            active={"gte": "2017-12-31", "lte": "2018-01-02"},
+            location__saved_location_id=[
+                "BN7ZSw8xza9FviPVfyCycd",
+                "X3uyTFbDOUaX2q_Qh5i31b",
+                "X3uyTFbDOUhrfq_Qh5i31A",
+            ],
+        )
+
+        client.request.assert_called_once_with(
+            "post",
+            "/v1/features/",
+            json={
+                "active": {"gte": "2017-12-31", "lte": "2018-01-02"},
+                "location": {
+                    "saved_location_id": [
+                        "BN7ZSw8xza9FviPVfyCycd",
+                        "X3uyTFbDOUaX2q_Qh5i31b",
+                        "X3uyTFbDOUhrfq_Qh5i31A",
+                    ]
+                },
             },
             verify=True,
             params=None,

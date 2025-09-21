@@ -13,9 +13,7 @@ class CsvMixin:
             flat_json = {}
             for k, v in d.items():
                 if isinstance(v, dict):
-                    flat_json.update(
-                        __flatten_json(v, f"{pk}{separator}{k}" if pk else k)
-                    )
+                    flat_json.update(__flatten_json(v, f"{pk}{separator}{k}" if pk else k))
                     continue
                 flat_json.update({f"{pk}{separator}{k}" if pk else k: v})
             return flat_json
