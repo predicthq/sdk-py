@@ -45,6 +45,7 @@ setup(
         "python-dateutil>=2.4.2",
         "pytz>=2017.2,<=2023.3",
         "stamina>=24.3.0,<25",
+        "deprecated>=1.2.18,<2.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
