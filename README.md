@@ -33,10 +33,8 @@ If you are migrating to version 5.0.0 or above from an earlier version, please c
 
 ## Usage
 
-We support all the endpoints available in our API.
+We support the following endpoints available in our API.
 
-* `oauth2` (deprecated, use `access_token` instead)
-* `accounts` (deprecated)
 * `broadcasts`
 * `events`
 * `features`
