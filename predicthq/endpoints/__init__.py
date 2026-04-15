@@ -3,6 +3,7 @@ from .v1.accounts import AccountsEndpoint
 from .v1.broadcasts import BroadcastsEndpoint
 from .v1.events import EventsEndpoint
 from .v1.features import FeaturesEndpoint
+from .v1.impact_area import ImpactAreaEndpoint
 from .v1.places import PlacesEndpoint
 from .v1.radius import SuggestedRadiusEndpoint
 from .v1.beam import BeamEndpoint
@@ -15,6 +16,7 @@ __all__ = [
     "BroadcastsEndpoint",
     "EventsEndpoint",
     "FeaturesEndpoint",
+    "ImpactAreaEndpoint",
     "PlacesEndpoint",
     "SuggestedRadiusEndpoint",
     "BeamEndpoint",

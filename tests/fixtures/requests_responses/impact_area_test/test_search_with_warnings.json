@@ -1,0 +1,18 @@
+{
+    "location": {
+        "lat": "37.7749",
+        "lon": "-122.4194"
+    },
+    "warnings": ["fallback to radius: isochrone service unavailable"],
+    "geojson": {
+        "type": "Feature",
+        "properties": {
+            "radius": 2000.0,
+            "radius_unit": "m"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-122.4194, 37.7749]
+        }
+    }
+}
