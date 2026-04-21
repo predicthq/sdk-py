@@ -35,6 +35,7 @@ class Client(object):
         self.accounts = endpoints.AccountsEndpoint(proxy(self))
         self.places = endpoints.PlacesEndpoint(proxy(self))
         self.radius = endpoints.SuggestedRadiusEndpoint(proxy(self))
+        self.impact_area = endpoints.ImpactAreaEndpoint(proxy(self))
         self.beam = endpoints.BeamEndpoint(proxy(self))
         self.saved_locations = endpoints.SavedLocationsEndpoint(proxy(self))
 
