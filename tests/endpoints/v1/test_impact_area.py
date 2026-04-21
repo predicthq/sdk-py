@@ -125,3 +125,19 @@ class ImpactAreaTest(unittest.TestCase):
         assert isinstance(result, ImpactAreaResultSet)
         assert len(result.warnings) == 1
         assert "fallback to radius" in result.warnings[0]
+
+    @with_mock_client(request_returns=load_fixture("requests_responses/impact_area_test/test_search_polygon"))
+    def test_search_polygon_verify_ssl_disabled(self, client):
+        client.impact_area.search(
+            location__origin="37.7749,-122.4194",
+            config={"verify_ssl": False},
+        )
+
+        client.request.assert_called_once_with(
+            "get",
+            "/v1/impact-area/",
+            params={
+                "location.origin": "37.7749,-122.4194",
+            },
+            verify=False,
+        )
