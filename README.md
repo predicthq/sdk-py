@@ -206,7 +206,9 @@ for feature in phq.features.obtain_features(
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
 
-### Impact Area endpoint
+### Predicted Impact Area endpoint
+
+> Predicted Impact Area is the successor to the Suggested Radius API. It provides a more accurate representation of event impact than a radius-based approach.
 
 Additional examples are available in [usecases/impact_area.py](https://github.com/predicthq/sdk-py/tree/master/usecases/impact_area.py) file.
 
@@ -238,7 +240,9 @@ print(result.geojson.geometry.coordinates)
 
 Please refer to our [Predicted Impact Area endpoint documentation](https://docs.predicthq.com/api/impact-area/get-impact-area) for the lists of search parameters and response fields available.
 
-### Radius endpoint
+### Suggested Radius endpoint
+
+> Predicted Impact Area is the successor to this API, providing a more accurate representation of event impact than a radius. Suggested Radius remains available and existing implementations are unaffected.
 
 The following example obtain suggested radius to be used when retrieving events for location {"lat": 45.5051, "lon": -122.6750} and generic industry.
 
@@ -282,6 +286,26 @@ phq = Client(access_token="abc123")
 
 analysis_group = phq.beam.analysis_group.get(group_id="abc123")
 print(analysis_group.model_dump(exlcude_none=True))
+```
+
+### Saved_Locations endpoints
+
+Additional examples are available in [usecases/saved_locations.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
+
+The following example searches for the saved_locations according to the parameters defined:
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+for saved_location in phq.saved_locations.search(
+        labels=["test", "retail"],
+        q="London", 
+        sort="-created",
+    ):
+        print(saved_location.location_id, saved_location.create_dt, saved_location.status)
 ```
 
 ### Serializing search results into a dictionary
@@ -345,27 +369,6 @@ for event in phq.events.search(config__verify_ssl=False):
 # dictionary syntax
 for event in phq.events.search(config={"verify_ssl": False}):
     print(event.rank, event.category, event.title, event.start.strftime("%Y-%m-%d"))
-```
-
-
-### Saved_Locations endpoints
-
-Additional examples are available in [usecases/saved_locations.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
-
-The following example searches for the saved_locations according to the parameters defined:
-
-```Python
-from predicthq import Client
-
-phq = Client(access_token="abc123")
-
-
-for saved_location in phq.saved_locations.search(
-        labels=["test", "retail"],
-        q="London", 
-        sort="-created",
-    ):
-        print(saved_location.location_id, saved_location.create_dt, saved_location.status)
 ```
 
 
