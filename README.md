@@ -236,7 +236,7 @@ print(result.geojson.properties.radius, result.geojson.properties.radius_unit)
 print(result.geojson.geometry.coordinates)
 ```
 
-Please refer to our [API Documentation](https://docs.predicthq.com/) for the lists of search parameters and response fields available.
+Please refer to our [Predicted Impact Area endpoint documentation](https://docs.predicthq.com/api/impact-area/get-impact-area) for the lists of search parameters and response fields available.
 
 ### Radius endpoint
 
