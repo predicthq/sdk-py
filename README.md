@@ -38,6 +38,7 @@ We support the following endpoints available in our API.
 * `broadcasts`
 * `events`
 * `features`
+* `impact_area`
 * `places`
 * `radius`
 * `beam`
@@ -204,6 +205,38 @@ for feature in phq.features.obtain_features(
 ```
 
 Please refer to our [Features endpoint documentation](https://docs.predicthq.com/start/features-api/) for the lists of supported features and response fields available.
+
+### Impact Area endpoint
+
+Additional examples are available in [usecases/impact_area.py](https://github.com/predicthq/sdk-py/tree/master/usecases/impact_area.py) file.
+
+The following example obtains the impact area as a polygon for a given location and industry.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+result = phq.impact_area.search(location__origin="45.5051,-122.6750", industry="accommodation")
+print(result.geojson.geometry.type, result.geojson.geometry.coordinates)
+print(result.location.model_dump(exclude_none=True))
+```
+
+You can also get the impact area as a radius instead of a polygon.
+
+```Python
+from predicthq import Client
+
+phq = Client(access_token="abc123")
+
+
+result = phq.impact_area.search(location__origin="45.5051,-122.6750", industry="retail", area_type="radius", radius_unit="km")
+print(result.geojson.properties.radius, result.geojson.properties.radius_unit)
+print(result.geojson.geometry.coordinates)
+```
+
+Please refer to our [API Documentation](https://docs.predicthq.com/) for the lists of search parameters and response fields available.
 
 ### Radius endpoint
 
