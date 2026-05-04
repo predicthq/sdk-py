@@ -288,7 +288,7 @@ analysis_group = phq.beam.analysis_group.get(group_id="abc123")
 print(analysis_group.model_dump(exlcude_none=True))
 ```
 
-### Saved_Locations endpoints
+### Saved Locations endpoints
 
 Additional examples are available in [usecases/saved_locations.py](https://github.com/predicthq/sdk-py/tree/master/usecases/places.py) file.
 
