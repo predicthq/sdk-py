@@ -135,3 +135,19 @@ def test_resultset():
         endpoint.load_page(page=3).model_dump(),
     ]
     assert list(p1.iter_all()) == list(p1) + list(p2) + list(p3)
+
+
+def test_resultset_without_more_returns_none():
+    # A ResultSet not produced by the @returns decorator has no _more callable set.
+    # _more is a declared private attr defaulting to None, so hasattr() is always
+    # True; get_next()/get_previous() must guard on `_more is None` and return None
+    # rather than raising "'NoneType' object is not callable".
+    result_set = schemas.ResultSet(
+        count=5,
+        next="https://example.org/?page=2",
+        previous="https://example.org/?page=1",
+    )
+    assert result_set.has_next() is True
+    assert result_set.has_previous() is True
+    assert result_set.get_next() is None
+    assert result_set.get_previous() is None

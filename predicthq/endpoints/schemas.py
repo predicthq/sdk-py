@@ -29,13 +29,13 @@ class ResultSet(BaseModel):
         return self.next is not None
 
     def get_next(self):
-        if not self.has_next() or not hasattr(self, "_more"):
+        if not self.has_next() or self._more is None:
             return
         params = self._parse_params(self.next)
         return self._more(**params)
 
     def get_previous(self):
-        if not self.has_previous() or not hasattr(self, "_more"):
+        if not self.has_previous() or self._more is None:
             return
         params = self._parse_params(self.previous)
         return self._more(**params)
